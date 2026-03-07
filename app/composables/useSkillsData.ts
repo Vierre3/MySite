@@ -28,9 +28,9 @@ export function useSkillsData(): SkillCategory[] {
       key: 'frontend',
       skills: [
         { name: 'Vue 3', icon: 'devicon:vuejs' },
-        { name: 'Nuxt', icon: 'devicon:nuxtjs' },
+        { name: 'Nuxt', icon: 'devicon:nuxt' },
         { name: 'Tailwind CSS', icon: 'devicon:tailwindcss' },
-        { name: 'SFML', icon: 'mdi:gamepad-variant', mono: true },
+        { name: 'SFML', icon: 'devicon:sfml', mono: true },
         { name: 'Raylib', icon: 'mdi:cube-outline', mono: true },
       ],
     },
@@ -42,7 +42,7 @@ export function useSkillsData(): SkillCategory[] {
         { name: 'Node.js', icon: 'devicon:nodejs' },
         { name: 'MongoDB', icon: 'devicon:mongodb' },
         { name: 'REST APIs', icon: 'mdi:api', mono: true },
-        { name: 'SQL', icon: 'mdi:database', mono: true },
+        { name: 'SQLite', icon: 'devicon:sqlite', mono: true },
       ],
     },
     {

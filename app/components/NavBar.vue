@@ -1,7 +1,7 @@
 <template>
   <nav
-    class="fixed top-0 left-0 right-0 z-50 transition-all duration-300"
-    :class="scrolled ? 'backdrop-blur-xl bg-dark-bg/80 border-b border-glass-border shadow-lg' : 'border-transparent'"
+    class="fixed top-0 left-0 right-0 transition-all duration-300"
+    :class="[mobileOpen ? 'z-[70]' : 'z-50', scrolled ? 'backdrop-blur-xl bg-dark-bg/80 border-b border-glass-border shadow-lg' : 'border-transparent']"
   >
     <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="flex items-center justify-between h-16">
@@ -53,10 +53,9 @@
       <div
         v-if="mobileOpen"
         class="md:hidden fixed inset-0 z-[60]"
-        @click.self="mobileOpen = false"
       >
-        <!-- Dark overlay backdrop -->
-        <div class="absolute inset-0 bg-black/50 backdrop-blur-sm" />
+        <!-- Dark overlay backdrop (click to close) -->
+        <div class="absolute inset-0 bg-black/50 backdrop-blur-sm" @click="mobileOpen = false" />
 
         <!-- Menu panel -->
         <div class="relative mt-16 mx-4">
@@ -89,12 +88,17 @@ const sectionIcons: Record<string, string> = {
   contact: 'mdi:email-outline',
 }
 const mobileOpen = ref(false)
+
+watch(mobileOpen, (open) => {
+  document.body.style.overflow = open ? 'hidden' : ''
+})
 const scrolled = ref(false)
 const { scrollToSection } = useSmoothScroll()
 
 onMounted(() => {
+  scrolled.value = window.scrollY > 75
   window.addEventListener('scroll', () => {
-    scrolled.value = window.scrollY > 50
+    scrolled.value = window.scrollY > 75
   })
 })
 </script>

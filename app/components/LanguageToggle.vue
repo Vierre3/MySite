@@ -13,5 +13,12 @@ const { locale, setLocale } = useI18n()
 
 function toggleLocale() {
   setLocale(locale.value === 'en' ? 'fr' : 'en')
+  // Force repaint on iOS Safari — backdrop-blur prevents automatic repaints
+  nextTick(() => {
+    document.body.style.transform = 'translateZ(0)'
+    requestAnimationFrame(() => {
+      document.body.style.transform = ''
+    })
+  })
 }
 </script>

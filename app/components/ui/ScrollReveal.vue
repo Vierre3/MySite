@@ -3,7 +3,7 @@
     ref="target"
     class="scroll-reveal"
     :class="{ revealed: isVisible }"
-    :style="{ transitionDelay: `${delay}ms` }"
+    :style="delayStyle"
   >
     <slot />
   </div>
@@ -17,4 +17,16 @@ const props = withDefaults(defineProps<{
 })
 
 const { target, isVisible } = useScrollReveal()
+const applyDelay = ref(true)
+
+const delayStyle = computed(() =>
+  applyDelay.value ? { transitionDelay: `${props.delay}ms` } : {}
+)
+
+onMounted(() => {
+  // After initial reveal pass (500ms), disable delays so late items animate instantly
+  setTimeout(() => {
+    applyDelay.value = false
+  }, 500)
+})
 </script>
