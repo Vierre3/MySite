@@ -3,8 +3,8 @@
     <!-- Header -->
     <div class="flex items-start justify-between mb-3">
       <div class="flex items-center gap-3">
-        <Icon name="mdi:folder-outline" class="w-8 h-8 text-orange-accent" />
-        <h3 class="text-lg font-semibold text-text-primary group-hover:text-orange-accent transition-colors">
+        <Icon name="mdi:folder-outline" class="w-8 h-8" />
+        <h3 class="text-lg font-semibold text-text-primary">
           {{ project.key }}
         </h3>
       </div>
@@ -15,7 +15,7 @@
         >
           {{ $t('projects.inProgress') }}
         </span>
-        <span class="text-xs px-2 py-1 rounded-full border border-glass-border text-text-secondary">
+        <span class="text-xs px-2 py-1 rounded-full border border-glass-border text-text-secondary whitespace-nowrap">
           {{ $t(`projects.types.${project.type}`) }}
         </span>
       </div>

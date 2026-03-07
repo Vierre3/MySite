@@ -4,7 +4,7 @@
       <UiSectionTitle title-key="nav.contact" />
 
       <UiScrollReveal>
-        <UiGlassCard class="p-8 md:p-12 text-center">
+        <UiGlassCard hover class="p-8 md:p-12 text-center">
           <p class="text-text-secondary text-lg mb-10">
             {{ $t('contact.subtitle') }}
           </p>
@@ -12,7 +12,7 @@
           <div class="flex flex-col sm:flex-row items-center justify-center gap-6">
             <a
               :href="mailHref"
-              class="flex items-center gap-3 px-6 py-4 rounded-xl bg-dark-bg/50 border border-glass-border hover:border-orange-accent/40 hover:shadow-[0_0_20px_rgba(255,107,0,0.1)] transition-all duration-300 group"
+              class="flex items-center gap-3 px-6 py-4 rounded-xl bg-dark-bg/50 border border-glass-border hover:border-orange-accent/40 hover:shadow-[0_0_20px_rgba(255,107,0,0.1)] hover:scale-105 active:scale-95 transition-all duration-300 group"
             >
               <Icon name="mdi:email-outline" class="w-6 h-6 text-orange-accent" />
               <span class="text-text-secondary group-hover:text-text-primary transition-colors">{{ $t('contact.email') }}</span>
@@ -22,7 +22,7 @@
               href="https://github.com/Vierre3/"
               target="_blank"
               rel="noopener noreferrer"
-              class="flex items-center gap-3 px-6 py-4 rounded-xl bg-dark-bg/50 border border-glass-border hover:border-orange-accent/40 hover:shadow-[0_0_20px_rgba(255,107,0,0.1)] transition-all duration-300 group"
+              class="flex items-center gap-3 px-6 py-4 rounded-xl bg-dark-bg/50 border border-glass-border hover:border-orange-accent/40 hover:shadow-[0_0_20px_rgba(255,107,0,0.1)] hover:scale-105 active:scale-95 transition-all duration-300 group"
             >
               <Icon name="mdi:github" class="w-6 h-6 text-orange-accent" />
               <span class="text-text-secondary group-hover:text-text-primary transition-colors">{{ $t('contact.github') }}</span>
@@ -32,7 +32,7 @@
               href="https://linkedin.com/in/pierreyves-guiraudet/"
               target="_blank"
               rel="noopener noreferrer"
-              class="flex items-center gap-3 px-6 py-4 rounded-xl bg-dark-bg/50 border border-glass-border hover:border-orange-accent/40 hover:shadow-[0_0_20px_rgba(255,107,0,0.1)] transition-all duration-300 group"
+              class="flex items-center gap-3 px-6 py-4 rounded-xl bg-dark-bg/50 border border-glass-border hover:border-orange-accent/40 hover:shadow-[0_0_20px_rgba(255,107,0,0.1)] hover:scale-105 active:scale-95 transition-all duration-300 group"
             >
               <Icon name="mdi:linkedin" class="w-6 h-6 text-orange-accent" />
               <span class="text-text-secondary group-hover:text-text-primary transition-colors">{{ $t('contact.linkedin') }}</span>

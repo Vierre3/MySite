@@ -7,7 +7,7 @@
       <div class="flex items-center justify-between h-16">
         <!-- Logo -->
         <button
-          class="text-lg font-bold text-text-primary cursor-pointer hover:text-orange-accent transition-colors"
+          class="text-lg font-bold text-text-primary cursor-pointer hover:text-orange-accent hover:scale-105 active:scale-95 transition-all"
           @click="scrollToSection('hero')"
         >
           <span class="text-orange-accent">&lt;</span>PY<span class="text-orange-accent">/&gt;</span>
@@ -18,7 +18,7 @@
           <button
             v-for="section in sections"
             :key="section"
-            class="text-sm text-text-secondary hover:text-orange-accent transition-colors cursor-pointer"
+            class="text-sm text-text-secondary hover:text-orange-accent hover:scale-105 active:scale-95 transition-all cursor-pointer"
             @click="scrollToSection(section)"
           >
             {{ $t(`nav.${section}`) }}
@@ -30,7 +30,7 @@
           <LanguageToggle />
           <!-- Mobile hamburger -->
           <button
-            class="md:hidden text-text-secondary hover:text-text-primary cursor-pointer"
+            class="md:hidden text-text-secondary hover:text-text-primary hover:scale-105 active:scale-95 transition-all cursor-pointer"
             @click="mobileOpen = !mobileOpen"
           >
             <Icon :name="mobileOpen ? 'mdi:close' : 'mdi:menu'" class="w-6 h-6" />
@@ -64,7 +64,7 @@
               <button
                 v-for="section in sections"
                 :key="section"
-                class="flex items-center gap-3 w-full text-left text-text-secondary hover:text-orange-accent hover:bg-white/5 rounded-xl transition-all cursor-pointer px-5 py-4 text-lg font-medium border border-transparent hover:border-orange-accent/20"
+                class="flex items-center gap-3 w-full text-left text-text-secondary hover:text-orange-accent hover:bg-white/5 hover:scale-[1.02] active:scale-95 rounded-xl transition-all cursor-pointer px-5 py-4 text-lg font-medium border border-transparent hover:border-orange-accent/20"
                 @click="scrollToSection(section); mobileOpen = false"
               >
                 <Icon :name="sectionIcons[section] ?? 'mdi:circle-outline'" class="w-5 h-5 text-orange-accent/70" />

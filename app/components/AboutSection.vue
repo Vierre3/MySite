@@ -4,7 +4,7 @@
       <UiSectionTitle title-key="about.title" />
 
       <UiScrollReveal>
-        <UiGlassCard class="p-8 md:p-12">
+        <UiGlassCard hover class="p-8 md:p-12">
           <div class="flex flex-col md:flex-row items-center gap-10">
             <!-- Profile photo -->
             <div class="shrink-0">

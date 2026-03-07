@@ -30,7 +30,7 @@ export default defineNuxtConfig({
     head: {
       title: 'Pierre-Yves | Full-Stack Developer',
       meta: [
-        { name: 'description', content: 'Full-Stack Developer Portfolio | Epitech Paris' },
+        { name: 'description', content: 'Pierre-Yves Guiraudet Portfolio | Epitech Paris' },
       ],
       link: [
         { rel: 'preconnect', href: 'https://fonts.googleapis.com' },
