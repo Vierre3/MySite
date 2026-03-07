@@ -1,0 +1,182 @@
+{
+  "nav": {
+    "about": "About",
+    "skills": "Skills",
+    "experience": "Experience",
+    "projects": "Projects",
+    "contact": "Contact"
+  },
+  "hero": {
+    "greeting": "Hi, I'm",
+    "name": "Pierre-Yves",
+    "title": "Full-Stack Developer",
+    "subtitle": "Epitech Paris",
+    "tagline": "Passionate about building elegant software, from low-level systems to modern web apps.",
+    "cta_contact": "Get in Touch",
+    "cta_resume": "Download CV"
+  },
+  "about": {
+    "title": "About Me",
+    "bio": "I'm a 3rd-year student at Epitech Paris, passionate about software engineering across the full stack. From writing UNIX shells in C to building real-time web applications with Nuxt and Vue, I enjoy tackling complex problems and crafting clean, efficient solutions. I've gained professional experience through two internships at Naitways, where I developed enterprise-grade Python tools for cybersecurity and infrastructure automation.",
+    "stats": {
+      "languages": "Languages",
+      "languagesCount": "10+",
+      "projects": "Projects",
+      "projectsCount": "20+",
+      "experience": "Internship months",
+      "experienceCount": "10+"
+    }
+  },
+  "skills": {
+    "title": "Skills",
+    "languages": "Languages",
+    "frontend": "Frontend",
+    "backend": "Backend",
+    "devops": "DevOps & Tools",
+    "tools": "Build & Tools",
+    "creative": "Creative & Game Engines",
+    "other": "Other"
+  },
+  "experience": {
+    "title": "Experience",
+    "naitways1": {
+      "role": "Software Developer Intern (Part-time)",
+      "company": "Naitways",
+      "date": "Oct 2025 - Feb 2026",
+      "items": [
+        "Built a Word (.docx) Hardening Report Generator in Python",
+        "Polled internal database via REST API to generate and send reports to clients",
+        "Worked on the NBOX - a satellite system deployed on client servers for self-configuration and VM management",
+        "Developed automation tools in Python for infrastructure management"
+      ]
+    },
+    "naitways2": {
+      "role": "Software Developer Intern (Full-time)",
+      "company": "Naitways",
+      "date": "Aug 2024 - Dec 2024",
+      "items": [
+        "Developed 13+ enterprise Python tools for cybersecurity and infrastructure automation",
+        "Built CVE vulnerability search systems integrating NVD and Vulners APIs",
+        "Created FortiGate firewall policy management and synchronization tools",
+        "Implemented SSH log aggregation from FortiAnalyzer to InfluxDB",
+        "Built a Flask-based release notes generator from GitLab commits",
+        "Developed network device integrations (Juniper, LibreNMS, Wazuh)",
+        "Created an AI-powered code documentation tool using Ollama (local LLM)"
+      ]
+    }
+  },
+  "projects": {
+    "title": "Projects",
+    "thosewholisten": {
+      "name": "Those Who Listen",
+      "description": "Cooperative survival horror where voice cloning becomes the enemy. Real-time voice cloning (<300ms latency, 100% local processing) lets creatures mimic your teammates. Built with OpenVoice and PyTorch.",
+      "type": "EIP"
+    },
+    "locode": {
+      "name": "LoCode",
+      "description": "Lightweight web code editor with Monaco Editor, SSH remote development, integrated terminal, and Electron desktop app.",
+      "type": "Personal"
+    },
+    "glados": {
+      "name": "Glados",
+      "description": "Complete programming language interpreter in Haskell with lexer, parser, type checker, and bytecode VM.",
+      "type": "Epitech"
+    },
+    "rtype": {
+      "name": "R-Type",
+      "description": "Multiplayer space shooter game engine with ECS architecture, networking, and SFML 3.0 graphics.",
+      "type": "Epitech"
+    },
+    "zappy": {
+      "name": "Zappy",
+      "description": "Multiplayer networked game with C server, C++/Raylib GUI, and autonomous Python AI agents.",
+      "type": "Epitech"
+    },
+    "shell42": {
+      "name": "42sh",
+      "description": "Advanced UNIX shell in C with alias system, arrow key support, built-in commands, and history.",
+      "type": "Epitech"
+    },
+    "arcade": {
+      "name": "Arcade",
+      "description": "Dynamic game framework with plugin architecture and runtime library loading in C++20.",
+      "type": "Epitech"
+    },
+    "raytracer": {
+      "name": "Raytracer",
+      "description": "3D ray tracing engine in C++ with configurable scenes and realistic light rendering.",
+      "type": "Epitech"
+    },
+    "crypto": {
+      "name": "Cryptography",
+      "description": "AES, RSA, and PGP encryption implementation in Python for secure message handling.",
+      "type": "Epitech"
+    },
+    "neuralnet": {
+      "name": "Neural Network",
+      "description": "Multilayer perceptron built from scratch in pure Python with forward/backpropagation.",
+      "type": "Epitech"
+    },
+    "survivor": {
+      "name": "Survivor",
+      "description": "Full-stack web application with Nuxt/Vue frontend, Deno backend, MongoDB database, and Docker deployment.",
+      "type": "Epitech"
+    },
+    "gomoku": {
+      "name": "Gomoku AI",
+      "description": "AI player for the 5-in-a-row board game with strategic evaluation in C++20.",
+      "type": "Epitech"
+    },
+    "rpg": {
+      "name": "RPG",
+      "description": "2D RPG game engine in C with CSFML - sprites, game mechanics, and world building.",
+      "type": "Epitech"
+    },
+    "marvin": {
+      "name": "MyMarvin",
+      "description": "Jenkins CI/CD automation project using Groovy Job DSL and Docker for pipeline management.",
+      "type": "Epitech"
+    },
+    "vueling": {
+      "name": "Vueling Hackathon",
+      "description": "Real-time voice translation system for aircraft with offline capabilities and multi-language support.",
+      "type": "Hackathon"
+    },
+    "discoveryweek": {
+      "name": "Discovery Week",
+      "description": "AI-powered hackathon project built with Flask, Ollama LLM integration, and SQLite database.",
+      "type": "Hackathon"
+    },
+    "flameyourmind": {
+      "name": "FlameYourMind",
+      "description": "Game jam project built with Godot 4.",
+      "type": "Game Jam"
+    },
+    "eventhorizon": {
+      "name": "Event Horizon 5min",
+      "description": "Game jam project built with Godot 4.",
+      "type": "Game Jam"
+    },
+    "lostinspace": {
+      "name": "Lost In Space",
+      "description": "Game jam project built with Godot 4.",
+      "type": "Game Jam"
+    },
+    "robbersandcat": {
+      "name": "Robbers And Cat",
+      "description": "Game jam project built with Godot 4.",
+      "type": "Game Jam"
+    }
+  },
+  "contact": {
+    "title": "Get in Touch",
+    "subtitle": "Feel free to reach out for opportunities, collaborations, or just to say hi.",
+    "email": "Email",
+    "github": "GitHub",
+    "linkedin": "LinkedIn"
+  },
+  "footer": {
+    "built": "Built with Nuxt 4 & Tailwind CSS",
+    "rights": "All rights reserved."
+  }
+}
