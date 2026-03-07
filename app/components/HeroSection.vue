@@ -44,7 +44,7 @@
     </div>
 
     <!-- Scroll indicator -->
-    <div class="hero-fade absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2" style="--delay: 1.2s;">
+    <div class="hero-fade absolute bottom-10 flex flex-col items-center gap-2" style="--delay: 1.2s;">
       <div class="w-6 h-10 rounded-full border-2 flex justify-center pt-2" style="border-color: rgba(160, 160, 184, 0.3);">
         <div class="w-1.5 h-1.5 rounded-full" style="background-color: #FF6B00; animation: scroll-indicator 1.5s ease-in-out infinite;" />
       </div>
