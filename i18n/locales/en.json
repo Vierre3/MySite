@@ -68,106 +68,34 @@
   },
   "projects": {
     "title": "Projects",
-    "thosewholisten": {
-      "name": "Those Who Listen",
-      "description": "Cooperative survival horror where voice cloning becomes the enemy. Real-time voice cloning (<300ms latency, 100% local processing) lets creatures mimic your teammates. Built with OpenVoice and PyTorch.",
-      "type": "Epitech"
+    "inProgress": "In Progress",
+    "types": {
+      "all": "All",
+      "epitech": "Epitech",
+      "personal": "Personal",
+      "hackathon": "Hackathon",
+      "jam": "Game Jam"
     },
-    "locode": {
-      "name": "LoCode",
-      "description": "Lightweight web code editor with Monaco Editor, SSH remote development, integrated terminal, and Electron desktop app.",
-      "type": "Personal"
-    },
-    "glados": {
-      "name": "Glados",
-      "description": "Complete programming language interpreter in Haskell with lexer, parser, type checker, and bytecode VM.",
-      "type": "Epitech"
-    },
-    "rtype": {
-      "name": "R-Type",
-      "description": "Multiplayer space shooter game engine with ECS architecture, networking, and SFML 3.0 graphics.",
-      "type": "Epitech"
-    },
-    "zappy": {
-      "name": "Zappy",
-      "description": "Multiplayer networked game with C server, C++/Raylib GUI, and autonomous Python AI agents.",
-      "type": "Epitech"
-    },
-    "shell42": {
-      "name": "42sh",
-      "description": "Advanced UNIX shell in C with alias system, arrow key support, built-in commands, and history.",
-      "type": "Epitech"
-    },
-    "arcade": {
-      "name": "Arcade",
-      "description": "Dynamic game framework with plugin architecture and runtime library loading in C++.",
-      "type": "Epitech"
-    },
-    "raytracer": {
-      "name": "Raytracer",
-      "description": "3D ray tracing engine in C++ with configurable scenes and realistic light rendering.",
-      "type": "Epitech"
-    },
-    "crypto": {
-      "name": "Cryptography",
-      "description": "AES, RSA, and PGP encryption implementation in Python for secure message handling.",
-      "type": "Epitech"
-    },
-    "neuralnet": {
-      "name": "Neural Network",
-      "description": "Multilayer perceptron built from scratch in pure Python with forward/backpropagation.",
-      "type": "Epitech"
-    },
-    "survivor": {
-      "name": "Survivor",
-      "description": "Full-stack web application with Nuxt/Vue frontend, Deno backend, MongoDB database, and Docker deployment.",
-      "type": "Epitech"
-    },
-    "gomoku": {
-      "name": "Gomoku AI",
-      "description": "AI player for the 5-in-a-row board game with strategic evaluation in C++.",
-      "type": "Epitech"
-    },
-    "rpg": {
-      "name": "RPG",
-      "description": "2D RPG game engine in C with CSFML - sprites, game mechanics, and world building.",
-      "type": "Epitech"
-    },
-    "marvin": {
-      "name": "MyMarvin",
-      "description": "Jenkins CI/CD automation project using Groovy Job DSL and Docker for pipeline management.",
-      "type": "Epitech"
-    },
-    "vueling": {
-      "name": "Vueling Hackathon",
-      "description": "Real-time voice translation system for aircraft with offline capabilities and multi-language support.",
-      "type": "Hackathon"
-    },
-    "discoveryweek": {
-      "name": "Discovery Week",
-      "description": "AI-powered hackathon project built with Flask, Ollama LLM integration, and SQLite database.",
-      "type": "Hackathon"
-    },
-    "flameyourmind": {
-      "name": "FlameYourMind",
-      "description": "Game jam project built with Godot 4.",
-      "type": "Game Jam"
-    },
-    "eventhorizon": {
-      "name": "Event Horizon 5min",
-      "description": "Game jam project built with Godot 4.",
-      "type": "Game Jam"
-    },
-    "lostinspace": {
-      "name": "Lost In Space",
-      "description": "Game jam project built with Godot 4.",
-      "type": "Game Jam"
-    },
-    "robbersandcat": {
-      "name": "Robbers And Cat",
-      "description": "Game jam project built with Godot 4.",
-      "type": "Game Jam"
-    }
+    "Those Who Listen": "Cooperative survival horror where voice cloning becomes the enemy. Real-time voice cloning (<300ms latency, 100% local processing) lets creatures mimic your teammates. Built with OpenVoice and PyTorch.",
+    "LoCode": "Lightweight web code editor with Monaco Editor, SSH remote development, integrated terminal, and Electron desktop app.",
+    "Glados": "Complete programming language interpreter in Haskell with lexer, parser, type checker, and bytecode VM.",
+    "R-Type": "Multiplayer space shooter game engine with ECS architecture, networking, and SFML 3.0 graphics.",
+    "Zappy": "Multiplayer networked game with C server, C++/Raylib GUI, and autonomous Python AI agents.",
+    "42sh": "Advanced UNIX shell in C with alias system, arrow key support, built-in commands, and history.",
+    "Arcade": "Dynamic game framework with plugin architecture and runtime library loading in C++.",
+    "Raytracer": "3D ray tracing engine in C++ with configurable scenes and realistic light rendering.",
+    "Cryptography": "AES, RSA, and PGP encryption implementation in Python for secure message handling.",
+    "Neural Network": "Multilayer perceptron built from scratch in pure Python with forward/backpropagation.",
+    "JEB Incubator": "Full-stack web application with Nuxt/Vue frontend, Deno backend, MongoDB database, and Docker deployment.",
+    "Gomoku AI": "AI player for the 5-in-a-row board game with strategic evaluation in C++.",
+    "RPG": "2D RPG game engine in C with CSFML - sprites, game mechanics, and world building.",
+    "MyMarvin": "Jenkins CI/CD automation project using Groovy Job DSL and Docker for pipeline management.",
+    "Vueling Hackathon": "Real-time voice translation system for aircraft with offline capabilities and multi-language support.",
+    "Discovery Week": "AI-powered hackathon project built with Flask, Ollama LLM integration, and SQLite database.",
+    "FlameYourMind": "Exit 8-inspired game where you play a scientist trapped in a burning lunar base. Find the differences between scenes to escape through the floors. Built with Godot 4 and Unreal Engine 5.",
+    "Event Horizon 5min": "3D spaceship fighter set near a black hole's event horizon. Siphon energy from the singularity while time accelerates — you have 5 minutes to charge your warp drive. Features juicy animations and a tomato Easter egg. Built with Godot 4.",
+    "Lost In Space": "Solo arcade survival game where you pilot a small spaceship drifting through space. Dodge randomly spawning asteroids at increasing speed and survive as long as possible. Score based on survival time. Built with Godot 4.",
+    "Robbers And Cat": "Open-world heist game where you steal paintings for a cat mafia. Drive around the city, burglarize locations in Phasmophobia-style gameplay, and escape before the police catches you. Built with Godot 4."
   },
   "contact": {
     "title": "Get in Touch",

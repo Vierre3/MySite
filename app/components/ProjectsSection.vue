@@ -7,14 +7,14 @@
       <div class="flex justify-center gap-2 mb-12 flex-wrap">
         <button
           v-for="filter in filters"
-          :key="filter.value"
+          :key="filter"
           class="px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300 cursor-pointer"
-          :class="activeFilter === filter.value
+          :class="activeFilter === filter
             ? 'bg-orange-accent text-white'
             : 'bg-glass border border-glass-border text-text-secondary hover:text-text-primary hover:border-glass-border-hover'"
-          @click="activeFilter = filter.value"
+          @click="activeFilter = filter"
         >
-          {{ filter.label }}
+          {{ $t(`projects.types.${filter}`) }}
         </button>
       </div>
 
@@ -36,13 +36,7 @@
 const projectsData = useProjectsData()
 const activeFilter = ref('all')
 
-const filters = [
-  { label: 'All', value: 'all' },
-  { label: 'Epitech', value: 'epitech' },
-  { label: 'Personal', value: 'personal' },
-  { label: 'Hackathons', value: 'hackathon' },
-  { label: 'Game Jams', value: 'jam' },
-]
+const filters = ['all', 'epitech', 'personal', 'hackathon', 'jam']
 
 const filteredProjects = computed(() => {
   if (activeFilter.value === 'all') return projectsData
