@@ -11,7 +11,7 @@
 
           <div class="flex flex-col sm:flex-row items-center justify-center gap-6">
             <a
-              href="mailto:pierre-yves.guiraudet@epitech.eu"
+              :href="mailHref"
               class="flex items-center gap-3 px-6 py-4 rounded-xl bg-dark-bg/50 border border-glass-border hover:border-orange-accent/40 hover:shadow-[0_0_20px_rgba(255,107,0,0.1)] transition-all duration-300 group"
             >
               <Icon name="mdi:email-outline" class="w-6 h-6 text-orange-accent" />
@@ -43,3 +43,10 @@
     </div>
   </section>
 </template>
+
+<script setup lang="ts">
+const mailHref = ref('')
+onMounted(() => {
+  mailHref.value = atob('bWFpbHRvOnBpZXJyZS15dmVzLmd1aXJhdWRldEBlcGl0ZWNoLmV1')
+})
+</script>

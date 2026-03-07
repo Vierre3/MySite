@@ -9,7 +9,7 @@
           :key="entry.key"
           :delay="index * 150"
         >
-          <TimelineItem :entry-key="entry.key" />
+          <TimelineItem :entry-key="entry.key" :current="entry.current" />
         </UiScrollReveal>
       </div>
     </div>

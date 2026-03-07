@@ -18,9 +18,17 @@
               {{ $t(`experience.${entryKey}.company`) }}
             </p>
           </div>
-          <span class="text-sm text-text-secondary whitespace-nowrap">
-            {{ $t(`experience.${entryKey}.date`) }}
-          </span>
+          <div class="flex items-center gap-2">
+            <span
+              v-if="current"
+              class="text-xs px-2 py-1 rounded-full bg-orange-accent/20 border border-orange-accent/40 text-orange-accent font-medium whitespace-nowrap"
+            >
+              {{ $t('projects.inProgress') }}
+            </span>
+            <span class="text-sm text-text-secondary whitespace-nowrap">
+              {{ $t(`experience.${entryKey}.date`) }}
+            </span>
+          </div>
         </div>
         <ul class="space-y-2">
           <li
@@ -40,6 +48,7 @@
 <script setup lang="ts">
 const props = defineProps<{
   entryKey: string
+  current?: boolean
 }>()
 
 const { t, te } = useI18n()
