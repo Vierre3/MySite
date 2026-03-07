@@ -20,6 +20,11 @@ export default defineNuxtConfig({
     strategy: 'no_prefix',
   },
 
+  ssr: true,
+  nitro: {
+    preset: 'github-pages',
+  },
+
   app: {
     head: {
       title: 'Pierre-Yves | Full-Stack Developer',
