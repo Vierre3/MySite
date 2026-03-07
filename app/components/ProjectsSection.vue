@@ -39,7 +39,6 @@ const activeFilter = ref('all')
 const filters = [
   { label: 'All', value: 'all' },
   { label: 'Epitech', value: 'epitech' },
-  { label: 'EIP', value: 'eip' },
   { label: 'Personal', value: 'personal' },
   { label: 'Hackathons', value: 'hackathon' },
   { label: 'Game Jams', value: 'jam' },

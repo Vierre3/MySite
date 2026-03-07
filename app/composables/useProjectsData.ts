@@ -1,7 +1,8 @@
 export interface Project {
   key: string
   techTags: string[]
-  type: 'personal' | 'epitech' | 'eip' | 'hackathon' | 'jam'
+  type: 'personal' | 'epitech' | 'hackathon' | 'jam'
+  current?: boolean
   github?: string
 }
 
@@ -10,12 +11,14 @@ export function useProjectsData(): Project[] {
     {
       key: 'thosewholisten',
       techTags: ['Python', 'PyTorch', 'OpenVoice', 'Voice Cloning', 'Nuxt'],
-      type: 'eip',
+      type: 'epitech',
+      current: true,
     },
     {
       key: 'locode',
       techTags: ['Nuxt 4', 'Vue 3', 'Monaco', 'Electron', 'SSH'],
       type: 'personal',
+      current: true,
     },
     {
       key: 'glados',
@@ -24,7 +27,7 @@ export function useProjectsData(): Project[] {
     },
     {
       key: 'rtype',
-      techTags: ['C++20', 'SFML 3', 'ECS', 'Networking'],
+      techTags: ['C++', 'SFML 3', 'ECS', 'Networking'],
       type: 'epitech',
     },
     {
@@ -39,7 +42,7 @@ export function useProjectsData(): Project[] {
     },
     {
       key: 'arcade',
-      techTags: ['C++20', 'Plugins', 'Dynamic Loading'],
+      techTags: ['C++', 'Plugins', 'Dynamic Loading'],
       type: 'epitech',
     },
     {
@@ -64,7 +67,7 @@ export function useProjectsData(): Project[] {
     },
     {
       key: 'gomoku',
-      techTags: ['C++20', 'Game AI', 'Strategy'],
+      techTags: ['C++', 'Game AI', 'Strategy'],
       type: 'epitech',
     },
     {

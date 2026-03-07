@@ -1,7 +1,7 @@
 <template>
   <section id="contact" class="py-24 px-4">
     <div class="max-w-3xl mx-auto">
-      <UiSectionTitle title-key="contact.title" />
+      <UiSectionTitle title-key="nav.contact" />
 
       <UiScrollReveal>
         <UiGlassCard class="p-8 md:p-12 text-center">

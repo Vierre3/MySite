@@ -10,6 +10,7 @@
         :key="skill.name"
         :name="skill.name"
         :icon="skill.icon"
+        :mono="skill.mono"
       />
     </div>
   </UiGlassCard>

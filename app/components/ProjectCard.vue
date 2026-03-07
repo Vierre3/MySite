@@ -8,9 +8,17 @@
           {{ $t(`projects.${project.key}.name`) }}
         </h3>
       </div>
-      <span class="text-xs px-2 py-1 rounded-full border border-glass-border text-text-secondary">
-        {{ $t(`projects.${project.key}.type`) }}
-      </span>
+      <div class="flex items-center gap-2">
+        <span
+          v-if="project.current"
+          class="text-xs px-2 py-1 rounded-full bg-orange-accent/20 border border-orange-accent/40 text-orange-accent font-medium"
+        >
+          In Progress
+        </span>
+        <span class="text-xs px-2 py-1 rounded-full border border-glass-border text-text-secondary">
+          {{ $t(`projects.${project.key}.type`) }}
+        </span>
+      </div>
     </div>
 
     <!-- Description -->

@@ -1,6 +1,7 @@
 export interface Skill {
   name: string
   icon: string
+  mono?: boolean
 }
 
 export interface SkillCategory {
@@ -19,7 +20,7 @@ export function useSkillsData(): SkillCategory[] {
         { name: 'Haskell', icon: 'devicon:haskell' },
         { name: 'TypeScript', icon: 'devicon:typescript' },
         { name: 'JavaScript', icon: 'devicon:javascript' },
-        { name: 'Rust', icon: 'devicon:rust' },
+        { name: 'Rust', icon: 'devicon:rust', mono: true },
         { name: 'Groovy', icon: 'devicon:groovy' },
       ],
     },
@@ -29,19 +30,19 @@ export function useSkillsData(): SkillCategory[] {
         { name: 'Vue 3', icon: 'devicon:vuejs' },
         { name: 'Nuxt', icon: 'devicon:nuxtjs' },
         { name: 'Tailwind CSS', icon: 'devicon:tailwindcss' },
-        { name: 'SFML', icon: 'mdi:gamepad-variant' },
-        { name: 'Raylib', icon: 'mdi:cube-outline' },
+        { name: 'SFML', icon: 'mdi:gamepad-variant', mono: true },
+        { name: 'Raylib', icon: 'mdi:cube-outline', mono: true },
       ],
     },
     {
       key: 'backend',
       skills: [
-        { name: 'Flask', icon: 'devicon:flask' },
+        { name: 'Flask', icon: 'devicon:flask', mono: true },
         { name: 'Deno', icon: 'devicon:denojs' },
         { name: 'Node.js', icon: 'devicon:nodejs' },
         { name: 'MongoDB', icon: 'devicon:mongodb' },
-        { name: 'REST APIs', icon: 'mdi:api' },
-        { name: 'SQL', icon: 'mdi:database' },
+        { name: 'REST APIs', icon: 'mdi:api', mono: true },
+        { name: 'SQL', icon: 'mdi:database', mono: true },
       ],
     },
     {
@@ -51,26 +52,26 @@ export function useSkillsData(): SkillCategory[] {
         { name: 'Jenkins', icon: 'devicon:jenkins' },
         { name: 'GitHub Actions', icon: 'devicon:githubactions' },
         { name: 'Git', icon: 'devicon:git' },
-        { name: 'Linux', icon: 'devicon:linux' },
-        { name: 'CI/CD', icon: 'mdi:pipe' },
+        { name: 'Linux', icon: 'devicon:linux', mono: true },
+        { name: 'CI/CD', icon: 'mdi:pipe', mono: true },
       ],
     },
     {
       key: 'tools',
       skills: [
         { name: 'CMake', icon: 'devicon:cmake' },
-        { name: 'Makefile', icon: 'mdi:file-cog' },
+        { name: 'Makefile', icon: 'mdi:file-cog', mono: true },
         { name: 'Stack', icon: 'devicon:haskell' },
         { name: 'Electron', icon: 'devicon:electron' },
         { name: 'Arduino', icon: 'devicon:arduino' },
-        { name: 'CUDA', icon: 'mdi:gpu' },
+        { name: 'CUDA', icon: 'mdi:gpu', mono: true },
       ],
     },
     {
       key: 'creative',
       skills: [
         { name: 'Godot', icon: 'devicon:godot' },
-        { name: 'Unity', icon: 'devicon:unity' },
+        { name: 'Unity', icon: 'devicon:unity', mono: true },
         { name: 'Blender', icon: 'devicon:blender' },
         { name: 'Canva', icon: 'devicon:canva' },
       ],
@@ -78,10 +79,21 @@ export function useSkillsData(): SkillCategory[] {
     {
       key: 'other',
       skills: [
-        { name: 'Networking', icon: 'mdi:lan' },
-        { name: 'Cryptography', icon: 'mdi:lock' },
-        { name: 'AI / ML', icon: 'mdi:brain' },
-        { name: 'Game Dev', icon: 'mdi:gamepad-variant-outline' },
+        { name: 'Networking', icon: 'mdi:lan', mono: true },
+        { name: 'Cryptography', icon: 'mdi:lock', mono: true },
+        { name: 'AI / ML', icon: 'mdi:brain', mono: true },
+        { name: 'Game Dev', icon: 'mdi:gamepad-variant-outline', mono: true },
+      ],
+    },
+    {
+      key: 'soft',
+      skills: [
+        { name: 'Autonomy', icon: 'mdi:account-check', mono: true },
+        { name: 'Teamwork', icon: 'mdi:account-group', mono: true },
+        { name: 'Team Lead', icon: 'mdi:account-star', mono: true },
+        { name: 'Adaptability', icon: 'mdi:swap-horizontal', mono: true },
+        { name: 'Problem Solving', icon: 'mdi:lightbulb-outline', mono: true },
+        { name: 'Communication', icon: 'mdi:message-text-outline', mono: true },
       ],
     },
   ]

@@ -3,11 +3,12 @@
     <div class="max-w-5xl mx-auto">
       <UiSectionTitle title-key="skills.title" />
 
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div class="columns-1 md:columns-2 lg:columns-3 gap-6 space-y-6">
         <UiScrollReveal
           v-for="(category, index) in skillsData"
           :key="category.key"
           :delay="index * 100"
+          class="break-inside-avoid"
         >
           <SkillCategory
             :category-key="category.key"

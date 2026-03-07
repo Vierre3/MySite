@@ -1,23 +1,23 @@
 {
   "nav": {
-    "about": "A propos",
-    "skills": "Competences",
-    "experience": "Experience",
+    "about": "À propos",
+    "skills": "Compétences",
+    "experience": "Expérience",
     "projects": "Projets",
     "contact": "Contact"
   },
   "hero": {
     "greeting": "Bonjour, je suis",
     "name": "Pierre-Yves",
-    "title": "Developpeur Full-Stack",
+    "title": "Développeur Full-Stack",
     "subtitle": "Epitech Paris",
-    "tagline": "Passionne par la creation de logiciels elegants, des systemes bas niveau aux applications web modernes.",
+    "tagline": "Passionné par la création de logiciels élégants, des systèmes bas niveau aux applications web modernes.",
     "cta_contact": "Me Contacter",
-    "cta_resume": "Telecharger CV"
+    "cta_resume": "Télécharger CV"
   },
   "about": {
-    "title": "A propos",
-    "bio": "Je suis etudiant en 3eme annee a Epitech Paris, passionne par le developpement logiciel full-stack. De l'ecriture de shells UNIX en C a la creation d'applications web en temps reel avec Nuxt et Vue, j'aime relever des defis complexes et concevoir des solutions propres et efficaces. J'ai acquis une experience professionnelle a travers deux stages chez Naitways, ou j'ai developpe des outils Python pour la cybersecurite et l'automatisation d'infrastructure.",
+    "title": "À propos",
+    "bio": "Je suis étudiant en 3ème année à Epitech Paris, passionné par le développement logiciel full-stack. De l'écriture de shells UNIX en C à la création d'applications web en temps réel avec Nuxt et Vue, j'aime relever des défis complexes et concevoir des solutions propres et efficaces. J'ai acquis une expérience professionnelle à travers deux stages chez Naitways, où j'ai développé des outils Python pour la cybersécurité et l'automatisation d'infrastructure.",
     "stats": {
       "languages": "Langages",
       "languagesCount": "10+",
@@ -28,40 +28,41 @@
     }
   },
   "skills": {
-    "title": "Competences",
+    "title": "Compétences",
     "languages": "Langages",
     "frontend": "Frontend",
     "backend": "Backend",
     "devops": "DevOps & Outils",
     "tools": "Build & Outils",
-    "creative": "Creatif & Moteurs de jeu",
-    "other": "Autres"
+    "creative": "Créatif & Moteurs de jeu",
+    "other": "Autres",
+    "soft": "Savoir-être"
   },
   "experience": {
-    "title": "Experience",
+    "title": "Expérience",
     "naitways1": {
-      "role": "Developpeur Stagiaire (Alternance)",
+      "role": "Développeur Stagiaire (Alternance)",
       "company": "Naitways",
-      "date": "Oct 2025 - Fev 2026",
+      "date": "Oct 2025 - Fév 2026",
       "items": [
-        "Conception d'un generateur de rapports de durcissement Word (.docx) en Python",
-        "Interrogation de la base de donnees interne via API REST pour generer et envoyer des rapports aux clients",
-        "Travail sur la NBOX - un systeme satellite deploye sur les serveurs clients pour l'auto-configuration et la gestion des VMs",
-        "Developpement d'outils d'automatisation en Python pour la gestion d'infrastructure"
+        "Conception d'un générateur de rapports de durcissement Word (.docx) en Python",
+        "Interrogation de la base de données interne via API REST pour générer et envoyer des rapports aux clients",
+        "Travail sur la NBOX - un système satellite déployé sur les serveurs clients pour l'auto-configuration et la gestion des VMs",
+        "Développement d'outils d'automatisation en Python pour la gestion d'infrastructure"
       ]
     },
     "naitways2": {
-      "role": "Developpeur Stagiaire (Temps plein)",
+      "role": "Développeur Stagiaire (Temps plein)",
       "company": "Naitways",
-      "date": "Aout 2024 - Dec 2024",
+      "date": "Août 2024 - Déc 2024",
       "items": [
-        "Developpement de plus de 13 outils Python pour la cybersecurite et l'automatisation d'infrastructure",
-        "Creation de systemes de recherche de vulnerabilites CVE integrant les APIs NVD et Vulners",
+        "Développement de plus de 13 outils Python pour la cybersécurité et l'automatisation d'infrastructure",
+        "Création de systèmes de recherche de vulnérabilités CVE intégrant les APIs NVD et Vulners",
         "Conception d'outils de gestion et synchronisation des politiques de pare-feu FortiGate",
-        "Implementation de l'agregation de logs SSH depuis FortiAnalyzer vers InfluxDB",
-        "Creation d'un generateur de notes de version Flask a partir des commits GitLab",
-        "Developpement d'integrations reseau (Juniper, LibreNMS, Wazuh)",
-        "Creation d'un outil de documentation de code par IA utilisant Ollama (LLM local)"
+        "Implémentation de l'agrégation de logs SSH depuis FortiAnalyzer vers InfluxDB",
+        "Création d'un générateur de notes de version Flask à partir des commits GitLab",
+        "Développement d'intégrations réseau (Juniper, LibreNMS, Wazuh)",
+        "Création d'un outil de documentation de code par IA utilisant Ollama (LLM local)"
       ]
     }
   },
@@ -69,47 +70,47 @@
     "title": "Projets",
     "thosewholisten": {
       "name": "Those Who Listen",
-      "description": "Survival horror cooperatif ou le clonage vocal devient l'ennemi. Clonage vocal temps reel (<300ms de latence, traitement 100% local) permettant aux creatures d'imiter vos coequipiers. Construit avec OpenVoice et PyTorch.",
-      "type": "EIP"
+      "description": "Survival horror coopératif où le clonage vocal devient l'ennemi. Clonage vocal temps réel (<300ms de latence, traitement 100% local) permettant aux créatures d'imiter vos coéquipiers. Construit avec OpenVoice et PyTorch.",
+      "type": "Epitech"
     },
     "locode": {
       "name": "LoCode",
-      "description": "Editeur de code web leger avec Monaco Editor, developpement distant SSH, terminal integre et application Electron.",
+      "description": "Éditeur de code web léger avec Monaco Editor, développement distant SSH, terminal intégré et application Electron.",
       "type": "Personnel"
     },
     "glados": {
       "name": "Glados",
-      "description": "Interpreteur de langage de programmation complet en Haskell avec lexer, parser, verificateur de types et VM bytecode.",
+      "description": "Interpréteur de langage de programmation complet en Haskell avec lexer, parser, vérificateur de types et VM bytecode.",
       "type": "Epitech"
     },
     "rtype": {
       "name": "R-Type",
-      "description": "Moteur de jeu de tir spatial multijoueur avec architecture ECS, reseau et graphismes SFML 3.0.",
+      "description": "Moteur de jeu de tir spatial multijoueur avec architecture ECS, réseau et graphismes SFML 3.0.",
       "type": "Epitech"
     },
     "zappy": {
       "name": "Zappy",
-      "description": "Jeu multijoueur en reseau avec serveur C, GUI C++/Raylib et agents IA Python autonomes.",
+      "description": "Jeu multijoueur en réseau avec serveur C, GUI C++/Raylib et agents IA Python autonomes.",
       "type": "Epitech"
     },
     "shell42": {
       "name": "42sh",
-      "description": "Shell UNIX avance en C avec systeme d'alias, support des fleches, commandes integrees et historique.",
+      "description": "Shell UNIX avancé en C avec système d'alias, support des flèches, commandes intégrées et historique.",
       "type": "Epitech"
     },
     "arcade": {
       "name": "Arcade",
-      "description": "Framework de jeux dynamique avec architecture de plugins et chargement de bibliotheques en C++20.",
+      "description": "Framework de jeux dynamique avec architecture de plugins et chargement de bibliothèques en C++.",
       "type": "Epitech"
     },
     "raytracer": {
       "name": "Raytracer",
-      "description": "Moteur de ray tracing 3D en C++ avec scenes configurables et rendu de lumiere realiste.",
+      "description": "Moteur de ray tracing 3D en C++ avec scènes configurables et rendu de lumière réaliste.",
       "type": "Epitech"
     },
     "crypto": {
       "name": "Cryptography",
-      "description": "Implementation de chiffrement AES, RSA et PGP en Python pour le traitement securise de messages.",
+      "description": "Implémentation de chiffrement AES, RSA et PGP en Python pour le traitement sécurisé de messages.",
       "type": "Epitech"
     },
     "neuralnet": {
@@ -119,17 +120,17 @@
     },
     "survivor": {
       "name": "Survivor",
-      "description": "Application web full-stack avec frontend Nuxt/Vue, backend Deno, base de donnees MongoDB et deploiement Docker.",
+      "description": "Application web full-stack avec frontend Nuxt/Vue, backend Deno, base de données MongoDB et déploiement Docker.",
       "type": "Epitech"
     },
     "gomoku": {
       "name": "Gomoku AI",
-      "description": "Joueur IA pour le jeu de plateau 5-en-ligne avec evaluation strategique en C++20.",
+      "description": "Joueur IA pour le jeu de plateau 5-en-ligne avec évaluation stratégique en C++.",
       "type": "Epitech"
     },
     "rpg": {
       "name": "RPG",
-      "description": "Moteur de jeu RPG 2D en C avec CSFML - sprites, mecaniques de jeu et construction de monde.",
+      "description": "Moteur de jeu RPG 2D en C avec CSFML - sprites, mécaniques de jeu et construction de monde.",
       "type": "Epitech"
     },
     "marvin": {
@@ -139,44 +140,44 @@
     },
     "vueling": {
       "name": "Vueling Hackathon",
-      "description": "Systeme de traduction vocale en temps reel pour avions avec capacites hors-ligne et support multilingue.",
+      "description": "Système de traduction vocale en temps réel pour avions avec capacités hors-ligne et support multilingue.",
       "type": "Hackathon"
     },
     "discoveryweek": {
       "name": "Discovery Week",
-      "description": "Projet hackathon avec integration IA, construit avec Flask, Ollama LLM et base de donnees SQLite.",
+      "description": "Projet hackathon avec intégration IA, construit avec Flask, Ollama LLM et base de données SQLite.",
       "type": "Hackathon"
     },
     "flameyourmind": {
       "name": "FlameYourMind",
-      "description": "Projet de game jam realise avec Godot 4.",
+      "description": "Projet de game jam réalisé avec Godot 4.",
       "type": "Game Jam"
     },
     "eventhorizon": {
       "name": "Event Horizon 5min",
-      "description": "Projet de game jam realise avec Godot 4.",
+      "description": "Projet de game jam réalisé avec Godot 4.",
       "type": "Game Jam"
     },
     "lostinspace": {
       "name": "Lost In Space",
-      "description": "Projet de game jam realise avec Godot 4.",
+      "description": "Projet de game jam réalisé avec Godot 4.",
       "type": "Game Jam"
     },
     "robbersandcat": {
       "name": "Robbers And Cat",
-      "description": "Projet de game jam realise avec Godot 4.",
+      "description": "Projet de game jam réalisé avec Godot 4.",
       "type": "Game Jam"
     }
   },
   "contact": {
-    "title": "Me Contacter",
-    "subtitle": "N'hesitez pas a me contacter pour des opportunites, des collaborations ou simplement pour discuter.",
+    "title": "Contact",
+    "subtitle": "N'hésitez pas à me contacter pour des opportunités, des collaborations ou simplement pour discuter.",
     "email": "Email",
     "github": "GitHub",
     "linkedin": "LinkedIn"
   },
   "footer": {
     "built": "Construit avec Nuxt 4 & Tailwind CSS",
-    "rights": "Tous droits reserves."
+    "rights": "Tous droits réservés."
   }
 }

@@ -38,37 +38,56 @@
         </div>
       </div>
     </div>
+  </nav>
 
-    <!-- Mobile Menu -->
+  <!-- Mobile Menu - Teleported outside nav to avoid clipping -->
+  <Teleport to="body">
     <Transition
-      enter-active-class="transition-all duration-300 ease-out"
-      enter-from-class="opacity-0 -translate-y-2"
-      enter-to-class="opacity-100 translate-y-0"
-      leave-active-class="transition-all duration-200 ease-in"
-      leave-from-class="opacity-100 translate-y-0"
-      leave-to-class="opacity-0 -translate-y-2"
+      enter-active-class="transition-opacity duration-300 ease-out"
+      enter-from-class="opacity-0"
+      enter-to-class="opacity-100"
+      leave-active-class="transition-opacity duration-200 ease-in"
+      leave-from-class="opacity-100"
+      leave-to-class="opacity-0"
     >
       <div
         v-if="mobileOpen"
-        class="md:hidden backdrop-blur-xl bg-dark-bg/95 border-b border-glass-border"
+        class="md:hidden fixed inset-0 z-[60]"
+        @click.self="mobileOpen = false"
       >
-        <div class="px-4 py-4 space-y-3">
-          <button
-            v-for="section in sections"
-            :key="section"
-            class="block w-full text-left text-text-secondary hover:text-orange-accent transition-colors cursor-pointer py-2"
-            @click="scrollToSection(section); mobileOpen = false"
-          >
-            {{ $t(`nav.${section}`) }}
-          </button>
+        <!-- Dark overlay backdrop -->
+        <div class="absolute inset-0 bg-black/50 backdrop-blur-sm" />
+
+        <!-- Menu panel -->
+        <div class="relative mt-16 mx-4">
+          <div class="backdrop-blur-xl bg-dark-bg/95 border border-glass-border rounded-2xl shadow-2xl shadow-black/40 overflow-hidden">
+            <div class="p-4 space-y-1">
+              <button
+                v-for="section in sections"
+                :key="section"
+                class="flex items-center gap-3 w-full text-left text-text-secondary hover:text-orange-accent hover:bg-white/5 rounded-xl transition-all cursor-pointer px-5 py-4 text-lg font-medium border border-transparent hover:border-orange-accent/20"
+                @click="scrollToSection(section); mobileOpen = false"
+              >
+                <Icon :name="sectionIcons[section] ?? 'mdi:circle-outline'" class="w-5 h-5 text-orange-accent/70" />
+                {{ $t(`nav.${section}`) }}
+              </button>
+            </div>
+          </div>
         </div>
       </div>
     </Transition>
-  </nav>
+  </Teleport>
 </template>
 
 <script setup lang="ts">
 const sections = ['about', 'skills', 'experience', 'projects', 'contact']
+const sectionIcons: Record<string, string> = {
+  about: 'mdi:account-outline',
+  skills: 'mdi:code-tags',
+  experience: 'mdi:briefcase-outline',
+  projects: 'mdi:folder-outline',
+  contact: 'mdi:email-outline',
+}
 const mobileOpen = ref(false)
 const scrolled = ref(false)
 const { scrollToSection } = useSmoothScroll()

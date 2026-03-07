@@ -35,7 +35,8 @@
     "devops": "DevOps & Tools",
     "tools": "Build & Tools",
     "creative": "Creative & Game Engines",
-    "other": "Other"
+    "other": "Other",
+    "soft": "Soft Skills"
   },
   "experience": {
     "title": "Experience",
@@ -70,7 +71,7 @@
     "thosewholisten": {
       "name": "Those Who Listen",
       "description": "Cooperative survival horror where voice cloning becomes the enemy. Real-time voice cloning (<300ms latency, 100% local processing) lets creatures mimic your teammates. Built with OpenVoice and PyTorch.",
-      "type": "EIP"
+      "type": "Epitech"
     },
     "locode": {
       "name": "LoCode",
@@ -99,7 +100,7 @@
     },
     "arcade": {
       "name": "Arcade",
-      "description": "Dynamic game framework with plugin architecture and runtime library loading in C++20.",
+      "description": "Dynamic game framework with plugin architecture and runtime library loading in C++.",
       "type": "Epitech"
     },
     "raytracer": {
@@ -124,7 +125,7 @@
     },
     "gomoku": {
       "name": "Gomoku AI",
-      "description": "AI player for the 5-in-a-row board game with strategic evaluation in C++20.",
+      "description": "AI player for the 5-in-a-row board game with strategic evaluation in C++.",
       "type": "Epitech"
     },
     "rpg": {
