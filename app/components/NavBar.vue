@@ -102,8 +102,7 @@ watch(mobileOpen, (open) => {
 function onMenuAnimationEnd() {
   if (!mobileOpen.value) mobileVisible.value = false
 }
-const { isRestoring } = useScrollRestore()
-const scrolled = ref(isRestoring.value)
+const scrolled = ref(false)
 const activeSection = ref('')
 const { scrollToSection } = useSmoothScroll()
 
@@ -142,7 +141,14 @@ onMounted(() => {
   }
 
   window.addEventListener('scroll', onScroll, { passive: true })
-  onScroll()
+
+  // If restoring scroll position, keep navbar background; otherwise check current scroll
+  const savedY = parseInt(sessionStorage.getItem('scroll-position') || '0', 10)
+  if (savedY > 75) {
+    scrolled.value = true
+  } else {
+    onScroll()
+  }
 })
 </script>
 

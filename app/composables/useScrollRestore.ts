@@ -13,14 +13,6 @@ export function setupScrollRestore() {
   const STORAGE_KEY = 'scroll-position'
   let ticking = false
 
-  const savedY = sessionStorage.getItem(STORAGE_KEY)
-  const restoreY = savedY ? parseInt(savedY, 10) : 0
-
-  // If we have a saved position, mark as restoring so animations can be skipped
-  if (restoreY > 0) {
-    isRestoring.value = true
-  }
-
   // Save scroll position on scroll
   const onScroll = () => {
     if (ticking) return
@@ -32,24 +24,31 @@ export function setupScrollRestore() {
   }
   window.addEventListener('scroll', onScroll, { passive: true })
 
-  // Restore scroll position after hydration, retrying until layout settles
-  if (restoreY > 0) {
-    let attempts = 0
-    const maxAttempts = 10
+  // Set isRestoring in onMounted (after hydration) to avoid hydration mismatch
+  onMounted(() => {
+    const savedY = sessionStorage.getItem(STORAGE_KEY)
+    const restoreY = savedY ? parseInt(savedY, 10) : 0
 
-    const tryRestore = () => {
-      window.scrollTo(0, restoreY)
-      attempts++
+    if (restoreY > 0) {
+      isRestoring.value = true
 
-      if (attempts < maxAttempts && Math.abs(window.scrollY - restoreY) > 2) {
-        requestAnimationFrame(tryRestore)
-      } else {
-        isRestoring.value = false
+      let attempts = 0
+      const maxAttempts = 10
+
+      const tryRestore = () => {
+        window.scrollTo(0, restoreY)
+        attempts++
+
+        if (attempts < maxAttempts && Math.abs(window.scrollY - restoreY) > 2) {
+          requestAnimationFrame(tryRestore)
+        } else {
+          isRestoring.value = false
+        }
       }
-    }
 
-    nextTick(() => {
-      requestAnimationFrame(tryRestore)
-    })
-  }
+      nextTick(() => {
+        requestAnimationFrame(tryRestore)
+      })
+    }
+  })
 }
