@@ -37,7 +37,9 @@ export function setupScrollRestore() {
     // Wait for next tick + small delay to ensure DOM is rendered
     nextTick(() => {
       requestAnimationFrame(() => {
-        window.scrollTo(0, restoreY)
+        // Clamp to max scrollable position to avoid overshooting near bottom
+        const maxY = document.documentElement.scrollHeight - window.innerHeight
+        window.scrollTo(0, Math.min(restoreY, maxY))
         // Clear restoring flag after scroll is restored
         setTimeout(() => {
           isRestoring.value = false
