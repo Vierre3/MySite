@@ -12,10 +12,10 @@
           :href="project.github"
           target="_blank"
           rel="noopener noreferrer"
-          class="text-text-secondary hover:text-orange-accent hover:scale-110 active:scale-95 md:active:scale-100 transition-all"
+          class="text-text-secondary hover:text-orange-accent hover:scale-110 active:scale-75 md:active:scale-100 transition-all"
           @click.stop
         >
-          <Icon name="mdi:open-in-new" class="w-4 h-4 mt-2" />
+          <Icon name="mdi:open-in-new" class="w-4 h-4 mt-1.5" />
         </a>
       </div>
       <div class="flex items-center gap-2">

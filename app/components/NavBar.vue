@@ -44,44 +44,40 @@
 
   <!-- Mobile Menu - Teleported outside nav to avoid clipping -->
   <Teleport to="body">
-    <Transition
-      enter-active-class="transition-opacity duration-300 ease-out"
-      enter-from-class="opacity-0"
-      enter-to-class="opacity-100"
-      leave-active-class="transition-opacity duration-200 ease-in"
-      leave-from-class="opacity-100"
-      leave-to-class="opacity-0"
+    <div
+      v-if="mobileVisible"
+      class="md:hidden fixed inset-0 z-[60]"
+      :class="mobileOpen ? 'mobile-menu-enter' : 'mobile-menu-leave'"
+      @animationend="onMenuAnimationEnd"
     >
+      <!-- Dark overlay backdrop (click to close) -->
       <div
-        v-if="mobileOpen"
-        class="md:hidden fixed inset-0 z-[60]"
-      >
-        <!-- Dark overlay backdrop (click to close) -->
-        <div class="absolute inset-0 bg-black/50 backdrop-blur-sm" @click="mobileOpen = false" />
+        class="absolute inset-0 mobile-overlay"
+        @click="mobileOpen = false"
+      />
 
-        <!-- Menu panel -->
-        <div class="relative mt-16 mx-4">
-          <div class="backdrop-blur-xl bg-dark-bg/95 border border-glass-border rounded-2xl shadow-2xl shadow-black/40 overflow-hidden">
-            <div class="p-4 space-y-1">
-              <button
-                v-for="section in sections"
-                :key="section"
-                class="flex items-center gap-3 w-full text-left group hover:bg-white/5 hover:scale-[1.02] active:scale-95 rounded-xl transition-all cursor-pointer px-5 py-4 text-lg font-medium border border-transparent hover:border-orange-accent/40"
-                :class="activeSection === section ? 'text-orange-accent' : 'text-text-secondary hover:text-text-primary'"
-                @click="scrollToSection(section); mobileOpen = false"
-              >
-                <Icon
-                  :name="sectionIcons[section]!"
-                  class="w-5 h-5"
-                  :class="activeSection === section ? 'text-orange-accent' : 'text-text-secondary group-hover:text-text-primary'"
-                />
-                {{ $t(`nav.${section}`) }}
-              </button>
-            </div>
+      <!-- Menu panel -->
+      <div class="relative mt-16 mx-4 mobile-menu-panel">
+        <div class="backdrop-blur-xl bg-dark-bg/95 border border-glass-border rounded-2xl shadow-2xl shadow-black/40 overflow-hidden">
+          <div class="p-4 space-y-1">
+            <button
+              v-for="section in sections"
+              :key="section"
+              class="flex items-center gap-3 w-full text-left group hover:bg-white/5 hover:scale-[1.02] active:scale-95 rounded-xl transition-all cursor-pointer px-5 py-4 text-lg font-medium border border-transparent hover:border-orange-accent/40"
+              :class="activeSection === section ? 'text-orange-accent' : 'text-text-secondary hover:text-text-primary'"
+              @click="scrollToSection(section); mobileOpen = false"
+            >
+              <Icon
+                :name="sectionIcons[section]!"
+                class="w-5 h-5"
+                :class="activeSection === section ? 'text-orange-accent' : 'text-text-secondary group-hover:text-text-primary'"
+              />
+              {{ $t(`nav.${section}`) }}
+            </button>
           </div>
         </div>
       </div>
-    </Transition>
+    </div>
   </Teleport>
 </template>
 
@@ -96,9 +92,16 @@ const sectionIcons: Record<string, string> = {
 }
 const mobileOpen = ref(false)
 
+const mobileVisible = ref(false)
+
 watch(mobileOpen, (open) => {
   document.body.style.overflow = open ? 'hidden' : ''
+  if (open) mobileVisible.value = true
 })
+
+function onMenuAnimationEnd() {
+  if (!mobileOpen.value) mobileVisible.value = false
+}
 const { isRestoring } = useScrollRestore()
 const scrolled = ref(isRestoring.value)
 const activeSection = ref('')
@@ -142,3 +145,39 @@ onMounted(() => {
   onScroll()
 })
 </script>
+
+<style>
+/* Enter animations */
+.mobile-menu-enter .mobile-overlay {
+  animation: overlay-in 300ms ease-out forwards;
+}
+.mobile-menu-enter .mobile-menu-panel {
+  animation: panel-in 300ms ease-out forwards;
+}
+
+/* Leave animations */
+.mobile-menu-leave .mobile-overlay {
+  animation: overlay-out 200ms ease-in forwards;
+}
+.mobile-menu-leave .mobile-menu-panel {
+  animation: panel-out 200ms ease-in forwards;
+}
+
+@keyframes overlay-in {
+  from { background-color: rgba(0,0,0,0); backdrop-filter: blur(0px); }
+  to { background-color: rgba(0,0,0,0.5); backdrop-filter: blur(4px); }
+}
+@keyframes overlay-out {
+  from { background-color: rgba(0,0,0,0.5); backdrop-filter: blur(4px); }
+  to { background-color: rgba(0,0,0,0); backdrop-filter: blur(0px); }
+}
+
+@keyframes panel-in {
+  from { opacity: 0; transform: translateY(-10px) scale(0.97); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+@keyframes panel-out {
+  from { opacity: 1; transform: translateY(0) scale(1); }
+  to { opacity: 0; transform: translateY(-10px) scale(0.97); }
+}
+</style>
