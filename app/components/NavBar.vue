@@ -145,13 +145,13 @@ onMounted(() => {
 
   onScroll()
   if (scrolled.value) {
-    navTransition.value = true
-  } else {
     requestAnimationFrame(() => {
       requestAnimationFrame(() => {
         navTransition.value = true
       })
     })
+  } else {
+    navTransition.value = true
   }
 
 })
