@@ -12,7 +12,7 @@
     <div
       class="relative h-full backdrop-blur-xl bg-glass rounded-[inherit] transition-all duration-300"
       :class="[
-        hover && ' hover:bg-glass-hover hover:shadow-[0_0_30px_rgba(255,107,0,0.15)]',
+        hover && ' hover:bg-glass-hover hover:shadow-[0_0_30px_rgba(255,107,0,0.1)]',
         $attrs.class as string
       ]"
     >

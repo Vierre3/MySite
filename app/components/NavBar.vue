@@ -104,14 +104,11 @@ const activeSection = ref('')
 const { scrollToSection } = useSmoothScroll()
 
 onMounted(() => {
-  scrolled.value = window.scrollY > 75
-  window.addEventListener('scroll', () => {
-    scrolled.value = window.scrollY > 75
-  })
-
-  const updateActiveSection = () => {
+  const onScroll = () => {
     const scrollY = window.scrollY
     const windowHeight = window.innerHeight
+
+    scrolled.value = scrollY > 75
 
     // If near top, no section is active
     if (scrollY < windowHeight * 0.3) {
@@ -126,7 +123,6 @@ onMounted(() => {
     }
 
     // Find which section the viewport is currently in
-    // A section is active if viewport center is between its top and the next section's top
     const checkPoint = scrollY + windowHeight * 0.4
     let active = ''
 
@@ -141,7 +137,7 @@ onMounted(() => {
     activeSection.value = active
   }
 
-  window.addEventListener('scroll', updateActiveSection, { passive: true })
-  updateActiveSection()
+  window.addEventListener('scroll', onScroll, { passive: true })
+  onScroll()
 })
 </script>
