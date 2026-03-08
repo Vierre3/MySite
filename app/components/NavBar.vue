@@ -102,7 +102,7 @@ watch(mobileOpen, (open) => {
 function onMenuAnimationEnd() {
   if (!mobileOpen.value) mobileVisible.value = false
 }
-const scrolled = ref(true)
+const scrolled = ref(false)
 const navTransition = ref(false)
 const activeSection = ref('')
 const { scrollToSection } = useSmoothScroll()
@@ -148,7 +148,11 @@ onMounted(() => {
   if (scrolled.value) {
     navTransition.value = true
   } else {
-    nextTick(() => { navTransition.value = true })
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        navTransition.value = true
+      })
+    })
     onScroll()
   }
 
