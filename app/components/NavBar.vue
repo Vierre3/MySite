@@ -1,6 +1,7 @@
 <template>
   <nav
-    class="fixed top-0 left-0 right-0 transition-all duration-300"
+    class="fixed top-0 left-0 right-0"
+    :style="navReady ? 'transition: all 300ms' : ''"
     :class="[mobileOpen ? 'z-[70]' : 'z-50', scrolled ? 'backdrop-blur-xl bg-dark-bg/80 border-b border-glass-border shadow-lg' : 'border-transparent']"
   >
     <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -103,6 +104,7 @@ function onMenuAnimationEnd() {
   if (!mobileOpen.value) mobileVisible.value = false
 }
 const scrolled = ref(true)
+const navReady = ref(false)
 const activeSection = ref('')
 const { scrollToSection } = useSmoothScroll()
 
@@ -149,6 +151,9 @@ onMounted(() => {
   } else {
     onScroll()
   }
+
+  // Enable transition after initial state is settled
+  requestAnimationFrame(() => { navReady.value = true })
 })
 </script>
 
