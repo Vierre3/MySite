@@ -148,7 +148,7 @@ onMounted(() => {
   if (scrolled.value) {
     navTransition.value = true
   } else {
-    requestAnimationFrame(() => { navTransition.value = true })
+    nextTick(() => { navTransition.value = true })
     onScroll()
   }
 
