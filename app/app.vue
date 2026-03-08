@@ -45,8 +45,4 @@ body {
   transform: none !important;
   transition: none !important;
 }
-
-.skip-animations nav {
-  transition: none !important;
-}
 </style>

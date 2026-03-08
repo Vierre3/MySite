@@ -32,19 +32,24 @@ export function setupScrollRestore() {
   }
   window.addEventListener('scroll', onScroll, { passive: true })
 
-  // Restore scroll position after hydration
+  // Restore scroll position after hydration, retrying until layout settles
   if (restoreY > 0) {
-    // Wait for next tick + small delay to ensure DOM is rendered
+    let attempts = 0
+    const maxAttempts = 10
+
+    const tryRestore = () => {
+      window.scrollTo(0, restoreY)
+      attempts++
+
+      if (attempts < maxAttempts && Math.abs(window.scrollY - restoreY) > 2) {
+        requestAnimationFrame(tryRestore)
+      } else {
+        isRestoring.value = false
+      }
+    }
+
     nextTick(() => {
-      requestAnimationFrame(() => {
-        // Clamp to max scrollable position to avoid overshooting near bottom
-        const maxY = document.documentElement.scrollHeight - window.innerHeight
-        window.scrollTo(0, Math.min(restoreY, maxY))
-        // Clear restoring flag after scroll is restored
-        setTimeout(() => {
-          isRestoring.value = false
-        }, 100)
-      })
+      requestAnimationFrame(tryRestore)
     })
   }
 }

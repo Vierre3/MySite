@@ -99,7 +99,8 @@ const mobileOpen = ref(false)
 watch(mobileOpen, (open) => {
   document.body.style.overflow = open ? 'hidden' : ''
 })
-const scrolled = ref(false)
+const { isRestoring } = useScrollRestore()
+const scrolled = ref(isRestoring.value)
 const activeSection = ref('')
 const { scrollToSection } = useSmoothScroll()
 
