@@ -146,8 +146,10 @@ onMounted(() => {
   const savedY = parseInt(sessionStorage.getItem('scroll-position') || '0', 10)
   scrolled.value = savedY > 75
   if (scrolled.value) {
+    console.log('if')
     navTransition.value = true
   } else {
+    console.log('else')
     requestAnimationFrame(() => {
       requestAnimationFrame(() => {
         navTransition.value = true
