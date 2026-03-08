@@ -20,6 +20,7 @@
 
             <a
               href="https://github.com/Vierre3/"
+              target="_self"
               rel="noopener noreferrer"
               class="flex items-center gap-3 px-6 py-4 rounded-xl bg-dark-bg/50 border border-glass-border hover:border-orange-accent/40 hover:shadow-[0_0_20px_rgba(255,107,0,0.2)] hover:scale-105 active:scale-95 md:active:scale-100 transition-all duration-300 group"
             >
@@ -29,6 +30,7 @@
 
             <a
               href="https://linkedin.com/in/pierreyves-guiraudet/"
+              target="_self"
               rel="noopener noreferrer"
               class="flex items-center gap-3 px-6 py-4 rounded-xl bg-dark-bg/50 border border-glass-border hover:border-orange-accent/40 hover:shadow-[0_0_20px_rgba(255,107,0,0.2)] hover:scale-105 active:scale-95 md:active:scale-100 transition-all duration-300 group"
             >
