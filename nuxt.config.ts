@@ -1,3 +1,5 @@
+const siteUrl = process.env.NUXT_PUBLIC_SITE_URL || ''
+
 export default defineNuxtConfig({
   compatibilityDate: '2025-07-15',
   devtools: { enabled: true },
@@ -31,6 +33,16 @@ export default defineNuxtConfig({
       title: 'Pierre-Yves | Full-Stack Developer',
       meta: [
         { name: 'description', content: 'Pierre-Yves Guiraudet Portfolio | Epitech Paris' },
+        { property: 'og:type', content: 'website' },
+        { property: 'og:title', content: 'Pierre-Yves | Full-Stack Developer' },
+        { property: 'og:description', content: 'Pierre-Yves Guiraudet Portfolio | Epitech Paris' },
+        { property: 'og:image', content: `${siteUrl}/og-image.png` },
+        { property: 'og:image:width', content: '1200' },
+        { property: 'og:image:height', content: '630' },
+        { name: 'twitter:card', content: 'summary_large_image' },
+        { name: 'twitter:title', content: 'Pierre-Yves | Full-Stack Developer' },
+        { name: 'twitter:description', content: 'Pierre-Yves Guiraudet Portfolio | Epitech Paris' },
+        { name: 'twitter:image', content: `${siteUrl}/og-image.png` },
       ],
       link: [
         { rel: 'preconnect', href: 'https://fonts.googleapis.com' },
