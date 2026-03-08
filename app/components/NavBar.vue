@@ -143,17 +143,15 @@ onMounted(() => {
 
   window.addEventListener('scroll', onScroll, { passive: true })
 
-  const savedY = parseInt(sessionStorage.getItem('scroll-position') || '0', 10)
-  scrolled.value = savedY > 75
+  onScroll()
   if (scrolled.value) {
-    navTransition.value = true
-  } else {
     requestAnimationFrame(() => {
       requestAnimationFrame(() => {
         navTransition.value = true
       })
     })
-    onScroll()
+  } else {
+    navTransition.value = true
   }
 
 })
