@@ -143,8 +143,8 @@ onMounted(() => {
 
   window.addEventListener('scroll', onScroll, { passive: true })
 
-  // const savedY = parseInt(sessionStorage.getItem('scroll-position') || '0', 10)
-  // scrolled.value = savedY > 75
+  const savedY = parseInt(sessionStorage.getItem('scroll-position') || '0', 10)
+  scrolled.value = savedY > 75
   navTransition.value = true
 
 })
