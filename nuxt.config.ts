@@ -45,6 +45,7 @@ export default defineNuxtConfig({
         { name: 'twitter:image', content: `${siteUrl}/og-image.png` },
       ],
       link: [
+        { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
         { rel: 'canonical', href: `${siteUrl}/` },
         { rel: 'preconnect', href: 'https://fonts.googleapis.com' },
         { rel: 'preconnect', href: 'https://fonts.gstatic.com', crossorigin: '' },
