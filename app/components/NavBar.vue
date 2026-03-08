@@ -102,7 +102,7 @@ watch(mobileOpen, (open) => {
 function onMenuAnimationEnd() {
   if (!mobileOpen.value) mobileVisible.value = false
 }
-const scrolled = ref(false)
+const scrolled = ref(true)
 const activeSection = ref('')
 const { scrollToSection } = useSmoothScroll()
 
