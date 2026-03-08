@@ -8,10 +8,10 @@
         <button
           v-for="filter in filters"
           :key="filter"
-          class="px-4 py-2 min-w-24 rounded-lg text-sm font-medium hover:scale-105 active:scale-95 transition-all duration-300 cursor-pointer"
+          class="px-4 py-2 min-w-24 rounded-lg text-sm font-medium active:scale-95 transition-all duration-300 cursor-pointer"
           :class="activeFilter === filter
             ? 'bg-orange-accent text-white'
-            : 'bg-glass border border-glass-border text-text-secondary hover:text-text-primary hover:border-glass-border-hover'"
+            : 'bg-glass border border-glass-border text-text-secondary hover:scale-105 hover:text-text-primary hover:border-orange-accent/40 hover:shadow-[0_0_20px_rgba(255,107,0,0.2)]'"
           @click="activeFilter = filter"
         >
           {{ $t(`projects.types.${filter}`) }}

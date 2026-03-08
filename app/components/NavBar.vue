@@ -33,7 +33,7 @@
             class="md:hidden text-text-secondary hover:text-text-primary hover:scale-105 active:scale-95 transition-all cursor-pointer"
             @click="mobileOpen = !mobileOpen"
           >
-            <Icon :name="mobileOpen ? 'mdi:close' : 'mdi:menu'" class="w-6 h-6" />
+            <Icon :name="mobileOpen ? 'mdi:close' : 'mdi:menu'" class="w-6 h-6 mt-1.5" />
           </button>
         </div>
       </div>
