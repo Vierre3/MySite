@@ -7,6 +7,16 @@
         <h3 class="text-lg font-semibold text-text-primary">
           {{ project.key }}
         </h3>
+        <a
+          v-if="project.github"
+          :href="project.github"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="text-text-secondary hover:text-orange-accent hover:scale-110 active:scale-95 md:active:scale-100 transition-all"
+          @click.stop
+        >
+          <Icon name="mdi:open-in-new" class="w-4 h-4 mt-2" />
+        </a>
       </div>
       <div class="flex items-center gap-2">
         <span

@@ -19,16 +19,19 @@ export function useProjectsData(): Project[] {
       techTags: ['Nuxt 4', 'Vue 3', 'Monaco', 'Electron', 'SSH'],
       type: 'personal',
       current: true,
+      github: 'https://github.com/Vierre3/LoCode'
     },
     {
       key: 'Glados',
       techTags: ['Haskell', 'Compiler', 'Bytecode VM'],
       type: 'epitech',
+      github: 'https://github.com/Vierre3/Glados'
     },
     {
       key: 'R-Type',
       techTags: ['C++', 'SFML 3', 'ECS', 'Networking'],
       type: 'epitech',
+      github: 'https://github.com/Vierre3/R-Type'
     },
     {
       key: 'Zappy',
@@ -39,6 +42,7 @@ export function useProjectsData(): Project[] {
       key: '42sh',
       techTags: ['C', 'UNIX', 'Parsing', 'System Programming'],
       type: 'epitech',
+      github: 'https://github.com/Vierre3/42sh'
     },
     {
       key: 'Arcade',
