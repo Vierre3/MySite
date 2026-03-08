@@ -14,15 +14,17 @@
         </button>
 
         <!-- Desktop Links -->
-        <div class="hidden md:flex items-center gap-8">
-          <button
-            v-for="section in sections"
-            :key="section"
-            class="text-sm text-text-secondary hover:text-orange-accent hover:scale-105 active:scale-95 transition-all cursor-pointer"
-            @click="scrollToSection(section)"
-          >
-            {{ $t(`nav.${section}`) }}
-          </button>
+        <div class="hidden md:flex items-center gap-6">
+          <template v-for="(section, index) in sections" :key="section">
+            <span v-if="index > 0" class="text-orange-accent text-glass-border select-none">|</span>
+            <button
+              class="text-sm transition-all cursor-pointer"
+              :class="activeSection === section ? 'text-orange-accent font-medium scale-110' : 'text-text-secondary hover:text-text-primary hover:scale-105'"
+              @click="scrollToSection(section)"
+            >
+              {{ $t(`nav.${section}`) }}
+            </button>
+          </template>
         </div>
 
         <!-- Right side -->
@@ -64,7 +66,8 @@
               <button
                 v-for="section in sections"
                 :key="section"
-                class="flex items-center gap-3 w-full text-left text-text-secondary hover:text-orange-accent hover:bg-white/5 hover:scale-[1.02] active:scale-95 rounded-xl transition-all cursor-pointer px-5 py-4 text-lg font-medium border border-transparent hover:border-orange-accent/20"
+                class="flex items-center gap-3 w-full text-left hover:bg-white/5 hover:scale-[1.02] active:scale-95 rounded-xl transition-all cursor-pointer px-5 py-4 text-lg font-medium border border-transparent hover:border-orange-accent/20"
+                :class="activeSection === section ? 'text-orange-accent' : 'text-text-secondary hover:text-orange-accent'"
                 @click="scrollToSection(section); mobileOpen = false"
               >
                 <Icon :name="sectionIcons[section] ?? 'mdi:circle-outline'" class="w-5 h-5 text-orange-accent/70" />
@@ -93,6 +96,7 @@ watch(mobileOpen, (open) => {
   document.body.style.overflow = open ? 'hidden' : ''
 })
 const scrolled = ref(false)
+const activeSection = ref('')
 const { scrollToSection } = useSmoothScroll()
 
 onMounted(() => {
@@ -100,5 +104,40 @@ onMounted(() => {
   window.addEventListener('scroll', () => {
     scrolled.value = window.scrollY > 75
   })
+
+  const updateActiveSection = () => {
+    const scrollY = window.scrollY
+    const windowHeight = window.innerHeight
+
+    // If near top, no section is active
+    if (scrollY < windowHeight * 0.3) {
+      activeSection.value = ''
+      return
+    }
+
+    // If at very bottom, activate last section
+    if (scrollY + windowHeight >= document.body.scrollHeight - 20) {
+      activeSection.value = sections[sections.length - 1]!
+      return
+    }
+
+    // Find which section the viewport is currently in
+    // A section is active if viewport center is between its top and the next section's top
+    const checkPoint = scrollY + windowHeight * 0.4
+    let active = ''
+
+    for (let i = sections.length - 1; i >= 0; i--) {
+      const el = document.getElementById(sections[i]!)
+      if (!el) continue
+      if (checkPoint >= el.offsetTop) {
+        active = sections[i]!
+        break
+      }
+    }
+    activeSection.value = active
+  }
+
+  window.addEventListener('scroll', updateActiveSection, { passive: true })
+  updateActiveSection()
 })
 </script>

@@ -2,8 +2,8 @@
   <UiGlassCard hover class="p-6 h-full flex flex-col group">
     <!-- Header -->
     <div class="flex items-start justify-between mb-3">
-      <div class="flex items-center gap-3">
-        <Icon name="mdi:folder-outline" class="w-8 h-8" />
+      <div class="flex items-center gap-2">
+        <span class="text-orange-accent font-bold text-lg select-none">/</span>
         <h3 class="text-lg font-semibold text-text-primary">
           {{ project.key }}
         </h3>

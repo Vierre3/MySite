@@ -1,18 +1,18 @@
 <template>
-  <div class="relative rounded-2xl border-[0.75px] border-glass-border h-full">
+  <div class="relative rounded-2xl border-[0.75px] border-glass-border h-full transition-all duration-300 hover:-translate-y-1">
     <UiGlowingEffect
       v-if="hover"
-      :spread="40"
+      :spread="30"
       :glow="true"
       :disabled="false"
-      :proximity="64"
-      :inactive-zone="0.01"
+      :proximity="50"
+      :inactive-zone="0"
       :border-width="2"
     />
     <div
       class="relative h-full backdrop-blur-xl bg-glass rounded-[inherit] transition-all duration-300"
       :class="[
-        hover && 'hover:bg-glass-hover hover:shadow-[0_0_30px_rgba(255,107,0,0.12)]',
+        hover && ' hover:bg-glass-hover hover:shadow-[0_0_30px_rgba(255,107,0,0.15)]',
         $attrs.class as string
       ]"
     >
