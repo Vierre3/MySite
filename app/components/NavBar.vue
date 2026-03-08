@@ -1,7 +1,7 @@
 <template>
   <nav
     class="fixed top-0 left-0 right-0"
-    :class="[navTransition ? '' : '', mobileOpen ? 'z-[70]' : 'z-50', scrolled ? 'backdrop-blur-xl bg-dark-bg/80 border-b border-glass-border shadow-lg' : 'border-transparent']"
+    :class="[navTransition ? 'transition-all duration-300' : '', mobileOpen ? 'z-[70]' : 'z-50', scrolled ? 'backdrop-blur-xl bg-dark-bg/80 border-b border-glass-border shadow-lg' : 'border-transparent']"
   >
     <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="flex items-center justify-between h-16">
@@ -144,13 +144,14 @@ onMounted(() => {
   window.addEventListener('scroll', onScroll, { passive: true })
 
   const savedY = parseInt(sessionStorage.getItem('scroll-position') || '0', 10)
-  if (savedY > 75) {
-    scrolled.value = true
+  scrolled.value = savedY > 75
+  if (scrolled.value) {
+    navTransition.value = true
   } else {
+    requestAnimationFrame(() => { navTransition.value = true })
     onScroll()
   }
 
-  requestAnimationFrame(() => { navTransition.value = true })
 })
 </script>
 
