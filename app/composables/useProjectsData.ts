@@ -19,19 +19,19 @@ export function useProjectsData(): Project[] {
       techTags: ['Nuxt 4', 'Vue 3', 'Monaco', 'Electron', 'SSH'],
       type: 'personal',
       current: true,
-      github: 'https://github.com/Vierre3/LoCode'
+      github: 'https://github.com/Vierre3/LoCode',
     },
     {
       key: 'Glados',
       techTags: ['Haskell', 'Compiler', 'Bytecode VM'],
       type: 'epitech',
-      github: 'https://github.com/Vierre3/Glados'
+      github: 'https://github.com/Vierre3/Glados',
     },
     {
       key: 'R-Type',
       techTags: ['C++', 'SFML 3', 'ECS', 'Networking'],
       type: 'epitech',
-      github: 'https://github.com/Vierre3/R-Type'
+      github: 'https://github.com/Vierre3/R-Type',
     },
     {
       key: 'Zappy',
@@ -42,7 +42,7 @@ export function useProjectsData(): Project[] {
       key: '42sh',
       techTags: ['C', 'UNIX', 'Parsing', 'System Programming'],
       type: 'epitech',
-      github: 'https://github.com/Vierre3/42sh'
+      github: 'https://github.com/Vierre3/42sh',
     },
     {
       key: 'Arcade',
@@ -53,6 +53,7 @@ export function useProjectsData(): Project[] {
       key: 'Raytracer',
       techTags: ['C++', 'CMake', 'CUDA', '3D Graphics'],
       type: 'epitech',
+      github: 'https://github.com/azeloup/raytracer',
     },
     {
       key: 'Cryptography',
@@ -68,9 +69,10 @@ export function useProjectsData(): Project[] {
       key: 'JEB Incubator',
       techTags: ['Nuxt', 'Vue', 'Deno', 'MongoDB', 'Docker'],
       type: 'epitech',
+      github: 'https://github.com/BjrTom/Survivor-JEB/tree/dev',
     },
     {
-      key: 'Gomoku AI',
+      key: 'Gomoku',
       techTags: ['C++', 'Game AI', 'Strategy'],
       type: 'epitech',
     },
@@ -80,12 +82,12 @@ export function useProjectsData(): Project[] {
       type: 'epitech',
     },
     {
-      key: 'MyMarvin',
+      key: 'My Marvin',
       techTags: ['Jenkins', 'Groovy', 'Docker', 'CI/CD'],
       type: 'epitech',
     },
     {
-      key: 'Vueling Hackathon',
+      key: 'Vueling AI',
       techTags: ['Node.js', 'Nuxt', 'AI', 'Real-time'],
       type: 'hackathon',
     },
@@ -95,7 +97,7 @@ export function useProjectsData(): Project[] {
       type: 'hackathon',
     },
     {
-      key: 'FlameYourMind',
+      key: 'Flame Your Mind',
       techTags: ['Godot 4', 'GDScript', 'Game Design'],
       type: 'jam',
     },
@@ -103,14 +105,16 @@ export function useProjectsData(): Project[] {
       key: 'Event Horizon 5min',
       techTags: ['Godot 4', 'GDScript', 'Game Design'],
       type: 'jam',
+      github: 'https://github.com/flav-code/game-jam-five-minutes',
     },
     {
       key: 'Lost In Space',
       techTags: ['Godot 4', 'GDScript', 'Game Design'],
       type: 'jam',
+      github: 'https://github.com/azeloup/LostInSpace',
     },
     {
-      key: 'Robbers And Cat',
+      key: 'Robbers & Cat',
       techTags: ['Godot 4', 'GDScript', 'Game Design'],
       type: 'jam',
     },

@@ -98,15 +98,15 @@
     "Cryptography": "Implémentation de chiffrement AES, RSA et PGP en Python pour le traitement sécurisé de messages.",
     "Neural Network": "Perceptron multicouche construit from scratch en Python pur avec forward/backpropagation.",
     "JEB Incubator": "Application web full-stack avec frontend Nuxt/Vue, backend Deno, base de données MongoDB et déploiement Docker.",
-    "Gomoku AI": "Joueur IA pour le jeu de plateau 5-en-ligne avec évaluation stratégique en C++.",
+    "Gomoku": "Joueur IA pour le jeu de plateau 5-en-ligne avec évaluation stratégique en C++.",
     "RPG": "Moteur de jeu RPG 2D en C avec CSFML - sprites, mécaniques de jeu et construction de monde.",
-    "MyMarvin": "Projet d'automatisation CI/CD Jenkins avec Groovy Job DSL et Docker pour la gestion de pipelines.",
-    "Vueling Hackathon": "Système de traduction vocale en temps réel pour avions avec capacités hors-ligne et support multilingue.",
+    "My Marvin": "Projet d'automatisation CI/CD Jenkins avec Groovy Job DSL et Docker pour la gestion de pipelines.",
+    "Vueling AI": "Système de traduction vocale en temps réel pour avions avec capacités hors-ligne et support multilingue.",
     "IREP ChatBot": "Projet hackathon avec intégration IA, construit avec Flask, Ollama LLM et base de données SQLite.",
-    "FlameYourMind": "Jeu inspiré d'Exit 8 où vous incarnez un scientifique piégé dans une base lunaire en feu. Trouvez les différences entre les scènes pour vous échapper à travers les étages. Réalisé avec Godot 4 et Unreal Engine 5.",
+    "Flame Your Mind": "Jeu inspiré d'Exit 8 où vous incarnez un scientifique piégé dans une base lunaire en feu. Trouvez les différences entre les scènes pour vous échapper à travers les étages. Réalisé avec Godot 4 et Unreal Engine 5.",
     "Event Horizon 5min": "Jeu de combat spatial 3D près de l'horizon des événements d'un trou noir. Siphonnez l'énergie de la singularité tandis que le temps accélère — vous avez 5 minutes pour charger votre moteur warp. Animations juicy et Easter egg tomate. Réalisé avec Godot 4.",
     "Lost In Space": "Jeu d'arcade solo où vous pilotez un petit vaisseau dérivant dans l'espace. Esquivez des astéroïdes apparaissant aléatoirement à vitesse croissante et survivez le plus longtemps possible. Score basé sur le temps de survie. Réalisé avec Godot 4.",
-    "Robbers And Cat": "Jeu de braquage en monde ouvert où vous volez des tableaux pour une mafia de chats. Conduisez à travers la ville, cambriolez des lieux dans un gameplay inspiré de Phasmophobia, et échappez-vous avant que la police ne vous attrape. Réalisé avec Godot 4."
+    "Robbers & Cat": "Jeu de braquage en monde ouvert où vous volez des tableaux pour une mafia de chats. Conduisez à travers la ville, cambriolez des lieux dans un gameplay inspiré de Phasmophobia, et échappez-vous avant que la police ne vous attrape. Réalisé avec Godot 4."
   },
   "contact": {
     "title": "Contact",

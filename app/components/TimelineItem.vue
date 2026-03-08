@@ -9,25 +9,25 @@
     <!-- Content -->
     <div class="pb-12 flex-1">
       <UiGlassCard hover class="p-6">
-        <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 mb-4">
-          <div>
-            <h3 class="text-lg font-semibold text-text-primary">
-              {{ $t(`experience.${entryKey}.role`) }}
-            </h3>
+        <div class="mb-4">
+          <h3 class="text-lg font-semibold text-text-primary">
+            {{ $t(`experience.${entryKey}.role`) }}
+          </h3>
+          <div class="flex justify-between items-start gap-2">
             <p class="text-orange-accent font-medium">
               {{ $t(`experience.${entryKey}.company`) }}
             </p>
-          </div>
-          <div class="flex items-center gap-2">
-            <span
-              v-if="current"
-              class="text-xs px-2 py-1 rounded-full bg-orange-accent/20 border border-orange-accent/40 text-orange-accent font-medium whitespace-nowrap"
-            >
-              {{ $t('projects.inProgress') }}
-            </span>
-            <span class="text-sm text-text-secondary whitespace-nowrap">
-              {{ $t(`experience.${entryKey}.date`) }}
-            </span>
+            <div class="flex items-center gap-2 translate-y-2 mb-2 sm:translate-y-0 sm:mb-0 sm:-mt-6">
+              <span
+                v-if="current"
+                class="text-xs px-2 py-1 rounded-full bg-orange-accent/20 border border-orange-accent/40 text-orange-accent font-medium whitespace-nowrap"
+              >
+                {{ $t('projects.inProgress') }}
+              </span>
+              <span class="text-sm text-text-secondary whitespace-nowrap">
+                {{ $t(`experience.${entryKey}.date`) }}
+              </span>
+            </div>
           </div>
         </div>
         <ul class="space-y-2">

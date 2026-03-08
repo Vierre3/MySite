@@ -98,15 +98,15 @@
     "Cryptography": "AES, RSA, and PGP encryption implementation in Python for secure message handling.",
     "Neural Network": "Multilayer perceptron built from scratch in pure Python with forward/backpropagation.",
     "JEB Incubator": "Full-stack web application with Nuxt/Vue frontend, Deno backend, MongoDB database, and Docker deployment.",
-    "Gomoku AI": "AI player for the 5-in-a-row board game with strategic evaluation in C++.",
+    "Gomoku": "AI player for the 5-in-a-row board game with strategic evaluation in C++.",
     "RPG": "2D RPG game engine in C with CSFML - sprites, game mechanics, and world building.",
-    "MyMarvin": "Jenkins CI/CD automation project using Groovy Job DSL and Docker for pipeline management.",
-    "Vueling Hackathon": "Real-time voice translation system for aircraft with offline capabilities and multi-language support.",
+    "My Marvin": "Jenkins CI/CD automation project using Groovy Job DSL and Docker for pipeline management.",
+    "Vueling AI": "Real-time voice translation system for aircraft with offline capabilities and multi-language support.",
     "IREP ChatBot": "AI-powered hackathon project built with Flask, Ollama LLM integration, and SQLite database.",
-    "FlameYourMind": "Exit 8-inspired game where you play a scientist trapped in a burning lunar base. Find the differences between scenes to escape through the floors. Built with Godot 4 and Unreal Engine 5.",
+    "Flame Your Mind": "Exit 8-inspired game where you play a scientist trapped in a burning lunar base. Find the differences between scenes to escape through the floors. Built with Godot 4 and Unreal Engine 5.",
     "Event Horizon 5min": "3D spaceship fighter set near a black hole's event horizon. Siphon energy from the singularity while time accelerates — you have 5 minutes to charge your warp drive. Features juicy animations and a tomato Easter egg. Built with Godot 4.",
     "Lost In Space": "Solo arcade survival game where you pilot a small spaceship drifting through space. Dodge randomly spawning asteroids at increasing speed and survive as long as possible. Score based on survival time. Built with Godot 4.",
-    "Robbers And Cat": "Open-world heist game where you steal paintings for a cat mafia. Drive around the city, burglarize locations in Phasmophobia-style gameplay, and escape before the police catches you. Built with Godot 4."
+    "Robbers & Cat": "Open-world heist game where you steal paintings for a cat mafia. Drive around the city, burglarize locations in Phasmophobia-style gameplay, and escape before the police catches you. Built with Godot 4."
   },
   "contact": {
     "title": "Get in Touch",
