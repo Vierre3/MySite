@@ -27,7 +27,7 @@
     </p>
 
     <!-- Tech tags -->
-    <div class="flex flex-wrap gap-2 mt-auto">
+    <div class="flex flex-wrap-reverse gap-2 mt-auto">
       <UiTechTag
         v-for="tag in project.techTags"
         :key="tag"
