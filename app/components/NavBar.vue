@@ -19,7 +19,7 @@
             <span v-if="index > 0" class="text-orange-accent text-glass-border select-none">|</span>
             <button
               class="text-sm transition-all cursor-pointer"
-              :class="activeSection === section ? 'text-orange-accent font-medium scale-110' : 'text-text-secondary hover:text-text-primary hover:scale-105'"
+              :class="activeSection === section ? 'text-orange-accent font-medium scale-110' : 'text-text-secondary hover:text-text-primary hover:scale-105 focus:text-text-primary focus:scale-105'"
               @click="scrollToSection(section)"
             >
               {{ $t(`nav.${section}`) }}
@@ -66,11 +66,15 @@
               <button
                 v-for="section in sections"
                 :key="section"
-                class="flex items-center gap-3 w-full text-left hover:bg-white/5 hover:scale-[1.02] active:scale-95 rounded-xl transition-all cursor-pointer px-5 py-4 text-lg font-medium border border-transparent hover:border-orange-accent/20"
-                :class="activeSection === section ? 'text-orange-accent' : 'text-text-secondary hover:text-orange-accent'"
+                class="flex items-center gap-3 w-full text-left group hover:bg-white/5 hover:scale-[1.02] active:scale-95 rounded-xl transition-all cursor-pointer px-5 py-4 text-lg font-medium border border-transparent hover:border-orange-accent/40"
+                :class="activeSection === section ? 'text-orange-accent' : 'text-text-secondary hover:text-text-primary'"
                 @click="scrollToSection(section); mobileOpen = false"
               >
-                <Icon :name="sectionIcons[section] ?? 'mdi:circle-outline'" class="w-5 h-5 text-orange-accent/70" />
+                <Icon
+                  :name="sectionIcons[section]!"
+                  class="w-5 h-5"
+                  :class="activeSection === section ? 'text-orange-accent' : 'text-text-secondary group-hover:text-text-primary'"
+                />
                 {{ $t(`nav.${section}`) }}
               </button>
             </div>
@@ -88,7 +92,7 @@ const sectionIcons: Record<string, string> = {
   skills: 'mdi:code-tags',
   experience: 'mdi:briefcase-outline',
   projects: 'mdi:folder-outline',
-  contact: 'mdi:email-outline',
+  contact: 'mdi:alternate-email',
 }
 const mobileOpen = ref(false)
 

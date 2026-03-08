@@ -33,7 +33,7 @@
       <!-- CTAs -->
       <div class="hero-fade flex flex-col sm:flex-row items-center justify-center gap-4" style="--delay: 1s;">
         <UiOrangeButton variant="solid" @click="scrollToSection('contact')">
-          <Icon name="mdi:email-outline" class="w-5 h-5" />
+          <Icon name="mdi:alternate-email" class="w-5 h-5" />
           {{ $t('hero.cta_contact') }}
         </UiOrangeButton>
         <UiOrangeButton variant="outline" href="/resume.pdf" download="CV_Pierre-Yves_Guiraudet.pdf">

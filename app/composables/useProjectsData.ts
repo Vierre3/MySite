@@ -86,7 +86,7 @@ export function useProjectsData(): Project[] {
       type: 'hackathon',
     },
     {
-      key: 'Discovery Week',
+      key: 'IREP ChatBot',
       techTags: ['Python', 'Flask', 'Ollama', 'SQLite'],
       type: 'hackathon',
     },
