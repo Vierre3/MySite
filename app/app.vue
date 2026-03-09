@@ -33,6 +33,12 @@ body {
   overflow-x: hidden;
 }
 
+/* Skip rendering of off-screen sections to reduce GPU/layout cost */
+section {
+  content-visibility: auto;
+  contain-intrinsic-size: auto 800px;
+}
+
 /* When restoring scroll position, skip all entrance animations */
 .skip-animations .hero-fade {
   animation: none !important;
