@@ -7,25 +7,25 @@ export function useScrollRestore() {
 export function setupScrollRestore() {
   if (import.meta.server) return
 
-  // Take control of scroll restoration from the browser
-  history.scrollRestoration = 'manual'
-
   const STORAGE_KEY = 'scroll-position'
-  let ticking = false
 
-  // Save scroll position on scroll
-  const onScroll = () => {
-    if (ticking) return
-    ticking = true
-    requestAnimationFrame(() => {
-      sessionStorage.setItem(STORAGE_KEY, String(window.scrollY))
-      ticking = false
-    })
-  }
-  window.addEventListener('scroll', onScroll, { passive: true })
-
-  // Set isRestoring in onMounted (after hydration) to avoid hydration mismatch
   onMounted(() => {
+    // Take control of scroll restoration from the browser
+    history.scrollRestoration = 'manual'
+
+    // Save scroll position on scroll
+    let ticking = false
+    const onScroll = () => {
+      if (ticking) return
+      ticking = true
+      requestAnimationFrame(() => {
+        sessionStorage.setItem(STORAGE_KEY, String(window.scrollY))
+        ticking = false
+      })
+    }
+    window.addEventListener('scroll', onScroll, { passive: true })
+
+    // Restore scroll position
     const savedY = sessionStorage.getItem(STORAGE_KEY)
     const restoreY = savedY ? parseInt(savedY, 10) : 0
 
