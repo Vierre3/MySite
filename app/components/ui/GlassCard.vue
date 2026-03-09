@@ -1,7 +1,7 @@
 <template>
   <div class="relative rounded-2xl border-[0.75px] border-glass-border h-full transition-all duration-300 hover:-translate-y-1">
     <UiGlowingEffect
-      v-if="hover"
+      v-if="hover && mounted"
       :spread="30"
       :glow="true"
       :disabled="false"
@@ -26,4 +26,7 @@ defineOptions({ inheritAttrs: false })
 defineProps<{
   hover?: boolean
 }>()
+
+const mounted = ref(false)
+onMounted(() => { mounted.value = true })
 </script>
