@@ -103,16 +103,12 @@ watch(mobileOpen, (open) => {
 function onMenuAnimationEnd() {
   if (!mobileOpen.value) mobileVisible.value = false
 }
-// Read saved scroll position immediately to avoid navbar flash
-const savedY = import.meta.client
-  ? parseInt(sessionStorage.getItem('scroll-position') || '0', 10)
-  : 0
-const scrolled = ref(savedY > 75)
+const scrolled = ref(false)
 const navTransition = ref(false)
 const activeSection = ref('')
 const { scrollToSection } = useSmoothScroll()
 
-function detectActiveSection() {
+const onScroll = () => {
   const scrollY = window.scrollY
   const windowHeight = window.innerHeight
 
@@ -143,24 +139,23 @@ function detectActiveSection() {
 }
 
 onMounted(() => {
-  window.addEventListener('scroll', detectActiveSection, { passive: true })
+  window.addEventListener('scroll', onScroll, { passive: true })
 
-  // Enable transitions only after initial state is set
-  nextTick(() => {
-    navTransition.value = true
-  })
+  const savedY = parseInt(sessionStorage.getItem('scroll-position') || '0', 10)
+  scrolled.value = savedY > 75
+  navTransition.value = true
 
-  // Detect active section once sections are in the DOM
+  // Detect active section after scroll restore completes
   const { isRestoring } = useScrollRestore()
   if (isRestoring.value) {
     const stop = watch(isRestoring, (restoring) => {
       if (!restoring) {
-        detectActiveSection()
+        onScroll()
         stop()
       }
     })
   } else {
-    nextTick(detectActiveSection)
+    nextTick(onScroll)
   }
 })
 </script>

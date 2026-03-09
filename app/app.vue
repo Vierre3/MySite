@@ -84,4 +84,26 @@ body {
 .skip-animations nav {
   transition: none !important;
 }
+
+/* Pre-hydration navbar backdrop (set by inline script in <head>) */
+html.scrolled nav {
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  background-color: rgb(var(--dark-bg) / 0.8);
+  border-bottom: 1px solid var(--glass-border);
+  box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+}
+
+/* Pre-hydration: prevent scroll-reveal opacity:0 flash */
+html.scrolled .scroll-reveal {
+  opacity: 1 !important;
+  transform: none !important;
+  transition: none !important;
+}
+
+html.scrolled .hero-fade {
+  animation: none !important;
+  opacity: 1 !important;
+  transform: none !important;
+}
 </style>
