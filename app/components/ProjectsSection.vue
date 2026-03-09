@@ -18,15 +18,27 @@
         </button>
       </div>
 
-      <!-- Projects grid -->
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        <UiScrollReveal
-          v-for="(project, index) in filteredProjects"
-          :key="`${activeFilter}-${project.key}`"
-          :delay="index * 80"
-        >
-          <ProjectCard :project="project" />
+      <!-- Projects grouped by year -->
+      <div v-for="(group, groupIndex) in groupedByYear" :key="`${activeFilter}-${group.year}`">
+        <!-- Year separator (skip for first/current year group) -->
+        <UiScrollReveal v-if="groupIndex > 0" :key="`${activeFilter}-sep-${group.year}`">
+          <div class="flex items-center gap-4 mb-6 mt-12">
+            <div class="h-px flex-1 bg-gradient-to-r from-transparent via-glass-border to-transparent" />
+            <span class="text-text-secondary text-sm font-medium tracking-wider">{{ group.year }}</span>
+            <div class="h-px flex-1 bg-gradient-to-r from-transparent via-glass-border to-transparent" />
+          </div>
         </UiScrollReveal>
+
+        <!-- Projects grid for this year -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <UiScrollReveal
+            v-for="(project, index) in group.projects"
+            :key="`${activeFilter}-${project.key}`"
+            :delay="index * 80"
+          >
+            <ProjectCard :project="project" />
+          </UiScrollReveal>
+        </div>
       </div>
     </div>
   </section>
@@ -41,5 +53,17 @@ const filters = ['all', 'epitech', 'personal', 'hackathon', 'jam']
 const filteredProjects = computed(() => {
   if (activeFilter.value === 'all') return projectsData
   return projectsData.filter(p => p.type === activeFilter.value)
+})
+
+const groupedByYear = computed(() => {
+  const groups = new Map<number, typeof projectsData>()
+  for (const project of filteredProjects.value) {
+    const existing = groups.get(project.year)
+    if (existing) existing.push(project)
+    else groups.set(project.year, [project])
+  }
+  return [...groups.entries()]
+    .sort(([a], [b]) => b - a)
+    .map(([year, projects]) => ({ year, projects }))
 })
 </script>
