@@ -43,12 +43,15 @@ export function setupScrollRestore() {
           requestAnimationFrame(tryRestore)
         } else {
           isRestoring.value = false
+          document.documentElement.classList.add('hydrated')
         }
       }
 
       nextTick(() => {
         requestAnimationFrame(tryRestore)
       })
+    } else {
+      document.documentElement.classList.add('hydrated')
     }
   })
 }
