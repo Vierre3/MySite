@@ -76,6 +76,10 @@ html {
   background-color: rgb(var(--dark-bg));
 }
 
+*, *::before, *::after {
+  transition: color 300ms ease, background-color 300ms ease, border-color 300ms ease, fill 300ms ease, stroke 300ms ease;
+}
+
 body {
   overflow-x: hidden;
 }
