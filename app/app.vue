@@ -27,11 +27,6 @@ setupScrollRestore()
 
 html {
   background-color: #0a0a1a;
-  overflow: hidden;
-}
-
-html.hydrated {
-  overflow: visible;
 }
 
 body {
