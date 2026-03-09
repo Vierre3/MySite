@@ -103,51 +103,65 @@ watch(mobileOpen, (open) => {
 function onMenuAnimationEnd() {
   if (!mobileOpen.value) mobileVisible.value = false
 }
-const scrolled = ref(false)
+// Read saved scroll position immediately to avoid navbar flash
+const savedY = import.meta.client
+  ? parseInt(sessionStorage.getItem('scroll-position') || '0', 10)
+  : 0
+const scrolled = ref(savedY > 75)
 const navTransition = ref(false)
 const activeSection = ref('')
 const { scrollToSection } = useSmoothScroll()
 
-onMounted(() => {
-  const onScroll = () => {
-    const scrollY = window.scrollY
-    const windowHeight = window.innerHeight
+function detectActiveSection() {
+  const scrollY = window.scrollY
+  const windowHeight = window.innerHeight
 
-    scrolled.value = scrollY > 75
+  scrolled.value = scrollY > 75
 
-    // If near top, no section is active
-    if (scrollY < windowHeight * 0.3) {
-      activeSection.value = ''
-      return
-    }
-
-    // If at very bottom, activate last section
-    if (scrollY + windowHeight >= document.body.scrollHeight - 20) {
-      activeSection.value = sections[sections.length - 1]!
-      return
-    }
-
-    // Find which section the viewport is currently in
-    const checkPoint = scrollY + windowHeight * 0.4
-    let active = ''
-
-    for (let i = sections.length - 1; i >= 0; i--) {
-      const el = document.getElementById(sections[i]!)
-      if (!el) continue
-      if (checkPoint >= el.offsetTop) {
-        active = sections[i]!
-        break
-      }
-    }
-    activeSection.value = active
+  if (scrollY < windowHeight * 0.3) {
+    activeSection.value = ''
+    return
   }
 
-  window.addEventListener('scroll', onScroll, { passive: true })
+  if (scrollY + windowHeight >= document.body.scrollHeight - 20) {
+    activeSection.value = sections[sections.length - 1]!
+    return
+  }
 
-  const savedY = parseInt(sessionStorage.getItem('scroll-position') || '0', 10)
-  scrolled.value = savedY > 75
-  navTransition.value = true
+  const checkPoint = scrollY + windowHeight * 0.4
+  let active = ''
 
+  for (let i = sections.length - 1; i >= 0; i--) {
+    const el = document.getElementById(sections[i]!)
+    if (!el) continue
+    if (checkPoint >= el.offsetTop) {
+      active = sections[i]!
+      break
+    }
+  }
+  activeSection.value = active
+}
+
+onMounted(() => {
+  window.addEventListener('scroll', detectActiveSection, { passive: true })
+
+  // Enable transitions only after initial state is set
+  nextTick(() => {
+    navTransition.value = true
+  })
+
+  // Detect active section once sections are in the DOM
+  const { isRestoring } = useScrollRestore()
+  if (isRestoring.value) {
+    const stop = watch(isRestoring, (restoring) => {
+      if (!restoring) {
+        detectActiveSection()
+        stop()
+      }
+    })
+  } else {
+    nextTick(detectActiveSection)
+  }
 })
 </script>
 
