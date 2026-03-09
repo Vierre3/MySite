@@ -58,11 +58,23 @@ const skillsData = useSkillsData()
 function distribute(data: typeof skillsData, numCols: number) {
   const cols: (typeof skillsData)[] = Array.from({ length: numCols }, () => [])
   const heights = new Array(numCols).fill(0)
-  for (const item of data) {
-    const shortest = heights.indexOf(Math.min(...heights))
-    cols[shortest]!.push(item)
-    heights[shortest] += item.skills.length + 2 // +2 for header/padding
+  const fullRows = Math.floor(data.length / numCols)
+  const splitIndex = fullRows * numCols
+
+  // Full rows: round-robin to keep order
+  for (let i = 0; i < splitIndex; i++) {
+    const col = i % numCols
+    cols[col]!.push(data[i]!)
+    heights[col] += data[i]!.skills.length + 2
   }
+
+  // Remaining items: place in shortest columns, in order
+  for (let i = splitIndex; i < data.length; i++) {
+    const shortest = heights.indexOf(Math.min(...heights))
+    cols[shortest]!.push(data[i]!)
+    heights[shortest] += data[i]!.skills.length + 2
+  }
+
   return cols
 }
 
