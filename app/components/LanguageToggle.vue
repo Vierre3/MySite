@@ -16,7 +16,9 @@ defineProps<{
 }>()
 
 function toggleLocale() {
-  setLocale(locale.value === 'en' ? 'fr' : 'en')
+  const newLocale = locale.value === 'en' ? 'fr' : 'en'
+  setLocale(newLocale)
+  document.cookie = `locale=${newLocale};path=/;max-age=${365 * 24 * 60 * 60}`
   // Force repaint on iOS Safari — backdrop-blur prevents automatic repaints
   nextTick(() => {
     document.body.style.transform = 'translateZ(0)'

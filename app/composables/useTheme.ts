@@ -1,5 +1,6 @@
 const STORAGE_KEY = 'theme'
 const theme = ref<'dark' | 'light'>('dark')
+let initialized = false
 
 function applyTheme(value: 'dark' | 'light') {
   const el = document.documentElement
@@ -7,17 +8,20 @@ function applyTheme(value: 'dark' | 'light') {
   el.classList.add(value)
 }
 
-if (import.meta.client) {
-  const saved = localStorage.getItem(STORAGE_KEY)
-  if (saved === 'light' || saved === 'dark') {
-    theme.value = saved
-  }
-  // Apply on init — the inline script in <head> handles the flash-free first paint,
-  // this ensures Vue's reactive state matches the DOM after hydration
-  applyTheme(theme.value)
-}
-
 export function useTheme() {
+  // Defer localStorage read to after hydration to avoid mismatch.
+  // The inline <script> in <head> already handles the visual (no flash).
+  if (import.meta.client && !initialized) {
+    initialized = true
+    onNuxtReady(() => {
+      const saved = localStorage.getItem(STORAGE_KEY)
+      if (saved === 'light' || saved === 'dark') {
+        theme.value = saved
+        applyTheme(saved)
+      }
+    })
+  }
+
   function toggleTheme() {
     theme.value = theme.value === 'dark' ? 'light' : 'dark'
     if (import.meta.client) {
