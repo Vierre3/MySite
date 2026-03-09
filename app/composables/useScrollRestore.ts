@@ -29,29 +29,40 @@ export function setupScrollRestore() {
     const savedY = sessionStorage.getItem(STORAGE_KEY)
     const restoreY = savedY ? parseInt(savedY, 10) : 0
 
-    if (restoreY > 0) {
-      isRestoring.value = true
-
-      let attempts = 0
-      const maxAttempts = 10
-
-      const tryRestore = () => {
-        window.scrollTo(0, restoreY)
-        attempts++
-
-        if (attempts < maxAttempts && Math.abs(window.scrollY - restoreY) > 2) {
-          requestAnimationFrame(tryRestore)
-        } else {
-          isRestoring.value = false
-          document.documentElement.classList.add('hydrated')
-        }
-      }
-
-      nextTick(() => {
-        requestAnimationFrame(tryRestore)
-      })
-    } else {
+    const enableScroll = () => {
       document.documentElement.classList.add('hydrated')
+    }
+
+    // Wait for full page load (all resources) before enabling scroll
+    const onReady = () => {
+      if (restoreY > 0) {
+        isRestoring.value = true
+
+        let attempts = 0
+        const maxAttempts = 10
+
+        const tryRestore = () => {
+          window.scrollTo(0, restoreY)
+          attempts++
+
+          if (attempts < maxAttempts && Math.abs(window.scrollY - restoreY) > 2) {
+            requestAnimationFrame(tryRestore)
+          } else {
+            isRestoring.value = false
+            enableScroll()
+          }
+        }
+
+        requestAnimationFrame(tryRestore)
+      } else {
+        enableScroll()
+      }
+    }
+
+    if (document.readyState === 'complete') {
+      onReady()
+    } else {
+      window.addEventListener('load', onReady, { once: true })
     }
   })
 }
