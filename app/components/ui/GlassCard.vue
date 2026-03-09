@@ -1,5 +1,5 @@
 <template>
-  <div class="relative rounded-2xl border-[0.75px] border-glass-border h-full transition-all duration-300 hover:-translate-y-1">
+  <div class="relative rounded-2xl border-[0.75px] border-glass-border h-full transition-all duration-300 translate-y-0 hover:-translate-y-1">
     <UiGlowingEffect
       v-if="hover"
       :spread="30"

@@ -8,7 +8,7 @@
           v-for="(category, index) in skillsData"
           :key="category.key"
           :delay="index * 100"
-          class="break-inside-avoid pb-1 pt-2"
+          class="break-inside-avoid py-1"
         >
           <SkillCategory
             :category-key="category.key"
