@@ -25,6 +25,13 @@ useHead({
   htmlAttrs: {
     class: computed(() => theme.value === 'light' ? 'light' : ''),
   },
+  script: [
+    {
+      key: 'theme-init',
+      tagPosition: 'head',
+      innerHTML: `(function(){try{if(localStorage.getItem('theme')==='light')document.documentElement.classList.add('light')}catch(e){}})()`,
+    },
+  ],
 })
 </script>
 

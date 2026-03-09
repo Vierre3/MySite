@@ -28,15 +28,15 @@
         </div>
 
         <!-- Right side -->
-        <div class="flex items-center gap-3" :class="{ 'menu-open': mobileOpen }">
-          <ThemeToggle />
-          <LanguageToggle />
+        <div class="flex items-center gap-3">
+          <ThemeToggle :show-text="mobileOpen" />
+          <LanguageToggle :show-text="mobileOpen" />
           <!-- Mobile hamburger -->
           <button
-            class="md:hidden text-text-secondary hover:text-text-primary hover:scale-105 active:scale-95 transition-all cursor-pointer"
+            class="md:hidden w-6 h-6 text-text-secondary hover:text-text-primary hover:scale-105 active:scale-95 transition-all cursor-pointer"
             @click="mobileOpen = !mobileOpen"
           >
-            <Icon :name="mobileOpen ? 'mdi:close' : 'mdi:menu'" class="w-6 h-6 mt-1.5" />
+            <Icon :name="mobileOpen ? 'mdi:close' : 'mdi:menu'" class="w-6 h-6" />
           </button>
         </div>
       </div>
@@ -184,20 +184,5 @@ onMounted(() => {
 @keyframes panel-out {
   from { opacity: 1; transform: translateY(0) scale(1); }
   to { opacity: 0; transform: translateY(-10px) scale(0.97); }
-}
-
-/* Toggle labels on mobile: animate in/out with menu */
-@media (max-width: 767px) {
-  .toggle-label {
-    display: inline !important;
-    overflow: hidden;
-    max-width: 0;
-    opacity: 0;
-    transition: max-width 250ms ease-out, opacity 250ms ease-out;
-  }
-  .menu-open .toggle-label {
-    max-width: 3rem;
-    opacity: 1;
-  }
 }
 </style>
