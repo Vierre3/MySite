@@ -14,9 +14,6 @@
                 class="w-40 h-40 rounded-full border-2 border-orange-accent/50 object-cover shadow-[0_0_30px_rgba(255,107,0,0.15)]"
                 onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"
               />
-              <div class="w-40 h-40 rounded-full border-2 border-orange-accent/50 bg-dark-surface items-center justify-center shadow-[0_0_30px_rgba(255,107,0,0.15)]" style="display: none;">
-                <Icon name="mdi:account" class="w-20 h-20 text-text-secondary/40" />
-              </div>
             </div>
 
             <!-- Bio -->
