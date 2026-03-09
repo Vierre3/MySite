@@ -41,7 +41,7 @@ body {
 }
 
 .skip-animations .scroll-reveal {
-  opacity: 1 !important;
+  clip-path: none !important;
   transform: none !important;
   transition: none !important;
 }
