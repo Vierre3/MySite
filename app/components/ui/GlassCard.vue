@@ -28,5 +28,11 @@ defineProps<{
 }>()
 
 const mounted = ref(false)
-onMounted(() => { mounted.value = true })
+onMounted(() => {
+  if (document.readyState === 'complete') {
+    mounted.value = true
+  } else {
+    window.addEventListener('load', () => { mounted.value = true }, { once: true })
+  }
+})
 </script>
