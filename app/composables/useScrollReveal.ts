@@ -67,13 +67,13 @@ export function useScrollReveal(threshold = 0.15) {
 
       observer.observe(target.value)
 
-      // When scroll restore finishes, elements in viewport need to be revealed immediately
-      // before .skip-animations is removed, otherwise they flash to opacity: 0
+      // When scroll restore finishes, reveal all elements at or above the viewport
+      // (already scrolled past or currently visible) — only elements below should animate
       if (isRestoring.value) {
         const stop = watch(isRestoring, (restoring) => {
           if (!restoring && !isVisible.value && target.value) {
             const r = target.value.getBoundingClientRect()
-            if (r.top < window.innerHeight && r.bottom > 0) {
+            if (r.top < window.innerHeight) {
               skipAnimation.value = true
               isVisible.value = true
               observer.disconnect()
