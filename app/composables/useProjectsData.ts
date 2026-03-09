@@ -107,6 +107,7 @@ export function useProjectsData(): Project[] {
       techTags: ['Node.js', 'Nuxt', 'AI', 'Real-time'],
       type: 'hackathon',
       year: 2025,
+      github: 'https://github.com/AxiomePro/vueling-hackathon-ai',
     },
     {
       key: 'IREP ChatBot',
@@ -126,18 +127,21 @@ export function useProjectsData(): Project[] {
       techTags: ['C', 'CSFML', '2D Game', 'Sprites'],
       type: 'epitech',
       year: 2024,
+      github: 'https://github.com/AxiomePro/MyRPG',
     },
     {
       key: 'Flame Your Mind',
       techTags: ['Godot', 'GDScript', 'Game Design'],
       type: 'jam',
       year: 2024,
+      github: 'https://github.com/AxiomePro/FlameYourMind',
     },
     {
       key: 'Robbers & Cat',
       techTags: ['Godot', 'GDScript', 'Game Design'],
       type: 'jam',
       year: 2024,
+      github: 'https://github.com/AxiomePro/RobbersAndCat',
     },
   ]
 }
