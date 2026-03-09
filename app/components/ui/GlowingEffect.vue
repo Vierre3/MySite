@@ -2,8 +2,8 @@
   <div
     ref="containerRef"
     :style="containerStyle"
-    class="pointer-events-none absolute inset-0 rounded-[inherit] opacity-100 transition-opacity"
-    :class="[blur > 0 && 'blur-[var(--blur)]']"
+    class="pointer-events-none absolute inset-0 rounded-[inherit]"
+    :class="[blur > 0 && 'blur-[var(--blur)]', !glowActive && 'invisible']"
   >
     <div
       class="glow absolute inset-0 rounded-[inherit] after:content-[''] after:rounded-[inherit] after:absolute after:inset-[calc(-1*var(--glowingeffect-border-width))] after:[border:var(--glowingeffect-border-width)_solid_transparent] after:[background:var(--gradient)] after:[background-attachment:fixed] after:opacity-[var(--active,0)] after:transition-opacity after:duration-300 after:[mask-clip:padding-box,border-box] after:[mask-composite:intersect] after:[mask-image:linear-gradient(#0000,#0000),conic-gradient(from_calc((var(--start)-var(--spread))*1deg),#00000000_0deg,#fff,#00000000_calc(var(--spread)*2deg))] after:[-webkit-mask-clip:padding-box,border-box] after:[-webkit-mask-composite:source-in] after:[-webkit-mask-image:linear-gradient(#0000,#0000),conic-gradient(from_calc((var(--start)-var(--spread))*1deg),#00000000_0deg,#fff,#00000000_calc(var(--spread)*2deg))]"
@@ -35,6 +35,7 @@ const props = withDefaults(defineProps<{
 })
 
 const containerRef = ref<HTMLDivElement>()
+const glowActive = ref(false)
 const lastPosition = { x: 0, y: 0 }
 let animationFrameId = 0
 
@@ -86,18 +87,20 @@ function handleMove(e?: MouseEvent | PointerEvent | { x: number; y: number }) {
 
     if (distanceFromCenter < inactiveRadius) {
       element.style.setProperty('--active', '0')
+      glowActive.value = false
       return
     }
 
-    const isActive =
+    const isNear =
       mouseX > left - props.proximity &&
       mouseX < left + width + props.proximity &&
       mouseY > top - props.proximity &&
       mouseY < top + height + props.proximity
 
-    element.style.setProperty('--active', isActive ? '1' : '0')
+    element.style.setProperty('--active', isNear ? '1' : '0')
+    glowActive.value = isNear
 
-    if (!isActive) return
+    if (!isNear) return
 
     const currentAngle = parseFloat(element.style.getPropertyValue('--start')) || 0
     let targetAngle =
