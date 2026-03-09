@@ -72,7 +72,7 @@ export default defineNuxtConfig({
       htmlAttrs: { class: 'dark' },
       script: [
         {
-          innerHTML: `(function(){try{if(localStorage.getItem('theme')==='light'){document.documentElement.classList.replace('dark','light')}var s=sessionStorage.getItem('scroll-position');if(s&&parseInt(s,10)>0){document.documentElement.classList.add('scrolled')}}catch(e){}})()`,
+          innerHTML: `(function(){try{if(localStorage.getItem('theme')==='light'){document.documentElement.classList.replace('dark','light')}var s=sessionStorage.getItem('scroll-position');if(s&&parseInt(s,10)>0){document.documentElement.classList.add('scrolled');var p=parseInt(s,10);requestAnimationFrame(function(){window.scrollTo(0,p)})}}catch(e){}})()`,
           tagPosition: 'head',
         },
       ],
