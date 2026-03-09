@@ -20,20 +20,10 @@
 const { isRestoring } = useScrollRestore()
 setupScrollRestore()
 
-const { theme } = useTheme()
+useTheme()
 useHead({
-  htmlAttrs: {
-    class: computed(() => theme.value),
-  },
   meta: [
-    { name: 'theme-color', content: computed(() => theme.value === 'light' ? '#f5f5f7' : '#0a0a1a') },
-  ],
-  script: [
-    {
-      key: 'theme-init',
-      tagPosition: 'head',
-      innerHTML: `(function(){try{document.documentElement.classList.add(localStorage.getItem('theme') || 'dark')}catch(e){}})()`,
-    },
+    { name: 'theme-color', content: computed(() => useTheme().theme.value === 'light' ? '#f5f5f7' : '#0a0a1a') },
   ],
 })
 </script>

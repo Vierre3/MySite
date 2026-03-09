@@ -37,6 +37,13 @@ export default defineNuxtConfig({
   app: {
     baseURL: process.env.NUXT_APP_BASE_URL || '/',
     head: {
+      htmlAttrs: { class: 'dark' },
+      script: [
+        {
+          innerHTML: `(function(){try{if(localStorage.getItem('theme')==='light'){document.documentElement.classList.replace('dark','light')}}catch(e){}})()`,
+          tagPosition: 'head',
+        },
+      ],
       title: 'Pierre-Yves | Full-Stack Developer',
       meta: [
         { name: 'description', content: 'Pierre-Yves • Guiraudet — Full-Stack Developer & Epitech Paris student. Portfolio showcasing web, systems, and game development projects.' },
