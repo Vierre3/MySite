@@ -11,6 +11,12 @@
   will-change: auto;
 }
 
+/* Disable backdrop-blur during opacity transition to prevent Safari grey artifacts */
+.scroll-reveal:not(.revealed) [class*="backdrop-blur"] {
+  -webkit-backdrop-filter: none !important;
+  backdrop-filter: none !important;
+}
+
 @keyframes float {
   0%, 100% {
     transform: translateY(0px);
