@@ -1,5 +1,7 @@
 import { ref, onMounted, nextTick } from 'vue'
 
+let initialLoadComplete = false
+
 export function useScrollReveal(threshold = 0.15) {
   const target = ref<HTMLElement | null>(null)
   const isVisible = ref(false)
@@ -23,10 +25,19 @@ export function useScrollReveal(threshold = 0.15) {
       const rect = target.value.getBoundingClientRect()
       const inViewport = rect.top < window.innerHeight && rect.bottom > 0
 
-      if (inViewport) {
-        // Already visible: skip the opacity transition to avoid Safari backdrop-blur bug
+      if (inViewport && !initialLoadComplete) {
+        // Already visible on initial page load: skip animation to avoid Safari backdrop-blur bug
         skipAnimation.value = true
         isVisible.value = true
+        requestAnimationFrame(() => { initialLoadComplete = true })
+        return
+      }
+
+      if (inViewport) {
+        // Dynamically created (e.g. filter change): delay one frame so CSS transition plays
+        requestAnimationFrame(() => {
+          isVisible.value = true
+        })
         return
       }
 
