@@ -12,6 +12,19 @@ export interface SkillCategory {
 export function useSkillsData(): SkillCategory[] {
   return [
     {
+      key: 'languages',
+      skills: [
+        { name: 'C', icon: 'devicon:c' },
+        { name: 'C++', icon: 'devicon:cplusplus' },
+        { name: 'Python', icon: 'devicon:python' },
+        { name: 'Haskell', icon: 'devicon:haskell' },
+        { name: 'TypeScript', icon: 'devicon:typescript' },
+        { name: 'JavaScript', icon: 'devicon:javascript' },
+        { name: 'Rust', icon: 'devicon:rust', mono: true },
+        { name: 'Groovy', icon: 'devicon:groovy' },
+      ],
+    },
+    {
       key: 'frontend',
       skills: [
         { name: 'Vue 3', icon: 'devicon:vuejs' },
@@ -30,19 +43,6 @@ export function useSkillsData(): SkillCategory[] {
         { name: 'MongoDB', icon: 'devicon:mongodb' },
         { name: 'REST APIs', icon: 'mdi:api', mono: true },
         { name: 'SQLite', icon: 'devicon:sqlite', mono: true },
-      ],
-    },
-    {
-      key: 'languages',
-      skills: [
-        { name: 'C', icon: 'devicon:c' },
-        { name: 'C++', icon: 'devicon:cplusplus' },
-        { name: 'Python', icon: 'devicon:python' },
-        { name: 'Haskell', icon: 'devicon:haskell' },
-        { name: 'TypeScript', icon: 'devicon:typescript' },
-        { name: 'JavaScript', icon: 'devicon:javascript' },
-        { name: 'Rust', icon: 'devicon:rust', mono: true },
-        { name: 'Groovy', icon: 'devicon:groovy' },
       ],
     },
     {

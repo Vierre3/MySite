@@ -57,7 +57,12 @@ const skillsData = useSkillsData()
 
 function distribute(data: typeof skillsData, numCols: number) {
   const cols: (typeof skillsData)[] = Array.from({ length: numCols }, () => [])
-  data.forEach((item, i) => cols[i % numCols]!.push(item))
+  const heights = new Array(numCols).fill(0)
+  for (const item of data) {
+    const shortest = heights.indexOf(Math.min(...heights))
+    cols[shortest]!.push(item)
+    heights[shortest] += item.skills.length + 2 // +2 for header/padding
+  }
   return cols
 }
 
