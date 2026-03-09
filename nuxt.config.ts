@@ -45,9 +45,6 @@ export default defineNuxtConfig({
         { name: 'twitter:description', content: 'Pierre-Yves • Guiraudet — Full-Stack Developer & Epitech Paris student. Portfolio showcasing web, systems, and game development projects.' },
         { name: 'twitter:image', content: `${siteUrl}/og-image.png` },
       ],
-      style: [
-        { innerHTML: 'html{overflow:hidden}html.hydrated{overflow:visible}' },
-      ],
       link: [
         { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
         { rel: 'canonical', href: `${siteUrl}/` },

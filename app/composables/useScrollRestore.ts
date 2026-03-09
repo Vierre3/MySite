@@ -29,40 +29,26 @@ export function setupScrollRestore() {
     const savedY = sessionStorage.getItem(STORAGE_KEY)
     const restoreY = savedY ? parseInt(savedY, 10) : 0
 
-    const enableScroll = () => {
-      document.documentElement.classList.add('hydrated')
-    }
+    if (restoreY > 0) {
+      isRestoring.value = true
 
-    // Wait for full page load (all resources) before enabling scroll
-    const onReady = () => {
-      if (restoreY > 0) {
-        isRestoring.value = true
+      let attempts = 0
+      const maxAttempts = 10
 
-        let attempts = 0
-        const maxAttempts = 10
+      const tryRestore = () => {
+        window.scrollTo(0, restoreY)
+        attempts++
 
-        const tryRestore = () => {
-          window.scrollTo(0, restoreY)
-          attempts++
-
-          if (attempts < maxAttempts && Math.abs(window.scrollY - restoreY) > 2) {
-            requestAnimationFrame(tryRestore)
-          } else {
-            isRestoring.value = false
-            enableScroll()
-          }
+        if (attempts < maxAttempts && Math.abs(window.scrollY - restoreY) > 2) {
+          requestAnimationFrame(tryRestore)
+        } else {
+          isRestoring.value = false
         }
-
-        requestAnimationFrame(tryRestore)
-      } else {
-        enableScroll()
       }
-    }
 
-    if (document.readyState === 'complete') {
-      onReady()
-    } else {
-      window.addEventListener('load', onReady, { once: true })
+      nextTick(() => {
+        requestAnimationFrame(tryRestore)
+      })
     }
   })
 }
