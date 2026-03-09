@@ -6,6 +6,7 @@ export function useScrollReveal(threshold = 0.15) {
   const target = ref<HTMLElement | null>(null)
   const isVisible = ref(false)
   const skipAnimation = ref(false)
+  const fadeIn = ref(false)
 
   onMounted(() => {
     nextTick(() => {
@@ -34,7 +35,8 @@ export function useScrollReveal(threshold = 0.15) {
       }
 
       if (inViewport) {
-        // Dynamically created (e.g. filter change): delay one frame so CSS transition plays
+        // Dynamically created (e.g. filter change): fade in + slide up
+        fadeIn.value = true
         requestAnimationFrame(() => {
           isVisible.value = true
         })
@@ -55,5 +57,5 @@ export function useScrollReveal(threshold = 0.15) {
     })
   })
 
-  return { target, isVisible, skipAnimation }
+  return { target, isVisible, skipAnimation, fadeIn }
 }
