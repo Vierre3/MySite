@@ -19,9 +19,9 @@
       </div>
 
       <!-- Projects grouped by year -->
-      <div v-for="(group, groupIndex) in groupedByYear" :key="`${activeFilter}-${group.year}`">
-        <!-- Year separator (skip for first/current year group) -->
-        <UiScrollReveal v-if="groupIndex > 0" :key="`${activeFilter}-sep-${group.year}`">
+      <div v-for="group in groupedByYear" :key="`${activeFilter}-${group.year}`">
+        <!-- Year separator (skip for current year) -->
+        <UiScrollReveal v-if="group.year !== currentYear" :key="`${activeFilter}-sep-${group.year}`">
           <div class="flex items-center gap-4 mb-6 mt-12">
             <div class="h-px flex-1 bg-gradient-to-r from-transparent via-glass-border to-transparent" />
             <span class="text-text-secondary text-sm font-medium tracking-wider">{{ group.year }}</span>
@@ -48,6 +48,7 @@
 const projectsData = useProjectsData()
 const activeFilter = ref('all')
 
+const currentYear = new Date().getFullYear()
 const filters = ['all', 'epitech', 'personal', 'hackathon', 'jam']
 
 const filteredProjects = computed(() => {
