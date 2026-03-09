@@ -2,10 +2,9 @@
   <div class="relative rounded-2xl border-[0.75px] border-glass-border h-full transition-transform duration-300 hover:-translate-y-1">
     <UiGlowingEffect
       v-if="hover && mounted"
-      :spread="30"
+      :spread="25"
       :glow="true"
-      :disabled="false"
-      :proximity="50"
+      :proximity="100"
       :inactive-zone="0"
       :border-width="2"
     />
