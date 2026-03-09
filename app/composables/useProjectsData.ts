@@ -10,7 +10,7 @@ export function useProjectsData(): Project[] {
   return [
     {
       key: 'Those Who Listen',
-      techTags: ['Python', 'PyTorch', 'OpenVoice', 'Voice Cloning', 'Nuxt'],
+      techTags: ['Python', 'PyTorch', 'OpenVoice', 'Voice Cloning', 'Unity', 'Nuxt'],
       type: 'epitech',
       current: true,
     },
