@@ -11,6 +11,10 @@ export default defineNuxtConfig({
     '@nuxt/icon',
   ],
 
+  tailwindcss: {
+    cssPath: '~/assets/css/tailwind.css',
+  },
+
   i18n: {
     locales: [
       { code: 'en', file: 'en.json', name: 'English' },

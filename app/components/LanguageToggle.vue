@@ -4,7 +4,7 @@
     @click="toggleLocale"
   >
     <Icon name="mdi:translate" class="w-4 h-4" />
-    <span class="uppercase">{{ locale === 'en' ? 'FR' : 'EN' }}</span>
+    <span class="toggle-label">{{ locale === 'en' ? 'FR' : 'EN' }}</span>
   </button>
 </template>
 

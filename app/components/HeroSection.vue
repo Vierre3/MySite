@@ -4,29 +4,29 @@
 
     <div class="relative z-10 text-center max-w-3xl mx-auto">
       <!-- Greeting -->
-      <p class="hero-fade text-lg md:text-xl mb-3" style="--delay: 0.2s; color: #a0a0b8;">
+      <p class="hero-fade text-lg md:text-xl mb-3 text-text-secondary" style="--delay: 0.2s;">
         {{ $t('hero.greeting') }}
       </p>
 
       <!-- Name -->
-      <h1 class="hero-fade text-5xl md:text-7xl font-bold mb-4" style="--delay: 0.4s; color: #f0f0f5;">
+      <h1 class="hero-fade text-5xl md:text-7xl font-bold mb-4 text-text-primary" style="--delay: 0.4s;">
         {{ $t('hero.name') }}
       </h1>
 
       <!-- Title -->
       <div class="hero-fade flex items-center justify-center gap-3 mb-3" style="--delay: 0.6s;">
-        <span class="text-xl md:text-2xl font-semibold" style="color: #FF6B00;">
+        <span class="text-xl md:text-2xl font-semibold text-orange-accent">
           {{ $t('hero.title') }}
         </span>
       </div>
 
       <!-- Subtitle -->
-      <p class="hero-fade text-lg mb-6" style="--delay: 0.7s; color: #a0a0b8;">
+      <p class="hero-fade text-lg mb-6 text-text-secondary" style="--delay: 0.7s;">
         {{ $t('hero.subtitle') }}
       </p>
 
       <!-- Tagline -->
-      <p class="hero-fade text-base md:text-lg max-w-xl mx-auto mb-10" style="--delay: 0.8s; color: rgba(160, 160, 184, 0.8);">
+      <p class="hero-fade text-base md:text-lg max-w-xl mx-auto mb-10 text-text-secondary/80" style="--delay: 0.8s;">
         {{ $t('hero.tagline') }}
       </p>
 
@@ -45,8 +45,8 @@
 
     <!-- Scroll indicator -->
     <div class="hero-fade absolute bottom-10 flex flex-col items-center gap-2" style="--delay: 1.2s;">
-      <div class="w-6 h-10 rounded-full border-2 flex justify-center pt-2" style="border-color: rgba(160, 160, 184, 0.3);">
-        <div class="w-1.5 h-1.5 rounded-full" style="background-color: #FF6B00; animation: scroll-indicator 1.5s ease-in-out infinite;" />
+      <div class="w-6 h-10 rounded-full border-2 border-text-secondary/30 flex justify-center pt-2">
+        <div class="w-1.5 h-1.5 rounded-full bg-orange-accent" style="animation: scroll-indicator 1.5s ease-in-out infinite;" />
       </div>
     </div>
   </section>
