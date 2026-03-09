@@ -4,10 +4,27 @@ export function useScrollRestore() {
   return { isRestoring: readonly(isRestoring) }
 }
 
+// Call before locale navigation to skip animations on remount
+export function setRestoring(value: boolean) {
+  isRestoring.value = value
+}
+
 export function setupScrollRestore() {
   if (import.meta.server) return
 
   const STORAGE_KEY = 'scroll-position'
+
+  // Release isRestoring after route changes (locale switches)
+  const router = useRouter()
+  router.afterEach(() => {
+    if (isRestoring.value) {
+      nextTick(() => {
+        requestAnimationFrame(() => {
+          isRestoring.value = false
+        })
+      })
+    }
+  })
 
   onMounted(() => {
     // Take control of scroll restoration from the browser

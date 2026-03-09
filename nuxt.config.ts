@@ -22,16 +22,48 @@ export default defineNuxtConfig({
     ],
     defaultLocale: 'en',
     langDir: 'locales/',
-    strategy: 'no_prefix',
-    detectBrowserLanguage: {
-      useCookie: true,
-      cookieKey: 'locale',
-    },
+    strategy: 'prefix',
+    detectBrowserLanguage: false,
   },
 
   ssr: true,
   nitro: {
     preset: 'github-pages',
+    prerender: {
+      routes: ['/en', '/fr'],
+      crawlLinks: false,
+    },
+  },
+
+  hooks: {
+    'nitro:build:public-assets'() {
+      const fs = require('node:fs')
+      const path = require('node:path')
+      const base = process.env.NUXT_APP_BASE_URL || '/'
+      const outputDir = path.resolve('.output/public')
+      const localeRedirect = `<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <script>
+    var l = 'en';
+    try { if (localStorage.getItem('locale') === 'fr') l = 'fr'; } catch(e) {}
+    window.location.replace('${base}' + l);
+  </script>
+</head>
+<body></body>
+</html>`
+      const rootRedirect = `<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <script>window.location.replace('${base}');</script>
+</head>
+<body></body>
+</html>`
+      fs.writeFileSync(path.join(outputDir, 'index.html'), localeRedirect)
+      fs.writeFileSync(path.join(outputDir, '404.html'), rootRedirect)
+    },
   },
 
   app: {

@@ -9,20 +9,17 @@
 </template>
 
 <script setup lang="ts">
-const { locale, setLocale } = useI18n()
+const { locale } = useI18n()
+const switchLocalePath = useSwitchLocalePath()
 
 defineProps<{
   showText: boolean
 }>()
 
 function toggleLocale() {
-  setLocale(locale.value === 'en' ? 'fr' : 'en')
-  // Force repaint on iOS Safari — backdrop-blur prevents automatic repaints
-  nextTick(() => {
-    document.body.style.transform = 'translateZ(0)'
-    requestAnimationFrame(() => {
-      document.body.style.transform = ''
-    })
-  })
+  const target = locale.value === 'en' ? 'fr' : 'en'
+  localStorage.setItem('locale', target)
+  setRestoring(true)
+  navigateTo(switchLocalePath(target))
 }
 </script>

@@ -4,14 +4,7 @@
     :class="{ 'skip-animations': isRestoring }"
   >
     <NavBar />
-    <main class="relative z-10">
-      <HeroSection />
-      <AboutSection />
-      <SkillsSection />
-      <ExperienceSection />
-      <ProjectsSection />
-      <ContactSection />
-    </main>
+    <NuxtPage />
     <FooterSection />
   </div>
 </template>
@@ -21,6 +14,14 @@ const { isRestoring } = useScrollRestore()
 setupScrollRestore()
 
 useTheme()
+
+// Save current locale to localStorage for the redirect pages (index.html, 404.html)
+if (import.meta.client) {
+  const { locale } = useI18n()
+  localStorage.setItem('locale', locale.value)
+  watch(locale, (l) => localStorage.setItem('locale', l))
+}
+
 useHead({
   meta: [
     { name: 'theme-color', content: computed(() => useTheme().theme.value === 'light' ? '#f5f5f7' : '#0a0a1a') },
