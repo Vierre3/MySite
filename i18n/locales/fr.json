@@ -87,7 +87,7 @@
       "hackathon": "Hackathon",
       "jam": "Game Jam"
     },
-    "Those Who Listen": "Survival horror coopératif où le clonage vocal devient l'ennemi. Clonage vocal temps réel (<300ms de latence, traitement 100% local) permettant aux créatures d'imiter vos coéquipiers. Construit avec OpenVoice et PyTorch.",
+    "Those Who Listen": "Jeu survival horror coopératif où le clonage vocal devient l'ennemi. Clonage vocal temps réel (<300ms de latence, traitement 100% local) permettant aux créatures d'imiter vos coéquipiers. Construit avec OpenVoice et PyTorch.",
     "LoCode": "Éditeur de code web léger avec Monaco Editor, développement distant SSH, terminal intégré et application Electron.",
     "Glados": "Interpréteur de langage de programmation complet en Haskell avec lexer, parser, vérificateur de types et VM bytecode.",
     "R-Type": "Moteur de jeu de tir spatial multijoueur avec architecture ECS, réseau et graphismes SFML 3.0.",

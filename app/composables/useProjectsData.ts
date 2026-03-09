@@ -10,13 +10,13 @@ export function useProjectsData(): Project[] {
   return [
     {
       key: 'Those Who Listen',
-      techTags: ['Python', 'PyTorch', 'OpenVoice', 'Voice Cloning', 'Unity', 'Nuxt'],
+      techTags: ['Nuxt', 'Python', 'PyTorch', 'OpenVoice', 'Unity', 'C#', 'Game Design'],
       type: 'epitech',
       current: true,
     },
     {
       key: 'LoCode',
-      techTags: ['Nuxt 4', 'Vue 3', 'Monaco', 'Electron', 'SSH'],
+      techTags: ['Nuxt', 'Vue', 'Monaco', 'Electron', 'SSH'],
       type: 'personal',
       current: true,
       github: 'https://github.com/Vierre3/LoCode',
@@ -29,7 +29,7 @@ export function useProjectsData(): Project[] {
     },
     {
       key: 'R-Type',
-      techTags: ['C++', 'SFML 3', 'ECS', 'Networking'],
+      techTags: ['C++', 'SFML', 'ECS', 'Networking'],
       type: 'epitech',
       github: 'https://github.com/Vierre3/R-Type',
     },
@@ -98,24 +98,24 @@ export function useProjectsData(): Project[] {
     },
     {
       key: 'Flame Your Mind',
-      techTags: ['Godot 4', 'GDScript', 'Game Design'],
+      techTags: ['Godot', 'GDScript', 'Game Design'],
       type: 'jam',
     },
     {
       key: 'Event Horizon 5min',
-      techTags: ['Godot 4', 'GDScript', 'Game Design'],
+      techTags: ['Godot', 'GDScript', 'Game Design'],
       type: 'jam',
       github: 'https://github.com/flav-code/game-jam-five-minutes',
     },
     {
       key: 'Lost In Space',
-      techTags: ['Godot 4', 'GDScript', 'Game Design'],
+      techTags: ['Godot', 'GDScript', 'Game Design'],
       type: 'jam',
       github: 'https://github.com/azeloup/LostInSpace',
     },
     {
       key: 'Robbers & Cat',
-      techTags: ['Godot 4', 'GDScript', 'Game Design'],
+      techTags: ['Godot', 'GDScript', 'Game Design'],
       type: 'jam',
     },
   ]
