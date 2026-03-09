@@ -68,11 +68,17 @@ function distribute(data: typeof skillsData, numCols: number) {
     heights[col] += data[i]!.skills.length + 2
   }
 
-  // Remaining items: place in shortest columns, in order
-  for (let i = splitIndex; i < data.length; i++) {
-    const shortest = heights.indexOf(Math.min(...heights))
-    cols[shortest]!.push(data[i]!)
-    heights[shortest] += data[i]!.skills.length + 2
+  // Remaining items: find the N shortest columns, then assign left-to-right
+  const remaining = data.length - splitIndex
+  if (remaining > 0) {
+    const colsByHeight = Array.from({ length: numCols }, (_, i) => i)
+      .sort((a, b) => heights[a]! - heights[b]!)
+      .slice(0, remaining)
+      .sort((a, b) => a - b) // restore left-to-right order
+
+    for (let i = 0; i < remaining; i++) {
+      cols[colsByHeight[i]!]!.push(data[splitIndex + i]!)
+    }
   }
 
   return cols
