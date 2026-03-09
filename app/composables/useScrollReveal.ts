@@ -2,6 +2,15 @@ import { ref, onMounted, nextTick } from 'vue'
 
 let initialLoadComplete = false
 
+// Mark initial load as complete after first render cycle, regardless of viewport state
+if (import.meta.client) {
+  requestAnimationFrame(() => {
+    requestAnimationFrame(() => {
+      initialLoadComplete = true
+    })
+  })
+}
+
 export function useScrollReveal(threshold = 0.15) {
   const target = ref<HTMLElement | null>(null)
   const isVisible = ref(false)
