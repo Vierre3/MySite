@@ -1,13 +1,13 @@
 .scroll-reveal {
+  opacity: 0;
   transform: translateY(20px);
-  clip-path: inset(0 0 100% 0);
-  transition: transform 1s cubic-bezier(0.4, 0, 0.2, 1), clip-path 1s cubic-bezier(0.4, 0, 0.2, 1);
-  will-change: transform, clip-path;
+  transition: transform 1s cubic-bezier(0.4, 0, 0.2, 1);
+  will-change: transform;
 }
 
 .scroll-reveal.revealed {
+  opacity: 1;
   transform: translateY(0);
-  clip-path: inset(0 0 0 0);
   will-change: auto;
 }
 
