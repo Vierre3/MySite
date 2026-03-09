@@ -1,5 +1,5 @@
 <template>
-  <div class="absolute inset-0 pointer-events-none overflow-hidden" style="z-index: 0;">
+  <div class="fixed inset-0 pointer-events-none overflow-hidden" style="z-index: 0;">
     <!-- Gradient orbs - responsive sizes, visible on all screens -->
     <div
       class="absolute w-[350px] h-[350px] md:w-[500px] md:h-[500px] lg:w-[700px] lg:h-[700px] rounded-full blur-[80px] md:blur-[120px]"

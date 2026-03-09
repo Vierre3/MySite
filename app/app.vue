@@ -34,7 +34,8 @@ body {
 }
 
 /* Skip rendering of off-screen sections to reduce GPU/layout cost */
-section {
+/* Exclude hero: it contains fixed-position children that break under containment */
+section:not(#hero) {
   content-visibility: auto;
   contain-intrinsic-size: auto 800px;
 }
