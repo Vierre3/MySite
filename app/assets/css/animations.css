@@ -1,7 +1,7 @@
 .scroll-reveal {
   opacity: 0;
-  transform: translateY(30px);
-  transition: opacity 0.7s cubic-bezier(0.4, 0, 0.2, 1), transform 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+  transform: translateY(20px);
+  transition: opacity 0.5s cubic-bezier(0.4, 0, 0.2, 1), transform 0.7s cubic-bezier(0.4, 0, 0.2, 1);
   will-change: opacity, transform;
 }
 
@@ -11,10 +11,9 @@
   will-change: auto;
 }
 
-/* Disable backdrop-blur during opacity transition to prevent Safari grey artifacts */
-.scroll-reveal:not(.revealed) [class*="backdrop-blur"] {
-  -webkit-backdrop-filter: none !important;
-  backdrop-filter: none !important;
+/* Elements already in viewport on page load: appear instantly, no opacity transition */
+.scroll-reveal.no-transition {
+  transition: none !important;
 }
 
 @keyframes float {
