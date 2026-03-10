@@ -6,7 +6,7 @@
     :class="[blur > 0 && 'blur-[var(--blur)]', !glowActive && 'invisible']"
   >
     <div
-      class="glow absolute inset-0 rounded-[inherit] after:content-[''] after:rounded-[inherit] after:absolute after:inset-[calc(-1*var(--glowingeffect-border-width))] after:[border:var(--glowingeffect-border-width)_solid_transparent] after:[background:var(--gradient)] after:opacity-[var(--active,0)] after:transition-opacity after:duration-300 after:[mask-clip:padding-box,border-box] after:[mask-composite:intersect] after:[mask-image:linear-gradient(#0000,#0000),conic-gradient(from_calc((var(--start)-var(--spread))*1deg),#00000000_0deg,#fff,#00000000_calc(var(--spread)*2deg))] after:[-webkit-mask-clip:padding-box,border-box] after:[-webkit-mask-composite:source-in] after:[-webkit-mask-image:linear-gradient(#0000,#0000),conic-gradient(from_calc((var(--start)-var(--spread))*1deg),#00000000_0deg,#fff,#00000000_calc(var(--spread)*2deg))]"
+      class="glow absolute inset-0 rounded-[inherit] after:content-[''] after:rounded-[inherit] after:absolute after:inset-[calc(-1*var(--glowingeffect-border-width))] after:[border:var(--glowingeffect-border-width)_solid_transparent] after:[background:var(--gradient)] after:opacity-[var(--active,0)] after:transition-opacity after:duration-300 after:[mask-clip:padding-box,border-box] after:[mask-composite:intersect] after:[mask-image:linear-gradient(#0000,#0000),radial-gradient(circle_at_var(--glow-x)_var(--glow-y),#fff,#0000_var(--glow-radius))] after:[-webkit-mask-clip:padding-box,border-box] after:[-webkit-mask-composite:source-in] after:[-webkit-mask-image:linear-gradient(#0000,#0000),radial-gradient(circle_at_var(--glow-x)_var(--glow-y),#fff,#0000_var(--glow-radius))]"
     />
   </div>
 </template>
@@ -21,18 +21,13 @@ const CURSOR_KEY = 'cursor-pos'
 const cursor = { vx: 0, vy: 0 }
 
 if (import.meta.client) {
-  // Restore from sessionStorage (page-relative → viewport)
-  // At module load, scroll is at 0. The actual conversion happens in the
-  // scroll-restore watcher (onMounted), so just store raw page coords for now.
   const saved = sessionStorage.getItem(CURSOR_KEY)
   if (saved) {
     const parts = saved.split(',')
-    // Store page coords temporarily — will be converted after scroll restore
     cursor.vx = Number(parts[0])
     cursor.vy = Number(parts[1])
   }
 
-  // Track cursor position as viewport-relative, persist as page-relative
   let ticking = false
   document.addEventListener('pointermove', (e: PointerEvent) => {
     cursor.vx = e.clientX
@@ -48,7 +43,6 @@ if (import.meta.client) {
 
 const props = withDefaults(defineProps<{
   blur?: number
-  inactiveZone?: number
   proximity?: number
   spread?: number
   glow?: boolean
@@ -56,7 +50,6 @@ const props = withDefaults(defineProps<{
   borderWidth?: number
 }>(), {
   blur: 0,
-  inactiveZone: 0.7,
   proximity: 0,
   spread: 20,
   glow: false,
@@ -67,9 +60,10 @@ const props = withDefaults(defineProps<{
 const containerRef = ref<HTMLDivElement>()
 const glowActive = ref(false)
 let animationFrameId = 0
+let activeAnimation: ReturnType<typeof animate> | null = null
+let currentGlowX = 0
+let currentGlowY = 0
 
-// Only static/prop-derived values. --active, --start, --spread are managed
-// by handleMove via direct DOM manipulation to avoid Vue re-renders resetting them.
 const containerStyle = computed(() => ({
   '--blur': `${props.blur}px`,
   '--glowingeffect-border-width': `${props.borderWidth}px`,
@@ -95,7 +89,6 @@ function handleMove(e?: PointerEvent) {
     cancelAnimationFrame(animationFrameId)
   }
 
-  // Update viewport-relative cursor position from pointer event
   if (e) {
     cursor.vx = e.clientX
     cursor.vy = e.clientY
@@ -106,60 +99,70 @@ function handleMove(e?: PointerEvent) {
     if (!element) return
 
     const { left, top, width, height } = element.getBoundingClientRect()
-    // Both cursor and getBoundingClientRect are viewport-relative
     const mouseX = cursor.vx
     const mouseY = cursor.vy
 
-    const centerX = left + width * 0.5
-    const centerY = top + height * 0.5
-    const distanceFromCenter = Math.hypot(mouseX - centerX, mouseY - centerY)
-    const inactiveRadius = 0.5 * Math.min(width, height) * props.inactiveZone
+    // Distance from cursor to the nearest border edge (works inside AND outside)
+    const dx = Math.max(left - mouseX, 0, mouseX - (left + width))
+    const dy = Math.max(top - mouseY, 0, mouseY - (top + height))
+    const outside = Math.hypot(dx, dy)
+    const inside = (dx === 0 && dy === 0)
+      ? Math.min(mouseX - left, left + width - mouseX, mouseY - top, top + height - mouseY)
+      : 0
+    const distToBorder = outside || inside
 
-    if (distanceFromCenter < inactiveRadius) {
-      element.style.setProperty('--active', '0')
-      glowActive.value = false
-      return
-    }
-
-    const isNear =
-      mouseX > left - props.proximity &&
-      mouseX < left + width + props.proximity &&
-      mouseY > top - props.proximity &&
-      mouseY < top + height + props.proximity
+    const isNear = distToBorder <= props.proximity
 
     element.style.setProperty('--active', isNear ? '1' : '0')
     glowActive.value = isNear
 
-    if (!isNear) return
+    if (!isNear) {
+      if (activeAnimation) { activeAnimation.stop(); activeAnimation = null }
+      return
+    }
 
-    // Dynamic spread: closer cursor = larger illuminated area
-    const distToEdgeX = Math.max(0, Math.abs(mouseX - centerX) - width * 0.5)
-    const distToEdgeY = Math.max(0, Math.abs(mouseY - centerY) - height * 0.5)
-    const distToEdge = Math.hypot(distToEdgeX, distToEdgeY)
-    const maxDist = props.proximity
-    const minSpread = props.spread * 0.2
-    const maxSpread = props.spread * 3
-    const t = Math.max(0, Math.min(1, 1 - distToEdge / maxDist))
-    const dynamicSpread = minSpread + (maxSpread - minSpread) * t
-    element.style.setProperty('--spread', String(dynamicSpread))
+    // Proximity factor: 1 at border, 0 at proximity edge
+    const t = Math.max(0, Math.min(1, 1 - distToBorder / props.proximity))
 
-    // Find the closest point on the card's border to the cursor
-    // This makes the glow illuminate the nearest edge, not the cursor-to-center line
-    const nearestX = Math.max(left, Math.min(mouseX, left + width))
-    const nearestY = Math.max(top, Math.min(mouseY, top + height))
+    // Nearest point on the card border (element-relative coords)
+    let glowX: number, glowY: number
+    const r_ = left + width
+    const b_ = top + height
 
-    const currentAngle = parseFloat(element.style.getPropertyValue('--start')) || 0
-    let targetAngle =
-      (180 * Math.atan2(nearestY - centerY, nearestX - centerX)) / Math.PI + 90
+    if (mouseX >= left && mouseX <= r_ && mouseY >= top && mouseY <= b_) {
+      // Cursor is inside — snap to the nearest edge
+      const dLeft = mouseX - left
+      const dRight = r_ - mouseX
+      const dTop = mouseY - top
+      const dBottom = b_ - mouseY
+      const minD = Math.min(dLeft, dRight, dTop, dBottom)
+      if (minD === dLeft) { glowX = 0; glowY = mouseY - top }
+      else if (minD === dRight) { glowX = width; glowY = mouseY - top }
+      else if (minD === dTop) { glowX = mouseX - left; glowY = 0 }
+      else { glowX = mouseX - left; glowY = height }
+    } else {
+      // Cursor is outside — clamp to rect
+      glowX = Math.max(0, Math.min(mouseX - left, width))
+      glowY = Math.max(0, Math.min(mouseY - top, height))
+    }
 
-    const angleDiff = ((targetAngle - currentAngle + 180) % 360) - 180
-    const newAngle = currentAngle + angleDiff
+    // Radius scales purely with proximity — uniform circle, always shrinks when leaving
+    const glowRadius = props.spread * (0.15 + 0.85 * t)
+    element.style.setProperty('--glow-radius', `${glowRadius}px`)
 
-    animate(currentAngle, newAngle, {
+    // Animate glow position for smooth movement along the border
+    const startX = currentGlowX
+    const startY = currentGlowY
+
+    if (activeAnimation) activeAnimation.stop()
+    activeAnimation = animate(0, 1, {
       duration: props.movementDuration,
       ease: [0.16, 1, 0.3, 1],
-      onUpdate: (value: number) => {
-        element.style.setProperty('--start', String(value))
+      onUpdate: (progress: number) => {
+        currentGlowX = startX + (glowX - startX) * progress
+        currentGlowY = startY + (glowY - startY) * progress
+        element.style.setProperty('--glow-x', `${currentGlowX}px`)
+        element.style.setProperty('--glow-y', `${currentGlowY}px`)
       },
     })
   })
@@ -176,17 +179,15 @@ onMounted(() => {
 
   // Set initial defaults for DOM-managed CSS vars
   if (containerRef.value) {
-    containerRef.value.style.setProperty('--spread', String(props.spread))
-    containerRef.value.style.setProperty('--start', '0')
+    containerRef.value.style.setProperty('--glow-x', '0px')
+    containerRef.value.style.setProperty('--glow-y', '0px')
+    containerRef.value.style.setProperty('--glow-radius', '0px')
     containerRef.value.style.setProperty('--active', '0')
   }
 
-  // Compute initial glow: wait for scroll restore to finish so we can
-  // convert the stored page-relative cursor to correct viewport coords
   if (isRestoring.value) {
     const stop = watch(isRestoring, (restoring) => {
       if (!restoring) {
-        // Now scrollY is correct — convert page coords to viewport
         const saved = sessionStorage.getItem(CURSOR_KEY)
         if (saved) {
           const parts = saved.split(',')
@@ -198,8 +199,6 @@ onMounted(() => {
       stop()
     })
   } else {
-    // No restore — if we loaded saved page coords at module level,
-    // scroll is 0 so page coords = viewport coords (already correct)
     handleMove()
   }
 
