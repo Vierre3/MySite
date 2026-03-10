@@ -19,9 +19,7 @@ export function setupScrollRestore() {
   router.afterEach(() => {
     if (isRestoring.value) {
       nextTick(() => {
-        requestAnimationFrame(() => {
-          isRestoring.value = false
-        })
+        isRestoring.value = false
       })
     }
   })
