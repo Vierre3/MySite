@@ -69,6 +69,12 @@ body {
 }
 
 /* When restoring scroll position, skip all entrance animations */
+.skip-animations .hero-fade {
+  animation: none !important;
+  opacity: 0 !important;
+  transform: none !important;
+}
+
 .skip-animations .scroll-reveal {
   opacity: 1 !important;
   transform: none !important;
