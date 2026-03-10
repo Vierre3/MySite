@@ -3,8 +3,17 @@
     class="min-h-screen bg-dark-bg text-text-primary font-sans antialiased transition-[background-color,color] duration-300"
     :class="{ 'skip-animations': isRestoring }"
   >
+    <HeroBackground />
     <NavBar />
     <NuxtPage />
+    <main class="relative z-10">
+      <HeroSection />
+      <AboutSection />
+      <SkillsSection />
+      <ExperienceSection />
+      <ProjectsSection />
+      <ContactSection />
+    </main>
     <FooterSection />
   </div>
 </template>
@@ -69,12 +78,6 @@ body {
 }
 
 /* When restoring scroll position, skip all entrance animations */
-.skip-animations .hero-fade {
-  animation: none !important;
-  opacity: 0 !important;
-  transform: none !important;
-}
-
 .skip-animations .scroll-reveal {
   opacity: 1 !important;
   transform: none !important;

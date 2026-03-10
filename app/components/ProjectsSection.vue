@@ -46,10 +46,7 @@
 
 <script setup lang="ts">
 const projectsData = useProjectsData()
-const { save, consume } = useProjectFilter()
-const activeFilter = ref(consume())
-
-watch(activeFilter, (v) => save(v))
+const activeFilter = ref('all')
 
 const currentYear = new Date().getFullYear()
 const filters = ['all', 'epitech', 'personal', 'hackathon', 'jam']
