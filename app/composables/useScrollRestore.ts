@@ -44,8 +44,6 @@ export function setupScrollRestore() {
           requestAnimationFrame(tryRestore)
         } else {
           isRestoring.value = false
-          // Remove pre-hydration class — Vue handles it from here
-          document.documentElement.classList.remove('scrolled')
         }
       }
 
@@ -53,7 +51,7 @@ export function setupScrollRestore() {
         requestAnimationFrame(tryRestore)
       })
     } else {
-      // No scroll to restore — remove pre-hydration class immediately
+      // No scroll to restore — remove pre-hydration class
       document.documentElement.classList.remove('scrolled')
     }
   })

@@ -1,7 +1,7 @@
 <template>
   <nav
     class="fixed top-0 left-0 right-0"
-    :class="[navTransition ? 'transition-[border-color,box-shadow] duration-300' : '', mobileVisible ? 'z-[70]' : 'z-50', scrolled ? 'nav-scrolled backdrop-blur-xl border-b border-glass-border shadow-lg' : 'border-transparent']"
+    :class="[navTransition ? 'transition-[border-color,box-shadow] duration-300' : '', mobileVisible ? 'z-[70]' : 'z-50', scrolled ? 'border-b border-glass-border shadow-lg' : 'border-transparent']"
   >
     <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="flex items-center justify-between h-16">
@@ -112,7 +112,8 @@ const onScroll = () => {
   const scrollY = window.scrollY
   const windowHeight = window.innerHeight
 
-  scrolled.value = scrollY > 75
+  scrolled.value = scrollY > 1
+  document.documentElement.classList.toggle('scrolled', scrolled.value)
 
   if (scrollY < windowHeight * 0.3) {
     activeSection.value = ''
@@ -142,7 +143,7 @@ onMounted(() => {
   window.addEventListener('scroll', onScroll, { passive: true })
 
   const savedY = parseInt(sessionStorage.getItem('scroll-position') || '0', 10)
-  scrolled.value = savedY > 75
+  scrolled.value = savedY > 1
   navTransition.value = true
 
   // Detect active section after scroll restore completes
@@ -199,18 +200,35 @@ onMounted(() => {
   to { opacity: 0; transform: translateY(-10px) scale(0.97); }
 }
 
-/* Navbar gradient background — uses pseudo-element so opacity can transition */
+/* Registered as <color> so the browser can interpolate on theme switch */
+@property --nav-bg-top {
+  syntax: '<color>';
+  inherits: true;
+  initial-value: rgb(0 0 0);
+}
+@property --nav-bg-bottom {
+  syntax: '<color>';
+  inherits: true;
+  initial-value: rgb(0 0 0);
+}
+.dark, .light {
+  --nav-bg-top: rgb(var(--dark-bg));
+  --nav-bg-bottom: rgb(var(--dark-bg) / 0.75);
+}
+
 nav::before {
   content: '';
   position: absolute;
   inset: 0;
-  background-image: linear-gradient(to bottom, rgb(var(--dark-bg)), rgb(var(--dark-bg) / 0.75));
+  background: linear-gradient(to bottom, var(--nav-bg-top), var(--nav-bg-bottom));
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
   opacity: 0;
-  transition: opacity 300ms ease;
+  transition: opacity 500ms ease, --nav-bg-top 300ms ease, --nav-bg-bottom 300ms ease;
   z-index: -1;
   pointer-events: none;
 }
-nav.nav-scrolled::before {
+html.scrolled nav::before {
   opacity: 1;
 }
 </style>
