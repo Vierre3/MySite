@@ -85,7 +85,8 @@ body {
   transition: none !important;
 }
 
-.skip-animations nav {
+.skip-animations nav,
+.skip-animations nav::before {
   transition: none !important;
 }
 
@@ -93,9 +94,11 @@ body {
 html.scrolled nav {
   backdrop-filter: blur(24px);
   -webkit-backdrop-filter: blur(24px);
-  background-color: rgb(var(--dark-bg) / 0.8);
   border-bottom: 1px solid var(--glass-border);
   box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+}
+html.scrolled nav::before {
+  opacity: 1;
 }
 
 /* Pre-hydration: prevent scroll-reveal opacity:0 flash */
