@@ -24,6 +24,7 @@ export function setupScrollRestore() {
       })
     }
     window.addEventListener('scroll', onScroll, { passive: true })
+    onUnmounted(() => window.removeEventListener('scroll', onScroll))
 
     // Restore scroll position
     const savedY = sessionStorage.getItem(STORAGE_KEY)

@@ -157,6 +157,10 @@ onMounted(() => {
   } else {
     nextTick(onScroll)
   }
+
+  onUnmounted(() => {
+    window.removeEventListener('scroll', onScroll)
+  })
 })
 </script>
 

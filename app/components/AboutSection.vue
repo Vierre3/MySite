@@ -11,6 +11,7 @@
               <img
                 src="/images/profile.jpg"
                 alt="Pierre-Yves"
+                loading="lazy"
                 class="w-40 h-40 rounded-full border-2 border-orange-accent/50 object-cover shadow-[0_0_30px_rgba(255,107,0,0.15)]"
                 onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"
               />
