@@ -47,7 +47,7 @@
       "items": [
         "5-year program (BAC+5, RNCP Level 7) — project-based pedagogy fostering autonomy and teamwork",
         "25+ projects developed across C, C++, Haskell, Python, JavaScript, and more",
-        "English: C1 level (Tepitech equivalent TOEIC 885)",
+        "English: B2 level (Tepitech equivalent TOEIC 885)",
         "French / Spanish bilingual"
       ]
     },
@@ -56,8 +56,7 @@
       "company": "Naitways",
       "date": "Oct 2025 - Feb 2026",
       "items": [
-        "Built a Word (.docx) Hardening Report Generator in Python",
-        "Polled internal database via REST API to generate and send reports to clients",
+        "Polled internal database via REST API to generate and send an hardening report to clients",
         "Worked on the NBOX - a satellite deployed on client servers for self-configuration and VM management",
         "Developed automation tools in Python for infrastructure management"
       ]

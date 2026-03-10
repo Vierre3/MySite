@@ -34,7 +34,7 @@
           <Icon name="mdi:alternate-email" class="w-5 h-5" />
           {{ $t('hero.cta_contact') }}
         </UiOrangeButton>
-        <UiOrangeButton variant="outline" href="/resume.pdf" download="CV_Pierre-Yves_Guiraudet.pdf">
+        <UiOrangeButton variant="outline" href="/resume.pdf" download="CV Pierre-Yves Guiraudet.pdf">
           <Icon name="mdi:download" class="w-5 h-5" />
           {{ $t('hero.cta_resume') }}
         </UiOrangeButton>

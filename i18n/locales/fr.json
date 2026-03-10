@@ -47,7 +47,7 @@
       "items": [
         "Programme en 5 ans (BAC+5, RNCP Niveau 7) — pédagogie par projet favorisant l'autonomie et le travail en équipe",
         "25+ projets développés en C, C++, Haskell, Python, JavaScript et plus",
-        "Anglais: niveau C1 (Tepitech équivalent TOEIC 885)",
+        "Anglais: niveau B2 (Tepitech équivalent TOEIC 885)",
         "Français / Espagnol bilingue"
       ]
     },
@@ -56,8 +56,7 @@
       "company": "Naitways",
       "date": "Oct 2025 - Fév 2026",
       "items": [
-        "Conception d'un générateur de rapports de durcissement Word (.docx) en Python",
-        "Interrogation de la base de données interne via API REST pour générer et envoyer des rapports aux clients",
+        "Interrogation de la base de données interne via API REST afin de générer et envoyer un rapport de durcissement aux clients",
         "Travail sur la NBOX - un satellite déployé sur les serveurs clients pour l'auto-configuration et la gestion des VMs",
         "Développement d'outils d'automatisation en Python pour la gestion d'infrastructure"
       ]
