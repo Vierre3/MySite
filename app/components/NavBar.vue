@@ -179,10 +179,10 @@ onMounted(() => {
 
 @keyframes overlay-in {
   from { background-color: rgba(0,0,0,0); backdrop-filter: blur(0px); }
-  to { background-color: rgba(0,0,0,0.5); backdrop-filter: blur(4px); }
+  to { background-color: rgba(0,0,0,0.25); backdrop-filter: blur(4px); }
 }
 @keyframes overlay-out {
-  from { background-color: rgba(0,0,0,0.5); backdrop-filter: blur(4px); }
+  from { background-color: rgba(0,0,0,0.25); backdrop-filter: blur(4px); }
   to { background-color: rgba(0,0,0,0); backdrop-filter: blur(0px); }
 }
 
