@@ -16,9 +16,10 @@ import { animate } from 'motion'
 
 const CURSOR_KEY = 'cursor-pos'
 
-// Shared cursor: viewport-relative (clientX/clientY) is the source of truth.
-// sessionStorage stores page-relative for cross-refresh persistence.
+// Shared cursor position (viewport-relative) and instance registry.
+// Module-level so all GlowingEffect instances share one set of global listeners.
 const cursor = { vx: 0, vy: 0 }
+const instances = new Set<() => void>()
 
 if (import.meta.client) {
   const saved = sessionStorage.getItem(CURSOR_KEY)
@@ -38,6 +39,11 @@ if (import.meta.client) {
       sessionStorage.setItem(CURSOR_KEY, `${cursor.vx + window.scrollX},${cursor.vy + window.scrollY}`)
       ticking = false
     })
+    instances.forEach(fn => fn())
+  }, { passive: true })
+
+  document.addEventListener('scroll', () => {
+    instances.forEach(fn => fn())
   }, { passive: true })
 }
 
@@ -82,16 +88,11 @@ const containerStyle = computed(() => ({
     )`,
 }))
 
-function handleMove(e?: PointerEvent) {
+function handleMove() {
   if (!containerRef.value) return
 
   if (animationFrameId) {
     cancelAnimationFrame(animationFrameId)
-  }
-
-  if (e) {
-    cursor.vx = e.clientX
-    cursor.vy = e.clientY
   }
 
   animationFrameId = requestAnimationFrame(() => {
@@ -130,7 +131,6 @@ function handleMove(e?: PointerEvent) {
     const b_ = top + height
 
     if (mouseX >= left && mouseX <= r_ && mouseY >= top && mouseY <= b_) {
-      // Cursor is inside — snap to the nearest edge
       const dLeft = mouseX - left
       const dRight = r_ - mouseX
       const dTop = mouseY - top
@@ -141,7 +141,6 @@ function handleMove(e?: PointerEvent) {
       else if (minD === dTop) { glowX = mouseX - left; glowY = 0 }
       else { glowX = mouseX - left; glowY = height }
     } else {
-      // Cursor is outside — clamp to rect
       glowX = Math.max(0, Math.min(mouseX - left, width))
       glowY = Math.max(0, Math.min(mouseY - top, height))
     }
@@ -171,11 +170,8 @@ function handleMove(e?: PointerEvent) {
 const { isRestoring } = useScrollRestore()
 
 onMounted(() => {
-  const handlePointerMove = (e: PointerEvent) => handleMove(e)
-  const handleScroll = () => handleMove()
-
-  document.addEventListener('scroll', handleScroll, { passive: true })
-  document.addEventListener('pointermove', handlePointerMove, { passive: true })
+  // Register this instance with the global listener
+  instances.add(handleMove)
 
   // Set initial defaults for DOM-managed CSS vars
   if (containerRef.value) {
@@ -204,8 +200,8 @@ onMounted(() => {
 
   onUnmounted(() => {
     if (animationFrameId) cancelAnimationFrame(animationFrameId)
-    document.removeEventListener('scroll', handleScroll)
-    document.removeEventListener('pointermove', handlePointerMove)
+    if (activeAnimation) activeAnimation.stop()
+    instances.delete(handleMove)
   })
 })
 </script>
