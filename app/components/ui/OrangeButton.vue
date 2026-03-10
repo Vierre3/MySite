@@ -9,7 +9,7 @@
     :class="[
       variant === 'solid'
         ? 'bg-orange-accent text-white hover:bg-orange-light hover:shadow-[0_0_20px_rgba(255,107,0,0.2)]'
-        : 'border border-orange-accent text-orange-accent hover:bg-orange-accent/10 hover:shadow-[0_0_20px_rgba(255,107,0,0.2)]'
+        : 'border border-orange-accent text-orange-accent hover:bg-orange-accent/20 hover:shadow-[0_0_20px_rgba(255,107,0,0.2)]'
     ]"
     @click="$emit('click')"
   >

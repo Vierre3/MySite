@@ -1,7 +1,7 @@
 <template>
   <nav
     class="fixed top-0 left-0 right-0"
-    :class="[navTransition ? 'transition-[background-color,border-color,box-shadow] duration-300' : '', mobileVisible ? 'z-[70]' : 'z-50', scrolled ? 'backdrop-blur-xl bg-dark-bg/80 border-b border-glass-border shadow-lg' : 'border-transparent']"
+    :class="[navTransition ? 'transition-[background-color,border-color,box-shadow] duration-300' : '', mobileVisible ? 'z-[70]' : 'z-50', scrolled ? 'backdrop-blur-xl bg-dark-bg border-b border-glass-border shadow-lg' : 'border-transparent']"
   >
     <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="flex items-center justify-between h-16">
@@ -59,7 +59,7 @@
 
       <!-- Menu panel -->
       <div class="relative mt-16 mx-4 mobile-menu-panel">
-        <div class="backdrop-blur-xl bg-dark-bg/95 border border-glass-border rounded-2xl shadow-2xl shadow-black/40 overflow-hidden">
+        <div class="backdrop-blur-xl bg-dark-bg border border-glass-border rounded-2xl shadow-2xl shadow-black/40 overflow-hidden">
           <div class="p-4 space-y-1">
             <button
               v-for="section in sections"

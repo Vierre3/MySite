@@ -34,7 +34,7 @@
           <Icon name="mdi:alternate-email" class="w-5 h-5" />
           {{ $t('hero.cta_contact') }}
         </UiOrangeButton>
-        <UiOrangeButton variant="outline" href="/resume.pdf" download="CV Pierre-Yves Guiraudet.pdf">
+        <UiOrangeButton variant="outline" @click="downloadResume">
           <Icon name="mdi:download" class="w-5 h-5" />
           {{ $t('hero.cta_resume') }}
         </UiOrangeButton>
@@ -52,6 +52,18 @@
 
 <script setup lang="ts">
 const { scrollToSection } = useSmoothScroll()
+
+async function downloadResume() {
+  const res = await fetch('/resume.pdf')
+  // Force octet-stream so mobile browsers can't render it inline
+  const blob = new Blob([await res.arrayBuffer()], { type: 'application/octet-stream' })
+  const url = URL.createObjectURL(blob)
+  const a = document.createElement('a')
+  a.download = 'CV Pierre-Yves Guiraudet.pdf'
+  a.href = url
+  a.click()
+  URL.revokeObjectURL(url)
+}
 </script>
 
 <style>
