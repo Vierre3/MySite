@@ -1,7 +1,7 @@
 <template>
   <nav
     class="fixed top-0 left-0 right-0"
-    :class="['transition-[border-color,box-shadow] duration-300', mobileVisible && mobileOpen ? 'z-[70] menu-open' : mobileVisible ? 'z-[70] menu-closing' : 'z-50', scrolled && !mobileVisible ? 'border-b border-glass-border nav-scrolled' : 'border-transparent']"
+    :class="['transition-[border-color,box-shadow] duration-300', mobileVisible && mobileOpen ? 'z-[70] menu-open' : mobileVisible ? 'z-[70] menu-closing' : 'z-50', scrolled && !mobileOpen ? 'nav-scrolled' : '', scrolled && !mobileVisible ? 'border-b border-glass-border' : 'border-transparent']"
   >
     <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="flex items-center justify-between h-16">
