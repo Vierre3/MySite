@@ -1,7 +1,7 @@
 <template>
   <nav
-    class="fixed top-0 left-0 right-0"
-    :class="['transition-[border-color,box-shadow] duration-300', mobileVisible && mobileOpen ? 'z-[70] menu-open' : mobileVisible ? 'z-[70] menu-closing' : 'z-50', scrolled && !mobileOpen ? 'nav-scrolled' : '', scrolled && !mobileVisible ? 'border-b border-glass-border' : 'border-transparent']"
+    class="fixed top-0 left-0 right-0 nav-transitions"
+    :class="[mobileVisible && mobileOpen ? 'z-[70] menu-open' : mobileVisible ? 'z-[70] menu-closing' : 'z-50', scrolled && !mobileOpen ? 'nav-scrolled' : '', scrolled && !mobileVisible ? 'border-b border-glass-border' : 'border-transparent']"
   >
     <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="flex items-center justify-between h-16">
@@ -228,6 +228,12 @@ nav::before {
 }
 html.scrolled nav::before {
   opacity: 1;
+}
+.nav-transitions {
+  transition: border-color 300ms ease, box-shadow 300ms ease;
+}
+nav.menu-closing {
+  transition: border-color 200ms ease, box-shadow 200ms ease;
 }
 nav.nav-scrolled {
   box-shadow: 0 10px 15px -3px var(--shadow-color), 0 4px 6px -4px var(--shadow-color);
