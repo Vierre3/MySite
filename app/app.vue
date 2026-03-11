@@ -24,6 +24,11 @@ setupScrollRestore()
 
 useTheme()
 
+// Remove pre-hydration loading class now that Vue is in control
+onMounted(() => {
+  document.documentElement.classList.remove('loading')
+})
+
 // Save current locale to localStorage for the redirect pages (index.html, 404.html)
 if (import.meta.client) {
   const { locale } = useI18n()
@@ -94,8 +99,8 @@ body {
   transition: none !important;
 }
 
-/* Pre-hydration: prevent scroll-reveal opacity:0 flash */
-html.scrolled .scroll-reveal {
+/* Pre-hydration only: prevent scroll-reveal opacity:0 flash before Vue mounts */
+html.loading.scrolled .scroll-reveal {
   opacity: 1 !important;
   transform: none !important;
   transition: none !important;
