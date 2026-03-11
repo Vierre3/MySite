@@ -1,7 +1,7 @@
 <template>
   <nav
     class="fixed top-0 left-0 right-0"
-    :class="['transition-[border-color,box-shadow] duration-300', mobileVisible ? 'z-[70]' : 'z-50', scrolled ? 'border-b border-glass-border shadow-lg' : 'border-transparent']"
+    :class="['transition-[border-color,box-shadow] duration-300', mobileVisible ? 'z-[70] menu-open' : 'z-50', scrolled && !mobileVisible ? 'border-b border-glass-border shadow-lg' : 'border-transparent']"
   >
     <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="flex items-center justify-between h-16">
@@ -59,7 +59,10 @@
 
       <!-- Menu panel -->
       <div class="relative mt-16 mx-4 mobile-menu-panel">
-        <div class="backdrop-blur-xl bg-dark-bg border border-glass-border rounded-2xl shadow-2xl shadow-black/40 overflow-hidden">
+        <!-- Inverted concave corners -->
+        <div class="absolute -top-1 -left-4 w-5 h-5 z-[100]" style="background: radial-gradient(circle at 0% 100%, transparent calc(1rem - 1px), var(--glass-border) calc(1rem - 1px), var(--glass-border) 1rem, var(--nav-bg-top) 1rem)" />
+        <div class="absolute -top-1 -right-4 w-5 h-5 z-[100]" style="background: radial-gradient(circle at 100% 100%, transparent calc(1rem - 1px), var(--glass-border) calc(1rem - 1px), var(--glass-border) 1rem, var(--nav-bg-top) 1rem)" />
+        <div class="backdrop-blur-xl bg-[var(--nav-bg-top)] border border-glass-border rounded-b-2xl shadow-2xl shadow-black/40 overflow-hidden border-t-0">
           <div class="p-4 space-y-1">
             <button
               v-for="section in sections"
@@ -226,4 +229,9 @@ nav::before {
 html.scrolled nav::before {
   opacity: 1;
 }
+nav.menu-open::before {
+  background: var(--nav-bg-top);
+  opacity: 1;
+}
+
 </style>
