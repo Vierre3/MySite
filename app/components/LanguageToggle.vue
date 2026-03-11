@@ -21,12 +21,7 @@ defineProps<{
 function toggleLocale() {
   const target = locale.value === 'en' ? 'fr' : 'en'
   localStorage.setItem('locale', target)
-  const isDesktop = window.matchMedia('(min-width: 768px)').matches
-  if (document.startViewTransition && isDesktop) {
-    document.startViewTransition(() => navigateTo(switchLocalePath(target)))
-  } else {
-    navigateTo(switchLocalePath(target))
-  }
+  navigateTo(switchLocalePath(target))
 }
 </script>
 
