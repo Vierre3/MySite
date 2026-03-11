@@ -36,25 +36,12 @@ export function useSkillsData(): SkillCategory[] {
       ],
     },
     {
-      key: 'backend',
+      key: 'creative',
       skills: [
-        { name: 'Flask', icon: 'devicon:flask' },
-        { name: 'Deno', icon: 'devicon:denojs' },
-        { name: 'Node.js', icon: 'devicon:nodejs' },
-        { name: 'MongoDB', icon: 'devicon:mongodb' },
-        { name: 'REST APIs', icon: 'mdi:api', mono: true },
-        { name: 'SQLite', icon: 'devicon:sqlite' },
-      ],
-    },
-    {
-      key: 'devops',
-      skills: [
-        { name: 'Docker', icon: 'devicon:docker' },
-        { name: 'Jenkins', icon: 'devicon:jenkins' },
-        { name: 'GitHub Actions', icon: 'devicon:githubactions' },
-        { name: 'Git', icon: 'devicon:git' },
-        { name: 'Linux', icon: 'devicon:linux' },
-        { name: 'CI/CD', icon: 'mdi:pipe', mono: true },
+        { name: 'Godot', icon: 'devicon:godot' },
+        { name: 'Unity', icon: 'devicon:unity' },
+        { name: 'Blender', icon: 'devicon:blender' },
+        { name: 'Canva', icon: 'devicon:canva' },
       ],
     },
     {
@@ -69,21 +56,34 @@ export function useSkillsData(): SkillCategory[] {
       ],
     },
     {
-      key: 'creative',
+      key: 'backend',
       skills: [
-        { name: 'Godot', icon: 'devicon:godot' },
-        { name: 'Unity', icon: 'devicon:unity' },
-        { name: 'Blender', icon: 'devicon:blender' },
-        { name: 'Canva', icon: 'devicon:canva' },
+        { name: 'Flask', icon: 'devicon:flask' },
+        { name: 'Deno', icon: 'devicon:denojs' },
+        { name: 'Node.js', icon: 'devicon:nodejs' },
+        { name: 'MongoDB', icon: 'devicon:mongodb' },
+        { name: 'REST APIs', icon: 'mdi:api', mono: true },
+        { name: 'SQLite', icon: 'devicon:sqlite' },
       ],
     },
     {
       key: 'other',
       skills: [
         { name: 'Networking', icon: 'mdi:lan', mono: true },
+        { name: 'Game Dev', icon: 'mdi:gamepad-variant-outline', mono: true },
         { name: 'Cryptography', icon: 'mdi:lock', mono: true },
         { name: 'AI / ML', icon: 'mdi:brain', mono: true },
-        { name: 'Game Dev', icon: 'mdi:gamepad-variant-outline', mono: true },
+      ],
+    },
+        {
+      key: 'devops',
+      skills: [
+        { name: 'Docker', icon: 'devicon:docker' },
+        { name: 'Jenkins', icon: 'devicon:jenkins' },
+        { name: 'GitHub Actions', icon: 'devicon:githubactions' },
+        { name: 'Git', icon: 'devicon:git' },
+        { name: 'Linux', icon: 'devicon:linux' },
+        { name: 'CI/CD', icon: 'mdi:pipe', mono: true },
       ],
     },
     {
