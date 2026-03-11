@@ -60,8 +60,8 @@
       <!-- Menu panel -->
       <div class="relative mt-16 mx-4 mobile-menu-panel">
         <!-- Inverted concave corners -->
-        <div class="absolute -top-1 -left-4 w-5 h-5 z-[100]" style="background: radial-gradient(circle at 0% 100%, transparent calc(1rem - 1px), var(--glass-border) calc(1rem - 1px), var(--glass-border) 1rem, var(--nav-bg-top) 1rem)" />
-        <div class="absolute -top-1 -right-4 w-5 h-5 z-[100]" style="background: radial-gradient(circle at 100% 100%, transparent calc(1rem - 1px), var(--glass-border) calc(1rem - 1px), var(--glass-border) 1rem, var(--nav-bg-top) 1rem)" />
+        <div class="absolute -top-[0.18rem] -left-4 w-5 h-5 z-[100] inverted-corner-left" />
+        <div class="absolute -top-[0.18rem] -right-4 w-5 h-5 z-[100] inverted-corner-right" />
         <div class="backdrop-blur-xl bg-[var(--nav-bg-top)] border border-glass-border rounded-b-2xl shadow-2xl shadow-black/40 overflow-hidden border-t-0">
           <div class="p-4 space-y-1">
             <button
@@ -234,4 +234,23 @@ nav.menu-open::before {
   opacity: 1;
 }
 
+@property --glass-border-color {
+  syntax: '<color>';
+  inherits: true;
+  initial-value: rgba(0 0 0);
+}
+.dark, .light {
+  --glass-border-color: var(--glass-border);
+}
+
+.inverted-corner-left,
+.inverted-corner-right {
+  transition: --nav-bg-top 300ms ease, --glass-border-color 300ms ease;
+}
+.inverted-corner-left {
+  background: radial-gradient(circle at 0% 100%, transparent 1rem, var(--glass-border-color) 1rem, var(--glass-border-color) calc(1rem + 1px), var(--nav-bg-top) 1rem);
+}
+.inverted-corner-right {
+  background: radial-gradient(circle at 100% 100%, transparent 1rem, var(--glass-border-color) 1rem, var(--glass-border-color) calc(1rem + 1px), var(--nav-bg-top) 1rem);
+}
 </style>
