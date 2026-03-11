@@ -1,7 +1,7 @@
 <template>
   <nav
     class="fixed top-0 left-0 right-0"
-    :class="['transition-[border-color,box-shadow] duration-300', mobileVisible ? 'z-[70] menu-open' : 'z-50', scrolled && !mobileVisible ? 'border-b border-glass-border shadow-lg' : 'border-transparent']"
+    :class="['transition-[border-color,box-shadow] duration-300', mobileVisible && mobileOpen ? 'z-[70] menu-open' : mobileVisible ? 'z-[70] menu-closing' : 'z-50', scrolled && !mobileVisible ? 'border-b border-glass-border shadow-lg' : 'border-transparent']"
   >
     <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="flex items-center justify-between h-16">
@@ -232,25 +232,30 @@ html.scrolled nav::before {
 nav.menu-open::before {
   background: var(--nav-bg-top);
   opacity: 1;
+  transition: opacity 300ms ease-out, --nav-bg-top 300ms ease, --nav-bg-bottom 300ms ease;
+}
+nav.menu-closing::before {
+  background: var(--nav-bg-top);
+  transition: opacity 200ms ease-in, --nav-bg-top 300ms ease, --nav-bg-bottom 300ms ease;
 }
 
-@property --glass-border-color {
+@property --corner-border {
   syntax: '<color>';
   inherits: true;
-  initial-value: rgba(0 0 0);
+  initial-value: rgb(0 0 0);
 }
 .dark, .light {
-  --glass-border-color: var(--glass-border);
+  --corner-border: color-mix(in srgb, rgb(var(--opposite)) 10%, rgb(var(--dark-bg)));
 }
 
 .inverted-corner-left,
 .inverted-corner-right {
-  transition: --nav-bg-top 300ms ease, --glass-border-color 300ms ease;
+  transition: --nav-bg-top 300ms ease, --corner-border 300ms ease;
 }
 .inverted-corner-left {
-  background: radial-gradient(circle at 0% 100%, transparent 1rem, var(--glass-border-color) 1rem, var(--glass-border-color) calc(1rem + 1px), var(--nav-bg-top) 1rem);
+  background: radial-gradient(circle at 0% 100%, transparent 1rem, var(--corner-border) 1rem, var(--corner-border) calc(1rem + 1px), var(--nav-bg-top) calc(1rem + 1px));
 }
 .inverted-corner-right {
-  background: radial-gradient(circle at 100% 100%, transparent 1rem, var(--glass-border-color) 1rem, var(--glass-border-color) calc(1rem + 1px), var(--nav-bg-top) 1rem);
+  background: radial-gradient(circle at 100% 100%, transparent 1rem, var(--corner-border) 1rem, var(--corner-border) calc(1rem + 1px), var(--nav-bg-top) calc(1rem + 1px));
 }
 </style>

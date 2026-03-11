@@ -48,6 +48,7 @@ useHead({
   --glass: rgba(255, 255, 255, 0.05);
   --glass-hover: rgba(255, 255, 255, 0.08);
   --glass-border: rgba(255, 255, 255, 0.1);
+  --opposite: 255 255 255;
   --dark-bg: 10 10 26;
   --text-primary: 240 240 245;
   --text-secondary: 160 160 184;
@@ -60,6 +61,7 @@ useHead({
   --glass: rgba(0, 0, 0, 0.05);
   --glass-hover: rgba(0, 0, 0, 0.08);
   --glass-border: rgba(0, 0, 0, 0.1);
+  --opposite: 0 0 0;
   --dark-bg: 245 245 247;
   --text-primary: 26 26 46;
   --text-secondary: 85 85 112;
