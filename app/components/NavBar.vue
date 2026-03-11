@@ -1,7 +1,7 @@
 <template>
   <nav
-    class="fixed top-0 left-0 right-0 nav-transitions"
-    :class="[mobileVisible && mobileOpen ? 'z-[70] menu-open' : mobileVisible ? 'z-[70] menu-closing' : 'z-50', scrolled && !mobileOpen ? 'nav-scrolled' : '', scrolled && !mobileVisible ? 'border-b border-glass-border' : 'border-transparent']"
+    class="fixed top-0 left-0 right-0 border-b nav-transitions"
+    :class="[mobileVisible ? 'z-[70]' : 'z-50', mobileVisible && mobileOpen ? 'menu-open' : mobileVisible ? 'menu-closing' : '', scrolled && !mobileOpen ? 'border-glass-border nav-scrolled' : 'border-transparent']"
   >
     <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="flex items-center justify-between h-16">
@@ -222,30 +222,34 @@ nav::before {
   backdrop-filter: blur(24px);
   -webkit-backdrop-filter: blur(24px);
   opacity: 0;
-  transition: opacity 500ms ease, --nav-bg-top 300ms ease, --nav-bg-bottom 300ms ease;
+  transition: opacity 500ms ease, --nav-bg-top 500ms ease, --nav-bg-bottom 500ms ease;
   z-index: -1;
   pointer-events: none;
 }
+
 html.scrolled nav::before {
   opacity: 1;
 }
-.nav-transitions {
-  transition: border-color 300ms ease, box-shadow 300ms ease;
-}
-nav.menu-closing {
-  transition: border-color 200ms ease, box-shadow 200ms ease;
-}
-nav.nav-scrolled {
+.nav-scrolled {
   box-shadow: 0 10px 15px -3px var(--shadow-color), 0 4px 6px -4px var(--shadow-color);
 }
-nav.menu-open::before {
+
+.nav-transitions {
+  transition: border-color 500ms ease, box-shadow 500ms ease;
+}
+.menu-open {
+  transition: border-color 300ms ease, box-shadow 300ms ease;
+}
+.menu-closing {
+  transition: border-color 200ms ease, box-shadow 200ms ease;
+}
+.menu-open::before {
   background: var(--nav-bg-top);
   opacity: 1;
   transition: opacity 300ms ease-out, --nav-bg-top 300ms ease, --nav-bg-bottom 300ms ease;
 }
-nav.menu-closing::before {
-  background: var(--nav-bg-top);
-  transition: opacity 200ms ease-in, --nav-bg-top 300ms ease, --nav-bg-bottom 300ms ease;
+.menu-closing::before {
+  transition: opacity 200ms ease-in, --nav-bg-top 200ms ease, --nav-bg-bottom 200ms ease;
 }
 
 @property --corner-border {
