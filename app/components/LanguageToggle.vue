@@ -21,7 +21,11 @@ defineProps<{
 function toggleLocale() {
   const target = locale.value === 'en' ? 'fr' : 'en'
   localStorage.setItem('locale', target)
-  navigateTo(switchLocalePath(target))
+  if (document.startViewTransition) {
+    document.startViewTransition(() => navigateTo(switchLocalePath(target)))
+  } else {
+    navigateTo(switchLocalePath(target))
+  }
 }
 </script>
 
