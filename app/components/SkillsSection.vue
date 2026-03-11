@@ -3,10 +3,10 @@
     <div class="max-w-5xl mx-auto">
       <UiSectionTitle title-key="skills.title" />
 
-      <!-- Mobile: single column -->
+      <!-- Mobile: single column, ordered by 3-col layout (col1 → col2 → col3) -->
       <div class="md:hidden space-y-6">
         <UiScrollReveal
-          v-for="(category, index) in skillsData"
+          v-for="(category, index) in mobileOrder"
           :key="category.key"
           :delay="index * 100"
         >
@@ -86,4 +86,5 @@ function distribute(data: typeof skillsData, numCols: number) {
 
 const columns2 = computed(() => distribute(skillsData, 2))
 const columns3 = computed(() => distribute(skillsData, 3))
+const mobileOrder = computed(() => columns3.value.flat())
 </script>
