@@ -4,7 +4,9 @@
     "skills": "Skills",
     "experience": "Experience",
     "projects": "Projects",
-    "contact": "Contact"
+    "contact": "Contact",
+    "theme_light": "Light",
+    "theme_dark": "Dark"
   },
   "hero": {
     "greeting": "Hi, I'm",

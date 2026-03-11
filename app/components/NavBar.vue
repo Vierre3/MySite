@@ -1,7 +1,7 @@
 <template>
   <nav
     class="fixed top-0 left-0 right-0"
-    :class="[navTransition ? 'transition-[border-color,box-shadow] duration-300' : '', mobileVisible ? 'z-[70]' : 'z-50', scrolled ? 'border-b border-glass-border shadow-lg' : 'border-transparent']"
+    :class="['transition-[border-color,box-shadow] duration-300', mobileVisible ? 'z-[70]' : 'z-50', scrolled ? 'border-b border-glass-border shadow-lg' : 'border-transparent']"
   >
     <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="flex items-center justify-between h-16">
@@ -13,8 +13,8 @@
           <span class="text-orange-accent">&lt;</span>PY<span class="text-orange-accent">/&gt;</span>
         </button>
 
-        <!-- Desktop Links -->
-        <div class="hidden md:flex items-center gap-6">
+        <!-- Desktop Links — absolutely centered on screen -->
+        <div class="hidden md:flex items-center gap-6 absolute left-1/2 -translate-x-1/2">
           <template v-for="(section, index) in sections" :key="section">
             <span v-if="index > 0" class="text-orange-accent text-glass-border select-none">|</span>
             <button
@@ -104,7 +104,6 @@ function onMenuAnimationEnd() {
   if (!mobileOpen.value) mobileVisible.value = false
 }
 const scrolled = ref(false)
-const navTransition = ref(false)
 const activeSection = ref('')
 const { scrollToSection } = useSmoothScroll()
 
@@ -141,10 +140,6 @@ const onScroll = () => {
 
 onMounted(() => {
   window.addEventListener('scroll', onScroll, { passive: true })
-
-  const savedY = parseInt(sessionStorage.getItem('scroll-position') || '0', 10)
-  scrolled.value = savedY > 1
-  navTransition.value = true
 
   // Detect active section after scroll restore completes
   const { isRestoring } = useScrollRestore()

@@ -4,7 +4,7 @@
     @click="toggleTheme"
   >
     <Icon name="mdi:sun-moon-stars" class="w-4 h-4" />
-    <span class="md:!w-auto md:!ml-1 md:!opacity-100 inline-block overflow-hidden whitespace-nowrap transition-[width,opacity,margin] duration-200" :style="showText ? 'width: 2.75rem; margin-left: 0.25rem; opacity: 1' : 'width: 0; margin-left: 0; opacity: 0'">{{ theme === 'dark' ? 'Light' : 'Dark' }}</span>
+    <span class="md:!w-auto md:!ml-1 md:!opacity-100 inline-block overflow-hidden whitespace-nowrap transition-[width,opacity,margin] duration-200" :style="showText ? 'width: 2.75rem; margin-left: 0.25rem; opacity: 1' : 'width: 0; margin-left: 0; opacity: 0'">{{ theme === 'dark' ? $t('nav.theme_light') : $t('nav.theme_dark') }}</span>
   </button>
 </template>
 
