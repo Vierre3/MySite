@@ -52,6 +52,7 @@ useHead({
   --dark-bg: 10 10 26;
   --text-primary: 240 240 245;
   --text-secondary: 160 160 184;
+  --shadow-color: rgba(120, 120, 200, 0.1);
 }
 
 .light {
@@ -65,6 +66,7 @@ useHead({
   --dark-bg: 245 245 247;
   --text-primary: 26 26 46;
   --text-secondary: 85 85 112;
+  --shadow-color: rgba(0, 0, 0, 0.1);
 }
 
 html {
