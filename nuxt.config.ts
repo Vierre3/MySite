@@ -42,10 +42,28 @@ export default defineNuxtConfig({
       const path = require('node:path')
       const base = process.env.NUXT_APP_BASE_URL || '/'
       const outputDir = path.resolve('.output/public')
+      const siteUrl = process.env.NUXT_PUBLIC_SITE_URL || ''
+      const title = 'Pierre-Yves | Full-Stack Developer'
+      const description = 'Pierre-Yves • Guiraudet — Full-Stack Developer & Epitech Paris student. Portfolio showcasing web, systems, and game development projects.'
       const localeRedirect = `<!DOCTYPE html>
 <html>
 <head>
   <meta charset="utf-8">
+  <title>${title}</title>
+  <meta name="description" content="${description}">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="${siteUrl}/">
+  <meta property="og:title" content="${title}">
+  <meta property="og:description" content="${description}">
+  <meta property="og:image" content="${siteUrl}/og-image.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="${title}">
+  <meta name="twitter:description" content="${description}">
+  <meta name="twitter:image" content="${siteUrl}/og-image.png">
+  <link rel="canonical" href="${siteUrl}/">
+  <link rel="icon" type="image/x-icon" href="${base}favicon.ico">
   <script>
     var l = 'en';
     try { if (localStorage.getItem('locale') === 'fr') l = 'fr'; } catch(e) {}
