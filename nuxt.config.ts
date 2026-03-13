@@ -12,6 +12,12 @@ export default defineNuxtConfig({
     '@nuxt/icon',
   ],
 
+  vite: {
+    optimizeDeps: {
+      include: ['motion'],
+    },
+  },
+
   tailwindcss: {
     cssPath: '~/assets/css/tailwind.css',
   },
