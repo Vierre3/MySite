@@ -2,7 +2,7 @@
   <div
     ref="target"
     class="scroll-reveal"
-    :class="{ revealed: isVisible, 'no-transition': skipAnimation, 'fade-in': fadeIn }"
+    :class="{ revealed: isVisible, 'no-transition': skipAnimation }"
     :style="delayStyle"
   >
     <slot />
@@ -16,7 +16,7 @@ const props = withDefaults(defineProps<{
   delay: 0,
 })
 
-const { target, isVisible, skipAnimation, fadeIn } = useScrollReveal()
+const { target, isVisible, skipAnimation } = useScrollReveal()
 const applyDelay = ref(true)
 
 const delayStyle = computed(() =>
