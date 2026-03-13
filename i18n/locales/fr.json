@@ -1,10 +1,5 @@
 {
   "nav": {
-    "about": "À Propos",
-    "skills": "Compétences",
-    "experience": "Expérience",
-    "projects": "Projets",
-    "contact": "Contact",
     "theme_light": "Clair",
     "theme_dark": "Sombre"
   },

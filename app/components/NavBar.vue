@@ -22,7 +22,7 @@
               :class="activeSection === section ? 'text-orange-accent font-medium scale-110' : 'text-text-secondary hover:text-text-primary hover:scale-105 focus:text-text-primary focus:scale-105'"
               @click="scrollToSection(section)"
             >
-              {{ $t(`nav.${section}`) }}
+              {{ $t(`${section}.title`) }}
             </button>
           </template>
         </div>
@@ -44,7 +44,6 @@
   </nav>
 
   <!-- Mobile Menu - Teleported outside nav to avoid clipping -->
-  <Teleport to="body">
     <div
       v-if="mobileVisible"
       class="md:hidden fixed inset-0 z-[60]"
@@ -76,13 +75,12 @@
                 class="w-5 h-5"
                 :class="activeSection === section ? 'text-orange-accent' : 'text-text-secondary group-hover:text-text-primary'"
               />
-              {{ $t(`nav.${section}`) }}
+              {{ $t(`${section}.title`) }}
             </button>
           </div>
         </div>
       </div>
     </div>
-  </Teleport>
 </template>
 
 <script setup lang="ts">

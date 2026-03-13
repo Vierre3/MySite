@@ -1,10 +1,5 @@
 {
   "nav": {
-    "about": "About Me",
-    "skills": "Skills",
-    "experience": "Experience",
-    "projects": "Projects",
-    "contact": "Contact",
     "theme_light": "Light",
     "theme_dark": "Dark"
   },
@@ -110,7 +105,7 @@
     "Robbers & Cat": "Open-world heist game where you steal paintings for a cat mafia. Drive around the city, burglarize locations in Phasmophobia-style gameplay, and escape before the police catches you. Built with Godot 4."
   },
   "contact": {
-    "title": "Get in Touch",
+    "title": "Contact",
     "subtitle": "Feel free to reach out for opportunities, collaborations, or just to say hi.",
     "email": "Email",
     "github": "GitHub",
