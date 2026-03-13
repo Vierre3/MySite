@@ -19,7 +19,7 @@
       </div>
 
       <!-- Subtitle -->
-      <p class="hero-fade text-lg mb-6 text-text-secondary" style="--delay: 0.6s;">
+      <p class="hero-fade text-lg md:text-xl mb-6 text-text-secondary" style="--delay: 0.6s;">
         {{ $t('hero.subtitle') }}
       </p>
 

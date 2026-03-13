@@ -1,6 +1,6 @@
 {
   "nav": {
-    "about": "À propos",
+    "about": "À Propos",
     "skills": "Compétences",
     "experience": "Expérience",
     "projects": "Projets",
@@ -18,7 +18,7 @@
     "cta_resume": "Télécharger le CV"
   },
   "about": {
-    "title": "À propos",
+    "title": "À Propos",
     "bio": "Je suis étudiant en 3ème année à Epitech Paris, basé dans les Hauts-de-Seine. Passionné par le développement logiciel full-stack — de l'écriture de shells UNIX en C à la création d'applications web en temps réel avec Nuxt et Vue, j'aime relever des défis complexes et concevoir des solutions propres et efficaces. J'ai acquis une expérience professionnelle à travers deux stages chez Naitways, où j'ai développé des outils Python pour la cybersécurité et l'automatisation d'infrastructure.",
     "stats": {
       "languages": "Langages",

@@ -146,7 +146,7 @@ function handleMove() {
     }
 
     // Radius scales purely with proximity — uniform circle, always shrinks when leaving
-    const glowRadius = props.spread * (0.15 + 0.85 * t)
+    const glowRadius = props.spread * (0.05 + 0.95 * t)
     element.style.setProperty('--glow-radius', `${glowRadius}px`)
 
     // Animate glow position for smooth movement along the border

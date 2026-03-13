@@ -13,12 +13,12 @@
           <span class="text-orange-accent">&lt;</span>PY<span class="text-orange-accent">/&gt;</span>
         </button>
 
-        <!-- Desktop Links — absolutely centered on screen -->
-        <div class="hidden md:flex items-center gap-6 absolute left-1/2 -translate-x-1/2">
+        <!-- Desktop Links — screen-centered, pushed left by right side when tight -->
+        <div class="hidden md:flex items-center gap-4 nav-links">
           <template v-for="(section, index) in sections" :key="section">
             <span v-if="index > 0" class="text-orange-accent text-glass-border select-none">|</span>
             <button
-              class="text-sm transition-all cursor-pointer"
+              class="text-sm transition-all cursor-pointer whitespace-nowrap"
               :class="activeSection === section ? 'text-orange-accent font-medium scale-110' : 'text-text-secondary hover:text-text-primary hover:scale-105 focus:text-text-primary focus:scale-105'"
               @click="scrollToSection(section)"
             >
@@ -164,6 +164,25 @@ onMounted(() => {
 </script>
 
 <style>
+/* Desktop links — screen-centered via absolute, flex fallback when tight */
+@media (min-width: 768px) {
+  .nav-links {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+  /* When viewport is too narrow for absolute centering, fall back to flex */
+  @media (max-width: 900px) {
+    .nav-links {
+      position: static;
+      transform: none;
+      flex: 1;
+      justify-content: center;
+      min-width: 0;
+    }
+  }
+}
+
 /* Enter animations */
 .mobile-menu-enter .mobile-overlay {
   animation: overlay-in 300ms ease-out forwards;
@@ -222,7 +241,7 @@ nav::before {
   backdrop-filter: blur(24px);
   -webkit-backdrop-filter: blur(24px);
   opacity: 0;
-  transition: opacity 500ms ease, --nav-bg-top 500ms ease, --nav-bg-bottom 500ms ease;
+  transition: opacity 500ms ease, --nav-bg-top 300ms ease, --nav-bg-bottom 300ms ease;
   z-index: -1;
   pointer-events: none;
 }
@@ -249,7 +268,7 @@ html.scrolled nav::before {
   transition: opacity 300ms ease-out, --nav-bg-top 300ms ease, --nav-bg-bottom 300ms ease;
 }
 .menu-closing::before {
-  transition: opacity 200ms ease-in, --nav-bg-top 200ms ease, --nav-bg-bottom 200ms ease;
+  transition: opacity 200ms ease-in, --nav-bg-top 300ms ease, --nav-bg-bottom 300ms ease;
 }
 
 @property --corner-border {
