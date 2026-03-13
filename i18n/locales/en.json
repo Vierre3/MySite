@@ -9,7 +9,7 @@
     "theme_dark": "Dark"
   },
   "hero": {
-    "greeting": "Hi, I'm",
+    "greeting": "Hello, I'm",
     "name": "Pierre-Yves",
     "title": "Full-Stack Developer",
     "subtitle": "Epitech Paris",
