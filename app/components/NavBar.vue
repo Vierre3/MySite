@@ -65,7 +65,7 @@
       <!-- Inverted concave corners -->
       <div class="absolute -top-[0.18rem] -left-4 w-5 h-5 z-[100] inverted-corner-left" />
       <div class="absolute -top-[0.18rem] -right-4 w-5 h-5 z-[100] inverted-corner-right" />
-      <div class="bg-dark-bg border border-glass-border rounded-b-2xl overflow-hidden border-t-0" style="box-shadow: 0 20px 40px -10px rgba(0,0,0,0.1), 8px 10px 20px -8px rgba(0,0,0,0.3), -8px 10px 20px -8px rgba(0,0,0,0.3)">
+      <div class="bg-dark-bg border border-glass-border rounded-b-2xl overflow-hidden border-t-0" style="box-shadow: 0 20px 40px -10px rgba(0,0,0,0.4), 8px 10px 20px -8px rgba(0,0,0,0.3), -8px 10px 20px -8px rgba(0,0,0,0.3)">
         <div class="p-4 space-y-1">
           <button
             v-for="section in sections"
