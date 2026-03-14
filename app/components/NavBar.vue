@@ -3,7 +3,7 @@
     class="fixed top-0 left-0 right-0 border-b nav-transitions"
     :class="[mobileVisible ? 'z-[70]' : 'z-50', mobileVisible && mobileOpen ? 'menu-open' : mobileVisible ? 'menu-closing' : '', scrolled && !mobileOpen ? 'border-glass-border nav-scrolled' : 'border-transparent']"
   >
-    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="max-w-6xl mx-auto px-4">
       <div class="flex items-center justify-between h-16">
         <!-- Logo -->
         <button
