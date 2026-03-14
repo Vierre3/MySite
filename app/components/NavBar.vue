@@ -187,7 +187,7 @@ onMounted(() => {
 
 /* Enter animations */
 .mobile-menu-enter .mobile-overlay {
-  animation: overlay-in 300ms ease-out forwards;
+  animation: overlay-in 300ms ease forwards;
 }
 .mobile-menu-enter .mobile-menu-panel {
   animation: panel-in 300ms ease-out forwards;
@@ -195,7 +195,7 @@ onMounted(() => {
 
 /* Leave animations */
 .mobile-menu-leave .mobile-overlay {
-  animation: overlay-out 200ms ease-in forwards;
+  animation: overlay-out 200ms ease forwards;
 }
 .mobile-menu-leave .mobile-menu-panel {
   animation: panel-out 200ms ease-in forwards;
