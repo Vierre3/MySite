@@ -47,24 +47,16 @@
 <script setup lang="ts">
 const projectsData = useProjectsData()
 const activeFilter = ref('all')
-
 const currentYear = new Date().getFullYear()
 const filters = ['all', 'epitech', 'personal', 'hackathon', 'jam']
 
-const filteredProjects = computed(() => {
-  if (activeFilter.value === 'all') return projectsData
-  return projectsData.filter(p => p.type === activeFilter.value)
-})
+const filteredProjects = computed(() =>
+  activeFilter.value === 'all' ? projectsData : projectsData.filter(p => p.type === activeFilter.value)
+)
 
 const groupedByYear = computed(() => {
   const groups = new Map<number, typeof projectsData>()
-  for (const project of filteredProjects.value) {
-    const existing = groups.get(project.year)
-    if (existing) existing.push(project)
-    else groups.set(project.year, [project])
-  }
-  return [...groups.entries()]
-    .sort(([a], [b]) => b - a)
-    .map(([year, projects]) => ({ year, projects }))
+  for (const p of filteredProjects.value) groups.set(p.year, [...(groups.get(p.year) || []), p])
+  return [...groups].sort(([a], [b]) => b - a).map(([year, projects]) => ({ year, projects }))
 })
 </script>

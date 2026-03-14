@@ -56,35 +56,26 @@
 const skillsData = useSkillsData()
 
 function distribute(data: typeof skillsData, numCols: number) {
-  const cols: (typeof skillsData)[] = Array.from({ length: numCols }, () => [])
-  const heights = new Array(numCols).fill(0)
-  const fullRows = Math.floor(data.length / numCols)
-  const splitIndex = fullRows * numCols
-
-  // Full rows: round-robin to keep order
-  for (let i = 0; i < splitIndex; i++) {
-    const col = i % numCols
-    cols[col]!.push(data[i]!)
-    heights[col] += data[i]!.skills.length + 2
-  }
-
-  // Remaining items: find the N shortest columns, then assign left-to-right
-  const remaining = data.length - splitIndex
-  if (remaining > 0) {
-    const colsByHeight = Array.from({ length: numCols }, (_, i) => i)
-      .sort((a, b) => heights[a]! - heights[b]!)
-      .slice(0, remaining)
-      .sort((a, b) => a - b) // restore left-to-right order
-
-    for (let i = 0; i < remaining; i++) {
-      cols[colsByHeight[i]!]!.push(data[splitIndex + i]!)
+  const heights = data.map(c => c.skills.length + 2)
+  const ideal = heights.reduce((a, b) => a + b, 0) / numCols
+  const cols: (typeof skillsData)[] = []
+  let i = 0
+  for (let c = 0; c < numCols; c++) {
+    const start = i
+    let sum = 0
+    while (i < data.length - (numCols - 1 - c)) {
+      if (sum > 0 && sum + heights[i]! > ideal && c < numCols - 1) {
+        if (sum + heights[i]! - ideal > ideal - sum) break
+        i++; break
+      }
+      sum += heights[i++]!
     }
+    cols.push(data.slice(start, Math.max(i, start + 1)))
   }
-
   return cols
 }
 
-const columns2 = computed(() => distribute(skillsData, 2))
-const columns3 = computed(() => distribute(skillsData, 3))
-const mobileOrder = computed(() => columns3.value.flat())
+const columns2 = distribute(skillsData, 2)
+const columns3 = distribute(skillsData, 3)
+const mobileOrder = columns3.flat()
 </script>

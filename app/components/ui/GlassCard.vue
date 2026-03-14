@@ -2,9 +2,9 @@
   <div class="relative rounded-2xl border-[0.75px] border-glass-border h-full transition-transform duration-300 hover:-translate-y-1">
     <UiGlowingEffect
       v-if="hover && mounted"
-      :spread="200"
+      :spread="180"
       :glow="true"
-      :proximity="100"
+      :proximity="90"
       :border-width="2"
     />
     <div
@@ -21,16 +21,11 @@
 
 <script setup lang="ts">
 defineOptions({ inheritAttrs: false })
-defineProps<{
-  hover?: boolean
-}>()
+defineProps<{ hover?: boolean }>()
 
 const mounted = ref(false)
 onMounted(() => {
-  if (document.readyState === 'complete') {
-    mounted.value = true
-  } else {
-    window.addEventListener('load', () => { mounted.value = true }, { once: true })
-  }
+  if (document.readyState === 'complete') mounted.value = true
+  else window.addEventListener('load', () => { mounted.value = true }, { once: true })
 })
 </script>

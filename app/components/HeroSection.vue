@@ -54,14 +54,9 @@
 const { scrollToSection } = useSmoothScroll()
 
 async function downloadResume() {
-  const res = await fetch('/resume.pdf')
-  // Force octet-stream so mobile browsers can't render it inline
-  const blob = new Blob([await res.arrayBuffer()], { type: 'application/octet-stream' })
+  const blob = new Blob([await (await fetch('/resume.pdf')).arrayBuffer()], { type: 'application/octet-stream' })
   const url = URL.createObjectURL(blob)
-  const a = document.createElement('a')
-  a.download = 'CV Pierre-Yves Guiraudet.pdf'
-  a.href = url
-  a.click()
+  Object.assign(document.createElement('a'), { href: url, download: 'CV Pierre-Yves Guiraudet.pdf' }).click()
   URL.revokeObjectURL(url)
 }
 </script>

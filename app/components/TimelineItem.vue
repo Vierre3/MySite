@@ -46,19 +46,12 @@
 </template>
 
 <script setup lang="ts">
-const props = defineProps<{
-  entryKey: string
-  current?: boolean
-}>()
-
+const props = defineProps<{ entryKey: string; current?: boolean }>()
 const { t, te } = useI18n()
+
 const items = computed(() => {
-  const result: string[] = []
-  let i = 0
-  while (te(`experience.${props.entryKey}.items[${i}]`)) {
-    result.push(t(`experience.${props.entryKey}.items[${i}]`))
-    i++
-  }
-  return result
+  const r: string[] = []
+  for (let i = 0; te(`experience.${props.entryKey}.items[${i}]`); i++) r.push(t(`experience.${props.entryKey}.items[${i}]`))
+  return r
 })
 </script>

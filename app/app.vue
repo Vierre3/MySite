@@ -21,15 +21,10 @@
 <script setup lang="ts">
 const { isRestoring } = useScrollRestore()
 setupScrollRestore()
-
 useTheme()
 
-// Remove pre-hydration loading class now that Vue is in control
-onMounted(() => {
-  document.documentElement.classList.remove('loading')
-})
+onMounted(() => document.documentElement.classList.remove('loading'))
 
-// Save current locale to localStorage for the redirect pages (index.html, 404.html)
 if (import.meta.client) {
   const { locale } = useI18n()
   localStorage.setItem('locale', locale.value)
@@ -37,9 +32,7 @@ if (import.meta.client) {
 }
 
 useHead({
-  meta: [
-    { name: 'theme-color', content: computed(() => useTheme().theme.value === 'light' ? '#f5f5f7' : '#0a0a1a') },
-  ],
+  meta: [{ name: 'theme-color', content: computed(() => useTheme().theme.value === 'light' ? '#f5f5f7' : '#0a0a1a') }],
 })
 </script>
 

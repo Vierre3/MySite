@@ -90,15 +90,14 @@
 <script setup lang="ts">
 const sections = ['about', 'skills', 'experience', 'projects', 'contact']
 const sectionIcons: Record<string, string> = {
-  about: 'mdi:account-outline',
-  skills: 'mdi:code-tags',
-  experience: 'mdi:briefcase-outline',
-  projects: 'mdi:folder-outline',
-  contact: 'mdi:alternate-email',
+  about: 'mdi:account-outline', skills: 'mdi:code-tags', experience: 'mdi:briefcase-outline',
+  projects: 'mdi:folder-outline', contact: 'mdi:alternate-email',
 }
 const mobileOpen = ref(false)
-
 const mobileVisible = ref(false)
+const scrolled = ref(false)
+const activeSection = ref('')
+const { scrollToSection } = useSmoothScroll()
 
 watch(mobileOpen, (open) => {
   document.body.style.overflow = open ? 'hidden' : ''
@@ -108,60 +107,30 @@ watch(mobileOpen, (open) => {
 function onMenuAnimationEnd() {
   if (!mobileOpen.value) mobileVisible.value = false
 }
-const scrolled = ref(false)
-const activeSection = ref('')
-const { scrollToSection } = useSmoothScroll()
 
 const onScroll = () => {
-  const scrollY = window.scrollY
-  const windowHeight = window.innerHeight
-
-  scrolled.value = scrollY > 1
+  const y = window.scrollY, h = window.innerHeight
+  scrolled.value = y > 1
   document.documentElement.classList.toggle('scrolled', scrolled.value)
 
-  if (scrollY < windowHeight * 0.3) {
-    activeSection.value = ''
-    return
-  }
+  if (y < h * 0.3) { activeSection.value = ''; return }
+  if (y + h >= document.body.scrollHeight - 20) { activeSection.value = sections.at(-1)!; return }
 
-  if (scrollY + windowHeight >= document.body.scrollHeight - 20) {
-    activeSection.value = sections[sections.length - 1]!
-    return
-  }
-
-  const checkPoint = scrollY + windowHeight * 0.4
-  let active = ''
-
+  const check = y + h * 0.4
+  activeSection.value = ''
   for (let i = sections.length - 1; i >= 0; i--) {
     const el = document.getElementById(sections[i]!)
-    if (!el) continue
-    if (checkPoint >= el.offsetTop) {
-      active = sections[i]!
-      break
-    }
+    if (el && check >= el.offsetTop) { activeSection.value = sections[i]!; break }
   }
-  activeSection.value = active
 }
 
 onMounted(() => {
   window.addEventListener('scroll', onScroll, { passive: true })
-
-  // Detect active section after scroll restore completes
   const { isRestoring } = useScrollRestore()
   if (isRestoring.value) {
-    const stop = watch(isRestoring, (restoring) => {
-      if (!restoring) {
-        onScroll()
-        stop()
-      }
-    })
-  } else {
-    nextTick(onScroll)
-  }
-
-  onUnmounted(() => {
-    window.removeEventListener('scroll', onScroll)
-  })
+    const stop = watch(isRestoring, (r) => { if (!r) { onScroll(); stop() } })
+  } else { nextTick(onScroll) }
+  onUnmounted(() => window.removeEventListener('scroll', onScroll))
 })
 </script>
 
