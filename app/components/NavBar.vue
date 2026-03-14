@@ -44,43 +44,47 @@
   </nav>
 
   <!-- Mobile Menu - Teleported outside nav to avoid clipping -->
+  <div
+    v-if="mobileVisible"
+    class="md:hidden fixed inset-0 z-[60]"
+    :class="mobileOpen ? 'mobile-menu-enter' : 'mobile-menu-leave'"
+    @animationend="onMenuAnimationEnd"
+  >
+    <!-- Dark overlay backdrop (click to close) -->
     <div
-      v-if="mobileVisible"
-      class="md:hidden fixed inset-0 z-[60]"
-      :class="mobileOpen ? 'mobile-menu-enter' : 'mobile-menu-leave'"
-      @animationend="onMenuAnimationEnd"
-    >
-      <!-- Dark overlay backdrop (click to close) -->
-      <div
-        class="absolute inset-0 mobile-overlay"
-        @click="mobileOpen = false"
-      />
+      class="absolute inset-0 mobile-overlay"
+      @click="mobileOpen = false"
+    />
 
-      <!-- Menu panel -->
-      <div class="relative mt-16 mx-4 mobile-menu-panel">
-        <!-- Inverted concave corners -->
-        <div class="absolute -top-[0.18rem] -left-4 w-5 h-5 z-[100] inverted-corner-left" />
-        <div class="absolute -top-[0.18rem] -right-4 w-5 h-5 z-[100] inverted-corner-right" />
-        <div class="backdrop-blur-xl bg-[var(--nav-bg-top)] border border-glass-border rounded-b-2xl shadow-2xl shadow-black/40 overflow-hidden border-t-0">
-          <div class="p-4 space-y-1">
-            <button
-              v-for="section in sections"
-              :key="section"
-              class="flex items-center gap-3 w-full text-left group hover:bg-white/5 hover:scale-[1.02] active:scale-95 rounded-xl transition-all cursor-pointer px-5 py-4 text-lg font-medium border border-transparent hover:border-orange-accent/40"
-              :class="activeSection === section ? 'text-orange-accent' : 'text-text-secondary hover:text-text-primary'"
-              @click="scrollToSection(section); mobileOpen = false"
-            >
-              <Icon
-                :name="sectionIcons[section]!"
-                class="w-5 h-5"
-                :class="activeSection === section ? 'text-orange-accent' : 'text-text-secondary group-hover:text-text-primary'"
-              />
-              {{ $t(`${section}.title`) }}
-            </button>
-          </div>
+    <!-- Menu panel -->
+    <div class="relative mt-16 mx-4 mobile-menu-panel">
+
+      <!-- Nav background strip — animates with panel as one block -->
+      <div class="absolute -top-16 -left-4 -right-4 h-16 z-[100] bg-dark-bg" />
+
+      <!-- Inverted concave corners -->
+      <div class="absolute -top-[0.18rem] -left-4 w-5 h-5 z-[100] inverted-corner-left" />
+      <div class="absolute -top-[0.18rem] -right-4 w-5 h-5 z-[100] inverted-corner-right" />
+      <div class="bg-dark-bg border border-glass-border rounded-b-2xl overflow-hidden border-t-0" style="box-shadow: 0 20px 40px -10px rgba(0,0,0,0.1), 8px 10px 20px -8px rgba(0,0,0,0.3), -8px 10px 20px -8px rgba(0,0,0,0.3)">
+        <div class="p-4 space-y-1">
+          <button
+            v-for="section in sections"
+            :key="section"
+            class="flex items-center gap-3 w-full text-left group hover:bg-white/5 hover:scale-[1.02] active:scale-95 rounded-xl transition-all cursor-pointer px-5 py-4 text-lg font-medium border border-transparent hover:border-orange-accent/40"
+            :class="activeSection === section ? 'text-orange-accent' : 'text-text-secondary hover:text-text-primary'"
+            @click="scrollToSection(section); mobileOpen = false"
+          >
+            <Icon
+              :name="sectionIcons[section]!"
+              class="w-5 h-5"
+              :class="activeSection === section ? 'text-orange-accent' : 'text-text-secondary group-hover:text-text-primary'"
+            />
+            {{ $t(`${section}.title`) }}
+          </button>
         </div>
       </div>
     </div>
+  </div>
 </template>
 
 <script setup lang="ts">
@@ -236,15 +240,17 @@ nav::before {
   position: absolute;
   inset: 0;
   background: linear-gradient(to bottom, var(--nav-bg-top), var(--nav-bg-bottom));
-  backdrop-filter: blur(24px);
-  -webkit-backdrop-filter: blur(24px);
+  /* backdrop-filter: blur(0px);
+  -webkit-backdrop-filter: blur(0px); */
   opacity: 0;
-  transition: opacity 500ms ease, --nav-bg-top 300ms ease, --nav-bg-bottom 300ms ease;
+  transition: opacity 500ms ease, backdrop-filter 500ms ease, -webkit-backdrop-filter 500ms ease, --nav-bg-top 300ms ease, --nav-bg-bottom 300ms ease;
   z-index: -1;
   pointer-events: none;
 }
 
 html.scrolled nav::before {
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
   opacity: 1;
 }
 .nav-scrolled {
@@ -261,12 +267,10 @@ html.scrolled nav::before {
   transition: border-color 200ms ease, box-shadow 200ms ease;
 }
 .menu-open::before {
-  background: var(--nav-bg-top);
-  opacity: 1;
-  transition: opacity 300ms ease-out, --nav-bg-top 300ms ease, --nav-bg-bottom 300ms ease;
+  transition: --nav-bg-top 300ms ease, --nav-bg-bottom 300ms ease;
 }
 .menu-closing::before {
-  transition: opacity 200ms ease-in, --nav-bg-top 300ms ease, --nav-bg-bottom 300ms ease;
+  transition: --nav-bg-top 300ms ease, --nav-bg-bottom 300ms ease;
 }
 
 @property --corner-border {
