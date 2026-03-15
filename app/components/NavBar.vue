@@ -14,7 +14,7 @@
         </button>
 
         <!-- Desktop Links — screen-centered, pushed left by right side when tight -->
-        <div class="hidden md:flex items-center gap-4 nav-links">
+        <div class="hidden md:flex items-center gap-4 lg:gap-6 nav-links">
           <template v-for="(section, index) in sections" :key="section">
             <span v-if="index > 0" class="text-orange-accent text-glass-border select-none">|</span>
             <button
