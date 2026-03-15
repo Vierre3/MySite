@@ -5,6 +5,7 @@ export interface Project {
   year: number
   current?: boolean
   github?: string
+  liveUrl?: string
 }
 
 export function useProjectsData(): Project[] {
@@ -23,6 +24,7 @@ export function useProjectsData(): Project[] {
       year: 2026,
       current: true,
       github: 'https://github.com/Vierre3/LoCode',
+      liveUrl: 'https://locode.vierre3.work/',
     },
     {
       key: 'Event Horizon 5min',

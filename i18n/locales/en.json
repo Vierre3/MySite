@@ -76,6 +76,8 @@
   "projects": {
     "title": "Projects",
     "inProgress": "In Progress",
+    "viewCode": "View code",
+    "tryIt": "Try it live",
     "types": {
       "all": "All",
       "epitech": "Epitech",

@@ -15,6 +15,9 @@
 import { animate } from 'motion'
 
 const CURSOR_KEY = 'cursor-pos'
+
+// Shared cursor position (viewport-relative) and instance registry
+// Module-level so all GlowingEffect instances share one set of global listeners
 const cursor = { vx: 0, vy: 0 }
 const instances = new Set<() => void>()
 
@@ -67,6 +70,7 @@ function handleMove() {
     const { left, top, width, height } = el.getBoundingClientRect()
     const mx = cursor.vx, my = cursor.vy
 
+    // Distance from cursor to nearest border edge (works inside AND outside)
     const dx = Math.max(left - mx, 0, mx - left - width)
     const dy = Math.max(top - my, 0, my - top - height)
     const outside = Math.hypot(dx, dy)
@@ -78,7 +82,10 @@ function handleMove() {
     glowActive.value = near
     if (!near) { if (anim) { anim.stop(); anim = null }; return }
 
+    // Proximity factor: 1 at border, 0 at proximity edge
     const t = Math.max(0, Math.min(1, 1 - dist / props.proximity))
+
+    // Nearest point on the card border (element-relative coords)
     let gx: number, gy: number
     const r = left + width, b = top + height
 
@@ -94,6 +101,7 @@ function handleMove() {
       gy = Math.max(0, Math.min(my - top, height))
     }
 
+    // Animate glow position for smooth movement along the border
     el.style.setProperty('--glow-radius', `${props.spread * (0.05 + 0.95 * t)}px`)
     const sx = curX, sy = curY
     if (anim) anim.stop()

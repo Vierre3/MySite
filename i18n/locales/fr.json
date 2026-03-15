@@ -76,6 +76,8 @@
   "projects": {
     "title": "Projets",
     "inProgress": "En cours",
+    "viewCode": "Afficher le code",
+    "tryIt": "Essayer en ligne",
     "types": {
       "all": "Tous",
       "epitech": "Epitech",

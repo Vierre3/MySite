@@ -9,8 +9,10 @@ export function setupScrollRestore() {
   const KEY = 'scroll-position'
 
   onMounted(() => {
+    // Take control of scroll restoration from the browser
     history.scrollRestoration = 'manual'
 
+    // Save scroll position on scroll (throttled via rAF)
     let ticking = false
     const onScroll = () => {
       if (ticking) return
@@ -20,6 +22,7 @@ export function setupScrollRestore() {
     window.addEventListener('scroll', onScroll, { passive: true })
     onUnmounted(() => window.removeEventListener('scroll', onScroll))
 
+    // Restore scroll position (retry up to 10 frames until content is tall enough)
     const restoreY = parseInt(sessionStorage.getItem(KEY) || '0', 10)
     if (restoreY <= 0) { document.documentElement.classList.remove('scrolled'); return }
 

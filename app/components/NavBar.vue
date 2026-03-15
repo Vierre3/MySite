@@ -108,14 +108,18 @@ function onMenuAnimationEnd() {
   if (!mobileOpen.value) mobileVisible.value = false
 }
 
+// Detect scrolled state and which section is active
 const onScroll = () => {
   const y = window.scrollY, h = window.innerHeight
   scrolled.value = y > 1
   document.documentElement.classList.toggle('scrolled', scrolled.value)
 
+  // Top of page — no active section
   if (y < h * 0.3) { activeSection.value = ''; return }
+  // Bottom of page — last section
   if (y + h >= document.body.scrollHeight - 20) { activeSection.value = sections.at(-1)!; return }
 
+  // Find topmost section whose top is above the 40% viewport checkpoint
   const check = y + h * 0.4
   activeSection.value = ''
   for (let i = sections.length - 1; i >= 0; i--) {
@@ -126,6 +130,7 @@ const onScroll = () => {
 
 onMounted(() => {
   window.addEventListener('scroll', onScroll, { passive: true })
+  // Detect active section after scroll restore completes
   const { isRestoring } = useScrollRestore()
   if (isRestoring.value) {
     const stop = watch(isRestoring, (r) => { if (!r) { onScroll(); stop() } })

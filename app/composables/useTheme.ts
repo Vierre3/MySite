@@ -7,6 +7,8 @@ function applyTheme(v: 'dark' | 'light') {
 }
 
 export function useTheme() {
+  // Defer localStorage read to after hydration to avoid mismatch
+  // (the inline <head> script already handles the visual, no flash)
   if (import.meta.client && !initialized) {
     initialized = true
     onNuxtReady(() => {

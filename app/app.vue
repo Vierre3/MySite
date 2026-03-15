@@ -23,8 +23,10 @@ const { isRestoring } = useScrollRestore()
 setupScrollRestore()
 useTheme()
 
+// Remove pre-hydration loading class now that Vue is in control
 onMounted(() => document.documentElement.classList.remove('loading'))
 
+// Save current locale to localStorage for the redirect pages (index.html, 404.html)
 if (import.meta.client) {
   const { locale } = useI18n()
   localStorage.setItem('locale', locale.value)
