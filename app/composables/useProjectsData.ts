@@ -24,7 +24,7 @@ export function useProjectsData(): Project[] {
       year: 2026,
       current: true,
       github: 'https://github.com/Vierre3/LoCode',
-      liveUrl: 'https://locode.vierre3.work/',
+      liveUrl: 'https://locode.vierre3.dev/',
     },
     {
       key: 'Event Horizon 5min',
