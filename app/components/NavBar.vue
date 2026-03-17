@@ -34,6 +34,7 @@
           <!-- Mobile hamburger -->
           <button
             class="md:hidden w-6 h-6 text-text-secondary hover:text-text-primary hover:scale-105 active:scale-95 transition-all cursor-pointer"
+            :aria-label="mobileOpen ? $t('nav.closeMenu') : $t('nav.openMenu')"
             @click="mobileOpen = !mobileOpen"
           >
             <Icon :name="mobileOpen ? 'mdi:close' : 'mdi:menu'" class="w-6 h-6" />

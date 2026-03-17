@@ -5,6 +5,12 @@ export default defineNuxtConfig({
   compatibilityDate: '2025-07-15',
   devtools: { enabled: true },
 
+  runtimeConfig: {
+    public: {
+      siteUrl,
+    },
+  },
+
   modules: [
     '@nuxtjs/tailwindcss',
     '@nuxtjs/i18n',
@@ -26,13 +32,14 @@ export default defineNuxtConfig({
 
   i18n: {
     locales: [
-      { code: 'en', file: 'en.json', name: 'English' },
-      { code: 'fr', file: 'fr.json', name: 'Francais' },
+      { code: 'en', language: 'en', file: 'en.json', name: 'English' },
+      { code: 'fr', language: 'fr', file: 'fr.json', name: 'Francais' },
     ],
     defaultLocale: 'en',
     langDir: 'locales/',
     strategy: 'prefix',
     detectBrowserLanguage: false,
+    baseUrl: siteUrl || undefined,
   },
 
   ssr: true,
@@ -56,7 +63,6 @@ export default defineNuxtConfig({
       const localeRedirect = `<!DOCTYPE html>
 <html>
 <head>
-  <meta charset="utf-8">
   <title>${title}</title>
   <meta name="description" content="${description}">
   <meta property="og:type" content="website">
@@ -70,7 +76,6 @@ export default defineNuxtConfig({
   <meta name="twitter:title" content="${title}">
   <meta name="twitter:description" content="${description}">
   <meta name="twitter:image" content="${siteUrl}/og-image.png">
-  <link rel="canonical" href="${siteUrl}/">
   <link rel="icon" type="image/x-icon" href="${base}favicon.ico">
   <link rel="icon" type="image/png" sizes="48x48" href="${base}favicon-48.png">
   <link rel="icon" type="image/png" sizes="192x192" href="${base}favicon-192.png">
@@ -126,7 +131,6 @@ export default defineNuxtConfig({
         { rel: 'icon', type: 'image/png', sizes: '48x48', href: '/favicon-48.png' },
         { rel: 'icon', type: 'image/png', sizes: '192x192', href: '/favicon-192.png' },
         { rel: 'apple-touch-icon', sizes: '180x180', href: '/apple-touch-icon.png' },
-        { rel: 'canonical', href: `${siteUrl}/` },
       ],
     },
   },

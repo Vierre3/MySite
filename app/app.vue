@@ -27,14 +27,22 @@ useTheme()
 onMounted(() => document.documentElement.classList.remove('loading'))
 
 // Save current locale to localStorage for the redirect pages (index.html, 404.html)
+const { locale } = useI18n()
+
 if (import.meta.client) {
-  const { locale } = useI18n()
   localStorage.setItem('locale', locale.value)
   watch(locale, (l) => localStorage.setItem('locale', l))
 }
 
+const siteUrl = useRuntimeConfig().public.siteUrl as string
+const canonicalUrl = computed(() => `${siteUrl}/${locale.value}`)
+
 useHead({
-  meta: [{ name: 'theme-color', content: computed(() => useTheme().theme.value === 'light' ? '#f5f5f7' : '#0a0a1a') }],
+  htmlAttrs: { lang: locale },
+  link: [{ rel: 'canonical', href: canonicalUrl }],
+  meta: [
+    { name: 'theme-color', content: computed(() => useTheme().theme.value === 'light' ? '#f5f5f7' : '#0a0a1a') },
+  ],
 })
 </script>
 
