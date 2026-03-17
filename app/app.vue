@@ -85,6 +85,9 @@ html {
 * {
   transition: color 300ms ease, background-color 300ms ease, border-color 300ms ease, fill 300ms ease, stroke 300ms ease;
 }
+canvas, .globe-wrap, .globe-wrap * {
+  transition: none !important;
+}
 
 body {
   overflow-x: hidden;
