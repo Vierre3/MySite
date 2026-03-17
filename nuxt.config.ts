@@ -98,7 +98,6 @@ export default defineNuxtConfig({
 </html>`
       fs.writeFileSync(path.join(outputDir, 'index.html'), localeRedirect)
       fs.writeFileSync(path.join(outputDir, '404.html'), rootRedirect)
-
     },
   },
 
@@ -132,8 +131,6 @@ export default defineNuxtConfig({
         { rel: 'icon', type: 'image/png', sizes: '48x48', href: '/favicon-48.png' },
         { rel: 'icon', type: 'image/png', sizes: '192x192', href: '/favicon-192.png' },
         { rel: 'apple-touch-icon', sizes: '180x180', href: '/apple-touch-icon.png' },
-        { rel: 'preload', href: '/fonts/inter-latin.woff2', as: 'font', type: 'font/woff2', crossorigin: '' },
-        { rel: 'preload', href: '/fonts/inter-latin-ext.woff2', as: 'font', type: 'font/woff2', crossorigin: '' },
       ],
     },
   },
