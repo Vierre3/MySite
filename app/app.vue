@@ -81,12 +81,25 @@ html {
   background-color: rgb(var(--dark-bg));
 }
 
-/* Theme transition — excludes pseudo-elements (glow effect, decorative borders) */
+/* Theme transition — per-element fallback for mobile / no View Transitions API */
 * {
   transition: color 300ms ease, background-color 300ms ease, border-color 300ms ease, fill 300ms ease, stroke 300ms ease;
 }
 canvas, .globe-wrap, .globe-wrap * {
   transition: none !important;
+}
+
+/* When using View Transitions API (desktop), suppress per-element transitions
+   so the browser only composites the crossfade — much lighter on Chromium */
+.vt-theme *,
+.vt-theme *::before,
+.vt-theme *::after {
+  transition: none !important;
+}
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation-duration: 250ms;
+  animation-timing-function: ease-in-out;
 }
 
 body {
