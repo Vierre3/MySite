@@ -70,6 +70,9 @@ export default defineNuxtConfig({
   <meta name="twitter:image" content="${siteUrl}/og-image.png">
   <link rel="canonical" href="${siteUrl}/">
   <link rel="icon" type="image/x-icon" href="${base}favicon.ico">
+  <link rel="icon" type="image/png" sizes="48x48" href="${base}favicon-48.png">
+  <link rel="icon" type="image/png" sizes="192x192" href="${base}favicon-192.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="${base}apple-touch-icon.png">
   <script>
     var l = 'en';
     try { if (localStorage.getItem('locale') === 'fr') l = 'fr'; } catch(e) {}
