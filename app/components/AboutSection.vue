@@ -9,11 +9,12 @@
             <!-- Profile photo -->
             <div class="shrink-0">
               <img
-                src="/images/profile.jpg"
+                src="/images/profile.webp"
                 alt="Pierre-Yves"
                 loading="lazy"
+                width="160"
+                height="160"
                 class="w-40 h-40 rounded-full border-2 border-orange-accent/50 object-cover shadow-[0_0_30px_rgba(255,107,0,0.15)]"
-                onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"
               />
             </div>
 
