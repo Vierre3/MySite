@@ -1,5 +1,4 @@
 const siteUrl = process.env.NUXT_PUBLIC_SITE_URL || ''
-const baseUrl = process.env.NUXT_APP_BASE_URL || '/'
 
 export default defineNuxtConfig({
   compatibilityDate: '2025-07-15',
@@ -55,7 +54,6 @@ export default defineNuxtConfig({
     'nitro:build:public-assets'() {
       const fs = require('node:fs')
       const path = require('node:path')
-      const base = process.env.NUXT_APP_BASE_URL || '/'
       const outputDir = path.resolve('.output/public')
       const siteUrl = process.env.NUXT_PUBLIC_SITE_URL || ''
       const title = 'Pierre-Yves | Full-Stack Developer'
@@ -76,14 +74,14 @@ export default defineNuxtConfig({
   <meta name="twitter:title" content="${title}">
   <meta name="twitter:description" content="${description}">
   <meta name="twitter:image" content="${siteUrl}/og-image.png">
-  <link rel="icon" type="image/x-icon" href="${base}favicon.ico">
-  <link rel="icon" type="image/png" sizes="48x48" href="${base}favicon-48.png">
-  <link rel="icon" type="image/png" sizes="192x192" href="${base}favicon-192.png">
-  <link rel="apple-touch-icon" sizes="180x180" href="${base}apple-touch-icon.png">
+  <link rel="icon" type="image/x-icon" href="/favicon.ico">
+  <link rel="icon" type="image/png" sizes="48x48" href="/favicon-48.png">
+  <link rel="icon" type="image/png" sizes="192x192" href="/favicon-192.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
   <script>
-    var l = 'en';
-    try { if (localStorage.getItem('locale') === 'fr') l = 'fr'; } catch(e) {}
-    window.location.replace('${base}' + l);
+    var l = '/en';
+    try { if (localStorage.getItem('locale') === 'fr') l = '/fr'; } catch(e) {}
+    window.location.replace(l);
   </script>
 </head>
 <body></body>
@@ -92,13 +90,12 @@ export default defineNuxtConfig({
 <html>
 <head>
   <meta charset="utf-8">
-  <script>window.location.replace('${base}');</script>
+  <script>window.location.replace('/');</script>
 </head>
 <body></body>
 </html>`
       fs.writeFileSync(path.join(outputDir, 'index.html'), localeRedirect)
       fs.writeFileSync(path.join(outputDir, '404.html'), rootRedirect)
-
     },
   },
 

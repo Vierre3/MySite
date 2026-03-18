@@ -1,5 +1,5 @@
 <template>
-  <canvas ref="cvs" class="absolute inset-0 w-full h-full z-[1] block pointer-events-none" style="-webkit-mask-image: linear-gradient(to bottom, black 88%, transparent 100%); mask-image: linear-gradient(to bottom, black 88%, transparent 100%);" />
+  <canvas ref="cvs" class="absolute inset-0 w-full h-full z-[1] block pointer-events-none globe-fade-in" style="-webkit-mask-image: linear-gradient(to bottom, black 88%, transparent 100%); mask-image: linear-gradient(to bottom, black 88%, transparent 100%);" />
 </template>
 
 <script setup lang="ts">
@@ -59,8 +59,9 @@ watch(cvs, (canvas) => {
     return { x: rx, y: y * cosTilt - rz * sinTilt, z: y * sinTilt + rz * cosTilt }
   }
 
-  let width = 0, height = 0, cx = 0, cy = 0, radius = 0, dpr = 1
+  let width = 0, height = 0, cx = 0, cy = 0, radius = 0, dpr = 1, dotScale = 1
   let rafId = 0
+
 
   function resize() {
     const w = canvas.clientWidth || canvas.parentElement?.clientWidth || window.innerWidth
@@ -72,9 +73,10 @@ watch(cvs, (canvas) => {
     canvas.width = Math.floor(w * dpr)
     canvas.height = Math.floor(h * dpr)
     ctx.setTransform(dpr, 0, 0, dpr, 0, 0)
-    cx = width * 0.72
+    cx = width * 0.68
     cy = height * 0.52
     radius = Math.min(width, height) * 0.42
+    dotScale = radius / 250
   }
 
   const ro = new ResizeObserver(resize)
@@ -83,6 +85,12 @@ watch(cvs, (canvas) => {
 
   let time = 0
 
+  // pause when off-screen
+  let visible = true
+  let skipFrame = false
+  const io = new IntersectionObserver(([e]) => { visible = !!e?.isIntersecting }, { threshold: 0 })
+  io.observe(canvas)
+
   /* ── grid ── */
   function drawGrid(rotation: number) {
     ctx.save()
@@ -90,7 +98,7 @@ watch(cvs, (canvas) => {
     ctx.arc(cx, cy, radius, 0, Math.PI * 2)
     ctx.clip()
     ctx.strokeStyle = `rgba(${cr},${cg},${cb},0.1)`
-    ctx.lineWidth = 1
+    ctx.lineWidth = dotScale
 
     for (let i = 0; i < 16; i++) {
       const lon = (i / 16) * Math.PI * 2
@@ -133,8 +141,14 @@ watch(cvs, (canvas) => {
   /* ── main loop ── */
   function animate() {
     if (!width || !height) { resize(); rafId = requestAnimationFrame(animate); return }
-    time += 0.0032
+    // skip frames when off-screen
+    if (!visible) { rafId = requestAnimationFrame(animate); return }
+    // 30fps: skip every other frame
+    skipFrame = !skipFrame
+    if (skipFrame) { rafId = requestAnimationFrame(animate); return }
+
     ctx.clearRect(0, 0, width, height)
+    time += 0.001
 
     // outer glow — tight and subtle
     const glow = ctx.createRadialGradient(cx, cy, radius * 0.7, cx, cy, radius * 1.15)
@@ -180,11 +194,11 @@ watch(cvs, (canvas) => {
       if (d.pz < 0) {
         ctx.fillStyle = `rgba(${cr},${cg},${cb},${(0.03 + twinkle * 0.035).toFixed(3)})`
         ctx.beginPath()
-        ctx.arc(d.px, d.py, d.baseSize * 0.65, 0, Math.PI * 2)
+        ctx.arc(d.px, d.py, d.baseSize * 0.65 * dotScale, 0, Math.PI * 2)
         ctx.fill()
       } else {
         const alpha = 0.28 + twinkle * 0.38
-        const size = d.baseSize + twinkle * 0.65
+        const size = (d.baseSize + twinkle * 0.65) * dotScale
         ctx.fillStyle = `rgba(${cr},${cg},${cb},${alpha.toFixed(3)})`
         ctx.beginPath()
         ctx.arc(d.px, d.py, size, 0, Math.PI * 2)
@@ -196,7 +210,7 @@ watch(cvs, (canvas) => {
 
     // outline
     ctx.strokeStyle = `rgba(${cr},${cg},${cb},0.13)`
-    ctx.lineWidth = 1.1
+    ctx.lineWidth = 1.1 * dotScale
     ctx.beginPath()
     ctx.arc(cx, cy, radius, 0, Math.PI * 2)
     ctx.stroke()
@@ -210,6 +224,18 @@ watch(cvs, (canvas) => {
     cancelAnimationFrame(rafId)
     obs.disconnect()
     ro.disconnect()
+    io.disconnect()
   })
 })
 </script>
+
+<style>
+.globe-fade-in {
+  animation: globeFadeIn 1.5s ease-in forwards;
+}
+
+@keyframes globeFadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+</style>
