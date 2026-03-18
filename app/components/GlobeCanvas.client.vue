@@ -60,7 +60,6 @@ watch(cvs, (canvas) => {
   }
 
   let width = 0, height = 0, cx = 0, cy = 0, radius = 0, dpr = 1, dotScale = 1
-  let rafId = 0
 
 
   function resize() {
@@ -85,11 +84,20 @@ watch(cvs, (canvas) => {
 
   let time = 0
 
-  // pause when off-screen
+  // fully stop when off-screen
   let visible = true
-  let skipFrame = false
-  const io = new IntersectionObserver(([e]) => { visible = !!e?.isIntersecting }, { threshold: 0 })
+  let timerId = 0
+  const io = new IntersectionObserver(([e]) => {
+    const wasVisible = visible
+    visible = !!e?.isIntersecting
+    canvas.style.visibility = visible ? '' : 'hidden'
+    if (visible && !wasVisible) startLoop()
+    if (!visible && wasVisible) stopLoop()
+  }, { threshold: 0 })
   io.observe(canvas)
+
+  function startLoop() { if (!timerId) timerId = window.setInterval(animate, 33) as unknown as number }
+  function stopLoop() { if (timerId) { clearInterval(timerId); timerId = 0 } }
 
   /* ── grid ── */
   function drawGrid(rotation: number) {
@@ -138,14 +146,9 @@ watch(cvs, (canvas) => {
     ctx.restore()
   }
 
-  /* ── main loop ── */
+  /* ── main loop (runs via setInterval at ~30fps) ── */
   function animate() {
-    if (!width || !height) { resize(); rafId = requestAnimationFrame(animate); return }
-    // skip frames when off-screen
-    if (!visible) { rafId = requestAnimationFrame(animate); return }
-    // 30fps: skip every other frame
-    skipFrame = !skipFrame
-    if (skipFrame) { rafId = requestAnimationFrame(animate); return }
+    if (!width || !height) { resize(); return }
 
     ctx.clearRect(0, 0, width, height)
     time += 0.001
@@ -215,13 +218,12 @@ watch(cvs, (canvas) => {
     ctx.arc(cx, cy, radius, 0, Math.PI * 2)
     ctx.stroke()
 
-    rafId = requestAnimationFrame(animate)
   }
 
-  rafId = requestAnimationFrame(animate)
+  startLoop()
 
   onUnmounted(() => {
-    cancelAnimationFrame(rafId)
+    stopLoop()
     obs.disconnect()
     ro.disconnect()
     io.disconnect()
