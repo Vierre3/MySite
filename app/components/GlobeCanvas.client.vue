@@ -73,7 +73,7 @@ watch(cvs, (canvas) => {
     canvas.height = Math.floor(h * dpr)
     ctx.setTransform(dpr, 0, 0, dpr, 0, 0)
     cx = width * 0.68
-    cy = height * 0.52
+    cy = height * 0.5
     radius = Math.min(width, height) * 0.42
     dotScale = radius / 250
   }
