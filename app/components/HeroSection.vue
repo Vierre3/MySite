@@ -1,5 +1,8 @@
 <template>
-  <section id="hero" class="relative min-h-screen flex items-center justify-center px-4">
+  <section id="hero" class="relative min-h-screen flex items-center justify-center px-4 overflow-hidden">
+    <!-- Globe background -->
+    <GlobeCanvas />
+
     <div class="relative z-10 text-center max-w-3xl mx-auto">
       <!-- Greeting -->
       <p class="hero-fade text-lg md:text-xl mb-3 text-text-secondary">
