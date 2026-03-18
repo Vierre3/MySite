@@ -136,20 +136,20 @@ watch(cvs, (canvas) => {
     time += 0.0032
     ctx.clearRect(0, 0, width, height)
 
-    // outer glow
-    const glow = ctx.createRadialGradient(cx, cy, radius * 0.65, cx, cy, radius * 1.45)
-    glow.addColorStop(0, `rgba(${cr},${cg},${cb},0.09)`)
-    glow.addColorStop(0.45, `rgba(${cr},${cg},${cb},0.035)`)
+    // outer glow — tight and subtle
+    const glow = ctx.createRadialGradient(cx, cy, radius * 0.7, cx, cy, radius * 1.15)
+    glow.addColorStop(0, `rgba(${cr},${cg},${cb},0.045)`)
+    glow.addColorStop(0.5, `rgba(${cr},${cg},${cb},0.015)`)
     glow.addColorStop(1, `rgba(${cr},${cg},${cb},0)`)
     ctx.fillStyle = glow
     ctx.beginPath()
-    ctx.arc(cx, cy, radius * 1.45, 0, Math.PI * 2)
+    ctx.arc(cx, cy, radius * 1.15, 0, Math.PI * 2)
     ctx.fill()
 
-    // sphere fill
+    // sphere fill — very subtle interior shading
     const sf = ctx.createRadialGradient(cx - radius * 0.28, cy - radius * 0.22, 0, cx, cy, radius)
-    sf.addColorStop(0, `rgba(${cr},${cg},${cb},0.10)`)
-    sf.addColorStop(0.55, `rgba(${cr},${cg},${cb},0.04)`)
+    sf.addColorStop(0, `rgba(${cr},${cg},${cb},0.05)`)
+    sf.addColorStop(0.55, `rgba(${cr},${cg},${cb},0.02)`)
     sf.addColorStop(1, 'rgba(0,0,0,0)')
     ctx.fillStyle = sf
     ctx.beginPath()
