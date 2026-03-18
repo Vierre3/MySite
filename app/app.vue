@@ -81,9 +81,29 @@ html {
   background-color: rgb(var(--dark-bg));
 }
 
-/* Theme transition — excludes pseudo-elements (glow effect, decorative borders) */
-* {
-  transition: color 300ms ease, background-color 300ms ease, border-color 300ms ease, fill 300ms ease, stroke 300ms ease;
+/* Theme transition — only active during switch, with expensive effects suspended */
+html.theme-transitioning,
+html.theme-transitioning *,
+html.theme-transitioning *::before,
+html.theme-transitioning *::after {
+  transition: color 250ms ease, background-color 250ms ease, border-color 250ms ease,
+              fill 250ms ease, stroke 250ms ease, text-shadow 250ms ease,
+              filter 250ms ease, box-shadow 250ms ease, --nav-bg-top 250ms ease,
+              --nav-bg-bottom 250ms ease, --corner-border 250ms ease !important;
+}
+/* Suspend expensive GPU effects during theme switch */
+html.theme-transitioning nav::before {
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+}
+html.theme-transitioning [class*="blur-"] {
+  filter: none !important;
+  -webkit-filter: none !important;
+}
+html.theme-transitioning canvas,
+html.theme-transitioning .globe-wrap,
+html.theme-transitioning .globe-wrap * {
+  transition: none !important;
 }
 
 body {

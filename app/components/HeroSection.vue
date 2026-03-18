@@ -1,6 +1,11 @@
 <template>
   <section id="hero" class="relative min-h-screen flex items-center justify-center px-4">
-    <div class="relative z-10 text-center max-w-3xl mx-auto">
+    <!-- Globe background — GPU-rendered, sits behind text -->
+    <div class="globe-wrap absolute inset-0 z-[5] flex items-center justify-center">
+      <GlobeCanvas :size="globeSize" />
+    </div>
+
+    <div class="relative z-10 text-center max-w-3xl mx-auto pointer-events-none hero-text-readable">
       <!-- Greeting -->
       <p class="hero-fade text-lg md:text-xl mb-3 text-text-secondary">
         {{ $t('hero.greeting') }}
@@ -29,12 +34,12 @@
       </p>
 
       <!-- CTAs -->
-      <div class="hero-fade flex flex-col sm:flex-row items-center justify-center gap-4" style="--delay: 1s;">
+      <div class="hero-fade flex flex-col sm:flex-row items-center justify-center gap-4 pointer-events-auto" style="--delay: 1s;">
         <UiOrangeButton variant="solid" @click="scrollToSection('contact')">
           <Icon name="mdi:alternate-email" class="w-5 h-5" />
           {{ $t('hero.cta_contact') }}
         </UiOrangeButton>
-        <UiOrangeButton variant="outline" @click="downloadResume">
+        <UiOrangeButton variant="outline" class="hero-btn-outline" @click="downloadResume">
           <Icon name="mdi:download" class="w-5 h-5" />
           {{ $t('hero.cta_resume') }}
         </UiOrangeButton>
@@ -52,6 +57,11 @@
 
 <script setup lang="ts">
 const { scrollToSection } = useSmoothScroll()
+
+const globeSize = computed(() => {
+  if (import.meta.server) return 550
+  return window.innerWidth < 768 ? 350 : 550
+})
 
 async function downloadResume() {
   const blob = new Blob([await (await fetch('/resume.pdf')).arrayBuffer()], { type: 'application/octet-stream' })
@@ -78,4 +88,39 @@ async function downloadResume() {
     transform: translateY(0);
   }
 }
+
+/* Background-colored halo behind text so it reads clearly over the globe */
+.hero-text-readable p,
+.hero-text-readable h1,
+.hero-text-readable span {
+  text-shadow:
+    0 0 8px var(--hero-halo),
+    0 0 16px var(--hero-halo),
+    0 0 30px var(--hero-halo),
+    0 0 30px var(--hero-halo),
+    0 0 60px var(--hero-halo);
+  transition: text-shadow 300ms ease;
+}
+
+/* Outline button: add halo but preserve its transition-all for hover effects */
+.hero-text-readable .hero-btn-outline {
+  text-shadow:
+    0 0 8px var(--hero-halo),
+    0 0 16px var(--hero-halo),
+    0 0 30px var(--hero-halo),
+    0 0 30px var(--hero-halo),
+    0 0 60px var(--hero-halo);
+}
+
+/* Icons use drop-shadow (text-shadow doesn't work on SVGs) */
+.hero-text-readable svg {
+  filter:
+    drop-shadow(0 0 6px var(--hero-halo))
+    drop-shadow(0 0 14px var(--hero-halo))
+    drop-shadow(0 0 28px var(--hero-halo));
+  transition: filter 300ms ease;
+}
+
+.dark { --hero-halo: rgb(10 10 26); }
+.light { --hero-halo: rgb(245 245 247); }
 </style>
