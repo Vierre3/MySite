@@ -15,10 +15,13 @@
       </h1>
 
       <!-- Title -->
-      <div class="hero-fade flex items-center justify-center gap-3 mb-3" style="--delay: 0.4s;">
-        <span class="text-xl md:text-2xl font-semibold text-orange-accent">
-          {{ $t('hero.title') }}
-        </span>
+      <div class="hero-fade flex items-center justify-center mb-3" style="--delay: 0.4s;">
+        <div class="terminal-box inline-flex items-center gap-1 px-3 py-1.5 border border-orange-accent/50 rounded-md bg-orange-accent/5">
+          <span class="font-mono text-base md:text-lg tracking-widest text-orange-accent">
+            {{ $t('hero.title') }}
+          </span>
+          <span class="terminal-cursor w-2 h-4 bg-orange-accent inline-block rounded-[1px]" />
+        </div>
       </div>
 
       <!-- Subtitle -->

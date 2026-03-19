@@ -1,5 +1,5 @@
 <template>
-  <canvas ref="cvs" class="absolute inset-0 w-full h-full z-[1] block pointer-events-none globe-fade-in" style="-webkit-mask-image: linear-gradient(to bottom, black 88%, transparent 100%); mask-image: linear-gradient(to bottom, black 88%, transparent 100%);" />
+  <canvas ref="cvs" class="absolute inset-0 w-full h-full z-[1] block pointer-events-none globe-fade-in" />
 </template>
 
 <script setup lang="ts">
