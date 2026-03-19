@@ -61,7 +61,6 @@ watch(cvs, (canvas) => {
 
   let width = 0, height = 0, cx = 0, cy = 0, radius = 0, dpr = 1, dotScale = 1
 
-
   function resize() {
     const w = canvas.clientWidth || canvas.parentElement?.clientWidth || window.innerWidth
     const h = canvas.clientHeight || canvas.parentElement?.clientHeight || window.innerHeight
@@ -73,8 +72,8 @@ watch(cvs, (canvas) => {
     canvas.height = Math.floor(h * dpr)
     ctx.setTransform(dpr, 0, 0, dpr, 0, 0)
     cx = width * 0.68
-    cy = height * 0.5
-    radius = Math.min(width, height) * 0.42
+    cy = height * 0.47
+    radius = Math.min(width, height) * 0.4
     dotScale = radius / 250
   }
 
