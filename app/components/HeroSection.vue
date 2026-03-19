@@ -1,7 +1,7 @@
 <template>
   <section id="hero" class="relative min-h-screen flex items-center justify-center px-4 overflow-hidden">
     <!-- Globe background -->
-    <GlobeCanvas />
+    <!-- <GlobeCanvas /> -->
 
     <div class="relative z-10 text-center max-w-3xl mx-auto">
       <!-- Greeting -->

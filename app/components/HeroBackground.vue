@@ -2,12 +2,12 @@
   <div class="fixed top-0 left-0 w-full h-screen pointer-events-none overflow-hidden" style="z-index: 0;">
     <!-- Gradient orbs - responsive sizes, visible on all screens -->
     <div
-      class="absolute w-[300px] h-[300px] md:w-[400px] md:h-[400px] lg:w-[600px] lg:h-[600px] rounded-full blur-[70px] md:blur-[100px]"
-      style="background: radial-gradient(circle, rgb(255,138,51) 0%, transparent 70%); top: -5%; right: -15%; opacity: 0.3; animation: float-slow 8s ease-in-out infinite;"
+      class="absolute w-[350px] h-[350px] md:w-[500px] md:h-[500px] lg:w-[700px] lg:h-[700px] rounded-full blur-[80px] md:blur-[120px]"
+      style="background: radial-gradient(circle, rgb(255,107,0) 0%, transparent 70%); top: -5%; right: -15%; opacity: 0.4; animation: float-slow 8s ease-in-out infinite;"
     />
     <div
-      class="absolute w-[350px] h-[350px] md:w-[500px] md:h-[500px] lg:w-[700px] lg:h-[700px] rounded-full blur-[80px] md:blur-[120px]"
-      style="background: radial-gradient(circle, rgb(255,107,0) 0%, transparent 70%); bottom: 5%; left: -10%; opacity: 0.4; animation: float 10s ease-in-out infinite;"
+      class="absolute w-[300px] h-[300px] md:w-[400px] md:h-[400px] lg:w-[600px] lg:h-[600px] rounded-full blur-[70px] md:blur-[100px]"
+      style="background: radial-gradient(circle, rgb(255,138,51) 0%, transparent 70%); bottom: 5%; left: -10%; opacity: 0.3; animation: float 10s ease-in-out infinite;"
     />
     <div
       class="absolute w-[250px] h-[250px] md:w-[300px] md:h-[300px] lg:w-[400px] lg:h-[400px] rounded-full blur-[60px] md:blur-[80px]"
