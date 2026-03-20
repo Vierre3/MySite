@@ -48,7 +48,7 @@
     </div>
 
     <!-- Scroll indicator -->
-    <div class="hero-fade absolute bottom-0 flex flex-col items-center gap-2" style="--delay: 1.2s;">
+    <div class="absolute hero-fade-in bottom-0 flex flex-col items-center gap-2" style="--delay: 1.2s;">
       <div class="w-6 h-10 rounded-full border-2 border-text-secondary/30 flex justify-center pt-6">
         <div class="w-1.5 h-1.5 rounded-full bg-orange-accent" style="animation: scroll-indicator 1.5s ease-in-out infinite;" />
       </div>
@@ -83,5 +83,16 @@ async function downloadResume() {
     opacity: 1;
     transform: translateY(0);
   }
+}
+
+.hero-fade-in {
+  opacity: 0;
+  animation: fadeIn 0.7s ease forwards;
+  animation-delay: var(--delay, 0s);
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
 }
 </style>
