@@ -1,5 +1,5 @@
 <template>
-  <section id="hero" class="relative min-h-screen flex items-center justify-center px-4 overflow-hidden">
+  <section id="hero" class="relative min-h-[calc(100vh-3rem)] flex items-center justify-center px-4 overflow-hidden">
     <!-- Globe background -->
     <!-- <GlobeCanvas /> -->
 
@@ -48,7 +48,7 @@
     </div>
 
     <!-- Scroll indicator -->
-    <div class="hero-fade absolute bottom-10 flex flex-col items-center gap-2" style="--delay: 1.2s;">
+    <div class="hero-fade absolute bottom-0 flex flex-col items-center gap-2" style="--delay: 1.2s;">
       <div class="w-6 h-10 rounded-full border-2 border-text-secondary/30 flex justify-center pt-6">
         <div class="w-1.5 h-1.5 rounded-full bg-orange-accent" style="animation: scroll-indicator 1.5s ease-in-out infinite;" />
       </div>

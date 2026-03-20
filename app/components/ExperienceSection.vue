@@ -1,5 +1,5 @@
 <template>
-  <section id="experience" class="py-24 px-4">
+  <section id="experience" class="pt-24 px-4">
     <div class="max-w-4xl mx-auto">
       <UiSectionTitle title-key="experience.title" />
 
