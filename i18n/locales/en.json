@@ -1,9 +1,9 @@
 {
   "nav": {
-    "theme_light": "Light",
-    "theme_dark": "Dark",
-    "openMenu": "Open menu",
-    "closeMenu": "Close menu"
+    "theme_light": "light",
+    "theme_dark": "dark",
+    "openMenu": "open menu",
+    "closeMenu": "close menu"
   },
   "hero": {
     "greeting": "Hello, I'm",

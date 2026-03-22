@@ -5,7 +5,7 @@
   >
     <Icon name="mdi:translate" class="w-4 h-4" />
     <span class="toggle-text md:!grid-cols-[1fr] md:!ml-1" :class="showText ? 'grid-cols-[1fr] ml-1' : 'grid-cols-[0fr]'">
-      <span class="overflow-hidden min-w-0">{{ locale === 'en' ? 'FR' : 'EN' }}</span>
+      <span class="overflow-hidden min-w-0">{{ locale === 'en' ? 'fr' : 'en' }}</span>
     </span>
   </button>
 </template>
