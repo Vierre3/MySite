@@ -8,11 +8,11 @@
         <button
           v-for="filter in filters"
           :key="filter"
-          class="px-4 py-2 min-w-24 rounded-lg text-sm font-medium cursor-pointer active:scale-95 md:active:scale-100 transition-all duration-300"
+          class="px-4 py-2 min-w-24 border rounded-lg text-sm font-medium cursor-pointer active:scale-95 md:active:scale-100 transition-all duration-300"
           :class="activeFilter === filter
-            ? 'bg-orange-accent text-white scale-105'
-            : 'bg-glass border border-glass-border  text-text-secondary hover:scale-105 hover:text-text-primary hover:border-orange-accent/40 hover:shadow-[0_0_20px_rgba(255,107,0,0.2)]'"
-          @click="activeFilter = filter"
+            ? 'bg-orange-accent border-transparent text-white scale-105 hover:border-white/40'
+            : 'bg-glass border-glass-border text-text-secondary hover:scale-105 hover:text-text-primary hover:border-orange-accent/40 hover:shadow-[0_0_20px_rgba(255,107,0,0.2)]'"
+          @click="toggleFilter(filter)"
         >
           {{ $t(`projects.types.${filter}`) }}
         </button>
@@ -46,13 +46,19 @@
 
 <script setup lang="ts">
 const projectsData = useProjectsData()
-const activeFilter = ref('all')
+const activeFilter = ref<string | null>(null)
 const currentYear = new Date().getFullYear()
 const filters = ['all', 'epitech', 'personal', 'hackathon', 'jam']
 
-const filteredProjects = computed(() =>
-  activeFilter.value === 'all' ? projectsData : projectsData.filter(p => p.type === activeFilter.value)
-)
+function toggleFilter(filter: string) {
+  activeFilter.value = activeFilter.value === filter ? null : filter
+}
+
+const filteredProjects = computed(() => {
+  if (activeFilter.value === null) return projectsData.filter(p => p.featured)
+  if (activeFilter.value === 'all') return projectsData
+  return projectsData.filter(p => p.type === activeFilter.value)
+})
 
 const groupedByYear = computed(() => {
   const groups = new Map<number, typeof projectsData>()

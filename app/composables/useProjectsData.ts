@@ -4,6 +4,7 @@ export interface Project {
   type: 'personal' | 'epitech' | 'hackathon' | 'jam'
   year: number
   current?: boolean
+  featured?: boolean
   github?: string
   liveUrl?: string
 }
@@ -16,6 +17,7 @@ export function useProjectsData(): Project[] {
       type: 'epitech',
       year: 2026,
       current: true,
+      featured: true,
     },
     {
       key: 'LoCode',
@@ -23,6 +25,7 @@ export function useProjectsData(): Project[] {
       type: 'personal',
       year: 2026,
       current: true,
+      featured: true,
       github: 'https://github.com/Vierre3/LoCode',
       liveUrl: 'https://locode.vierre3.dev/',
     },
@@ -31,6 +34,7 @@ export function useProjectsData(): Project[] {
       techTags: ['Godot', 'GDScript', 'Game Design'],
       type: 'jam',
       year: 2026,
+      featured: true,
       github: 'https://github.com/flav-code/game-jam-five-minutes',
     },
     {
@@ -38,6 +42,7 @@ export function useProjectsData(): Project[] {
       techTags: ['C++', 'SFML', 'ECS', 'Networking'],
       type: 'epitech',
       year: 2025,
+      featured: true,
       github: 'https://github.com/Vierre3/R-Type',
     },
     {
@@ -57,6 +62,7 @@ export function useProjectsData(): Project[] {
       techTags: ['Haskell', 'Compiler', 'Bytecode VM'],
       type: 'epitech',
       year: 2025,
+      featured: true,
       github: 'https://github.com/Vierre3/Glados',
     },
     {
@@ -109,6 +115,7 @@ export function useProjectsData(): Project[] {
       techTags: ['Node.js', 'Nuxt', 'AI', 'Real-time'],
       type: 'hackathon',
       year: 2025,
+      featured: true,
       github: 'https://github.com/AxiomePro/vueling-hackathon-ai',
     },
     {
@@ -122,6 +129,7 @@ export function useProjectsData(): Project[] {
       techTags: ['C', 'UNIX', 'Parsing', 'System Programming'],
       type: 'epitech',
       year: 2024,
+      featured: true,
       github: 'https://github.com/Vierre3/42sh',
     },
     {
@@ -136,6 +144,7 @@ export function useProjectsData(): Project[] {
       techTags: ['Godot', 'GDScript', 'Game Design'],
       type: 'jam',
       year: 2024,
+      featured: true,
       github: 'https://github.com/AxiomePro/FlameYourMind',
     },
     {
@@ -143,6 +152,7 @@ export function useProjectsData(): Project[] {
       techTags: ['Godot', 'GDScript', 'Game Design'],
       type: 'jam',
       year: 2024,
+      featured: true,
       github: 'https://github.com/AxiomePro/RobbersAndCat',
     },
   ]
