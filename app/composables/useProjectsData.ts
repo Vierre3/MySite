@@ -34,18 +34,17 @@ export function useProjectsData(): Project[] {
       github: 'https://github.com/flav-code/game-jam-five-minutes',
     },
     {
-      key: 'Glados',
-      techTags: ['Haskell', 'Compiler', 'Bytecode VM'],
-      type: 'epitech',
-      year: 2025,
-      github: 'https://github.com/Vierre3/Glados',
-    },
-    {
       key: 'R-Type',
       techTags: ['C++', 'SFML', 'ECS', 'Networking'],
       type: 'epitech',
       year: 2025,
       github: 'https://github.com/Vierre3/R-Type',
+    },
+    {
+      key: 'Gomoku',
+      techTags: ['C++', 'Game AI', 'Strategy'],
+      type: 'epitech',
+      year: 2025,
     },
     {
       key: 'Neural Network',
@@ -54,14 +53,21 @@ export function useProjectsData(): Project[] {
       year: 2025,
     },
     {
+      key: 'Glados',
+      techTags: ['Haskell', 'Compiler', 'Bytecode VM'],
+      type: 'epitech',
+      year: 2025,
+      github: 'https://github.com/Vierre3/Glados',
+    },
+    {
       key: 'Cryptography',
       techTags: ['Python', 'AES', 'RSA', 'PGP'],
       type: 'epitech',
       year: 2025,
     },
     {
-      key: 'Gomoku',
-      techTags: ['C++', 'Game AI', 'Strategy'],
+      key: 'Zappy',
+      techTags: ['C', 'C++', 'Python', 'Raylib', 'Networking'],
       type: 'epitech',
       year: 2025,
     },
@@ -71,12 +77,6 @@ export function useProjectsData(): Project[] {
       type: 'jam',
       year: 2025,
       github: 'https://github.com/azeloup/LostInSpace',
-    },
-    {
-      key: 'Zappy',
-      techTags: ['C', 'C++', 'Python', 'Raylib', 'Networking'],
-      type: 'epitech',
-      year: 2025,
     },
     {
       key: 'Raytracer',
