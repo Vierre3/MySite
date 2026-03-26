@@ -118,11 +118,28 @@ function handleMove() {
 const { isRestoring } = useScrollRestore()
 
 onMounted(() => {
-  instances.add(handleMove)
   if (containerRef.value) {
     for (const [k, v] of [['--glow-x', '0px'], ['--glow-y', '0px'], ['--glow-radius', '0px'], ['--active', '0']] as const)
       containerRef.value.style.setProperty(k, v)
   }
+
+  // Only track pointer when card is visible in viewport
+  let visible = false
+  const io = new IntersectionObserver(([e]) => {
+    const nowVisible = !!e?.isIntersecting
+    if (nowVisible && !visible) instances.add(handleMove)
+    if (!nowVisible && visible) {
+      instances.delete(handleMove)
+      if (frameId) { cancelAnimationFrame(frameId); frameId = 0 }
+      if (anim) { anim.stop(); anim = null }
+      glowActive.value = false
+      containerRef.value?.style.setProperty('--active', '0')
+    }
+    visible = nowVisible
+  }, { rootMargin: '50px' })
+
+  const parent = containerRef.value?.closest('.relative') || containerRef.value
+  if (parent) io.observe(parent)
 
   if (isRestoring.value) {
     const stop = watch(isRestoring, (r) => {
@@ -135,6 +152,11 @@ onMounted(() => {
     })
   } else { handleMove() }
 
-  onUnmounted(() => { if (frameId) cancelAnimationFrame(frameId); if (anim) anim.stop(); instances.delete(handleMove) })
+  onUnmounted(() => {
+    io.disconnect()
+    if (frameId) cancelAnimationFrame(frameId)
+    if (anim) anim.stop()
+    instances.delete(handleMove)
+  })
 })
 </script>

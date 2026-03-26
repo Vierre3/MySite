@@ -29,8 +29,8 @@
 
         <!-- Right side -->
         <div class="flex items-center gap-3">
-          <ThemeToggle :show-text="mobileOpen" />
-          <LanguageToggle :show-text="mobileOpen" />
+          <ThemeToggle :show-text="mobileOpen && hasToggleSpace" />
+          <LanguageToggle :show-text="mobileOpen && hasToggleSpace" />
           <!-- Mobile hamburger -->
           <button
             class="md:hidden w-6 h-6 text-text-secondary hover:text-text-primary hover:scale-105 active:scale-95 transition-all cursor-pointer"
@@ -61,12 +61,12 @@
     <div class="relative mt-16 mx-4 mobile-menu-panel">
 
       <!-- Nav background strip — animates with panel as one block -->
-      <div class="absolute -top-16 -left-4 -right-4 h-16 z-[100] bg-dark-bg" />
+      <div class="absolute -top-16 -left-4 -right-4 h-16 z-[100] bg-dark-bg transition-[background-color] duration-300" />
 
       <!-- Inverted concave corners -->
-      <div class="absolute -top-[0.18rem] -left-4 w-5 h-5 z-[100] inverted-corner-left" />
-      <div class="absolute -top-[0.18rem] -right-4 w-5 h-5 z-[100] inverted-corner-right" />
-      <div class="bg-dark-bg border border-glass-border rounded-b-2xl overflow-hidden border-t-0" style="box-shadow: 0 20px 40px -10px rgba(0,0,0,0.4), 8px 10px 20px -8px rgba(0,0,0,0.3), -8px 10px 20px -8px rgba(0,0,0,0.3)">
+      <div class="absolute -top-[0.18rem] -left-4 w-5 h-5 z-[100] inverted-corner" style="--x:0%" />
+      <div class="absolute -top-[0.18rem] -right-4 w-5 h-5 z-[100] inverted-corner" style="--x:100%" />
+      <div class="bg-dark-bg border border-glass-border border-t-0 rounded-b-2xl overflow-hidden transition-[background-color,border-color] duration-300" style="box-shadow: 0 20px 40px -10px rgba(0,0,0,0.4), 8px 10px 20px -8px rgba(0,0,0,0.3), -8px 10px 20px -8px rgba(0,0,0,0.3)">
         <div class="p-4 space-y-1 overflow-y-auto max-h-[calc(100vh-5rem)]">
           <button
             v-for="section in sections"
@@ -99,6 +99,11 @@ const mobileVisible = ref(false)
 const scrolled = ref(false)
 const activeSection = ref('')
 const { scrollToSection } = useSmoothScroll()
+const hasToggleSpace = ref(true)
+
+function checkToggleSpace() {
+  hasToggleSpace.value = window.innerWidth >= 300
+}
 
 watch(mobileOpen, (open) => {
   document.body.style.overflow = open ? 'hidden' : ''
@@ -130,13 +135,18 @@ const onScroll = () => {
 }
 
 onMounted(() => {
+  checkToggleSpace()
+  window.addEventListener('resize', checkToggleSpace, { passive: true })
   window.addEventListener('scroll', onScroll, { passive: true })
   // Detect active section after scroll restore completes
   const { isRestoring } = useScrollRestore()
   if (isRestoring.value) {
     const stop = watch(isRestoring, (r) => { if (!r) { onScroll(); stop() } })
   } else { nextTick(onScroll) }
-  onUnmounted(() => window.removeEventListener('scroll', onScroll))
+  onUnmounted(() => {
+    window.removeEventListener('resize', checkToggleSpace)
+    window.removeEventListener('scroll', onScroll)
+  })
 })
 </script>
 
@@ -215,8 +225,6 @@ nav::before {
   position: absolute;
   inset: 0;
   background: linear-gradient(to bottom, var(--nav-bg-top), var(--nav-bg-bottom));
-  /* backdrop-filter: blur(0px);
-  -webkit-backdrop-filter: blur(0px); */
   opacity: 0;
   transition: opacity 500ms ease, backdrop-filter 500ms ease, -webkit-backdrop-filter 500ms ease, --nav-bg-top 300ms ease, --nav-bg-bottom 300ms ease;
   z-index: -1;
@@ -257,14 +265,7 @@ html.scrolled nav::before {
   --corner-border: color-mix(in srgb, rgb(var(--opposite)) 10%, rgb(var(--dark-bg)));
 }
 
-.inverted-corner-left,
-.inverted-corner-right {
-  transition: --nav-bg-top 300ms ease, --corner-border 300ms ease;
-}
-.inverted-corner-left {
-  background: radial-gradient(circle at 0% 100%, transparent 1rem, var(--corner-border) 1rem, var(--corner-border) calc(1rem + 1px), var(--nav-bg-top) calc(1rem + 1px));
-}
-.inverted-corner-right {
-  background: radial-gradient(circle at 100% 100%, transparent 1rem, var(--corner-border) 1rem, var(--corner-border) calc(1rem + 1px), var(--nav-bg-top) calc(1rem + 1px));
+.inverted-corner {
+  background: radial-gradient(circle at var(--x) 100%, transparent 1rem, var(--corner-border) 1rem, var(--corner-border) calc(1rem + 1px), var(--nav-bg-top) calc(1rem + 1px));
 }
 </style>

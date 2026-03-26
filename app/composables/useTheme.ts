@@ -19,7 +19,12 @@ export function useTheme() {
 
   function toggleTheme() {
     theme.value = theme.value === 'dark' ? 'light' : 'dark'
-    if (import.meta.client) { localStorage.setItem('theme', theme.value); applyTheme(theme.value) }
+    if (import.meta.client) {
+      localStorage.setItem('theme', theme.value)
+      document.documentElement.classList.add('theme-switching')
+      applyTheme(theme.value)
+      setTimeout(() => document.documentElement.classList.remove('theme-switching'), 350)
+    }
   }
 
   return { theme: readonly(theme), toggleTheme }

@@ -56,7 +56,7 @@ useHead({
   --glass: rgba(255, 255, 255, 0.05);
   --glass-hover: rgba(255, 255, 255, 0.08);
   --glass-border: rgba(255, 255, 255, 0.1);
-  --opposite: 255 255 255;
+  --opposite: 245 245 247;
   --dark-bg: 10 10 26;
   --text-primary: 240 240 245;
   --text-secondary: 160 160 184;
@@ -70,7 +70,7 @@ useHead({
   --glass: rgba(0, 0, 0, 0.05);
   --glass-hover: rgba(0, 0, 0, 0.08);
   --glass-border: rgba(0, 0, 0, 0.1);
-  --opposite: 0 0 0;
+  --opposite: 10 10 26;
   --dark-bg: 245 245 247;
   --text-primary: 26 26 46;
   --text-secondary: 85 85 112;
@@ -81,9 +81,12 @@ html {
   background-color: rgb(var(--dark-bg));
 }
 
-/* Theme transition — excludes pseudo-elements (glow effect, decorative borders) */
-* {
+/* Theme transition — only active during theme switch to avoid permanent GPU overhead */
+html.theme-switching * {
   transition: color 300ms ease, background-color 300ms ease, border-color 300ms ease, fill 300ms ease, stroke 300ms ease;
+}
+html.theme-switching .inverted-corner {
+  transition: --nav-bg-top 300ms ease, --corner-border 300ms ease;
 }
 
 body {

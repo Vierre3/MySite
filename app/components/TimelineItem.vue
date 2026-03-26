@@ -1,5 +1,5 @@
 <template>
-  <div class="relative flex gap-6 md:gap-10">
+  <div class="relative flex gap-2 sm:gap-6 md:gap-10 min-w-0">
     <!-- Timeline dot & line -->
     <div class="flex flex-col items-center">
       <div class="w-4 h-4 rounded-full bg-orange-accent border-4 border-dark-bg shadow-[0_0_15px_rgba(255,107,0,0.4)] z-10 shrink-0" />
@@ -7,17 +7,17 @@
     </div>
 
     <!-- Content -->
-    <div class="pb-12 flex-1">
+    <div class="pb-12 flex-1 min-w-0">
       <UiGlassCard hover class="p-6">
         <div class="mb-4">
           <h3 class="text-lg font-semibold text-text-primary">
             {{ $t(`experience.${entryKey}.role`) }}
           </h3>
-          <div class="flex justify-between items-start gap-2">
+          <div class="flex flex-wrap justify-between items-start gap-x-4 gap-y-1">
             <p class="text-orange-accent font-medium">
               {{ $t(`experience.${entryKey}.company`) }}
             </p>
-            <div class="flex items-center gap-2 translate-y-2 mb-2 sm:translate-y-0 sm:mb-0 sm:-mt-6">
+            <div class="flex flex-wrap items-center gap-2 translate-y-2 mb-2 sm:translate-y-0 sm:mb-0 sm:-mt-6">
               <span
                 v-if="current"
                 class="text-xs px-2 py-1 rounded-full bg-orange-accent/20 border border-orange-accent/40 text-orange-accent font-medium whitespace-nowrap"

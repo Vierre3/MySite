@@ -27,7 +27,7 @@
           </div>
 
           <!-- Stats -->
-          <div class="grid grid-cols-3 gap-6 mt-10 pt-8 border-t border-glass-border">
+          <div class="grid grid-cols-1 min-[333px]:grid-cols-3 gap-6 mt-10 pt-8 border-t border-glass-border">
             <StatCard
               :value="$t('about.stats.languagesCount')"
               :label="$t('about.stats.languages')"

@@ -1,7 +1,7 @@
 <template>
   <UiGlassCard hover class="p-6 h-full flex flex-col group">
     <!-- Header -->
-    <div class="flex items-start justify-between mb-3">
+    <div class="flex flex-wrap items-start justify-between gap-2 mb-3">
       <div class="flex items-center gap-2">
         <span class="text-orange-accent font-bold text-lg select-none">/</span>
         <h3 class="text-lg font-semibold text-text-primary">
@@ -28,7 +28,7 @@
           <Icon name="mdi:rocket-launch-outline" class="w-4 h-4 mt-1.5" />
         </a>
       </div>
-      <div class="flex items-center gap-2">
+      <div class="flex flex-wrap items-center gap-2">
         <span
           v-if="project.current"
           class="text-xs px-2 py-1 rounded-full bg-orange-accent/20 border border-orange-accent/40 text-orange-accent font-medium whitespace-nowrap"
