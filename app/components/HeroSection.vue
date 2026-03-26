@@ -1,5 +1,5 @@
 <template>
-  <section id="hero" class="relative min-h-[calc(100vh-3rem)] flex items-center justify-center px-4 overflow-hidden">
+  <section id="hero" class="relative min-h-[calc(100vh-3rem)] flex items-center justify-center px-4 py-24 overflow-hidden">
     <!-- Globe background -->
     <!-- <GlobeCanvas /> -->
 
