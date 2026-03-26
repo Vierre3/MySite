@@ -102,7 +102,7 @@ const { scrollToSection } = useSmoothScroll()
 const hasToggleSpace = ref(true)
 
 function checkToggleSpace() {
-  hasToggleSpace.value = window.innerWidth >= 300
+  hasToggleSpace.value = window.innerWidth >= 305
 }
 
 watch(mobileOpen, (open) => {
@@ -159,7 +159,7 @@ onMounted(() => {
     transform: translateX(-50%);
   }
   /* When viewport is too narrow for absolute centering, fall back to flex */
-  @media (max-width: 900px) {
+  @media (max-width: 888px) {
     .nav-links {
       position: static;
       transform: none;
