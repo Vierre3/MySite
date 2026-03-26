@@ -20,7 +20,7 @@
           <span class="font-mono text-lg md:text-xl font-semibold text-orange-accent">
             {{ $t('hero.title') }}
           </span>
-          <span class="terminal-cursor w-2 h-4 bg-orange-accent inline-block rounded-[1px] ml-1" />
+          <span class="terminal-cursor w-[9px] h-[18px] bg-orange-accent inline-block rounded-[1px] ml-1 align-[-2px]" />
         </div>
       </div>
 
