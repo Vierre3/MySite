@@ -15,12 +15,12 @@
       </h1>
 
       <!-- Title -->
-      <div class="hero-fade flex items-center justify-center mb-3" style="--delay: 0.4s;">
-        <div class="terminal-box inline-flex items-center gap-1 px-3 py-1.5 border border-orange-accent/50 rounded-md bg-orange-accent/10">
+      <div class="hero-fade mb-3" style="--delay: 0.4s;">
+        <div ref="terminalBox" class="terminal-box text-center px-3 py-1.5 border border-orange-accent/50 rounded-md bg-orange-accent/10 mx-auto">
           <span class="font-mono text-lg md:text-xl font-semibold text-orange-accent">
             {{ $t('hero.title') }}
           </span>
-          <span class="terminal-cursor w-2 h-4 bg-orange-accent inline-block rounded-[1px]" />
+          <span class="terminal-cursor w-2 h-4 bg-orange-accent inline-block rounded-[1px] ml-1" />
         </div>
       </div>
 
@@ -58,6 +58,29 @@
 
 <script setup lang="ts">
 const { scrollToSection } = useSmoothScroll()
+
+const terminalBox = ref<HTMLElement>()
+
+function fitTerminalBox() {
+  const el = terminalBox.value
+  if (!el) return
+  el.style.width = ''
+  const originalHeight = el.offsetHeight
+  let tooNarrow = 0, fits = el.offsetWidth
+  while (fits - tooNarrow > 1) {
+    const test = (tooNarrow + fits) / 2
+    el.style.width = test + 'px'
+    if (el.offsetHeight > originalHeight) tooNarrow = test
+    else fits = test
+  }
+  el.style.width = Math.ceil(fits) + 'px'
+}
+
+onMounted(() => { nextTick(fitTerminalBox) })
+if (import.meta.client) {
+  window.addEventListener('resize', fitTerminalBox)
+  onUnmounted(() => window.removeEventListener('resize', fitTerminalBox))
+}
 
 async function downloadResume() {
   const blob = new Blob([await (await fetch('/resume.pdf')).arrayBuffer()], { type: 'application/octet-stream' })
