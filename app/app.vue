@@ -93,6 +93,7 @@ body {
   overflow-x: hidden;
 }
 
+
 /* When restoring scroll position, skip all entrance animations */
 .skip-animations .scroll-reveal {
   opacity: 1 !important;

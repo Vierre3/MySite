@@ -3,11 +3,16 @@
     class="fixed top-0 left-0 right-0 border-b nav-transitions"
     :class="[mobileVisible ? 'z-[70]' : 'z-50', mobileVisible && mobileOpen ? 'menu-open' : { 'menu-closing': mobileVisible }, scrolled && !mobileOpen ? 'nav-scrolled' : 'border-transparent']"
   >
+    <!-- Scroll progress bar — width driven by --scroll-progress CSS variable (set in pre-hydration hook + onScroll) -->
+    <div class="pointer-events-none duration-500 gpu-layer" :class="{ 'bg-text-secondary/15': scrolled }">
+      <div class="scroll-progress-bar h-[3px] bg-orange-light rounded-r-full" />
+    </div>
+
     <div class="max-w-6xl mx-auto px-4 lg:px-8">
       <div class="flex items-center justify-between h-16">
         <!-- Logo -->
         <button
-          class="text-lg font-bold text-text-primary cursor-pointer hover:text-orange-accent hover:scale-105 active:scale-95 transition-all"
+          class="text-lg font-bold text-text-primary cursor-pointer hover:text-orange-accent hover:scale-105 active:scale-95 transition-all gpu-layer"
           @click="scrollToSection('hero')"
         >
           <span class="text-orange-accent">&lt;</span>PY<span class="text-orange-accent">/&gt;</span>
@@ -33,7 +38,7 @@
           <LanguageToggle :show-text="mobileOpen && hasToggleSpace" />
           <!-- Mobile hamburger -->
           <button
-            class="md:hidden w-6 h-6 text-text-secondary hover:text-text-primary hover:scale-105 active:scale-95 transition-all cursor-pointer"
+            class="md:hidden w-6 h-6 text-text-secondary hover:text-text-primary hover:scale-105 active:scale-95 transition-all cursor-pointer gpu-layer"
             :aria-label="mobileOpen ? $t('nav.closeMenu') : $t('nav.openMenu')"
             @click="mobileOpen = !mobileOpen"
           >
@@ -42,9 +47,6 @@
         </div>
       </div>
     </div>
-
-    <!-- Scroll progress bar — width driven by --scroll-progress CSS variable (set in pre-hydration hook + onScroll) -->
-    <div class="scroll-progress-bar absolute bottom-0 left-0 h-0.5 pointer-events-none bg-orange-accent/50 rounded-r-full" />
   </nav>
 
   <!-- Mobile Menu - Teleported outside nav to avoid clipping -->
@@ -123,8 +125,12 @@ const onScroll = () => {
   const y = window.scrollY, h = window.innerHeight
   const docHeight = document.documentElement.scrollHeight - h
   scrolled.value = y > 0
-  document.documentElement.style.setProperty('--scroll-progress', (Math.min(y / docHeight, 1) * 100) + '%')
+  const progress = docHeight > 0 ? Math.min(Math.max(y, 0) / docHeight, 1) : 0
+  document.documentElement.style.setProperty('--scroll-progress', (progress * 100) + '%')
+  document.documentElement.classList.toggle('scroll-full', progress >= 1)
   document.documentElement.classList.toggle('scrolled', scrolled.value)
+
+
 
   // Top of page — no active section
   if (y < h * 0.3) { activeSection.value = ''; return }
@@ -252,6 +258,16 @@ html.scrolled nav, .nav-scrolled {
 
 .scroll-progress-bar {
   width: var(--scroll-progress, 0%);
+  transition: width 50ms ease-out;
+}
+html.scroll-full .scroll-progress-bar {
+  border-radius: 0;
+}
+
+/* Force GPU compositing layer — fixes iOS Safari overscroll rendering glitch */
+.gpu-layer {
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
 }
 
 .nav-transitions {
