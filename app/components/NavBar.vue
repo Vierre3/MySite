@@ -105,7 +105,7 @@ const sectionIcons: Record<string, string> = {
 }
 const mobileOpen = ref(false)
 const mobileVisible = ref(false)
-const scrolled = ref(false)
+const scrolled = ref(import.meta.client ? document.documentElement.classList.contains('scrolled') : false)
 const activeSection = ref('')
 const { scrollToSection } = useSmoothScroll()
 const hasToggleSpace = ref(true)
@@ -124,7 +124,7 @@ function onMenuAnimationEnd() {
 }
 
 // Scroll progress for top bar
-const scrollProgress = ref(0)
+const scrollProgress = ref(import.meta.client ? Math.min(window.scrollY / (document.documentElement.scrollHeight - window.innerHeight || 1), 1) : 0)
 
 // Detect scrolled state and which section is active
 const onScroll = () => {
