@@ -4,15 +4,15 @@
     :class="[mobileVisible ? 'z-[70]' : 'z-50', mobileVisible && mobileOpen ? 'menu-open' : { 'menu-closing': mobileVisible }, scrolled && !mobileOpen ? 'nav-scrolled' : 'border-transparent']"
   >
     <!-- Scroll progress bar — width driven by --scroll-progress CSS variable (set in pre-hydration hook + onScroll) -->
-    <div class="absolute top-0 left-0 right-0 pointer-events-none duration-500 gpu-layer">
-      <div class="scroll-progress-bar h-[2px] bg-orange-accent/70 rounded-r-full" />
-    </div>
+    <div class="scroll-progress-bar absolute top-0 left-0 right-0 h-[2px] bg-orange-accent/70 rounded-r-full pointer-events-none" />
+      <!-- <div class="scroll-progress-bar h-[2px] bg-orange-accent/70 rounded-r-full" /> -->
+    <!-- </div> -->
 
     <div class="max-w-6xl mx-auto px-4 lg:px-8">
       <div class="flex items-center justify-between h-16">
         <!-- Logo -->
         <button
-          class="text-lg font-bold text-text-primary cursor-pointer hover:text-orange-accent hover:scale-105 active:scale-95 transition-all gpu-layer"
+          class="text-lg font-bold text-text-primary cursor-pointer hover:text-orange-accent hover:scale-105 active:scale-95"
           @click="scrollToSection('hero')"
         >
           <span class="text-orange-accent">&lt;</span>PY<span class="text-orange-accent">/&gt;</span>
@@ -38,7 +38,7 @@
           <LanguageToggle :show-text="mobileOpen && hasToggleSpace" />
           <!-- Mobile hamburger -->
           <button
-            class="md:hidden w-6 h-6 text-text-secondary hover:text-text-primary hover:scale-105 active:scale-95 transition-all cursor-pointer gpu-layer"
+            class="md:hidden w-6 h-6 text-text-secondary hover:text-text-primary hover:scale-105 active:scale-95 cursor-pointer"
             :aria-label="mobileOpen ? $t('nav.closeMenu') : $t('nav.openMenu')"
             @click="mobileOpen = !mobileOpen"
           >
@@ -76,7 +76,7 @@
           <button
             v-for="section in sections"
             :key="section"
-            class="flex items-center gap-3 w-full text-left group hover:bg-white/5 hover:scale-[1.02] active:scale-95 rounded-xl transition-all cursor-pointer px-5 py-4 text-lg font-medium border border-transparent hover:border-orange-accent/40"
+            class="flex items-center gap-3 w-full text-left group hover:bg-white/5 hover:scale-[1.02] active:scale-95 rounded-xl cursor-pointer px-5 py-4 text-lg font-medium border border-transparent hover:border-orange-accent/40"
             :class="activeSection === section ? 'text-orange-accent' : 'text-text-secondary hover:text-text-primary'"
             @click="scrollToSection(section); mobileOpen = false"
           >
@@ -125,12 +125,8 @@ const onScroll = () => {
   const y = window.scrollY, h = window.innerHeight
   const docHeight = document.documentElement.scrollHeight - h
   scrolled.value = y > 0
-  const progress = docHeight > 0 ? Math.min(Math.max(y, 0) / docHeight, 1) : 0
-  document.documentElement.style.setProperty('--scroll-progress', (progress * 100) + '%')
-  document.documentElement.classList.toggle('scroll-full', progress >= 1)
+  document.documentElement.style.setProperty('--scroll-progress', (Math.min(Math.max(y, 0) / docHeight, 1) * 100) + '%')
   document.documentElement.classList.toggle('scrolled', scrolled.value)
-
-
 
   // Top of page — no active section
   if (y < h * 0.3) { activeSection.value = ''; return }
@@ -250,18 +246,14 @@ html.scrolled nav::before {
   -webkit-backdrop-filter: blur(24px);
   opacity: 1;
 }
-/* Pre-hydration: apply border/shadow via html.scrolled until Vue takes over */
-html.scrolled nav, .nav-scrolled {
+/* Pre-hydration only: border/shadow via html.loading.scrolled; after mount Vue uses .nav-scrolled */
+html.loading.scrolled nav, .nav-scrolled {
   border-color: var(--glass-border);
   box-shadow: 0 10px 15px -3px var(--shadow-color), 0 4px 6px -4px var(--shadow-color);
 }
 
 .scroll-progress-bar {
   width: var(--scroll-progress, 0%);
-  transition: width 100ms ease-out;
-}
-html.scroll-full .scroll-progress-bar {
-  border-radius: 0;
 }
 
 /* Force GPU compositing layer — fixes iOS Safari overscroll rendering glitch */
