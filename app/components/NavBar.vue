@@ -4,8 +4,8 @@
     :class="[mobileVisible ? 'z-[70]' : 'z-50', mobileVisible && mobileOpen ? 'menu-open' : { 'menu-closing': mobileVisible }, scrolled && !mobileOpen ? 'nav-scrolled' : 'border-transparent']"
   >
     <!-- Scroll progress bar — width driven by --scroll-progress CSS variable (set in pre-hydration hook + onScroll) -->
-    <div class="pointer-events-none duration-500 gpu-layer" :class="{ 'bg-text-secondary/15': scrolled }">
-      <div class="scroll-progress-bar h-[3px] bg-orange-accent/70 rounded-r-full" />
+    <div class="absolute top-0 left-0 right-0 pointer-events-none duration-500 gpu-layer">
+      <div class="scroll-progress-bar h-[2px] bg-orange-accent/70 rounded-r-full" />
     </div>
 
     <div class="max-w-6xl mx-auto px-4 lg:px-8">
@@ -258,7 +258,7 @@ html.scrolled nav, .nav-scrolled {
 
 .scroll-progress-bar {
   width: var(--scroll-progress, 0%);
-  transition: width 50ms ease-out;
+  transition: width 100ms ease-out;
 }
 html.scroll-full .scroll-progress-bar {
   border-radius: 0;
