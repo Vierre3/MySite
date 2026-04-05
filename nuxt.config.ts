@@ -104,7 +104,7 @@ export default defineNuxtConfig({
       htmlAttrs: { class: 'dark' },
       script: [
         {
-          innerHTML: `(function(){try{document.documentElement.classList.add('loading');if(localStorage.getItem('theme')==='light'){document.documentElement.classList.replace('dark','light')}var s=sessionStorage.getItem('scroll-position');if(s&&parseInt(s,10)>0){document.documentElement.classList.add('scrolled');var p=parseInt(s,10);requestAnimationFrame(function(){window.scrollTo(0,p)})}}catch(e){}})()`,
+          innerHTML: `(function(){try{document.documentElement.classList.add('loading');if(localStorage.getItem('theme')==='light'){document.documentElement.classList.replace('dark','light')}var s=sessionStorage.getItem('scroll-position');if(s&&parseInt(s,10)>0){document.documentElement.classList.add('scrolled');var p=parseInt(s,10);var dh=document.documentElement.scrollHeight-window.innerHeight;if(dh>0)document.documentElement.style.setProperty('--scroll-progress',(Math.min(p/dh,1)*100)+'%');requestAnimationFrame(function(){window.scrollTo(0,p)})}}catch(e){}})()`,
           tagPosition: 'head',
         },
       ],

@@ -1,7 +1,7 @@
 <template>
   <nav
     class="fixed top-0 left-0 right-0 border-b nav-transitions"
-    :class="[mobileVisible ? 'z-[70]' : 'z-50', mobileVisible && mobileOpen ? 'menu-open' : { 'menu-closing': mobileVisible }, scrolled && !mobileOpen ? 'border-glass-border nav-scrolled' : 'border-transparent']"
+    :class="[mobileVisible ? 'z-[70]' : 'z-50', mobileVisible && mobileOpen ? 'menu-open' : { 'menu-closing': mobileVisible }, scrolled && !mobileOpen ? 'nav-scrolled' : 'border-transparent']"
   >
     <div class="max-w-6xl mx-auto px-4 lg:px-8">
       <div class="flex items-center justify-between h-16">
@@ -43,14 +43,8 @@
       </div>
     </div>
 
-    <!-- Scroll progress bar -->
-    <div class="width-full duration-500"> <!--:class="{ 'bg-text-secondary/15': scrolled }"-->
-    <div
-      class="absolute bottom-0 h-0.5 pointer-events-none bg-orange-accent/50"
-      :class="scrollProgress >= 1 ? '' : 'rounded-r-full'"
-      :style="{ width: `${scrollProgress * 100}%` }"
-    />
-    </div>
+    <!-- Scroll progress bar — width driven by --scroll-progress CSS variable (set in pre-hydration hook + onScroll) -->
+    <div class="scroll-progress-bar absolute bottom-0 left-0 h-0.5 pointer-events-none bg-orange-accent/50 rounded-r-full" />
   </nav>
 
   <!-- Mobile Menu - Teleported outside nav to avoid clipping -->
@@ -105,7 +99,7 @@ const sectionIcons: Record<string, string> = {
 }
 const mobileOpen = ref(false)
 const mobileVisible = ref(false)
-const scrolled = ref(import.meta.client ? document.documentElement.classList.contains('scrolled') : false)
+const scrolled = ref(false)
 const activeSection = ref('')
 const { scrollToSection } = useSmoothScroll()
 const hasToggleSpace = ref(true)
@@ -123,15 +117,13 @@ function onMenuAnimationEnd() {
   if (!mobileOpen.value) mobileVisible.value = false
 }
 
-// Scroll progress for top bar
-const scrollProgress = ref(import.meta.client ? Math.min(window.scrollY / (document.documentElement.scrollHeight - window.innerHeight || 1), 1) : 0)
 
 // Detect scrolled state and which section is active
 const onScroll = () => {
   const y = window.scrollY, h = window.innerHeight
   const docHeight = document.documentElement.scrollHeight - h
   scrolled.value = y > 0
-  scrollProgress.value = y / docHeight
+  document.documentElement.style.setProperty('--scroll-progress', (Math.min(y / docHeight, 1) * 100) + '%')
   document.documentElement.classList.toggle('scrolled', scrolled.value)
 
   // Top of page — no active section
@@ -152,11 +144,13 @@ onMounted(() => {
   checkToggleSpace()
   window.addEventListener('resize', checkToggleSpace, { passive: true })
   window.addEventListener('scroll', onScroll, { passive: true })
-  // Detect active section after scroll restore completes
+  // Run onScroll immediately to pick up current scroll position
+  onScroll()
+  // Also wait for scroll restore to complete for accurate active section
   const { isRestoring } = useScrollRestore()
   if (isRestoring.value) {
     const stop = watch(isRestoring, (r) => { if (!r) { onScroll(); stop() } })
-  } else { nextTick(onScroll) }
+  }
   onUnmounted(() => {
     window.removeEventListener('resize', checkToggleSpace)
     window.removeEventListener('scroll', onScroll)
@@ -250,8 +244,14 @@ html.scrolled nav::before {
   -webkit-backdrop-filter: blur(24px);
   opacity: 1;
 }
-.nav-scrolled {
+/* Pre-hydration: apply border/shadow via html.scrolled until Vue takes over */
+html.scrolled nav, .nav-scrolled {
+  border-color: var(--glass-border);
   box-shadow: 0 10px 15px -3px var(--shadow-color), 0 4px 6px -4px var(--shadow-color);
+}
+
+.scroll-progress-bar {
+  width: var(--scroll-progress, 0%);
 }
 
 .nav-transitions {

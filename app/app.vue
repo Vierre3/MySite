@@ -107,7 +107,6 @@ body {
 
 /* Pre-hydration only: prevent scroll-reveal opacity:0 flash before Vue mounts */
 html.loading.scrolled .scroll-reveal {
-  opacity: 1 !important;
   transform: none !important;
   transition: none !important;
 }
