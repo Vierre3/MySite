@@ -255,7 +255,7 @@ html.loading.scrolled nav, .nav-scrolled {
 }
 
 @keyframes scroll-progress {
-  to { width: 100%; }
+  100% { width: 100%; border-radius: 0; }
 }
 
 /* Force GPU compositing layer — fixes iOS Safari overscroll rendering glitch */
