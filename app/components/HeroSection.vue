@@ -30,7 +30,7 @@
       </p>
 
       <!-- Tagline -->
-      <p class="hero-fade text-base md:text-lg max-w-xl mx-auto mb-10 text-text-secondary/80" style="--delay: 0.8s;">
+      <p class="hero-fade text-base md:text-lg max-w-xl mx-auto mb-10 text-text-secondary/70" style="--delay: 0.8s;">
         {{ $t('hero.tagline') }}
       </p>
 

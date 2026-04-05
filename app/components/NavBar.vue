@@ -5,7 +5,7 @@
   >
     <!-- Scroll progress bar — width driven by --scroll-progress CSS variable (set in pre-hydration hook + onScroll) -->
     <div class="pointer-events-none duration-500 gpu-layer" :class="{ 'bg-text-secondary/15': scrolled }">
-      <div class="scroll-progress-bar h-[3px] bg-orange-light rounded-r-full" />
+      <div class="scroll-progress-bar h-[3px] bg-orange-accent/70 rounded-r-full" />
     </div>
 
     <div class="max-w-6xl mx-auto px-4 lg:px-8">
