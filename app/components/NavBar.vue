@@ -4,9 +4,7 @@
     :class="[mobileVisible ? 'z-[70]' : 'z-50', mobileVisible && mobileOpen ? 'menu-open' : { 'menu-closing': mobileVisible }, scrolled && !mobileOpen ? 'nav-scrolled' : 'border-transparent']"
   >
     <!-- Scroll progress bar — width driven by --scroll-progress CSS variable (set in pre-hydration hook + onScroll) -->
-    <div class="scroll-progress-bar absolute top-0 left-0 right-0 h-[2px] bg-orange-accent/70 rounded-r-full pointer-events-none" />
-      <!-- <div class="scroll-progress-bar h-[2px] bg-orange-accent/70 rounded-r-full" /> -->
-    <!-- </div> -->
+    <div class="scroll-progress-bar absolute top-0 left-0 h-[2px] bg-orange-accent/70 rounded-r-full pointer-events-none" />
 
     <div class="max-w-6xl mx-auto px-4 lg:px-8">
       <div class="flex items-center justify-between h-16">
@@ -123,9 +121,7 @@ function onMenuAnimationEnd() {
 // Detect scrolled state and which section is active
 const onScroll = () => {
   const y = window.scrollY, h = window.innerHeight
-  const docHeight = document.documentElement.scrollHeight - h
   scrolled.value = y > 0
-  document.documentElement.style.setProperty('--scroll-progress', (Math.min(Math.max(y, 0) / docHeight, 1) * 100) + '%')
   document.documentElement.classList.toggle('scrolled', scrolled.value)
 
   // Top of page — no active section
@@ -253,7 +249,13 @@ html.loading.scrolled nav, .nav-scrolled {
 }
 
 .scroll-progress-bar {
-  width: var(--scroll-progress, 0%);
+  width: 0%;
+  animation: scroll-progress linear forwards;
+  animation-timeline: scroll(root);
+}
+
+@keyframes scroll-progress {
+  to { width: 100%; }
 }
 
 /* Force GPU compositing layer — fixes iOS Safari overscroll rendering glitch */
