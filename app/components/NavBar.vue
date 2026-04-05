@@ -1,7 +1,7 @@
 <template>
   <nav
     class="fixed top-0 left-0 right-0 border-b nav-transitions"
-    :class="[mobileVisible ? 'z-[70]' : 'z-50', mobileVisible && mobileOpen ? 'menu-open' : mobileVisible ? 'menu-closing' : '', scrolled && !mobileOpen ? 'border-glass-border nav-scrolled' : 'border-transparent']"
+    :class="[mobileVisible ? 'z-[70]' : 'z-50', mobileVisible && mobileOpen ? 'menu-open' : { 'menu-closing': mobileVisible }, scrolled && !mobileOpen ? 'border-glass-border nav-scrolled' : 'border-transparent']"
   >
     <div class="max-w-6xl mx-auto px-4 lg:px-8">
       <div class="flex items-center justify-between h-16">
@@ -41,6 +41,15 @@
           </button>
         </div>
       </div>
+    </div>
+
+    <!-- Scroll progress bar -->
+    <div class="width-full duration-500"> <!--:class="{ 'bg-text-secondary/15': scrolled }"-->
+    <div
+      class="absolute bottom-0 h-0.5 pointer-events-none bg-orange-accent/50"
+      :class="scrollProgress >= 1 ? '' : 'rounded-r-full'"
+      :style="{ width: `${scrollProgress * 100}%` }"
+    />
     </div>
   </nav>
 
@@ -114,10 +123,15 @@ function onMenuAnimationEnd() {
   if (!mobileOpen.value) mobileVisible.value = false
 }
 
+// Scroll progress for top bar
+const scrollProgress = ref(0)
+
 // Detect scrolled state and which section is active
 const onScroll = () => {
   const y = window.scrollY, h = window.innerHeight
-  scrolled.value = y > 1
+  const docHeight = document.documentElement.scrollHeight - h
+  scrolled.value = y > 0
+  scrollProgress.value = y / docHeight
   document.documentElement.classList.toggle('scrolled', scrolled.value)
 
   // Top of page — no active section
