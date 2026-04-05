@@ -3,7 +3,7 @@
     class="fixed top-0 left-0 right-0 border-b nav-transitions"
     :class="[mobileVisible ? 'z-[70]' : 'z-50', mobileVisible && mobileOpen ? 'menu-open' : { 'menu-closing': mobileVisible }, scrolled && !mobileOpen ? 'nav-scrolled' : 'border-transparent']"
   >
-    <!-- Scroll progress bar — width driven by --scroll-progress CSS variable (set in pre-hydration hook + onScroll) -->
+    <!-- Scroll progress bar — width driven by CSS -->
     <div class="scroll-progress-bar absolute top-0 left-0 h-[2px] bg-orange-accent/70 rounded-r-full pointer-events-none" />
 
     <div class="max-w-6xl mx-auto px-4 lg:px-8">

@@ -44,6 +44,7 @@ const glowActive = ref(false)
 let frameId = 0
 let anim: ReturnType<typeof animate> | null = null
 let curX = 0, curY = 0
+let skipNextAnim = false
 
 const containerStyle = computed(() => ({
   '--blur': `${props.blur}px`,
@@ -103,8 +104,17 @@ function handleMove() {
 
     // Animate glow position for smooth movement along the border
     el.style.setProperty('--glow-radius', `${props.spread * (0.05 + 0.95 * t)}px`)
-    const sx = curX, sy = curY
     if (anim) anim.stop()
+
+    // On refresh/restore, snap instantly — no visible animation
+    if (skipNextAnim) {
+      skipNextAnim = false
+      curX = gx; curY = gy
+      el.style.setProperty('--glow-x', `${curX}px`); el.style.setProperty('--glow-y', `${curY}px`)
+      return
+    }
+
+    const sx = curX, sy = curY
     anim = animate(0, 1, {
       duration: props.movementDuration, ease: [0.16, 1, 0.3, 1],
       onUpdate: (p: number) => {
@@ -146,6 +156,7 @@ onMounted(() => {
       if (!r) {
         const saved = sessionStorage.getItem(CURSOR_KEY)
         if (saved) { const [x, y] = saved.split(','); cursor.vx = Number(x) - window.scrollX; cursor.vy = Number(y) - window.scrollY }
+        skipNextAnim = true
         requestAnimationFrame(() => handleMove())
       }
       stop()
