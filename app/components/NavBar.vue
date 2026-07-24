@@ -22,7 +22,7 @@
             <span v-if="index > 0" class="text-orange-accent text-glass-border select-none">|</span>
             <button
               class="text-sm transition-all cursor-pointer whitespace-nowrap"
-              :class="activeSection === section ? 'text-orange-accent font-medium scale-110' : 'text-text-secondary hover:text-text-primary hover:scale-105 focus:text-text-primary focus:scale-105'"
+              :class="activeSection === section ? 'text-orange-accent font-medium scale-110' : 'text-text-secondary hover:text-text-primary hover:scale-105 focus-visible:text-text-primary focus-visible:scale-105'"
               @click="scrollToSection(section)"
             >
               {{ $t(`${section}.title`) }}

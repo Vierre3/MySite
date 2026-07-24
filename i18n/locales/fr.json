@@ -16,7 +16,7 @@
   },
   "about": {
     "title": "À Propos",
-    "bio": "Je suis étudiant en 3ème année à Epitech Paris, basé dans les Hauts-de-Seine. Passionné par le développement logiciel full-stack — de l'écriture de shells UNIX en C à la création d'applications web en temps réel avec Nuxt et Vue, j'aime relever des défis complexes et concevoir des solutions propres et efficaces. J'ai acquis une expérience professionnelle à travers deux stages chez Naitways, où j'ai développé des outils Python pour la cybersécurité et l'automatisation d'infrastructure.",
+    "bio": "Je suis étudiant en 3ème année à Epitech Paris, basé dans les Hauts-de-Seine. Passionné par le développement logiciel full-stack — de l'écriture de shells UNIX en C à la création d'applications web en temps réel avec Nuxt et Vue, j'aime relever des défis complexes et concevoir des solutions propres et efficaces. J'ai acquis une expérience professionnelle à travers trois stages chez Naitways, où j'ai développé des outils Python pour la cybersécurité et l'automatisation d'infrastructure.",
     "stats": {
       "languages": "Langages",
       "languagesCount": "10+",
@@ -50,18 +50,8 @@
         "Français / Espagnol bilingue"
       ]
     },
-    "naitways1": {
-      "role": "Développeur Logiciel Stagiaire (Temps partiel)",
-      "company": "Naitways",
-      "date": "Oct 2025 - Fév 2026",
-      "items": [
-        "Interrogation de la base de données interne via API REST afin de générer et envoyer un rapport de durcissement aux clients",
-        "Travail sur la NBOX - un satellite déployé sur les serveurs clients pour l'auto-configuration et la gestion des VMs",
-        "Développement d'outils d'automatisation en Python pour la gestion d'infrastructure"
-      ]
-    },
-    "naitways2": {
-      "role": "Développeur Logiciel Stagiaire (Temps plein)",
+    "naitways": {
+      "role": "Développeur Logiciel Stagiaire",
       "company": "Naitways",
       "date": "Août 2024 - Déc 2024",
       "items": [
@@ -72,6 +62,29 @@
         "Création d'un générateur de notes de version Flask à partir des commits GitLab",
         "Développement d'intégrations réseau (Juniper, LibreNMS, Wazuh)",
         "Création d'un outil de documentation de code par IA utilisant Ollama (LLM local)"
+      ]
+    },
+    "naitways2": {
+      "role": "Développeur Logiciel Stagiaire (Temps partiel)",
+      "company": "Naitways",
+      "date": "Oct 2025 - Fév 2026",
+      "items": [
+        "Interrogation de la base de données interne via API REST afin de générer et envoyer un rapport de durcissement aux clients",
+        "Travail sur la NBOX - un satellite déployé sur les serveurs clients pour l'auto-configuration et la gestion des VMs",
+        "Développement d'outils d'automatisation en Python pour la gestion d'infrastructure"
+      ]
+    },
+    "naitways3": {
+      "role": "Développeur Full-Stack Stagiaire — Infrastructure Cloud",
+      "company": "Naitways",
+      "date": "Mars 2026 - Juil. 2026",
+      "items": [
+        "Seul développeur d'une plateforme cloud interne de provisionnement et d'exploitation d'un parc de machines virtuelles KVM réparties sur plusieurs hyperviseurs — ~40 000 lignes réparties sur trois bases de code",
+        "Conception d'une architecture distribuée en FastAPI : un plan de contrôle gérant comptes, stockage, audit et facturation, et un agent par hôte pilotant libvirt",
+        "Développement de l'interface web Nuxt 4 / TypeScript, incluant les consoles VNC (noVNC) et série (xterm.js) dans le navigateur",
+        "Mise en place d'une chaîne Server-Sent Events de bout en bout diffusant en temps réel l'état des VMs, les alertes et les entrées d'audit des hyperviseurs jusqu'au navigateur",
+        "Intégration de l'authentification Keycloak/OIDC, de clés d'API à portées, du relevé de consommation par VM vers InfluxDB et d'un consommateur AMQP d'actions signées",
+        "Prise en charge de la couche infrastructure : bridges Open vSwitch, pools de stockage partagés iSCSI/NFS, passthrough GPU et provisionnement cloud-init"
       ]
     }
   },

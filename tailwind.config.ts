@@ -1,6 +1,12 @@
 import type { Config } from 'tailwindcss'
 
 export default {
+  // Wraps every `hover:` / `group-hover:` utility in `@media (hover: hover)`, so
+  // touch devices never get a hover state stuck on the last tapped element.
+  // Touch feedback is carried by the `active:` utilities instead.
+  future: {
+    hoverOnlyWhenSupported: true,
+  },
   content: [
     './app/**/*.{vue,ts,js}',
   ],

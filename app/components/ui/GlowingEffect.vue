@@ -21,12 +21,20 @@ const CURSOR_KEY = 'cursor-pos'
 const cursor = { vx: 0, vy: 0 }
 const instances = new Set<() => void>()
 
+// A finger emits pointermove too, but never a pointerleave — on touch the glow
+// would follow the tap and then stay lit at that spot forever. Only a real
+// mouse arms the effect; until one is seen, handleMove() is a no-op.
+let hasMouse = false
+
 if (import.meta.client) {
   const saved = sessionStorage.getItem(CURSOR_KEY)
-  if (saved) { const [x, y] = saved.split(','); cursor.vx = Number(x); cursor.vy = Number(y) }
+  // Only a mouse can have written this, so a restored position implies a mouse.
+  if (saved) { const [x, y] = saved.split(','); cursor.vx = Number(x); cursor.vy = Number(y); hasMouse = true }
 
   let ticking = false
   document.addEventListener('pointermove', (e: PointerEvent) => {
+    if (e.pointerType !== 'mouse') return
+    hasMouse = true
     cursor.vx = e.clientX; cursor.vy = e.clientY
     if (!ticking) { ticking = true; requestAnimationFrame(() => { sessionStorage.setItem(CURSOR_KEY, `${cursor.vx + window.scrollX},${cursor.vy + window.scrollY}`); ticking = false }) }
     instances.forEach(fn => fn())
@@ -62,7 +70,7 @@ const containerStyle = computed(() => ({
 }))
 
 function handleMove() {
-  if (!containerRef.value) return
+  if (!containerRef.value || !hasMouse) return
   if (frameId) cancelAnimationFrame(frameId)
 
   frameId = requestAnimationFrame(() => {

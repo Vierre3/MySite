@@ -1,0 +1,13 @@
+# pnpm config (since pnpm 11 the "pnpm" field of package.json is no longer read:
+# overrides & co. live here).
+
+# Dependencies allowed to run their install scripts (native binaries).
+# esbuild downloads its platform binary and @parcel/watcher builds a native
+# addon: without this, pnpm blocks the install (ERR_PNPM_IGNORED_BUILDS).
+allowBuilds:
+  '@parcel/watcher': true
+  esbuild: true
+
+# Was package.json "overrides" (npm) — security patch for a transitive dep.
+overrides:
+  serialize-javascript: ^7.0.3

@@ -4,14 +4,17 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Commands
 
-- `npm run dev` — start dev server at localhost:3000
-- `npm run generate` — static site generation (prerendered HTML for GitHub Pages)
-- `npm run preview` — preview the generated static site locally
+- `pnpm install` — install dependencies (pnpm is the package manager; `packageManager` is pinned in `package.json`)
+- `pnpm dev` — start dev server at localhost:3000
+- `pnpm generate` — static site generation (prerendered HTML for GitHub Pages)
+- `pnpm preview` — preview the generated static site locally
 - No test framework is configured.
 
 ## Deployment
 
-Pushes to `main` trigger GitHub Actions → `nuxt generate` → GitHub Pages at vierre3.dev. The build sets `NUXT_APP_BASE_URL` and `NUXT_PUBLIC_SITE_URL` from the workflow.
+Pushes to `main` trigger GitHub Actions (`.github/workflows/nuxtjs.yml`) → `pnpm install --frozen-lockfile` → `pnpm generate` → GitHub Pages at vierre3.dev. The workflow sets `NUXT_PUBLIC_SITE_URL` from the Pages origin; the base URL stays `/` since the site runs on a custom domain (`CNAME`).
+
+pnpm settings that npm kept in `package.json` (dependency `overrides`, install-script allowlist) live in `pnpm-workspace.yaml` — pnpm 11 no longer reads the `pnpm` field of `package.json`.
 
 ## Architecture
 
@@ -103,7 +106,7 @@ Fixed fullscreen background (z-index 0) with:
 - `useScrollReveal` — IntersectionObserver-based entrance animation. Returns `{ target, isVisible, skipAnimation }`. Integrates with scroll restore to instantly reveal elements already above viewport.
 - `useSmoothScroll` — `scrollToSection(sectionId)` calls `scrollIntoView({ behavior: 'smooth', block: 'start' })`.
 - `useProjectsData` — Returns typed `Project[]` with `key, techTags, type, year, current?, github?, liveUrl?`. ~20 projects from 2024–2026.
-- `useExperienceData` — Returns typed `ExperienceEntry[]` with `key, current?`. 3 entries (Epitech, 2 Naitways internships).
+- `useExperienceData` — Returns typed `ExperienceEntry[]` with `key, current?`. 4 entries (Epitech, 3 Naitways internships).
 - `useSkillsData` — Returns typed `SkillCategory[]` with `key, skills: { name, icon, mono? }[]`. 8 categories using Iconify devicon/mdi icon sets.
 
 ### Tailwind

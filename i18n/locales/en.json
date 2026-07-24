@@ -16,7 +16,7 @@
   },
   "about": {
     "title": "About Me",
-    "bio": "I'm a 3rd-year student at Epitech Paris, based in Hauts-de-Seine. Passionate about software engineering across the full stack — from writing UNIX shells in C to building real-time web applications with Nuxt and Vue, I enjoy tackling complex problems and crafting clean, efficient solutions. I've gained professional experience through two internships at Naitways, where I developed enterprise-grade Python tools for cybersecurity and infrastructure automation.",
+    "bio": "I'm a 3rd-year student at Epitech Paris, based in Hauts-de-Seine. Passionate about software engineering across the full stack — from writing UNIX shells in C to building real-time web applications with Nuxt and Vue, I enjoy tackling complex problems and crafting clean, efficient solutions. I've gained professional experience through three internships at Naitways, where I developed enterprise-grade Python tools for cybersecurity and infrastructure automation.",
     "stats": {
       "languages": "Languages",
       "languagesCount": "10+",
@@ -50,18 +50,8 @@
         "French / Spanish bilingual"
       ]
     },
-    "naitways1": {
-      "role": "Software Developer Intern (Part-time)",
-      "company": "Naitways",
-      "date": "Oct 2025 - Feb 2026",
-      "items": [
-        "Polled internal database via REST API in order to generate and send an hardening report to clients",
-        "Worked on the NBOX - a satellite deployed on client servers for self-configuration and VM management",
-        "Developed automation tools in Python for infrastructure management"
-      ]
-    },
-    "naitways2": {
-      "role": "Software Developer Intern (Full-time)",
+    "naitways": {
+      "role": "Software Developer Intern",
       "company": "Naitways",
       "date": "Aug 2024 - Dec 2024",
       "items": [
@@ -72,6 +62,29 @@
         "Built a Flask-based release notes generator from GitLab commits",
         "Developed network device integrations (Juniper, LibreNMS, Wazuh)",
         "Created an AI-powered code documentation tool using Ollama (local LLM)"
+      ]
+    },
+    "naitways2": {
+      "role": "Software Developer Intern (Part-time)",
+      "company": "Naitways",
+      "date": "Oct 2025 - Feb 2026",
+      "items": [
+        "Polled internal database via REST API in order to generate and send an hardening report to clients",
+        "Worked on the NBOX - a satellite deployed on client servers for self-configuration and VM management",
+        "Developed automation tools in Python for infrastructure management"
+      ]
+    },
+    "naitways3": {
+      "role": "Full-Stack Developer Intern — Cloud Infrastructure",
+      "company": "Naitways",
+      "date": "Mar 2026 - Jul 2026",
+      "items": [
+        "Sole developer of an internal cloud platform for provisioning and operating a fleet of KVM virtual machines across multiple hypervisors — ~40,000 lines across three codebases",
+        "Designed a distributed FastAPI architecture: a control plane owning accounts, storage, audit and billing, plus a per-host agent driving libvirt",
+        "Built the Nuxt 4 / TypeScript web interface, including in-browser VNC (noVNC) and serial (xterm.js) consoles",
+        "Implemented an end-to-end Server-Sent Events pipeline streaming live VM state, alerts and audit entries from hypervisors to the browser",
+        "Integrated Keycloak/OIDC authentication, scoped API keys, per-VM metering into InfluxDB and a signed AMQP action consumer",
+        "Handled the infrastructure layer: Open vSwitch bridges, shared iSCSI/NFS storage pools, GPU passthrough and cloud-init provisioning"
       ]
     }
   },
