@@ -87,7 +87,7 @@ export function useSkillsData(): SkillCategory[] {
     {
       key: 'other',
       skills: [
-        { name: 'Network', icon: 'mdi:lan', mono: true },
+        { name: 'Networking', icon: 'mdi:lan', mono: true },
         { name: 'Virtualization', icon: 'mdi:server-network', mono: true },
         { name: 'Cryptography', icon: 'mdi:lock', mono: true },
         { name: 'AI / ML', icon: 'mdi:brain', mono: true },
