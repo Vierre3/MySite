@@ -36,11 +36,13 @@
           <LanguageToggle :show-text="mobileOpen && hasToggleSpace" />
           <!-- Mobile hamburger -->
           <button
-            class="md:hidden w-6 h-6 text-text-secondary hover:text-text-primary hover:scale-105 active:text-text-primary active:scale-105 cursor-pointer transition-[transform,color]"
+            class="burger md:hidden w-6 h-6 text-text-secondary hover:text-text-primary hover:scale-105 active:text-text-primary active:scale-105 cursor-pointer transition-[transform,color]"
+            :class="{ 'burger-open': mobileOpen }"
             :aria-label="mobileOpen ? $t('nav.closeMenu') : $t('nav.openMenu')"
+            :aria-expanded="mobileOpen"
             @click="mobileOpen = !mobileOpen"
           >
-            <Icon :name="mobileOpen ? 'mdi:close' : 'mdi:menu'" class="w-6 h-6" />
+            <span /><span /><span />
           </button>
         </div>
       </div>
@@ -157,6 +159,28 @@ onMounted(() => {
 </script>
 
 <style>
+/* Mobile hamburger → cross. Three bars; on open the outer two translate to the
+   centre and rotate into an X while the middle bar fades out. Bars use
+   currentColor so they inherit the button's text-colour hover/active states. */
+.burger {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 4px;
+}
+.burger span {
+  display: block;
+  width: 16px;
+  height: 1.5px;
+  border-radius: 2px;
+  background: currentColor;
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.2s ease;
+}
+.burger-open span:nth-child(1) { transform: translateY(5.5px) rotate(45deg); }
+.burger-open span:nth-child(2) { opacity: 0; }
+.burger-open span:nth-child(3) { transform: translateY(-5.5px) rotate(-45deg); }
+
 /* Desktop links — screen-centered via absolute, flex fallback when tight */
 @media (min-width: 768px) {
   .nav-links {
