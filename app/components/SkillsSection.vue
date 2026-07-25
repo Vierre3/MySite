@@ -55,22 +55,41 @@
 <script setup lang="ts">
 const skillsData = useSkillsData()
 
+// Split the categories into `numCols` contiguous columns while minimising the
+// tallest column (so the columns end at roughly the same height). Contiguous =
+// categories keep their data order, which is what the mobile single-column
+// order relies on (columns3.flat()). Height ≈ skills + 2 for the card header.
+// DP: dp[k][i] = smallest achievable max-column-height when the first i
+// categories are packed into k columns; par records where the last column began.
 function distribute(data: typeof skillsData, numCols: number) {
-  const heights = data.map(c => c.skills.length + 2)
-  const ideal = heights.reduce((a, b) => a + b, 0) / numCols
-  const cols: (typeof skillsData)[] = []
-  let i = 0
-  for (let c = 0; c < numCols; c++) {
-    const start = i
-    let sum = 0
-    while (i < data.length - (numCols - 1 - c)) {
-      if (sum > 0 && sum + heights[i]! > ideal && c < numCols - 1) {
-        if (sum + heights[i]! - ideal > ideal - sum) break
-        i++; break
+  const n = data.length
+  if (n <= numCols) {
+    return Array.from({ length: numCols }, (_, c) => (c < n ? [data[c]!] : [])) as (typeof skillsData)[]
+  }
+
+  const h = data.map(c => c.skills.length + 2)
+  const prefix = [0]
+  for (const x of h) prefix.push(prefix[prefix.length - 1]! + x)
+  const seg = (a: number, b: number) => prefix[b]! - prefix[a]! // height of [a, b)
+
+  const dp = Array.from({ length: numCols + 1 }, () => new Array(n + 1).fill(Infinity))
+  const par = Array.from({ length: numCols + 1 }, () => new Array(n + 1).fill(0))
+  dp[0]![0] = 0
+  for (let k = 1; k <= numCols; k++) {
+    for (let i = k; i <= n; i++) {
+      for (let j = k - 1; j < i; j++) {
+        const cost = Math.max(dp[k - 1]![j]!, seg(j, i))
+        if (cost < dp[k]![i]!) { dp[k]![i] = cost; par[k]![i] = j }
       }
-      sum += heights[i++]!
     }
-    cols.push(data.slice(start, Math.max(i, start + 1)))
+  }
+
+  const cols: (typeof skillsData)[] = []
+  let end = n
+  for (let k = numCols; k >= 1; k--) {
+    const start = par[k]![end]!
+    cols.unshift(data.slice(start, end))
+    end = start
   }
   return cols
 }
