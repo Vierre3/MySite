@@ -12,7 +12,7 @@
           :href="project.github"
           target="_blank"
           rel="noopener noreferrer"
-          class="text-text-secondary hover:text-orange-accent hover:scale-110 active:scale-75 md:active:scale-100 transition-all"
+          class="text-text-secondary hover:text-orange-accent hover:scale-110 active:text-orange-accent active:scale-110 transition-all"
           :title="$t('projects.viewCode')"
         >
           <Icon name="mdi:link-variant" class="w-4 h-4 mt-1.5" />
@@ -22,7 +22,7 @@
           :href="project.liveUrl"
           target="_blank"
           rel="noopener noreferrer"
-          class="text-text-secondary hover:text-orange-accent hover:scale-110 active:scale-75 md:active:scale-100 transition-all"
+          class="text-text-secondary hover:text-orange-accent hover:scale-110 active:text-orange-accent active:scale-110 transition-all"
           :title="$t('projects.tryIt')"
         >
           <Icon name="mdi:rocket-launch-outline" class="w-4 h-4 mt-1.5" />

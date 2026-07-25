@@ -93,6 +93,12 @@ body {
   overflow-x: hidden;
 }
 
+/* Kill the default grey tap-flash on mobile — press feedback comes from the
+   :active states on buttons/links instead. */
+html {
+  -webkit-tap-highlight-color: transparent;
+}
+
 
 /* When restoring scroll position, skip all entrance animations */
 .skip-animations .scroll-reveal {

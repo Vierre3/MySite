@@ -10,7 +10,7 @@
       <div class="flex items-center justify-between h-16">
         <!-- Logo -->
         <button
-          class="text-lg font-bold text-text-primary cursor-pointer hover:text-orange-accent hover:scale-105 active:scale-95"
+          class="text-lg font-bold text-text-primary cursor-pointer hover:text-orange-accent hover:scale-105 active:text-orange-accent active:scale-105 transition-[transform,color]"
           @click="scrollToSection('hero')"
         >
           <span class="text-orange-accent">&lt;</span>PY<span class="text-orange-accent">/&gt;</span>
@@ -36,7 +36,7 @@
           <LanguageToggle :show-text="mobileOpen && hasToggleSpace" />
           <!-- Mobile hamburger -->
           <button
-            class="md:hidden w-6 h-6 text-text-secondary hover:text-text-primary hover:scale-105 active:scale-95 cursor-pointer"
+            class="md:hidden w-6 h-6 text-text-secondary hover:text-text-primary hover:scale-105 active:text-text-primary active:scale-105 cursor-pointer transition-[transform,color]"
             :aria-label="mobileOpen ? $t('nav.closeMenu') : $t('nav.openMenu')"
             @click="mobileOpen = !mobileOpen"
           >
@@ -74,14 +74,14 @@
           <button
             v-for="section in sections"
             :key="section"
-            class="flex items-center gap-3 w-full text-left group hover:bg-white/5 hover:scale-[1.02] active:scale-95 rounded-xl cursor-pointer px-5 py-4 text-lg font-medium border border-transparent hover:border-orange-accent/40"
-            :class="activeSection === section ? 'text-orange-accent' : 'text-text-secondary hover:text-text-primary'"
+            class="flex items-center gap-3 w-full text-left group hover:bg-white/5 hover:scale-[1.02] active:bg-white/5 active:scale-[1.02] rounded-xl cursor-pointer px-5 py-4 text-lg font-medium border border-transparent hover:border-orange-accent/40 active:border-orange-accent/40 transition-[transform,background-color,border-color]"
+            :class="activeSection === section ? 'text-orange-accent' : 'text-text-secondary hover:text-text-primary active:text-text-primary'"
             @click="scrollToSection(section); mobileOpen = false"
           >
             <Icon
               :name="sectionIcons[section]!"
               class="w-5 h-5"
-              :class="activeSection === section ? 'text-orange-accent' : 'text-text-secondary group-hover:text-text-primary'"
+              :class="activeSection === section ? 'text-orange-accent' : 'text-text-secondary group-hover:text-text-primary group-active:text-text-primary'"
             />
             {{ $t(`${section}.title`) }}
           </button>

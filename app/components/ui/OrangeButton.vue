@@ -5,11 +5,11 @@
     :download="download || undefined"
     :target="href && !download ? '_blank' : undefined"
     :rel="href ? 'noopener noreferrer' : undefined"
-    class="inline-flex items-center gap-2 px-6 py-3 rounded-xl font-medium hover:scale-105 active:scale-95 md:active:scale-100 transition-all duration-300 cursor-pointer"
+    class="inline-flex items-center gap-2 px-6 py-3 rounded-xl font-medium hover:scale-105 active:scale-105 transition-all duration-300 cursor-pointer"
     :class="[
       variant === 'solid'
-        ? 'bg-orange-accent text-white hover:bg-orange-light hover:shadow-[0_0_20px_rgba(255,107,0,0.2)]'
-        : 'border border-orange-accent text-orange-accent hover:bg-orange-accent/20 hover:shadow-[0_0_20px_rgba(255,107,0,0.2)]'
+        ? 'bg-orange-accent text-white hover:bg-orange-light hover:shadow-[0_0_20px_rgba(255,107,0,0.2)] active:bg-orange-light active:shadow-[0_0_20px_rgba(255,107,0,0.2)]'
+        : 'border border-orange-accent text-orange-accent hover:bg-orange-accent/20 hover:shadow-[0_0_20px_rgba(255,107,0,0.2)] active:bg-orange-accent/20 active:shadow-[0_0_20px_rgba(255,107,0,0.2)]'
     ]"
     @click="$emit('click')"
   >
