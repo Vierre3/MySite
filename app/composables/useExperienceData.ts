@@ -9,7 +9,7 @@ export function useExperienceData(): ExperienceEntry[] {
     // newest-first. Keys stay chronological (naitways = oldest); only the
     // displayed order is reversed.
     { key: 'epitech', current: true },
-    { key: 'naitways3', current: true },
+    { key: 'naitways3' },
     { key: 'naitways2' },
     { key: 'naitways' },
   ]
