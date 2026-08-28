@@ -12,7 +12,55 @@
 </template>
 
 <script setup lang="ts">
-import { animate } from 'motion'
+// Minimal scalar tween — replaces the `motion` library, which was ~140 KiB of
+// the main bundle (with most of it unused) just to drive this one glow. Same
+// cubic-bezier easing and duration, so the animation is visually identical.
+function makeCubicBezier(x1: number, y1: number, x2: number, y2: number) {
+  const cx = 3 * x1, bx = 3 * (x2 - x1) - cx, ax = 1 - cx - bx
+  const cy = 3 * y1, by = 3 * (y2 - y1) - cy, ay = 1 - cy - by
+  const sampleX = (t: number) => ((ax * t + bx) * t + cx) * t
+  const sampleY = (t: number) => ((ay * t + by) * t + cy) * t
+  const sampleDX = (t: number) => (3 * ax * t + 2 * bx) * t + cx
+  const solveX = (x: number) => {
+    let t = x
+    for (let i = 0; i < 8; i++) {
+      const err = sampleX(t) - x
+      if (Math.abs(err) < 1e-4) return t
+      const d = sampleDX(t)
+      if (Math.abs(d) < 1e-6) break
+      t -= err / d
+    }
+    let lo = 0, hi = 1
+    t = x
+    while (lo < hi) {
+      const err = sampleX(t) - x
+      if (Math.abs(err) < 1e-4) break
+      if (err < 0) lo = t; else hi = t
+      t = (lo + hi) / 2
+    }
+    return t
+  }
+  return (x: number) => (x <= 0 ? 0 : x >= 1 ? 1 : sampleY(solveX(x)))
+}
+
+const glowEase = makeCubicBezier(0.16, 1, 0.3, 1)
+
+// Tween 0→1 over `durationSec`, calling onUpdate with the eased progress each
+// frame; returns a handle with stop(), matching how the old `animate()` was used.
+function tween(durationSec: number, ease: (t: number) => number, onUpdate: (p: number) => void) {
+  const ms = Math.max(1, durationSec * 1000)
+  const start = performance.now()
+  let raf = 0
+  let stopped = false
+  const tick = (now: number) => {
+    if (stopped) return
+    const t = Math.min(1, (now - start) / ms)
+    onUpdate(ease(t))
+    if (t < 1) raf = requestAnimationFrame(tick)
+  }
+  raf = requestAnimationFrame(tick)
+  return { stop: () => { stopped = true; cancelAnimationFrame(raf) } }
+}
 
 const CURSOR_KEY = 'cursor-pos'
 
@@ -50,7 +98,7 @@ const props = withDefaults(defineProps<{
 const containerRef = ref<HTMLDivElement>()
 const glowActive = ref(false)
 let frameId = 0
-let anim: ReturnType<typeof animate> | null = null
+let anim: { stop: () => void } | null = null
 let curX = 0, curY = 0
 let skipNextAnim = false
 
@@ -123,12 +171,9 @@ function handleMove() {
     }
 
     const sx = curX, sy = curY
-    anim = animate(0, 1, {
-      duration: props.movementDuration, ease: [0.16, 1, 0.3, 1],
-      onUpdate: (p: number) => {
-        curX = sx + (gx - sx) * p; curY = sy + (gy - sy) * p
-        el.style.setProperty('--glow-x', `${curX}px`); el.style.setProperty('--glow-y', `${curY}px`)
-      },
+    anim = tween(props.movementDuration, glowEase, (p: number) => {
+      curX = sx + (gx - sx) * p; curY = sy + (gy - sy) * p
+      el.style.setProperty('--glow-x', `${curX}px`); el.style.setProperty('--glow-y', `${curY}px`)
     })
   })
 }

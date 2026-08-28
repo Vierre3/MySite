@@ -36,7 +36,7 @@
           <LanguageToggle :show-text="mobileOpen && hasToggleSpace" />
           <!-- Mobile hamburger -->
           <button
-            class="burger md:hidden w-6 h-6 text-text-secondary hover:text-text-primary hover:scale-105 active:text-text-primary active:scale-105 cursor-pointer transition-[transform,color]"
+            class="burger flex md:hidden w-6 h-6 text-text-secondary hover:text-text-primary hover:scale-105 active:text-text-primary active:scale-105 cursor-pointer transition-[transform,color]"
             :class="{ 'burger-open': mobileOpen }"
             :aria-label="mobileOpen ? $t('nav.closeMenu') : $t('nav.openMenu')"
             :aria-expanded="mobileOpen"
@@ -162,8 +162,9 @@ onMounted(() => {
 /* Mobile hamburger → cross. Three bars; on open the outer two translate to the
    centre and rotate into an X while the middle bar fades out. Bars use
    currentColor so they inherit the button's text-colour hover/active states. */
+/* Display is controlled by the `flex md:hidden` utilities on the element so the
+   button stays hidden on desktop; this only supplies the bar layout. */
 .burger {
-  display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;

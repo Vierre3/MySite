@@ -13,17 +13,18 @@ export default defineNuxtConfig({
   modules: [
     '@nuxtjs/tailwindcss',
     '@nuxtjs/i18n',
-    '@vueuse/nuxt',
     '@nuxt/icon',
   ],
 
-  vite: {
-    optimizeDeps: {
-      include: ['motion'],
-    },
-  },
-
   css: ['~/assets/css/fonts.css'],
+
+  // Inline the (small) render-blocking entry stylesheet into the prerendered
+  // HTML so first paint isn't gated on a separate CSS round-trip (~150ms). The
+  // icon CSS is already inlined by @nuxt/icon regardless; this only folds in the
+  // ~7 KiB gz component/utility sheet, removing the last render-blocking request.
+  features: {
+    inlineStyles: () => true,
+  },
 
   tailwindcss: {
     cssPath: '~/assets/css/tailwind.css',
