@@ -1,4 +1,4 @@
 User-Agent: *
 Disallow:
 
-Sitemap: https://vierre3.work/sitemap.xml
+Sitemap: https://vierre3.dev/sitemap.xml

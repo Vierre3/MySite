@@ -57,7 +57,7 @@ export default defineNuxtConfig({
       const path = require('node:path')
       const outputDir = path.resolve('.output/public')
       const siteUrl = process.env.NUXT_PUBLIC_SITE_URL || ''
-      const title = 'Pierre-Yves | Full-Stack Developer'
+      const title = 'Pierre-Yves Guiraudet | Full-Stack Developer'
       const description = 'Pierre-Yves Guiraudet — Full-Stack Developer & Epitech Paris student. Portfolio showcasing web, systems, and game development projects.'
       const localeRedirect = `<!DOCTYPE html>
 <html>
@@ -108,19 +108,42 @@ export default defineNuxtConfig({
           innerHTML: `(function(){try{document.documentElement.classList.add('loading');if(localStorage.getItem('theme')==='light'){document.documentElement.classList.replace('dark','light')}var s=sessionStorage.getItem('scroll-position');if(s&&parseInt(s,10)>0){document.documentElement.classList.add('scrolled');requestAnimationFrame(function(){window.scrollTo(0,parseInt(s,10))})}}catch(e){}})()`,
           tagPosition: 'head',
         },
+        // Person structured data — tells Google this site IS Pierre-Yves
+        // Guiraudet (name, role, school, and the social profiles it already
+        // knows via sameAs), which is what earns ranking + a knowledge panel
+        // on a name search.
+        {
+          type: 'application/ld+json',
+          innerHTML: JSON.stringify({
+            '@context': 'https://schema.org',
+            '@type': 'Person',
+            name: 'Pierre-Yves Guiraudet',
+            givenName: 'Pierre-Yves',
+            familyName: 'Guiraudet',
+            url: siteUrl || 'https://vierre3.dev',
+            image: `${siteUrl || 'https://vierre3.dev'}/images/profile.webp`,
+            jobTitle: 'Full-Stack Developer',
+            description: 'Full-Stack Developer and Epitech Paris student.',
+            alumniOf: { '@type': 'CollegeOrUniversity', name: 'Epitech' },
+            sameAs: [
+              'https://github.com/Vierre3',
+              'https://www.linkedin.com/in/pierreyves-guiraudet/',
+            ],
+          }),
+        },
       ],
-      title: 'Pierre-Yves | Full-Stack Developer',
+      title: 'Pierre-Yves Guiraudet | Full-Stack Developer',
       meta: [
         { name: 'description', content: 'Pierre-Yves Guiraudet — Full-Stack Developer & Epitech Paris student. Portfolio showcasing web, systems, and game development projects.' },
         { property: 'og:type', content: 'website' },
         { property: 'og:url', content: `${siteUrl}/` },
-        { property: 'og:title', content: 'Pierre-Yves | Full-Stack Developer' },
+        { property: 'og:title', content: 'Pierre-Yves Guiraudet | Full-Stack Developer' },
         { property: 'og:description', content: 'Pierre-Yves Guiraudet — Full-Stack Developer & Epitech Paris student. Portfolio showcasing web, systems, and game development projects.' },
         { property: 'og:image', content: `${siteUrl}/og-image.png` },
         { property: 'og:image:width', content: '1200' },
         { property: 'og:image:height', content: '630' },
         { name: 'twitter:card', content: 'summary_large_image' },
-        { name: 'twitter:title', content: 'Pierre-Yves | Full-Stack Developer' },
+        { name: 'twitter:title', content: 'Pierre-Yves Guiraudet | Full-Stack Developer' },
         { name: 'twitter:description', content: 'Pierre-Yves Guiraudet — Full-Stack Developer & Epitech Paris student. Portfolio showcasing web, systems, and game development projects.' },
         { name: 'twitter:image', content: `${siteUrl}/og-image.png` },
       ],

@@ -2,16 +2,16 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
         xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>https://vierre3.work/en</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://vierre3.work/en"/>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://vierre3.work/fr"/>
+    <loc>https://vierre3.dev/en</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://vierre3.dev/en"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://vierre3.dev/fr"/>
     <changefreq>monthly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://vierre3.work/fr</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://vierre3.work/en"/>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://vierre3.work/fr"/>
+    <loc>https://vierre3.dev/fr</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://vierre3.dev/en"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://vierre3.dev/fr"/>
     <changefreq>monthly</changefreq>
     <priority>1.0</priority>
   </url>
