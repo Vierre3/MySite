@@ -58,7 +58,7 @@ export default defineNuxtConfig({
       const outputDir = path.resolve('.output/public')
       const siteUrl = process.env.NUXT_PUBLIC_SITE_URL || ''
       const title = 'Pierre-Yves | Full-Stack Developer'
-      const description = 'Pierre-Yves • Guiraudet — Full-Stack Developer & Epitech Paris student. Portfolio showcasing web, systems, and game development projects.'
+      const description = 'Pierre-Yves Guiraudet — Full-Stack Developer & Epitech Paris student. Portfolio showcasing web, systems, and game development projects.'
       const localeRedirect = `<!DOCTYPE html>
 <html>
 <head>
@@ -111,17 +111,17 @@ export default defineNuxtConfig({
       ],
       title: 'Pierre-Yves | Full-Stack Developer',
       meta: [
-        { name: 'description', content: 'Pierre-Yves • Guiraudet — Full-Stack Developer & Epitech Paris student. Portfolio showcasing web, systems, and game development projects.' },
+        { name: 'description', content: 'Pierre-Yves Guiraudet — Full-Stack Developer & Epitech Paris student. Portfolio showcasing web, systems, and game development projects.' },
         { property: 'og:type', content: 'website' },
         { property: 'og:url', content: `${siteUrl}/` },
         { property: 'og:title', content: 'Pierre-Yves | Full-Stack Developer' },
-        { property: 'og:description', content: 'Pierre-Yves • Guiraudet — Full-Stack Developer & Epitech Paris student. Portfolio showcasing web, systems, and game development projects.' },
+        { property: 'og:description', content: 'Pierre-Yves Guiraudet — Full-Stack Developer & Epitech Paris student. Portfolio showcasing web, systems, and game development projects.' },
         { property: 'og:image', content: `${siteUrl}/og-image.png` },
         { property: 'og:image:width', content: '1200' },
         { property: 'og:image:height', content: '630' },
         { name: 'twitter:card', content: 'summary_large_image' },
         { name: 'twitter:title', content: 'Pierre-Yves | Full-Stack Developer' },
-        { name: 'twitter:description', content: 'Pierre-Yves • Guiraudet — Full-Stack Developer & Epitech Paris student. Portfolio showcasing web, systems, and game development projects.' },
+        { name: 'twitter:description', content: 'Pierre-Yves Guiraudet — Full-Stack Developer & Epitech Paris student. Portfolio showcasing web, systems, and game development projects.' },
         { name: 'twitter:image', content: `${siteUrl}/og-image.png` },
       ],
       link: [
