@@ -5,7 +5,7 @@
         <h2 class="text-3xl md:text-4xl font-bold text-text-primary mb-4 text-balance">
           {{ $t(titleKey) }}
         </h2>
-        <div class="w-20 h-1 bg-orange-accent mx-auto rounded-full" />
+        <div class="w-20 h-1 mx-auto rounded-full bg-gradient-to-r from-orange-accent to-teal" />
       </div>
       <slot />
     </div>

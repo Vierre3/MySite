@@ -2,7 +2,7 @@
   <UiSection id="work" title-key="caseStudy.title">
     <UiScrollReveal>
       <UiGlassCard class="p-6 md:p-10">
-        <p class="text-sm font-medium text-orange-accent mb-3">
+        <p class="text-sm font-medium text-teal mb-3">
           {{ $t('caseStudy.meta') }}
         </p>
         <h3 class="text-2xl md:text-3xl font-bold text-balance text-text-primary mb-4">
@@ -20,7 +20,7 @@
               v-if="index > 0"
               class="flex lg:flex-col items-center justify-center gap-x-5 gap-y-2 shrink-0 lg:w-36 py-3 lg:py-0 text-xs"
             >
-              <span class="flex items-center gap-1 text-text-secondary">
+              <span class="flex items-center gap-1 text-teal">
                 {{ $t(`caseStudy.diagram.${part.incoming}`) }}
                 <Icon name="mdi:arrow-right" class="w-4 h-4 hidden lg:block" />
                 <Icon name="mdi:arrow-down" class="w-4 h-4 lg:hidden" />
@@ -45,7 +45,7 @@
               <p class="text-sm text-text-secondary leading-relaxed mb-4">
                 {{ $t(`caseStudy.parts.${part.key}.detail`) }}
               </p>
-              <p class="text-xs font-medium text-orange-accent mt-auto">
+              <p class="text-xs font-medium text-teal mt-auto">
                 {{ $t(`caseStudy.parts.${part.key}.size`) }}
               </p>
             </div>

@@ -2,7 +2,7 @@
 
 Personal portfolio of Pierre-Yves Guiraudet, live at [vierre3.dev](https://vierre3.dev).
 
-A single-page site in English and French: a case study, selected projects, skills, experience and contact, with a light and a dark theme.
+A single-page site in English and French: a case study, selected projects, skills, experience and contact.
 
 ## Stack
 

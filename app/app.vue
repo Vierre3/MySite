@@ -22,7 +22,6 @@
 <script setup lang="ts">
 const { isRestoring } = useScrollRestore()
 setupScrollRestore()
-const { theme } = useTheme()
 
 // Remove pre-hydration loading class now that Vue is in control
 onMounted(() => document.documentElement.classList.remove('loading'))
@@ -43,7 +42,7 @@ useHead(() => ({
   link: localeHead.value.link,
   meta: [
     ...(localeHead.value.meta || []),
-    { name: 'theme-color', content: theme.value === 'light' ? '#f5f5f7' : '#0a0a1a' },
+    { name: 'theme-color', content: '#f6f1e8' },
   ],
 }))
 
@@ -60,36 +59,28 @@ useSeoMeta({
 <style>
 @import '~/assets/css/animations.css';
 
-.dark {
-  --orange-accent: 255 107 0;
-  --orange-light: 255 138 51;
-  --on-accent: 25 12 0;
-  --glass: rgba(255, 255, 255, 0.05);
-  --glass-hover: rgba(255, 255, 255, 0.08);
-  --glass-border: rgba(255, 255, 255, 0.1);
-  --opposite: 245 245 247;
-  --dark-bg: 10 10 26;
-  --text-primary: 240 240 245;
-  --text-secondary: 160 160 184;
-  --shadow-color: rgba(120, 120, 200, 0.1);
-}
-
-/* Light accent is a deeper orange so orange text and white-on-orange buttons
-   keep a 4.5:1 contrast on the pale background. The second orange (tag text,
-   button hover) goes a shade darker here for the same reason; on the dark theme
-   it is the original lighter, yellower orange. */
-.light {
-  --orange-accent: 194 72 0;
-  --orange-light: 176 64 0;
+/* One theme: warm paper, ink text, and two colours with separate jobs.
+   Orange is brand and action (logo, buttons, active states, "In progress");
+   teal carries information (tags, meta lines, company names).
+   Colours are RGB triplets so Tailwind can apply opacity (tailwind.config.ts).
+   Token names are historical: `dark-bg` is the page colour and `glass*` the card
+   surface and its border. */
+:root {
+  --dark-bg: 246 241 232;
+  --opposite: 24 32 48;
+  --text-primary: 24 32 48;
+  --text-secondary: 84 92 108;
+  --glass: rgb(255 253 248);
+  --glass-hover: rgb(250 246 238);
+  --glass-border: rgba(24, 32, 48, 0.12);
+  --shadow-color: rgba(24, 32, 48, 0.1);
+  --orange-accent: 190 62 6;
+  --orange-light: 168 54 4;
   --on-accent: 255 255 255;
-  --glass: rgba(0, 0, 0, 0.05);
-  --glass-hover: rgba(0, 0, 0, 0.08);
-  --glass-border: rgba(0, 0, 0, 0.1);
-  --opposite: 10 10 26;
-  --dark-bg: 245 245 247;
-  --text-primary: 26 26 46;
-  --text-secondary: 85 85 112;
-  --shadow-color: rgba(0, 0, 0, 0.1);
+  --teal: 12 98 104;
+  /* The ribbon blends from one colour to the other across its strands */
+  --ribbon-a: 205 78 14;
+  --ribbon-b: 12 98 104;
 }
 
 html {
@@ -112,16 +103,13 @@ body {
   outline-offset: 2px;
 }
 
-/* Theme transition — only active during theme switch to avoid permanent GPU overhead */
-html.theme-switching * {
-  transition: color 300ms ease, background-color 300ms ease, border-color 300ms ease, fill 300ms ease, stroke 300ms ease;
-}
-html.theme-switching .inverted-corner {
-  transition: --nav-bg-top 300ms ease, --corner-border 300ms ease;
+::selection {
+  background: rgb(var(--teal) / 0.28);
 }
 
 /* When restoring scroll position, skip all entrance animations */
 .skip-animations .scroll-reveal {
+  opacity: 1 !important;
   transform: none !important;
   transition: none !important;
 }
@@ -131,8 +119,9 @@ html.theme-switching .inverted-corner {
   transition: none !important;
 }
 
-/* Pre-hydration only: don't offset revealed content before Vue mounts */
+/* Pre-hydration only: content restored mid-page must be visible before Vue mounts */
 html.loading.scrolled .scroll-reveal {
+  opacity: 1 !important;
   transform: none !important;
   transition: none !important;
 }

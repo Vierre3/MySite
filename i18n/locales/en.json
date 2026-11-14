@@ -4,8 +4,6 @@
     "description": "Portfolio of Pierre-Yves Guiraudet, full-stack developer and Epitech Paris student: web platforms, systems programming and games."
   },
   "nav": {
-    "theme_light": "light",
-    "theme_dark": "dark",
     "openMenu": "open menu",
     "closeMenu": "close menu",
     "top": "Back to top",
@@ -121,7 +119,7 @@
     "Safekeeping": "Hand-drawn 2D tower-defense game for Android and the web, built in Unity. Place towers and walls, run supply belts back to your keep and hold off wave after wave of raiders, who adapt their path to what you build. Playable in the browser, with an online leaderboard.",
     "Fortunes of 1877": "Open-world trading game in development at Hogeschool Rotterdam, built in Unity. You captain a balloon-powered ship between floating islands, buying goods where they're cheap and selling them where they're wanted, and every docking is done by hand.",
     "Copaintes": "Website for Copaintes, a bar in the 10th arrondissement of Paris: the menu, upcoming events, table reservations and the story of the place. A fast static site with search-engine structured data.",
-    "Portfolio": "This website: a statically generated portfolio in English and French, with light and dark themes, an animated canvas ribbon and a background that scrolls at its own speed.",
+    "Portfolio": "This website: a statically generated portfolio in English and French, with an animated canvas ribbon and a background that scrolls at its own speed.",
     "Glados": "Programming language built from scratch in Haskell — lexer, parser, type checker, and bytecode VM. Supports user-defined functions, lambdas, scoping, built-in I/O, and a REPL with colored output.",
     "R-Type": "Multiplayer space shooter game engine in C++ using an Entity Component System architecture for efficient entity management, with networked gameplay and SFML 3.0 rendering.",
     "Zappy": "Three-part networked simulation: a C server managing teams and resources on a virtual planet, a C++/Raylib 3D GUI for real-time visualization, and autonomous Python AI agents competing for survival.",

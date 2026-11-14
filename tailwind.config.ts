@@ -19,6 +19,7 @@ export default {
         'orange-accent': 'rgb(var(--orange-accent) / <alpha-value>)',
         'orange-light': 'rgb(var(--orange-light) / <alpha-value>)',
         'on-accent': 'rgb(var(--on-accent) / <alpha-value>)',
+        'teal': 'rgb(var(--teal) / <alpha-value>)',
         'glass': 'var(--glass)',
         'glass-hover': 'var(--glass-hover)',
         'glass-border': 'var(--glass-border)',

@@ -4,8 +4,6 @@
     "description": "Portfolio de Pierre-Yves Guiraudet, développeur full-stack et étudiant à Epitech Paris : plateformes web, programmation système et jeux."
   },
   "nav": {
-    "theme_light": "clair",
-    "theme_dark": "sombre",
     "openMenu": "ouvrir le menu",
     "closeMenu": "fermer le menu",
     "top": "Retour en haut",
@@ -121,7 +119,7 @@
     "Safekeeping": "Tower defense 2D dessiné à la main pour Android et le web, réalisé avec Unity. Placez tours et murs, reliez-les à votre donjon par des convoyeurs de ravitaillement et repoussez des vagues de pillards qui adaptent leur chemin à vos constructions. Jouable dans le navigateur, avec un classement en ligne.",
     "Fortunes of 1877": "Jeu de commerce en monde ouvert en cours de développement à la Hogeschool Rotterdam, réalisé avec Unity. Vous commandez un navire porté par un ballon entre des îles flottantes, achetez les marchandises là où elles sont bon marché pour les revendre là où elles sont recherchées, et chaque amarrage se fait à la main.",
     "Copaintes": "Site web de Copaintes, un bar du 10e arrondissement de Paris : la carte, les événements à venir, la réservation de table et l'histoire du lieu. Un site statique rapide, avec données structurées pour les moteurs de recherche.",
-    "Portfolio": "Ce site : un portfolio généré statiquement, en français et en anglais, avec thèmes clair et sombre, un ruban animé en canvas et un arrière-plan qui défile à sa propre vitesse.",
+    "Portfolio": "Ce site : un portfolio généré statiquement, en français et en anglais, avec un ruban animé en canvas et un arrière-plan qui défile à sa propre vitesse.",
     "Glados": "Langage de programmation créé from scratch en Haskell — lexer, parser, vérificateur de types et VM bytecode. Supporte les fonctions utilisateur, lambdas, portée de variables, I/O intégrées et un REPL avec sortie colorée.",
     "R-Type": "Moteur de jeu de tir spatial multijoueur en C++ utilisant une architecture Entity Component System pour la gestion efficace des entités, avec gameplay en réseau et rendu SFML 3.0.",
     "Zappy": "Simulation en réseau en trois parties : un serveur C gérant équipes et ressources sur une planète virtuelle, une GUI 3D C++/Raylib pour la visualisation temps réel, et des agents IA Python autonomes en compétition pour survivre.",

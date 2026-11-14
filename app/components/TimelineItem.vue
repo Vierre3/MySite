@@ -14,7 +14,7 @@
             <h3 class="text-lg font-semibold text-text-primary">
               {{ $t(`experience.${entryKey}.role`) }}
             </h3>
-            <p class="text-orange-accent font-medium">
+            <p class="text-teal font-medium">
               {{ $t(`experience.${entryKey}.company`) }}
             </p>
           </div>
@@ -33,7 +33,7 @@
             :key="i"
             class="flex items-start gap-2 text-text-secondary text-sm leading-relaxed"
           >
-            <Icon name="mdi:chevron-right" class="w-4 h-4 text-orange-accent shrink-0 mt-0.5" />
+            <Icon name="mdi:chevron-right" class="w-4 h-4 text-teal shrink-0 mt-0.5" />
             <span>{{ rt(item) }}</span>
           </li>
         </ul>

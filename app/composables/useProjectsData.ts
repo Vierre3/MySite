@@ -19,6 +19,7 @@ export function useProjectsData(): Project[] {
       year: 2026,
       current: true,
       featured: true,
+      liveUrl: 'https://twlgame.com/',
     },
     {
       key: 'LoCode',

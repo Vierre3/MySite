@@ -109,10 +109,9 @@ export default defineNuxtConfig({
 
   app: {
     head: {
-      htmlAttrs: { class: 'dark' },
       script: [
         {
-          innerHTML: `(function(){try{document.documentElement.classList.add('loading');if(localStorage.getItem('theme')==='light'){document.documentElement.classList.replace('dark','light')}var s=sessionStorage.getItem('scroll-position');if(s&&parseInt(s,10)>0){document.documentElement.classList.add('scrolled');requestAnimationFrame(function(){window.scrollTo(0,parseInt(s,10))})}}catch(e){}})()`,
+          innerHTML: `(function(){try{var d=document.documentElement;d.classList.add('loading','js');var s=sessionStorage.getItem('scroll-position');if(s&&parseInt(s,10)>0){d.classList.add('scrolled');requestAnimationFrame(function(){window.scrollTo(0,parseInt(s,10))})}}catch(e){}})()`,
           tagPosition: 'head',
         },
         // Person structured data — tells Google this site IS Pierre-Yves

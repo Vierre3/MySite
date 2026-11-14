@@ -34,7 +34,6 @@
 
         <!-- Right side -->
         <div class="flex items-center gap-3">
-          <ThemeToggle :show-text="mobileOpen && hasToggleSpace" />
           <LanguageToggle :show-text="mobileOpen && hasToggleSpace" />
           <!-- Mobile hamburger -->
           <button
@@ -240,7 +239,7 @@ onMounted(() => {
   to { opacity: 0; transform: translateY(-10px) scale(0.97); }
 }
 
-/* Registered as <color> so the browser can interpolate on theme switch */
+/* Registered as <color> so the gradient can be transitioned */
 @property --nav-bg-top {
   syntax: '<color>';
   inherits: true;
@@ -251,7 +250,7 @@ onMounted(() => {
   inherits: true;
   initial-value: rgb(0 0 0);
 }
-.dark, .light {
+:root {
   --nav-bg-top: rgb(var(--dark-bg));
   --nav-bg-bottom: rgb(var(--dark-bg) / 0.75);
 }
@@ -318,7 +317,7 @@ html.loading.scrolled nav, .nav-scrolled {
   inherits: true;
   initial-value: rgb(0 0 0);
 }
-.dark, .light {
+:root {
   --corner-border: color-mix(in srgb, rgb(var(--opposite)) 10%, rgb(var(--dark-bg)));
 }
 

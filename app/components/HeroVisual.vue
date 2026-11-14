@@ -32,12 +32,13 @@ onMounted(() => {
   function draw(ms: number) {
     const t = ms / 1000
     const root = document.documentElement
-    const accent = getComputedStyle(root).getPropertyValue('--orange-accent').trim().replaceAll(' ', ',')
-    const light = root.classList.contains('light')
+    const styles = getComputedStyle(root)
+    const triplet = (name: string) => styles.getPropertyValue(name).trim().split(/\s+/).map(Number)
+    // Strands blend from one colour to the other across the ribbon
+    const from = triplet('--ribbon-a')
+    const to = triplet('--ribbon-b')
 
     ctx!.clearRect(0, 0, width, height)
-    // Additive blending makes crossings glow on the dark theme
-    ctx!.globalCompositeOperation = light ? 'source-over' : 'lighter'
     ctx!.lineWidth = 1
 
     for (let i = 0; i < STRANDS; i++) {
@@ -56,8 +57,11 @@ onMounted(() => {
         if (y === 0) ctx!.moveTo(x, y)
         else ctx!.lineTo(x, y)
       }
-      const alpha = (light ? 0.1 : 0.05) + 0.2 * (1 - Math.abs(u) * 2)
-      ctx!.strokeStyle = i % 9 === 0 && !light ? `rgba(255,225,200,${alpha})` : `rgba(${accent},${alpha})`
+      // Fine strands need a fair amount of ink on a pale page; strongest in the middle
+      const alpha = 0.17 + 0.34 * (1 - Math.abs(u) * 2)
+      const mix = i / (STRANDS - 1)
+      const rgb = from.map((channel, c) => Math.round(channel + (to[c]! - channel) * mix))
+      ctx!.strokeStyle = `rgba(${rgb},${alpha})`
       ctx!.stroke()
     }
 
@@ -83,21 +87,18 @@ onMounted(() => {
   const ro = new ResizeObserver(resize)
   ro.observe(el)
 
-  // Redraw on theme change so the still frame (reduced motion) picks up the new colour
-  const themeObserver = new MutationObserver(restart)
-  themeObserver.observe(document.documentElement, { attributes: true, attributeFilter: ['class'] })
-
   onUnmounted(() => {
     cancelAnimationFrame(frame)
     ro.disconnect()
-    themeObserver.disconnect()
     probe.remove()
   })
 })
 </script>
 
 <style>
+/* Fades in after the first frame is drawn, so it doesn't pop onto the page */
 .ribbon {
+  animation: ribbonIn 1.8s ease-out 0.15s both;
   position: absolute;
   top: 0;
   right: 0;
@@ -112,5 +113,9 @@ onMounted(() => {
   .ribbon {
     opacity: 0.85;
   }
+}
+
+@keyframes ribbonIn {
+  from { opacity: 0; }
 }
 </style>
