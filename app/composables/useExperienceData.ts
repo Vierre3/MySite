@@ -5,12 +5,12 @@ export interface ExperienceEntry {
 
 export function useExperienceData(): ExperienceEntry[] {
   return [
-    // Epitech pinned first (finishes last, still ongoing), then the internships
-    // newest-first. Keys stay chronological (naitways = oldest); only the
-    // displayed order is reversed.
-    { key: 'epitech', current: true },
+    // Current exchange programme first, then internships newest-first, then the
+    // degree (still ongoing). Keys stay chronological (naitways = oldest).
+    { key: 'rotterdam', current: true },
     { key: 'naitways3' },
     { key: 'naitways2' },
     { key: 'naitways' },
+    { key: 'epitech', current: true },
   ]
 }

@@ -1,58 +1,64 @@
 <template>
-  <div class="fixed top-0 left-0 w-full h-screen pointer-events-none overflow-hidden" style="z-index: 0;">
-    <!-- Gradient orbs - responsive sizes, visible on all screens -->
-    <div
-      class="absolute w-[350px] h-[350px] md:w-[500px] md:h-[500px] lg:w-[700px] lg:h-[700px] rounded-full blur-[56px] md:blur-[88px]"
-      style="background: radial-gradient(circle, rgb(255,107,0) 0%, transparent 70%); top: -5%; right: -15%; opacity: 0.32; animation: float-slow 8s ease-in-out infinite;"
-    />
-    <div
-      class="absolute w-[300px] h-[300px] md:w-[400px] md:h-[400px] lg:w-[600px] lg:h-[600px] rounded-full blur-[50px] md:blur-[74px]"
-      style="background: radial-gradient(circle, rgb(255,138,51) 0%, transparent 70%); bottom: 5%; left: -10%; opacity: 0.24; animation: float 10s ease-in-out infinite;"
-    />
-    <div
-      class="absolute w-[250px] h-[250px] md:w-[300px] md:h-[300px] lg:w-[400px] lg:h-[400px] rounded-full blur-[44px] md:blur-[58px]"
-      style="background: radial-gradient(circle, rgb(74,58,255) 0%, transparent 70%); top: 35%; left: 45%; opacity: 0.15; animation: float-slow 12s ease-in-out infinite reverse;"
-    />
-    <div
-      class="absolute w-[200px] h-[200px] md:w-[250px] md:h-[250px] lg:w-[350px] lg:h-[350px] rounded-full blur-[50px] md:blur-[66px]"
-      style="background: radial-gradient(circle, rgb(255,107,0) 0%, transparent 70%); top: 60%; right: 10%; opacity: 0.15; animation: float 14s ease-in-out infinite;"
-    />
-
-    <!-- Grid pattern overlay -->
-    <div
-      class="absolute inset-0"
-      :style="{ opacity: 0.1, backgroundImage: `linear-gradient(rgba(${gridLine},0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(${gridLine},0.1) 1px, transparent 1px)`, backgroundSize: '60px 60px' }"
-    />
-
-    <!-- Floating geometric shapes -->
-    <div
-      v-for="shape in shapes"
-      :key="shape.id"
-      class="absolute"
-      :class="[shape.class, shape.hideOnMobile ? 'hidden sm:block' : '']"
-      :style="shape.style"
-    />
+  <div class="site-bg" aria-hidden="true">
+    <HeroVisual />
   </div>
 </template>
 
-<script setup lang="ts">
-const { theme } = useTheme()
+<style>
+/* Backdrop: soft colour washes and a faint grid, painted as gradients (no blur
+   filter). Wash sizes are tied to the screen width, not to the layer: the layer
+   is several screens tall, and circles sized from it would be wider than a
+   phone screen and tint the whole view one flat colour. */
+.site-bg {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background:
+    linear-gradient(rgb(var(--opposite) / 0.025) 1px, transparent 1px) 0 0 / 60px 60px,
+    linear-gradient(90deg, rgb(var(--opposite) / 0.025) 1px, transparent 1px) 0 0 / 60px 60px,
+    radial-gradient(circle 95vw at 100% 0%, rgb(var(--orange-accent) / 0.22), transparent),
+    radial-gradient(circle 85vw at 0% 20%, rgb(var(--orange-light) / 0.15), transparent),
+    radial-gradient(circle 80vw at 70% 40%, rgb(74 58 255 / 0.11), transparent),
+    radial-gradient(circle 85vw at 100% 58%, rgb(var(--orange-accent) / 0.16), transparent),
+    radial-gradient(circle 85vw at 0% 79%, rgb(var(--orange-light) / 0.15), transparent),
+    radial-gradient(circle 90vw at 100% 100%, rgb(var(--orange-accent) / 0.18), transparent);
+}
 
-const gridLine = computed(() => theme.value === 'light' ? '0,0,0' : '255,255,255')
+/* Wide screens: fewer, larger washes */
+@media (min-width: 1024px) {
+  .site-bg {
+    background:
+      linear-gradient(rgb(var(--opposite) / 0.025) 1px, transparent 1px) 0 0 / 60px 60px,
+      linear-gradient(90deg, rgb(var(--opposite) / 0.025) 1px, transparent 1px) 0 0 / 60px 60px,
+      radial-gradient(circle at 100% 0%, rgb(var(--orange-accent) / 0.2), transparent 45%),
+      radial-gradient(circle at 0% 95%, rgb(var(--orange-light) / 0.14), transparent 40%),
+      radial-gradient(circle at 55% 45%, rgb(74 58 255 / 0.09), transparent 35%),
+      radial-gradient(circle at 88% 70%, rgb(var(--orange-accent) / 0.08), transparent 30%);
+  }
+}
 
-const a = '255,107,0'
-const shapes = [
-  { id: 1, class: 'w-2 h-2 rotate-45', style: `background-color: rgba(${a},0.35); top: 45%; left: 8%; animation: float 7s ease-in-out infinite reverse;`, hideOnMobile: false },
-  { id: 2, class: 'w-5 h-5 border rotate-45', style: `border-color: rgba(${a},0.2); top: 65%; right: 25%; animation: float-slow 9s ease-in-out infinite;`, hideOnMobile: true },
-  { id: 3, class: 'w-2 h-2 rotate-45', style: `background-color: rgba(${a},0.3); top: 85%; left: 20%; animation: float 5s ease-in-out infinite;`, hideOnMobile: false },
-  { id: 4, class: 'w-3 h-3 rounded-full', style: `background-color: rgba(${a},0.3); top: 15%; right: 30%; animation: float-slow 7s ease-in-out infinite;`, hideOnMobile: false },
-  { id: 5, class: 'w-2 h-2 rounded-full', style: `background-color: rgba(${a},0.25); top: 35%; left: 25%; animation: float 6s ease-in-out infinite reverse;`, hideOnMobile: false },
-  { id: 6, class: 'w-1.5 h-1.5 rounded-full', style: `background-color: rgba(${a},0.4); top: 50%; right: 12%; animation: float-slow 5s ease-in-out infinite;`, hideOnMobile: false },
-  { id: 7, class: 'w-5 h-5 border rounded-full', style: `border-color: rgba(${a},0.2); top: 80%; left: 60%; animation: float 7s ease-in-out infinite;`, hideOnMobile: true },
-  { id: 8, class: 'w-4 h-4 border rounded-full', style: `border-color: rgba(${a},0.3); top: 10%; left: 55%; animation: float-slow 8s ease-in-out infinite reverse;`, hideOnMobile: true },
-  { id: 9, class: 'w-1 h-1 rounded-full', style: `background-color: rgba(${a},0.5); top: 18%; left: 35%; animation: float 4s ease-in-out infinite;`, hideOnMobile: false },
-  { id: 10, class: 'w-1 h-1 rounded-full', style: `background-color: rgba(${a},0.4); top: 42%; right: 45%; animation: float-slow 5s ease-in-out infinite;`, hideOnMobile: false },
-  { id: 11, class: 'w-3 h-3 border rotate-45', style: `border-color: rgba(${a},0.25); top: 38%; right: 5%; animation: float 10s ease-in-out infinite;`, hideOnMobile: true },
-  { id: 12, class: 'w-2 h-2 rotate-45', style: `background-color: rgba(${a},0.2); top: 72%; right: 50%; animation: float-slow 7s ease-in-out infinite reverse;`, hideOnMobile: false },
-]
-</script>
+/* Parallax: the layer always moves at 15% of the scroll speed, however long the
+   page is. It is laid out in the page (absolute, so it would scroll away at full
+   speed) and a scroll-driven animation pushes it back down by 85% of the
+   distance scrolled. Its height is exactly what that leaves visible:
+   one screen + 15% of the scrollable distance = 15% of the page + 85vh.
+   The end offset, (page - screen) * 0.85, written in terms of the layer's own
+   height (the % in translate) is (100% - 100vh) * 0.85 / 0.15.
+   Decorative, so browsers without scroll-driven animations keep it fixed. */
+@media (prefers-reduced-motion: no-preference) {
+  @supports (animation-timeline: scroll()) {
+    .site-bg {
+      position: absolute;
+      inset: 0 0 auto;
+      height: calc(15% + 85vh);
+      animation: site-bg-drift linear both;
+      animation-timeline: scroll(root);
+    }
+  }
+}
+
+@keyframes site-bg-drift {
+  to { transform: translateY(calc((100% - 100vh) * 0.85 / 0.15)); }
+}
+</style>

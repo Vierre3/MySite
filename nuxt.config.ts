@@ -1,5 +1,10 @@
 const siteUrl = process.env.NUXT_PUBLIC_SITE_URL || ''
 
+// Defaults for the static redirect pages and for crawlers that don't run JS.
+// The per-locale title/description are set in app.vue from the `seo.*` messages.
+const title = 'Pierre-Yves Guiraudet – Full-Stack Developer'
+const description = 'Portfolio of Pierre-Yves Guiraudet, full-stack developer and Epitech Paris student: web platforms, systems programming and games.'
+
 export default defineNuxtConfig({
   compatibilityDate: '2025-07-15',
   devtools: { enabled: true },
@@ -18,10 +23,15 @@ export default defineNuxtConfig({
 
   css: ['~/assets/css/fonts.css'],
 
+  // Static site: every icon is known at build time, so bundle the ones the code
+  // references and never fetch from the Iconify API at runtime.
+  icon: {
+    provider: 'none',
+    clientBundle: { scan: true },
+  },
+
   // Inline the (small) render-blocking entry stylesheet into the prerendered
-  // HTML so first paint isn't gated on a separate CSS round-trip (~150ms). The
-  // icon CSS is already inlined by @nuxt/icon regardless; this only folds in the
-  // ~7 KiB gz component/utility sheet, removing the last render-blocking request.
+  // HTML so first paint isn't gated on a separate CSS round-trip.
   features: {
     inlineStyles: () => true,
   },
@@ -56,9 +66,6 @@ export default defineNuxtConfig({
       const fs = require('node:fs')
       const path = require('node:path')
       const outputDir = path.resolve('.output/public')
-      const siteUrl = process.env.NUXT_PUBLIC_SITE_URL || ''
-      const title = 'Pierre-Yves Guiraudet | Full-Stack Developer'
-      const description = 'Pierre-Yves Guiraudet — Full-Stack Developer & Epitech Paris student. Portfolio showcasing web, systems, and game development projects.'
       const localeRedirect = `<!DOCTYPE html>
 <html>
 <head>
@@ -123,8 +130,8 @@ export default defineNuxtConfig({
             url: siteUrl || 'https://vierre3.dev',
             image: `${siteUrl || 'https://vierre3.dev'}/images/profile.webp`,
             jobTitle: 'Full-Stack Developer',
-            description: 'Full-Stack Developer and Epitech Paris student.',
-            alumniOf: { '@type': 'CollegeOrUniversity', name: 'Epitech' },
+            description,
+            affiliation: { '@type': 'CollegeOrUniversity', name: 'Epitech' },
             sameAs: [
               'https://github.com/Vierre3',
               'https://www.linkedin.com/in/pierreyves-guiraudet/',
@@ -132,19 +139,15 @@ export default defineNuxtConfig({
           }),
         },
       ],
-      title: 'Pierre-Yves Guiraudet | Full-Stack Developer',
+      title,
       meta: [
-        { name: 'description', content: 'Pierre-Yves Guiraudet — Full-Stack Developer & Epitech Paris student. Portfolio showcasing web, systems, and game development projects.' },
+        { name: 'description', content: description },
         { property: 'og:type', content: 'website' },
-        { property: 'og:url', content: `${siteUrl}/` },
-        { property: 'og:title', content: 'Pierre-Yves Guiraudet | Full-Stack Developer' },
-        { property: 'og:description', content: 'Pierre-Yves Guiraudet — Full-Stack Developer & Epitech Paris student. Portfolio showcasing web, systems, and game development projects.' },
+        { property: 'og:site_name', content: 'Pierre-Yves Guiraudet' },
         { property: 'og:image', content: `${siteUrl}/og-image.png` },
         { property: 'og:image:width', content: '1200' },
         { property: 'og:image:height', content: '630' },
         { name: 'twitter:card', content: 'summary_large_image' },
-        { name: 'twitter:title', content: 'Pierre-Yves Guiraudet | Full-Stack Developer' },
-        { name: 'twitter:description', content: 'Pierre-Yves Guiraudet — Full-Stack Developer & Epitech Paris student. Portfolio showcasing web, systems, and game development projects.' },
         { name: 'twitter:image', content: `${siteUrl}/og-image.png` },
       ],
       link: [
@@ -152,8 +155,9 @@ export default defineNuxtConfig({
         { rel: 'icon', type: 'image/png', sizes: '48x48', href: '/favicon-48.png' },
         { rel: 'icon', type: 'image/png', sizes: '192x192', href: '/favicon-192.png' },
         { rel: 'apple-touch-icon', sizes: '180x180', href: '/apple-touch-icon.png' },
+        // Only the latin subset is preloaded: no page text needs latin-ext, and a
+        // preload would download it regardless of unicode-range.
         { rel: 'preload', href: '/fonts/inter-latin.woff2', as: 'font', type: 'font/woff2', crossorigin: '' },
-        { rel: 'preload', href: '/fonts/inter-latin-ext.woff2', as: 'font', type: 'font/woff2', crossorigin: '' },
       ],
     },
   },

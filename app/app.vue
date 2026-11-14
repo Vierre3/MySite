@@ -1,6 +1,6 @@
 <template>
   <div
-    class="min-h-screen bg-dark-bg text-text-primary font-sans antialiased transition-[background-color,color] duration-300"
+    class="relative min-h-screen bg-dark-bg text-text-primary font-sans antialiased transition-[background-color,color] duration-300"
     :class="{ 'skip-animations': isRestoring }"
   >
     <HeroBackground />
@@ -8,10 +8,11 @@
     <NuxtPage />
     <main class="relative z-10">
       <HeroSection />
-      <AboutSection />
+      <CaseStudySection />
+      <ProjectsSection />
       <SkillsSection />
       <ExperienceSection />
-      <ProjectsSection />
+      <AboutSection />
       <ContactSection />
     </main>
     <FooterSection />
@@ -21,28 +22,38 @@
 <script setup lang="ts">
 const { isRestoring } = useScrollRestore()
 setupScrollRestore()
-useTheme()
+const { theme } = useTheme()
 
 // Remove pre-hydration loading class now that Vue is in control
 onMounted(() => document.documentElement.classList.remove('loading'))
 
 // Save current locale to localStorage for the redirect pages (index.html, 404.html)
-const { locale } = useI18n()
+const { locale, t } = useI18n()
 
 if (import.meta.client) {
   localStorage.setItem('locale', locale.value)
   watch(locale, (l) => localStorage.setItem('locale', l))
 }
 
-const siteUrl = useRuntimeConfig().public.siteUrl as string
-const canonicalUrl = computed(() => `${siteUrl}/${locale.value}`)
+// lang attribute, canonical, hreflang alternates and og:locale for the current locale
+const localeHead = useLocaleHead()
 
-useHead({
-  htmlAttrs: { lang: locale },
-  link: [{ rel: 'canonical', href: canonicalUrl }],
+useHead(() => ({
+  htmlAttrs: localeHead.value.htmlAttrs,
+  link: localeHead.value.link,
   meta: [
-    { name: 'theme-color', content: computed(() => useTheme().theme.value === 'light' ? '#f5f5f7' : '#0a0a1a') },
+    ...(localeHead.value.meta || []),
+    { name: 'theme-color', content: theme.value === 'light' ? '#f5f5f7' : '#0a0a1a' },
   ],
+}))
+
+useSeoMeta({
+  title: () => t('seo.title'),
+  description: () => t('seo.description'),
+  ogTitle: () => t('seo.title'),
+  ogDescription: () => t('seo.description'),
+  twitterTitle: () => t('seo.title'),
+  twitterDescription: () => t('seo.description'),
 })
 </script>
 
@@ -52,7 +63,7 @@ useHead({
 .dark {
   --orange-accent: 255 107 0;
   --orange-light: 255 138 51;
-  --orange-glow: rgba(255, 107, 0, 0.3);
+  --on-accent: 25 12 0;
   --glass: rgba(255, 255, 255, 0.05);
   --glass-hover: rgba(255, 255, 255, 0.08);
   --glass-border: rgba(255, 255, 255, 0.1);
@@ -63,10 +74,14 @@ useHead({
   --shadow-color: rgba(120, 120, 200, 0.1);
 }
 
+/* Light accent is a deeper orange so orange text and white-on-orange buttons
+   keep a 4.5:1 contrast on the pale background. The second orange (tag text,
+   button hover) goes a shade darker here for the same reason; on the dark theme
+   it is the original lighter, yellower orange. */
 .light {
-  --orange-accent: 229 90 0;
-  --orange-light: 255 138 51;
-  --orange-glow: rgba(255, 107, 0, 0.15);
+  --orange-accent: 194 72 0;
+  --orange-light: 176 64 0;
+  --on-accent: 255 255 255;
   --glass: rgba(0, 0, 0, 0.05);
   --glass-hover: rgba(0, 0, 0, 0.08);
   --glass-border: rgba(0, 0, 0, 0.1);
@@ -79,6 +94,22 @@ useHead({
 
 html {
   background-color: rgb(var(--dark-bg));
+  /* Kill the default grey tap-flash on mobile — press feedback comes from the
+     :active states on buttons/links instead. */
+  -webkit-tap-highlight-color: transparent;
+  /* No scroll anchoring: when the project list changes length, the browser would
+     otherwise shift the page to hold a later section still, moving the filter
+     tabs away from under the pointer. */
+  overflow-anchor: none;
+}
+
+body {
+  overflow-x: hidden;
+}
+
+:focus-visible {
+  outline: 2px solid rgb(var(--orange-accent));
+  outline-offset: 2px;
 }
 
 /* Theme transition — only active during theme switch to avoid permanent GPU overhead */
@@ -89,20 +120,8 @@ html.theme-switching .inverted-corner {
   transition: --nav-bg-top 300ms ease, --corner-border 300ms ease;
 }
 
-body {
-  overflow-x: hidden;
-}
-
-/* Kill the default grey tap-flash on mobile — press feedback comes from the
-   :active states on buttons/links instead. */
-html {
-  -webkit-tap-highlight-color: transparent;
-}
-
-
 /* When restoring scroll position, skip all entrance animations */
 .skip-animations .scroll-reveal {
-  opacity: 1 !important;
   transform: none !important;
   transition: none !important;
 }
@@ -112,7 +131,7 @@ html {
   transition: none !important;
 }
 
-/* Pre-hydration only: prevent scroll-reveal opacity:0 flash before Vue mounts */
+/* Pre-hydration only: don't offset revealed content before Vue mounts */
 html.loading.scrolled .scroll-reveal {
   transform: none !important;
   transition: none !important;

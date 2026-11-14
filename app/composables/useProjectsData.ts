@@ -1,19 +1,20 @@
 export interface Project {
   key: string
   techTags: string[]
-  type: 'personal' | 'epitech' | 'hackathon' | 'jam'
+  type: 'personal' | 'epitech' | 'rotterdam' | 'hackathon' | 'jam'
   year: number
   current?: boolean
   featured?: boolean
   github?: string
   liveUrl?: string
+  playUrl?: string
 }
 
 export function useProjectsData(): Project[] {
   return [
     {
       key: 'Those Who Listen',
-      techTags: ['Nuxt', 'Python', 'PyTorch', 'OpenVoice', 'Unity', 'C#', 'Game Design'],
+      techTags: ['Nuxt', 'Python', 'PyTorch', 'OpenVoice', 'Unity', 'C#'],
       type: 'epitech',
       year: 2026,
       current: true,
@@ -27,14 +28,44 @@ export function useProjectsData(): Project[] {
       current: true,
       featured: true,
       github: 'https://github.com/Vierre3/LoCode',
-      liveUrl: 'https://locode.vierre3.dev/',
+      playUrl: 'https://locode.vierre3.dev/',
+    },
+    {
+      key: 'Fortunes of 1877',
+      techTags: ['Unity', 'C#', 'Inverse Kinematics', 'Physics', '3D'],
+      type: 'rotterdam',
+      year: 2026,
+      current: true,
+      liveUrl: 'https://fortunesof1877.com/',
+    },
+    {
+      key: 'Safekeeping',
+      techTags: ['Unity', 'C#', 'A* Pathfinding', 'WebGL', 'Android'],
+      type: 'rotterdam',
+      year: 2026,
+      featured: true,
+      liveUrl: 'https://safekeeping.vierre3.dev/',
+      playUrl: 'https://safekeeping.vierre3.dev/play/',
+    },
+    {
+      key: 'Copaintes',
+      techTags: ['Nuxt', 'Vue', 'Static site', 'Responsive'],
+      type: 'personal',
+      year: 2026,
+      liveUrl: 'https://copaintes.com/',
+    },
+    {
+      key: 'Portfolio',
+      techTags: ['Nuxt', 'Vue', 'Tailwind CSS', 'i18n', 'Canvas'],
+      type: 'personal',
+      year: 2026,
+      github: 'https://github.com/Vierre3/MySite/',
     },
     {
       key: 'Event Horizon 5min',
       techTags: ['Godot', 'GDScript', 'Game Design'],
       type: 'jam',
       year: 2026,
-      featured: true,
       github: 'https://github.com/flav-code/game-jam-five-minutes',
     },
     {
@@ -108,6 +139,7 @@ export function useProjectsData(): Project[] {
       techTags: ['Nuxt', 'Vue', 'Deno', 'MongoDB', 'Docker'],
       type: 'epitech',
       year: 2025,
+      featured: true,
       github: 'https://github.com/BjrTom/Survivor-JEB/tree/dev',
     },
     {
@@ -115,7 +147,6 @@ export function useProjectsData(): Project[] {
       techTags: ['Node.js', 'Nuxt', 'AI', 'Real-time'],
       type: 'hackathon',
       year: 2025,
-      featured: true,
       github: 'https://github.com/AxiomePro/vueling-hackathon-ai',
     },
     {
@@ -129,7 +160,6 @@ export function useProjectsData(): Project[] {
       techTags: ['C', 'UNIX', 'Parsing', 'System Programming'],
       type: 'epitech',
       year: 2024,
-      featured: true,
       github: 'https://github.com/Vierre3/42sh',
     },
     {
@@ -141,10 +171,9 @@ export function useProjectsData(): Project[] {
     },
     {
       key: 'Flame Your Mind',
-      techTags: ['Godot', 'GDScript', 'Game Design'],
+      techTags: ['Godot', 'Unreal Engine 5', 'GDScript', 'Game Design'],
       type: 'jam',
       year: 2024,
-      featured: true,
       github: 'https://github.com/AxiomePro/FlameYourMind',
     },
     {
@@ -152,7 +181,6 @@ export function useProjectsData(): Project[] {
       techTags: ['Godot', 'GDScript', 'Game Design'],
       type: 'jam',
       year: 2024,
-      featured: true,
       github: 'https://github.com/AxiomePro/RobbersAndCat',
     },
   ]

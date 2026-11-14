@@ -1,52 +1,48 @@
 <template>
-  <section id="contact" class="pt-24 pb-12 px-4">
-    <div class="max-w-3xl mx-auto">
-      <UiSectionTitle title-key="contact.title" />
+  <UiSection id="contact" title-key="contact.title">
+    <UiScrollReveal>
+      <UiGlassCard class="p-6 sm:p-8 md:p-12 text-center max-w-3xl mx-auto">
+        <p class="text-text-secondary text-lg text-balance mb-6">
+          {{ $t('contact.subtitle') }}
+        </p>
 
-      <UiScrollReveal>
-        <UiGlassCard hover class="p-8 md:p-12 text-center">
-          <p class="text-text-secondary text-lg mb-10">
-            {{ $t('contact.subtitle') }}
-          </p>
+        <!-- Address is decoded on the client only, to keep it out of the static HTML -->
+        <p class="min-h-8 mb-8">
+          <a
+            v-if="email"
+            :href="`mailto:${email}`"
+            class="text-sm min-[390px]:text-base sm:text-lg md:text-2xl font-semibold text-text-primary hover:text-orange-accent active:text-orange-accent transition-colors break-all"
+          >
+            {{ email }}
+          </a>
+        </p>
 
-          <div class="flex flex-col sm:flex-row items-center justify-center gap-6">
-            <a
-              :href="mailHref"
-              class="flex items-center gap-3 px-6 py-4 rounded-xl bg-dark-bg/50 border border-glass-border hover:border-orange-accent/40 hover:shadow-[0_0_20px_rgba(255,107,0,0.2)] hover:scale-105 active:border-orange-accent/40 active:shadow-[0_0_20px_rgba(255,107,0,0.2)] active:scale-105 transition-all duration-300 group"
-            >
-              <Icon name="mdi:email-outline" class="w-6 h-6 text-text-secondary group-hover:text-text-primary group-active:text-text-primary transition-colors" />
-              <span class="text-text-secondary group-hover:text-text-primary group-active:text-text-primary transition-colors">{{ $t('contact.email') }}</span>
-            </a>
-
-            <a
-              href="https://github.com/Vierre3/"
-              target="_blank"
-              rel="noopener noreferrer"
-              class="flex items-center gap-3 px-6 py-4 rounded-xl bg-dark-bg/50 border border-glass-border hover:border-orange-accent/40 hover:shadow-[0_0_20px_rgba(255,107,0,0.2)] hover:scale-105 active:border-orange-accent/40 active:shadow-[0_0_20px_rgba(255,107,0,0.2)] active:scale-105 transition-all duration-300 group"
-            >
-              <Icon name="mdi:github" class="w-6 h-6 text-text-secondary group-hover:text-text-primary group-active:text-text-primary transition-colors" />
-              <span class="text-text-secondary group-hover:text-text-primary group-active:text-text-primary transition-colors">{{ $t('contact.github') }}</span>
-            </a>
-
-            <a
-              href="https://www.linkedin.com/in/pierreyves-guiraudet/"
-              target="_blank"
-              rel="noopener noreferrer"
-              class="flex items-center gap-3 px-6 py-4 rounded-xl bg-dark-bg/50 border border-glass-border hover:border-orange-accent/40 hover:shadow-[0_0_20px_rgba(255,107,0,0.2)] hover:scale-105 active:border-orange-accent/40 active:shadow-[0_0_20px_rgba(255,107,0,0.2)] active:scale-105 transition-all duration-300 group"
-            >
-              <Icon name="mdi:linkedin" class="w-6 h-6 text-text-secondary group-hover:text-text-primary group-active:text-text-primary transition-colors" />
-              <span class="text-text-secondary group-hover:text-text-primary group-active:text-text-primary transition-colors">{{ $t('contact.linkedin') }}</span>
-            </a>
-          </div>
-        </UiGlassCard>
-      </UiScrollReveal>
-    </div>
-  </section>
+        <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+          <a
+            v-for="link in links"
+            :key="link.key"
+            :href="link.href"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="btn-ghost flex items-center gap-3 px-6 py-3 rounded-xl"
+          >
+            <Icon :name="link.icon" class="w-6 h-6" />
+            {{ $t(`contact.${link.key}`) }}
+          </a>
+        </div>
+      </UiGlassCard>
+    </UiScrollReveal>
+  </UiSection>
 </template>
 
 <script setup lang="ts">
-const mailHref = ref('')
+const links = [
+  { key: 'github', icon: 'mdi:github', href: 'https://github.com/Vierre3/' },
+  { key: 'linkedin', icon: 'mdi:linkedin', href: 'https://www.linkedin.com/in/pierreyves-guiraudet/' },
+]
+
+const email = ref('')
 onMounted(() => {
-  mailHref.value = atob('bWFpbHRvOnBpZXJyZS15dmVzLmd1aXJhdWRldEBlcGl0ZWNoLmV1')
+  email.value = atob('cGllcnJlLXl2ZXMuZ3VpcmF1ZGV0QGVwaXRlY2guZXU=')
 })
 </script>

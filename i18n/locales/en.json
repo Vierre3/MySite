@@ -1,47 +1,188 @@
 {
+  "seo": {
+    "title": "Pierre-Yves Guiraudet – Full-Stack Developer",
+    "description": "Portfolio of Pierre-Yves Guiraudet, full-stack developer and Epitech Paris student: web platforms, systems programming and games."
+  },
   "nav": {
     "theme_light": "light",
     "theme_dark": "dark",
     "openMenu": "open menu",
-    "closeMenu": "close menu"
+    "closeMenu": "close menu",
+    "top": "Back to top",
+    "main": "Main navigation",
+    "links": {
+      "skills": "Skills",
+      "work": "Case Study",
+      "projects": "Projects",
+      "experience": "Experience",
+      "about": "About",
+      "contact": "Contact"
+    }
   },
   "hero": {
-    "greeting": "Hello, I'm",
-    "name": "Pierre-Yves",
-    "title": "Full-Stack Developer",
-    "subtitle": "Epitech Paris",
-    "tagline": "Passionate about building elegant software, from low-level systems to modern web applications.",
-    "cta_contact": "Get in Touch",
+    "role": "Full-stack developer",
+    "name": "Pierre-Yves Guiraudet",
+    "statement": "I build web platforms, real-time interfaces and automation tools, from the database to the browser.",
+    "context": "Software engineering student at Epitech Paris, currently in Rotterdam.",
+    "cta_contact": "Get in touch",
     "cta_resume": "Download CV"
-  },
-  "about": {
-    "title": "About Me",
-    "bio": "I'm a 3rd-year student at Epitech Paris, based in Hauts-de-Seine. Passionate about software engineering across the full stack — from writing UNIX shells in C to building real-time web applications with Nuxt and Vue, I enjoy tackling complex problems and crafting clean, efficient solutions. I've gained professional experience through three internships at Naitways, where I developed enterprise-grade Python tools for cybersecurity and infrastructure automation.",
-    "stats": {
-      "languages": "Languages",
-      "languagesCount": "10+",
-      "projects": "Projects",
-      "projectsCount": "20+",
-      "experience": "Internship months",
-      "experienceCount": "12+"
-    }
   },
   "skills": {
     "title": "Skills",
     "languages": "Languages",
-    "frontend": "Frontend",
-    "backend": "Backend",
-    "devops": "DevOps",
-    "tools": "Build & Tools",
-    "creative": "Creative & Game Engines",
-    "other": "Other",
-    "soft": "Soft Skills"
+    "frontend": "Front end",
+    "backend": "Back end and data",
+    "infra": "Infrastructure and DevOps",
+    "creative": "Games and graphics",
+    "domains": "Domains"
+  },
+  "caseStudy": {
+    "title": "Case Study",
+    "meta": "Naitways · March to July 2026 · Sole developer",
+    "heading": "A cloud platform for running virtual machines across several servers",
+    "intro": "Naitways, a French hosting and network operator, needed an internal platform to create and operate KVM virtual machines across multiple physical hosts. I designed and built it end to end in four months: back end, web interface, infrastructure integration and documentation. About 40,000 lines across three codebases.",
+    "parts": {
+      "control": {
+        "name": "Control plane",
+        "detail": "FastAPI. Owns accounts, API keys, shared storage, audit and billing, and routes every operation to the right host.",
+        "size": "~12,200 lines of Python · 27 API routers · 25 database migrations"
+      },
+      "agent": {
+        "name": "Host agent",
+        "detail": "FastAPI, one per physical server. Drives libvirt: disks, network interfaces and consoles.",
+        "size": "~11,600 lines of Python · 21 API routers"
+      },
+      "web": {
+        "name": "Web interface",
+        "detail": "Nuxt 4 and TypeScript, with VNC and serial consoles in the browser.",
+        "size": "~16,100 lines · 29 pages · 28 components"
+      }
+    },
+    "problemsTitle": "Two problems worth telling",
+    "problems": {
+      "sse": {
+        "title": "Live state without polling",
+        "text": "The interface had to show machine state, IP addresses, alerts and audit entries as they changed. The control plane keeps a stream open to every host and fans events out to browsers by topic over Server-Sent Events. The trade-off: the event bus lives in one process, so each service runs as a single worker."
+      },
+      "libvirt": {
+        "title": "A seven-second endpoint",
+        "text": "Some endpoints intermittently took around 7 seconds. The cause was a bulk libvirt statistics call that polled every QEMU process over a shared connection. I measured the cost of each statistics flag and replaced the call with a lighter per-machine query."
+      }
+    },
+    "scopeTitle": "What it covers",
+    "scope": [
+      "VM lifecycle",
+      "Browser consoles",
+      "Open vSwitch networking",
+      "iSCSI and NFS storage",
+      "GPU passthrough",
+      "Multi-tenancy",
+      "Keycloak / OIDC",
+      "Audit trail",
+      "Usage metering"
+    ],
+    "note": "Internal product: the source code is not public.",
+    "diagram": {
+      "requests": "HTTP requests",
+      "commands": "commands",
+      "events": "live events (SSE)",
+      "perServer": "one per server",
+      "integrations": "Connected to",
+      "services": [
+        "Keycloak · login",
+        "InfluxDB · usage metering",
+        "RabbitMQ · signed actions",
+        "Audit collector"
+      ]
+    }
+  },
+  "projects": {
+    "title": "Projects",
+    "inProgress": "In Progress",
+    "viewCode": "View code",
+    "tryIt": "Visit the website",
+    "play": "Try it live",
+    "types": {
+      "epitech": "Epitech",
+      "rotterdam": "Hogeschool",
+      "personal": "Personal",
+      "hackathon": "Hackathon",
+      "jam": "Game Jam"
+    },
+    "filters": {
+      "featured": "Featured",
+      "all": "All",
+      "school": "School",
+      "personal": "Personal",
+      "events": "Jams & Hackathons"
+    },
+    "Those Who Listen": "Cooperative survival horror game where voice cloning becomes the enemy. Real-time voice cloning (<300ms latency, 100% local processing) lets creatures mimic your teammates. Built with OpenVoice and PyTorch.",
+    "LoCode": "Web-based code editor powered by Monaco Editor (VSCode's engine) with SSH remote development, split panels, integrated xterm.js terminal, and an Electron desktop app for cross-platform use.",
+    "Safekeeping": "Hand-drawn 2D tower-defense game for Android and the web, built in Unity. Place towers and walls, run supply belts back to your keep and hold off wave after wave of raiders, who adapt their path to what you build. Playable in the browser, with an online leaderboard.",
+    "Fortunes of 1877": "Open-world trading game in development at Hogeschool Rotterdam, built in Unity. You captain a balloon-powered ship between floating islands, buying goods where they're cheap and selling them where they're wanted, and every docking is done by hand.",
+    "Copaintes": "Website for Copaintes, a bar in the 10th arrondissement of Paris: the menu, upcoming events, table reservations and the story of the place. A fast static site with search-engine structured data.",
+    "Portfolio": "This website: a statically generated portfolio in English and French, with light and dark themes, an animated canvas ribbon and a background that scrolls at its own speed.",
+    "Glados": "Programming language built from scratch in Haskell — lexer, parser, type checker, and bytecode VM. Supports user-defined functions, lambdas, scoping, built-in I/O, and a REPL with colored output.",
+    "R-Type": "Multiplayer space shooter game engine in C++ using an Entity Component System architecture for efficient entity management, with networked gameplay and SFML 3.0 rendering.",
+    "Zappy": "Three-part networked simulation: a C server managing teams and resources on a virtual planet, a C++/Raylib 3D GUI for real-time visualization, and autonomous Python AI agents competing for survival.",
+    "42sh": "Feature-rich UNIX shell in C supporting pipes, redirections, logical operators (&&, {'||'}), alias system, arrow-key history navigation, cursor movement, and multiple built-in commands.",
+    "Arcade": "Modular game framework in C++ where games and display modules (NCurses, SDL, SFML) compile as shared libraries (.so) and load dynamically at runtime through a plugin interface.",
+    "Raytracer": "3D ray tracing engine in C++ rendering realistic scenes with configurable primitives, multiple light sources, and scene descriptions parsed from config files using libconfig++.",
+    "Cryptography": "Complete encryption suite in Python implementing AES symmetric encryption, RSA asymmetric key pairs, and PGP workflows — with a CLI tool for encrypting, decrypting, and signing messages.",
+    "Neural Network": "Multilayer perceptron built from scratch in Python with NumPy, without any ML framework — forward propagation, backpropagation with chain-rule gradients, sigmoid/Leaky ReLU activations, batch training, and JSON model persistence.",
+    "JEB Incubator": "Full-stack startup incubator platform with a Nuxt/Vue frontend, Deno backend API, MongoDB database, and Docker Compose deployment for streamlined local and production setup.",
+    "Gomoku": "AI player for Gomoku (5-in-a-row) in C++ with strategic board evaluation, game logging, and replay file generation. Implements the pbrain protocol for AI tournament compatibility.",
+    "RPG": "2D RPG game engine in C with CSFML featuring sprite-based characters, enemies, collision detection, room transitions, and a custom world-building system with texture asset management.",
+    "My Marvin": "Jenkins CI/CD automation using Groovy Job DSL to define build pipelines, Dockerized Jenkins instance with plugin management, and YAML-based workflow orchestration.",
+    "Vueling AI": "Real-time voice translation for aircraft enabling crew-passenger communication across up to 5 languages. Analyzes flight manifest data to prioritize onboard languages, with offline support and two modes: announcements and conversations.",
+    "IREP ChatBot": "Hackathon-built AI chatbot using Flask and a locally-hosted Ollama LLM for natural language understanding, with SQLite for conversation persistence and context-aware responses.",
+    "Flame Your Mind": "Exit 8-inspired game where you play a scientist trapped in a burning lunar base. Find the differences between scenes to escape through the floors. Built with Godot 4 and Unreal Engine 5.",
+    "Event Horizon 5min": "3D spaceship fighter set near a black hole's event horizon. Siphon energy from the singularity while time accelerates — you have 5 minutes to charge your warp drive. Features juicy animations and a tomato Easter egg. Built with Godot 4.",
+    "Lost In Space": "Solo arcade survival game where you pilot a small spaceship drifting through space. Dodge randomly spawning asteroids at increasing speed and survive as long as possible. Score based on survival time. Built with Godot 4.",
+    "Robbers & Cat": "Open-world heist game where you steal paintings for a cat mafia. Drive around the city, burglarize locations in Phasmophobia-style gameplay, and escape before the police catches you. Built with Godot 4."
+  },
+  "projectRoles": {
+    "LoCode": "Solo project.",
+    "Those Who Listen": "Team of 6. I build the real-time voice streaming between the server and Unity.",
+    "Safekeeping": "Team of 4. I built the pathfinding, towers, shop, web build and the game's website.",
+    "Fortunes of 1877": "Team of 13. I built the player controller, on-ship physics and rope docking.",
+    "Copaintes": "Solo project, built for the bar.",
+    "Portfolio": "Solo project.",
+    "Event Horizon 5min": "Team of 4. I worked on ship movement, the camera and enemy ships.",
+    "R-Type": "Team of 5. I built the ECS core, co-wrote the networking and set up CI.",
+    "Gomoku": "Team of 2. I wrote the minimax AI with alpha-beta pruning.",
+    "Neural Network": "Team of 2. I implemented the perceptron, its training and the chess analyser.",
+    "Glados": "Team of 4. I wrote most of it: parser, type checks, bytecode compiler and runtime.",
+    "Cryptography": "Team of 2. I implemented XOR, RSA and PGP-XOR.",
+    "Zappy": "Team of 5. I built the Python AI agents and their team strategy.",
+    "Lost In Space": "Team of 2. I built the main scene and finished the game loop.",
+    "Raytracer": "Team of 4. I built the optional CUDA renderer and the real-time view.",
+    "Arcade": "Team of 3, project lead. I built the plugin loader, the menu and Pacman.",
+    "My Marvin": "Team of 2. I wrote the Jenkins configuration, the seed job and the Docker setup.",
+    "JEB Incubator": "Team of 4. I led the Nuxt front end: search, login, startup pages and export.",
+    "Vueling AI": "Team of 6. I built the web front end: language selection, theming and mobile layout.",
+    "IREP ChatBot": "Hackathon team. I built the Flask app, the Ollama integration and the interface.",
+    "42sh": "Team of 4. I wrote most of the shell: history, line editing, completion and prompt.",
+    "RPG": "Team of 3. I built the map loading, player movement, sprite animation and CI.",
+    "Flame Your Mind": "Team of 3. I made the fire effect, the player controller and an animated door.",
+    "Robbers & Cat": "Team of 3. I built the drivable car, indoor movement, the HUD and the menus."
   },
   "experience": {
     "title": "Experience",
+    "rotterdam": {
+      "role": "Game Design and Development — Exchange Programme",
+      "company": "Hogeschool Rotterdam",
+      "date": "2026 - 2027",
+      "items": [
+        "Exchange year at Rotterdam University of Applied Sciences, in the Game Design and Development programme",
+        "Safekeeping: a 2D tower-defense game for Android and the web, built in Unity with a team",
+        "Worked on gameplay and systems: pathfinding optimisation, levels, a first-play tutorial, an online leaderboard with playtest telemetry, and object pooling",
+        "Now on a 3D exploration game in a team of thirteen, working on player movement and cameras"
+      ]
+    },
     "epitech": {
       "role": "Expert in Software Engineering",
-      "company": "Epitech",
+      "company": "Epitech Paris",
       "date": "2023 - 2028",
       "items": [
         "5-year program (BAC+5, RNCP Level 7) — project-based pedagogy fostering autonomy and teamwork",
@@ -55,13 +196,9 @@
       "company": "Naitways",
       "date": "Aug 2024 - Dec 2024",
       "items": [
-        "Developed 13+ enterprise Python tools for cybersecurity and infrastructure automation",
-        "Built CVE vulnerability search systems integrating NVD and Vulners APIs",
-        "Created FortiGate firewall policy management and synchronization tools",
-        "Implemented SSH log aggregation from FortiAnalyzer to InfluxDB",
-        "Built a Flask-based release notes generator from GitLab commits",
-        "Developed network device integrations (Juniper, LibreNMS, Wazuh)",
-        "Created an AI-powered code documentation tool using Ollama (local LLM)"
+        "Delivered 13+ Python tools for cybersecurity and infrastructure automation",
+        "Security: CVE vulnerability search on the NVD and Vulners APIs, FortiGate firewall policy synchronisation, SSH log aggregation from FortiAnalyzer to InfluxDB",
+        "Tooling: a Flask release-notes generator from GitLab commits, network device integrations (Juniper, LibreNMS, Wazuh) and a code documentation tool running on a local LLM (Ollama)"
       ]
     },
     "naitways2": {
@@ -69,7 +206,7 @@
       "company": "Naitways",
       "date": "Oct 2025 - Feb 2026",
       "items": [
-        "Polled internal database via REST API in order to generate and send an hardening report to clients",
+        "Polled the internal database through its REST API to generate hardening reports and send them to clients",
         "Worked on the NBOX - a satellite deployed on client servers for self-configuration and VM management",
         "Developed automation tools in Python for infrastructure management"
       ]
@@ -79,47 +216,30 @@
       "company": "Naitways",
       "date": "Mar 2026 - Jul 2026",
       "items": [
-        "Sole developer of an internal cloud platform for provisioning and operating a fleet of KVM virtual machines across multiple hypervisors — ~40,000 lines across three codebases",
-        "Designed a distributed FastAPI architecture: a control plane owning accounts, storage, audit and billing, plus a per-host agent driving libvirt",
-        "Built the Nuxt 4 / TypeScript web interface, including in-browser VNC (noVNC) and serial (xterm.js) consoles",
-        "Implemented an end-to-end Server-Sent Events pipeline streaming live VM state, alerts and audit entries from hypervisors to the browser",
-        "Integrated Keycloak/OIDC authentication, scoped API keys, per-VM metering into InfluxDB and a signed AMQP action consumer",
-        "Handled the infrastructure layer: Open vSwitch bridges, shared iSCSI/NFS storage pools, GPU passthrough and cloud-init provisioning"
+        "Sole developer of an internal cloud platform that provisions and operates KVM virtual machines across multiple hypervisors: about 40,000 lines across three codebases",
+        "Built the FastAPI control plane and per-host agents, the Nuxt 4 / TypeScript interface, and the live event pipeline between them",
+        "Integrated authentication (Keycloak/OIDC), usage metering, Open vSwitch networking and shared iSCSI/NFS storage. Details in the case study above"
       ]
     }
   },
-  "projects": {
-    "title": "Projects",
-    "inProgress": "In Progress",
-    "viewCode": "View code",
-    "tryIt": "Try it live",
-    "types": {
-      "all": "All",
-      "epitech": "Epitech",
-      "personal": "Personal",
-      "hackathon": "Hackathon",
-      "jam": "Game Jam"
-    },
-    "Those Who Listen": "Cooperative survival horror game where voice cloning becomes the enemy. Real-time voice cloning (<300ms latency, 100% local processing) lets creatures mimic your teammates. Built with OpenVoice and PyTorch.",
-    "LoCode": "Web-based code editor powered by Monaco Editor (VSCode's engine) with SSH remote development, split panels, integrated xterm.js terminal, and an Electron desktop app for cross-platform use.",
-    "Glados": "Programming language built from scratch in Haskell — lexer, parser, type checker, and bytecode VM. Supports user-defined functions, lambdas, scoping, built-in I/O, and a REPL with colored output.",
-    "R-Type": "Multiplayer space shooter game engine in C++ using an Entity Component System architecture for efficient entity management, with networked gameplay and SFML 3.0 rendering.",
-    "Zappy": "Three-part networked simulation: a C server managing teams and resources on a virtual planet, a C++/Raylib 3D GUI for real-time visualization, and autonomous Python AI agents competing for survival.",
-    "42sh": "Feature-rich UNIX shell in C supporting pipes, redirections, logical operators (&&, {'||'}), alias system, arrow-key history navigation, cursor movement, and multiple built-in commands.",
-    "Arcade": "Modular game framework in C++ where games and display modules (NCurses, SDL, SFML) compile as shared libraries (.so) and load dynamically at runtime through a plugin interface.",
-    "Raytracer": "3D ray tracing engine in C++ rendering realistic scenes with configurable primitives, multiple light sources, and scene descriptions parsed from config files using libconfig++.",
-    "Cryptography": "Complete encryption suite in Python implementing AES symmetric encryption, RSA asymmetric key pairs, and PGP workflows — with a CLI tool for encrypting, decrypting, and signing messages.",
-    "Neural Network": "Multilayer perceptron built from scratch in pure Python — forward propagation, backpropagation with chain-rule gradients, sigmoid/Leaky ReLU activations, batch training, and JSON model persistence.",
-    "JEB Incubator": "Full-stack startup incubator platform with a Nuxt/Vue frontend, Deno backend API, MongoDB database, and Docker Compose deployment for streamlined local and production setup.",
-    "Gomoku": "AI player for Gomoku (5-in-a-row) in C++ with strategic board evaluation, game logging, and replay file generation. Implements the pbrain protocol for AI tournament compatibility.",
-    "RPG": "2D RPG game engine in C with CSFML featuring sprite-based characters, enemies, collision detection, room transitions, and a custom world-building system with texture asset management.",
-    "My Marvin": "Jenkins CI/CD automation using Groovy Job DSL to define build pipelines, Dockerized Jenkins instance with plugin management, and YAML-based workflow orchestration.",
-    "Vueling AI": "Real-time voice translation for aircraft enabling crew-passenger communication across up to 5 languages. Analyzes flight manifest data to prioritize onboard languages, with offline support and two modes: announcements and conversations.",
-    "IREP ChatBot": "Hackathon-built AI chatbot using Flask and a locally-hosted Ollama LLM for natural language understanding, with SQLite for conversation persistence and context-aware responses.",
-    "Flame Your Mind": "Exit 8-inspired game where you play a scientist trapped in a burning lunar base. Find the differences between scenes to escape through the floors. Built with Godot 4 and Unreal Engine 5.",
-    "Event Horizon 5min": "3D spaceship fighter set near a black hole's event horizon. Siphon energy from the singularity while time accelerates — you have 5 minutes to charge your warp drive. Features juicy animations and a tomato Easter egg. Built with Godot 4.",
-    "Lost In Space": "Solo arcade survival game where you pilot a small spaceship drifting through space. Dodge randomly spawning asteroids at increasing speed and survive as long as possible. Score based on survival time. Built with Godot 4.",
-    "Robbers & Cat": "Open-world heist game where you steal paintings for a cat mafia. Drive around the city, burglarize locations in Phasmophobia-style gameplay, and escape before the police catches you. Built with Godot 4."
+  "about": {
+    "title": "About",
+    "bio": "I'm a fourth-year software engineering student at Epitech Paris, currently on exchange at Rotterdam University of Applied Sciences. Over three internships at Naitways, a French hosting and network operator, I went from writing Python automation tools to building a cloud platform alone, back end and front end. I also like systems and games: a UNIX shell in C, a programming language in Haskell, and several games made with Unity and Godot. I work in French, Spanish and English.",
+    "photoAlt": "Portrait of Pierre-Yves Guiraudet",
+    "stats": {
+      "internships": {
+        "value": "3",
+        "label": "Internships at Naitways"
+      },
+      "months": {
+        "value": "12+",
+        "label": "Months in industry"
+      },
+      "projects": {
+        "value": "25+",
+        "label": "Projects delivered"
+      }
+    }
   },
   "contact": {
     "title": "Contact",

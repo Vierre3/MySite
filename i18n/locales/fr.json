@@ -1,107 +1,127 @@
 {
+  "seo": {
+    "title": "Pierre-Yves Guiraudet – Développeur Full-Stack",
+    "description": "Portfolio de Pierre-Yves Guiraudet, développeur full-stack et étudiant à Epitech Paris : plateformes web, programmation système et jeux."
+  },
   "nav": {
     "theme_light": "clair",
     "theme_dark": "sombre",
     "openMenu": "ouvrir le menu",
-    "closeMenu": "fermer le menu"
+    "closeMenu": "fermer le menu",
+    "top": "Retour en haut",
+    "main": "Navigation principale",
+    "links": {
+      "skills": "Compétences",
+      "work": "Étude de cas",
+      "projects": "Projets",
+      "experience": "Expérience",
+      "about": "À propos",
+      "contact": "Contact"
+    }
   },
   "hero": {
-    "greeting": "Bonjour, je suis",
-    "name": "Pierre-Yves",
-    "title": "Développeur Full-Stack",
-    "subtitle": "Epitech Paris",
-    "tagline": "Passionné par la création de logiciels élégants, des systèmes bas niveau aux applications web modernes.",
-    "cta_contact": "Me Contacter",
+    "role": "Développeur full-stack",
+    "name": "Pierre-Yves Guiraudet",
+    "statement": "Je conçois des plateformes web, des interfaces temps réel et des outils d'automatisation, de la base de données au navigateur.",
+    "context": "Étudiant en ingénierie logicielle à Epitech Paris, actuellement à Rotterdam.",
+    "cta_contact": "Me contacter",
     "cta_resume": "Télécharger le CV"
-  },
-  "about": {
-    "title": "À Propos",
-    "bio": "Je suis étudiant en 3ème année à Epitech Paris, basé dans les Hauts-de-Seine. Passionné par le développement logiciel full-stack — de l'écriture de shells UNIX en C à la création d'applications web en temps réel avec Nuxt et Vue, j'aime relever des défis complexes et concevoir des solutions propres et efficaces. J'ai acquis une expérience professionnelle à travers trois stages chez Naitways, où j'ai développé des outils Python pour la cybersécurité et l'automatisation d'infrastructure.",
-    "stats": {
-      "languages": "Langages",
-      "languagesCount": "10+",
-      "projects": "Projets",
-      "projectsCount": "20+",
-      "experience": "Mois de stage",
-      "experienceCount": "12+"
-    }
   },
   "skills": {
     "title": "Compétences",
     "languages": "Langages",
-    "frontend": "Frontend",
-    "backend": "Backend",
-    "devops": "DevOps",
-    "tools": "Build & Outils",
-    "creative": "Créatif & Moteurs de jeu",
-    "other": "Autres",
-    "soft": "Savoir-être"
+    "frontend": "Front-end",
+    "backend": "Back-end et données",
+    "infra": "Infrastructure et DevOps",
+    "creative": "Jeux et graphisme",
+    "domains": "Domaines"
   },
-  "experience": {
-    "title": "Expérience",
-    "epitech": {
-      "role": "Expert en Ingénierie Logicielle",
-      "company": "Epitech",
-      "date": "2023 - 2028",
-      "items": [
-        "Programme en 5 ans (BAC+5, RNCP Niveau 7) — pédagogie par projet favorisant l'autonomie et le travail en équipe",
-        "25+ projets développés en C, C++, Haskell, Python, JavaScript et plus",
-        "Anglais: niveau B2 (Tepitech équivalent TOEIC 885)",
-        "Français / Espagnol bilingue"
-      ]
+  "caseStudy": {
+    "title": "Étude de cas",
+    "meta": "Naitways · Mars à juillet 2026 · Seul développeur",
+    "heading": "Une plateforme cloud pour exploiter des machines virtuelles sur plusieurs serveurs",
+    "intro": "Naitways, hébergeur et opérateur réseau français, avait besoin d'une plateforme interne pour créer et exploiter des machines virtuelles KVM sur plusieurs hôtes physiques. Je l'ai conçue et développée de bout en bout en quatre mois : back-end, interface web, intégration à l'infrastructure et documentation. Environ 40 000 lignes réparties sur trois bases de code.",
+    "parts": {
+      "control": {
+        "name": "Plan de contrôle",
+        "detail": "FastAPI. Gère les comptes, les clés d'API, le stockage partagé, l'audit et la facturation, et route chaque opération vers le bon hôte.",
+        "size": "~12 200 lignes de Python · 27 routeurs d'API · 25 migrations de base de données"
+      },
+      "agent": {
+        "name": "Agent d'hôte",
+        "detail": "FastAPI, un par serveur physique. Pilote libvirt : disques, interfaces réseau et consoles.",
+        "size": "~11 600 lignes de Python · 21 routeurs d'API"
+      },
+      "web": {
+        "name": "Interface web",
+        "detail": "Nuxt 4 et TypeScript, avec consoles VNC et série dans le navigateur.",
+        "size": "~16 100 lignes · 29 pages · 28 composants"
+      }
     },
-    "naitways": {
-      "role": "Développeur Logiciel Stagiaire",
-      "company": "Naitways",
-      "date": "Août 2024 - Déc 2024",
-      "items": [
-        "Développement de plus de 13 outils Python pour la cybersécurité et l'automatisation d'infrastructure",
-        "Création de systèmes de recherche de vulnérabilités CVE intégrant les APIs NVD et Vulners",
-        "Conception d'outils de gestion et synchronisation des politiques de pare-feu FortiGate",
-        "Implémentation de l'agrégation de logs SSH depuis FortiAnalyzer vers InfluxDB",
-        "Création d'un générateur de notes de version Flask à partir des commits GitLab",
-        "Développement d'intégrations réseau (Juniper, LibreNMS, Wazuh)",
-        "Création d'un outil de documentation de code par IA utilisant Ollama (LLM local)"
-      ]
+    "problemsTitle": "Deux problèmes qui méritent d'être racontés",
+    "problems": {
+      "sse": {
+        "title": "L'état en direct, sans polling",
+        "text": "L'interface devait afficher l'état des machines, les adresses IP, les alertes et les entrées d'audit dès qu'ils changeaient. Le plan de contrôle garde un flux ouvert vers chaque hôte et redistribue les événements aux navigateurs par sujet, via Server-Sent Events. La contrepartie : le bus d'événements vit dans un seul processus, donc chaque service tourne avec un seul worker."
+      },
+      "libvirt": {
+        "title": "Un endpoint qui mettait sept secondes",
+        "text": "Certains endpoints mettaient par intermittence environ 7 secondes à répondre. La cause : un appel groupé de statistiques libvirt qui interrogeait chaque processus QEMU sur une connexion partagée. J'ai mesuré le coût de chaque option de statistiques et remplacé l'appel par une requête plus légère, machine par machine."
+      }
     },
-    "naitways2": {
-      "role": "Développeur Logiciel Stagiaire (Temps partiel)",
-      "company": "Naitways",
-      "date": "Oct 2025 - Fév 2026",
-      "items": [
-        "Interrogation de la base de données interne via API REST afin de générer et envoyer un rapport de durcissement aux clients",
-        "Travail sur la NBOX - un satellite déployé sur les serveurs clients pour l'auto-configuration et la gestion des VMs",
-        "Développement d'outils d'automatisation en Python pour la gestion d'infrastructure"
-      ]
-    },
-    "naitways3": {
-      "role": "Développeur Full-Stack Stagiaire — Infrastructure Cloud",
-      "company": "Naitways",
-      "date": "Mars 2026 - Juil. 2026",
-      "items": [
-        "Seul développeur d'une plateforme cloud interne de provisionnement et d'exploitation d'un parc de machines virtuelles KVM réparties sur plusieurs hyperviseurs — ~40 000 lignes réparties sur trois bases de code",
-        "Conception d'une architecture distribuée en FastAPI : un plan de contrôle gérant comptes, stockage, audit et facturation, et un agent par hôte pilotant libvirt",
-        "Développement de l'interface web Nuxt 4 / TypeScript, incluant les consoles VNC (noVNC) et série (xterm.js) dans le navigateur",
-        "Mise en place d'une chaîne Server-Sent Events de bout en bout diffusant en temps réel l'état des VMs, les alertes et les entrées d'audit des hyperviseurs jusqu'au navigateur",
-        "Intégration de l'authentification Keycloak/OIDC, de clés d'API à portées, du relevé de consommation par VM vers InfluxDB et d'un consommateur AMQP d'actions signées",
-        "Prise en charge de la couche infrastructure : bridges Open vSwitch, pools de stockage partagés iSCSI/NFS, passthrough GPU et provisionnement cloud-init"
+    "scopeTitle": "Ce qu'elle couvre",
+    "scope": [
+      "Cycle de vie des VM",
+      "Consoles dans le navigateur",
+      "Réseau Open vSwitch",
+      "Stockage iSCSI et NFS",
+      "Passthrough GPU",
+      "Multi-tenant",
+      "Keycloak / OIDC",
+      "Journal d'audit",
+      "Mesure de consommation"
+    ],
+    "note": "Produit interne : le code source n'est pas public.",
+    "diagram": {
+      "requests": "requêtes HTTP",
+      "commands": "commandes",
+      "events": "événements en direct (SSE)",
+      "perServer": "un par serveur",
+      "integrations": "Connectée à",
+      "services": [
+        "Keycloak · connexion",
+        "InfluxDB · mesure de consommation",
+        "RabbitMQ · actions signées",
+        "Collecteur d'audit"
       ]
     }
   },
   "projects": {
     "title": "Projets",
     "inProgress": "En cours",
-    "viewCode": "Afficher le code",
-    "tryIt": "Essayer en ligne",
+    "viewCode": "Voir le code",
+    "tryIt": "Voir le site",
+    "play": "Essayer en ligne",
     "types": {
-      "all": "Tous",
       "epitech": "Epitech",
+      "rotterdam": "Hogeschool",
       "personal": "Personnel",
       "hackathon": "Hackathon",
       "jam": "Game Jam"
     },
-    "Those Who Listen": "Jeu survival horror coopératif où le clonage vocal devient l'ennemi. Clonage vocal temps réel (<300ms de latence, traitement 100% local) permettant aux créatures d'imiter vos coéquipiers. Construit avec OpenVoice et PyTorch.",
+    "filters": {
+      "featured": "Sélection",
+      "all": "Tous",
+      "school": "École",
+      "personal": "Personnel",
+      "events": "Jams et Hackathons"
+    },
+    "Those Who Listen": "Jeu survival horror coopératif où le clonage vocal devient l'ennemi. Clonage vocal temps réel (<300 ms de latence, traitement 100 % local) permettant aux créatures d'imiter vos coéquipiers. Construit avec OpenVoice et PyTorch.",
     "LoCode": "Éditeur de code web propulsé par Monaco Editor (le moteur de VSCode) avec développement distant SSH, panneaux divisés, terminal xterm.js intégré et une application Electron pour un usage multi-plateforme.",
+    "Safekeeping": "Tower defense 2D dessiné à la main pour Android et le web, réalisé avec Unity. Placez tours et murs, reliez-les à votre donjon par des convoyeurs de ravitaillement et repoussez des vagues de pillards qui adaptent leur chemin à vos constructions. Jouable dans le navigateur, avec un classement en ligne.",
+    "Fortunes of 1877": "Jeu de commerce en monde ouvert en cours de développement à la Hogeschool Rotterdam, réalisé avec Unity. Vous commandez un navire porté par un ballon entre des îles flottantes, achetez les marchandises là où elles sont bon marché pour les revendre là où elles sont recherchées, et chaque amarrage se fait à la main.",
+    "Copaintes": "Site web de Copaintes, un bar du 10e arrondissement de Paris : la carte, les événements à venir, la réservation de table et l'histoire du lieu. Un site statique rapide, avec données structurées pour les moteurs de recherche.",
+    "Portfolio": "Ce site : un portfolio généré statiquement, en français et en anglais, avec thèmes clair et sombre, un ruban animé en canvas et un arrière-plan qui défile à sa propre vitesse.",
     "Glados": "Langage de programmation créé from scratch en Haskell — lexer, parser, vérificateur de types et VM bytecode. Supporte les fonctions utilisateur, lambdas, portée de variables, I/O intégrées et un REPL avec sortie colorée.",
     "R-Type": "Moteur de jeu de tir spatial multijoueur en C++ utilisant une architecture Entity Component System pour la gestion efficace des entités, avec gameplay en réseau et rendu SFML 3.0.",
     "Zappy": "Simulation en réseau en trois parties : un serveur C gérant équipes et ressources sur une planète virtuelle, une GUI 3D C++/Raylib pour la visualisation temps réel, et des agents IA Python autonomes en compétition pour survivre.",
@@ -109,7 +129,7 @@
     "Arcade": "Framework de jeux modulaire en C++ où les jeux et modules d'affichage (NCurses, SDL, SFML) compilent en bibliothèques partagées (.so) et se chargent dynamiquement à l'exécution via une interface de plugins.",
     "Raytracer": "Moteur de ray tracing 3D en C++ rendant des scènes réalistes avec des primitives configurables, plusieurs sources de lumière, et des descriptions de scènes parsées depuis des fichiers de configuration via libconfig++.",
     "Cryptography": "Suite de chiffrement complète en Python implémentant AES symétrique, paires de clés RSA asymétriques et workflows PGP — avec un outil CLI pour chiffrer, déchiffrer et signer des messages.",
-    "Neural Network": "Perceptron multicouche construit from scratch en Python pur — propagation avant, rétropropagation avec gradients par règle de la chaîne, activations sigmoid/Leaky ReLU, entraînement par batch et persistance de modèle en JSON.",
+    "Neural Network": "Perceptron multicouche construit from scratch en Python avec NumPy, sans framework de ML — propagation avant, rétropropagation avec gradients par règle de la chaîne, activations sigmoid/Leaky ReLU, entraînement par batch et persistance de modèle en JSON.",
     "JEB Incubator": "Plateforme d'incubateur de startups full-stack avec frontend Nuxt/Vue, API backend Deno, base de données MongoDB et déploiement Docker Compose pour une mise en place locale et production simplifiée.",
     "Gomoku": "IA pour le Gomoku (5-en-ligne) en C++ avec évaluation stratégique du plateau, journalisation des parties et génération de fichiers de replay. Implémente le protocole pbrain pour la compatibilité avec les tournois d'IA.",
     "RPG": "Moteur de jeu RPG 2D en C avec CSFML comprenant personnages en sprites, ennemis, détection de collisions, transitions entre salles et un système de construction de monde avec gestion des assets de textures.",
@@ -120,6 +140,106 @@
     "Event Horizon 5min": "Jeu de combat spatial 3D près de l'horizon des événements d'un trou noir. Siphonnez l'énergie de la singularité tandis que le temps accélère — vous avez 5 minutes pour charger votre moteur warp. Animations juicy et Easter egg tomate. Réalisé avec Godot 4.",
     "Lost In Space": "Jeu d'arcade solo où vous pilotez un petit vaisseau dérivant dans l'espace. Esquivez des astéroïdes apparaissant aléatoirement à vitesse croissante et survivez le plus longtemps possible. Score basé sur le temps de survie. Réalisé avec Godot 4.",
     "Robbers & Cat": "Jeu de braquage en monde ouvert où vous volez des tableaux pour une mafia de chats. Conduisez à travers la ville, cambriolez des lieux dans un gameplay inspiré de Phasmophobia, et échappez-vous avant que la police ne vous attrape. Réalisé avec Godot 4."
+  },
+  "projectRoles": {
+    "LoCode": "Projet solo.",
+    "Those Who Listen": "Équipe de 6. Je développe le streaming vocal temps réel entre le serveur et Unity.",
+    "Safekeeping": "Équipe de 4. J'ai développé le pathfinding, les tours, la boutique, la version web et le site du jeu.",
+    "Fortunes of 1877": "Équipe de 13. J'ai développé le contrôleur du joueur, la physique à bord et l'amarrage par cordes.",
+    "Copaintes": "Projet solo, réalisé pour le bar.",
+    "Portfolio": "Projet solo.",
+    "Event Horizon 5min": "Équipe de 4. J'ai travaillé sur les déplacements du vaisseau, la caméra et les vaisseaux ennemis.",
+    "R-Type": "Équipe de 5. J'ai développé le cœur de l'ECS, co-écrit le réseau et mis en place la CI.",
+    "Gomoku": "Équipe de 2. J'ai écrit l'IA minimax avec élagage alpha-bêta.",
+    "Neural Network": "Équipe de 2. J'ai implémenté le perceptron, son entraînement et l'analyseur d'échecs.",
+    "Glados": "Équipe de 4. J'en ai écrit l'essentiel : parser, vérification de types, compilateur bytecode et runtime.",
+    "Cryptography": "Équipe de 2. J'ai implémenté XOR, RSA et PGP-XOR.",
+    "Zappy": "Équipe de 5. J'ai développé les agents IA en Python et leur stratégie d'équipe.",
+    "Lost In Space": "Équipe de 2. J'ai créé la scène principale et finalisé la boucle de jeu.",
+    "Raytracer": "Équipe de 4. J'ai développé le rendu CUDA optionnel et la vue temps réel.",
+    "Arcade": "Équipe de 3, chef de projet. J'ai développé le chargeur de plugins, le menu et Pacman.",
+    "My Marvin": "Équipe de 2. J'ai écrit la configuration Jenkins, le job seed et l'environnement Docker.",
+    "JEB Incubator": "Équipe de 4. J'ai mené le front-end Nuxt : recherche, connexion, pages des startups et export.",
+    "Vueling AI": "Équipe de 6. J'ai développé le front-end web : sélection des langues, thème et affichage mobile.",
+    "IREP ChatBot": "Équipe de hackathon. J'ai développé l'application Flask, l'intégration Ollama et l'interface.",
+    "42sh": "Équipe de 4. J'ai écrit l'essentiel du shell : historique, édition de ligne, complétion et prompt.",
+    "RPG": "Équipe de 3. J'ai développé le chargement de la carte, les déplacements, l'animation des sprites et la CI.",
+    "Flame Your Mind": "Équipe de 3. J'ai réalisé l'effet de feu, le contrôleur du joueur et une porte animée.",
+    "Robbers & Cat": "Équipe de 3. J'ai développé la voiture pilotable, les déplacements en intérieur, le HUD et les menus."
+  },
+  "experience": {
+    "title": "Expérience",
+    "rotterdam": {
+      "role": "Game Design and Development — Programme d'échange",
+      "company": "Hogeschool Rotterdam",
+      "date": "2026 - 2027",
+      "items": [
+        "Année d'échange à la Rotterdam University of Applied Sciences, dans le programme Game Design and Development",
+        "Safekeeping : un tower defense 2D pour Android et le web, réalisé en équipe avec Unity",
+        "Travail sur le gameplay et les systèmes : optimisation du pathfinding, niveaux, tutoriel de première partie, classement en ligne avec télémétrie de playtest et object pooling",
+        "Actuellement sur un jeu d'exploration 3D dans une équipe de treize, sur les déplacements du joueur et les caméras"
+      ]
+    },
+    "epitech": {
+      "role": "Expert en Ingénierie Logicielle",
+      "company": "Epitech Paris",
+      "date": "2023 - 2028",
+      "items": [
+        "Programme en 5 ans (BAC+5, RNCP Niveau 7) — pédagogie par projet favorisant l'autonomie et le travail en équipe",
+        "25+ projets développés en C, C++, Haskell, Python, JavaScript et plus",
+        "Anglais : niveau B2 (Tepitech équivalent TOEIC 885)",
+        "Français / Espagnol bilingue"
+      ]
+    },
+    "naitways": {
+      "role": "Développeur Logiciel Stagiaire",
+      "company": "Naitways",
+      "date": "Août 2024 - Déc 2024",
+      "items": [
+        "Plus de 13 outils Python livrés pour la cybersécurité et l'automatisation d'infrastructure",
+        "Sécurité : recherche de vulnérabilités CVE via les API NVD et Vulners, synchronisation des politiques de pare-feu FortiGate, agrégation des logs SSH de FortiAnalyzer vers InfluxDB",
+        "Outillage : générateur de notes de version Flask à partir des commits GitLab, intégrations d'équipements réseau (Juniper, LibreNMS, Wazuh) et outil de documentation de code sur un LLM local (Ollama)"
+      ]
+    },
+    "naitways2": {
+      "role": "Développeur Logiciel Stagiaire (Temps partiel)",
+      "company": "Naitways",
+      "date": "Oct 2025 - Fév 2026",
+      "items": [
+        "Interrogation de la base de données interne via son API REST pour générer des rapports de durcissement et les envoyer aux clients",
+        "Travail sur la NBOX - un satellite déployé sur les serveurs clients pour l'auto-configuration et la gestion des VMs",
+        "Développement d'outils d'automatisation en Python pour la gestion d'infrastructure"
+      ]
+    },
+    "naitways3": {
+      "role": "Développeur Full-Stack Stagiaire — Infrastructure Cloud",
+      "company": "Naitways",
+      "date": "Mars 2026 - Juil. 2026",
+      "items": [
+        "Seul développeur d'une plateforme cloud interne qui provisionne et exploite des machines virtuelles KVM sur plusieurs hyperviseurs : environ 40 000 lignes réparties sur trois bases de code",
+        "Développement du plan de contrôle et des agents par hôte en FastAPI, de l'interface Nuxt 4 / TypeScript et de la chaîne d'événements en direct qui les relie",
+        "Intégration de l'authentification (Keycloak/OIDC), de la mesure de consommation, du réseau Open vSwitch et du stockage partagé iSCSI/NFS. Détails dans l'étude de cas ci-dessus"
+      ]
+    }
+  },
+  "about": {
+    "title": "À propos",
+    "bio": "Je suis étudiant en quatrième année d'ingénierie logicielle à Epitech Paris, actuellement en échange à la Rotterdam University of Applied Sciences. Au fil de trois stages chez Naitways, hébergeur et opérateur réseau français, je suis passé de l'écriture d'outils d'automatisation en Python à la construction en solo d'une plateforme cloud, back-end et front-end. J'aime aussi les systèmes et les jeux : un shell UNIX en C, un langage de programmation en Haskell et plusieurs jeux réalisés avec Unity et Godot. Je travaille en français, en espagnol et en anglais.",
+    "photoAlt": "Portrait de Pierre-Yves Guiraudet",
+    "stats": {
+      "internships": {
+        "value": "3",
+        "label": "Stages chez Naitways"
+      },
+      "months": {
+        "value": "12+",
+        "label": "Mois en entreprise"
+      },
+      "projects": {
+        "value": "25+",
+        "label": "Projets réalisés"
+      }
+    }
   },
   "contact": {
     "title": "Contact",

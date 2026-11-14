@@ -1,3 +1,42 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer components {
+  /* Quiet bordered control: nav toggles, project filters, contact links. */
+  .btn-ghost {
+    @apply border border-glass-border bg-glass text-text-secondary cursor-pointer
+      transition-[color,transform] duration-200
+      hover:text-text-primary active:text-text-primary active:scale-95;
+  }
+
+  /* Nav toggle label: grid 0fr → 1fr animates the text open without a fixed width. */
+  .toggle-text {
+    display: grid;
+    transition: grid-template-columns 200ms ease, margin 200ms ease;
+  }
+
+  /* Small "in progress" status pill shared by projects and experience. */
+  .pill-current {
+    @apply text-xs px-2 py-1 rounded-full bg-orange-accent/15 border border-orange-accent/40
+      text-orange-accent font-medium whitespace-nowrap;
+  }
+}
+
+/* "Squircle" corners (continuous curve, Apple style), same recipe as the
+   Copaintes site: every rounded rectangle gets `corner-shape: superellipse(2)`.
+   Never on circles or pills (rounded-full), which it would square off.
+   At equal radius a squircle looks tighter, so the radii are enlarged 1.7x, but
+   only where the shape is supported; other browsers (Safari, Firefox) ignore it
+   and keep the normal round corners. Placed after the utilities so it wins. */
+.rounded-lg,
+.rounded-xl,
+.rounded-2xl {
+  corner-shape: superellipse(2);
+}
+@supports (corner-shape: superellipse(2)) {
+  .rounded-lg { border-radius: calc(0.5rem * 1.7); }
+  .rounded-xl { border-radius: calc(0.75rem * 1.7); }
+  /* Large cards need more than 1.7x to read as round as the old 1rem corner */
+  .rounded-2xl { border-radius: calc(1rem * 2.5); }
+}
