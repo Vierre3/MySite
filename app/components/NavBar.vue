@@ -4,8 +4,8 @@
     :class="[mobileVisible ? 'z-[70]' : 'z-50', mobileVisible && mobileOpen ? 'menu-open' : { 'menu-closing': mobileVisible }, scrolled && !mobileOpen ? 'nav-scrolled' : 'border-transparent']"
     :aria-label="$t('nav.main')"
   >
-    <!-- Scroll progress bar — scaled by a CSS scroll-driven animation -->
-    <div class="scroll-progress-bar absolute top-0 left-0 w-full h-[2px] bg-orange-accent/70 pointer-events-none" />
+    <!-- Scroll progress bar, along the bar's bottom edge (over its border) — scaled by a CSS scroll-driven animation -->
+    <div class="scroll-progress-bar absolute -bottom-px left-0 w-full h-[2px] bg-orange-accent/70 pointer-events-none" />
 
     <div class="max-w-5xl mx-auto px-4">
       <div class="flex items-center justify-between h-16">
@@ -32,8 +32,9 @@
           </button>
         </div>
 
-        <!-- Right side -->
-        <div class="flex items-center gap-3">
+        <!-- Right side. No gap on mobile: the hamburger's 44px tap area already
+             leaves 14px of air on each side of its 16px bars. -->
+        <div class="flex items-center gap-0 md:gap-3">
           <LanguageToggle :show-text="mobileOpen && hasToggleSpace" />
           <!-- Mobile hamburger -->
           <button
