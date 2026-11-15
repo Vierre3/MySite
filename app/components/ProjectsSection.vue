@@ -1,20 +1,22 @@
 <template>
   <UiSection id="projects" title-key="projects.title">
-    <!-- Filter tabs -->
-    <div class="flex justify-center gap-2 mb-10 flex-wrap">
-      <button
-        v-for="filter in filters"
-        :key="filter"
-        class="px-4 py-2 min-w-24 rounded-lg text-sm font-medium"
-        :class="activeFilter === filter
-          ? 'border border-transparent bg-orange-accent text-on-accent cursor-pointer'
-          : 'btn-ghost'"
-        :aria-pressed="activeFilter === filter"
-        @click="activeFilter = filter"
-      >
-        {{ $t(`projects.filters.${filter}`) }}
-      </button>
-    </div>
+    <!-- Filter tabs (they come in on scroll like the cards below them) -->
+    <UiScrollReveal>
+      <div class="flex justify-center gap-2 mb-10 flex-wrap">
+        <button
+          v-for="filter in filters"
+          :key="filter"
+          class="px-4 py-2 min-w-24 rounded-lg text-sm font-medium"
+          :class="activeFilter === filter
+            ? 'border border-transparent bg-orange-accent text-on-accent cursor-pointer'
+            : 'btn-ghost'"
+          :aria-pressed="activeFilter === filter"
+          @click="activeFilter = filter"
+        >
+          {{ $t(`projects.filters.${filter}`) }}
+        </button>
+      </div>
+    </UiScrollReveal>
 
     <!-- Projects grouped by year -->
     <div v-for="(group, groupIndex) in groupedByYear" :key="`${activeFilter}-${group.year}`">
